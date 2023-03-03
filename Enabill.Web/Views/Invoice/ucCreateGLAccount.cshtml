@@ -1,0 +1,30 @@
+﻿@model Enabill.Models.GLAccount
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "Create GL Account";
+}
+
+<form id="frmCreateGLAccount" method="post" action="">
+    @*@Html.Hidden("GLAccountID", @Model.GLAccount.GLAccountID)*@
+
+    <div>
+        <table>
+            <tr>
+                <td style="width:auto">GL Account Code:</td>
+                <td style="width:auto;color:White"> @Html.TextBox("GLAccountCode")</td>
+            </tr>
+            <tr>
+                <td style="width:auto">GL Account Name:</td>
+                <td style="width:auto;color:White"> @Html.TextBox("GLAccountName")</td>
+            </tr>
+            <tr>
+                <td style="width:auto">Active:</td>
+                <td style="width:auto;color:White"> @Html.CheckBox("IsActive")</td>
+            </tr>
+        </table>
+    </div>
+</form>

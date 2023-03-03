@@ -1,0 +1,50 @@
+﻿@model Enabill.Web.Models.UserLeaveManualAdjustmentModel
+
+<table class="general fullWidth">
+    <tr>
+        <th width="15%">Effective Date</th>
+        <th width="10%">LeaveType</th>
+        <th align="center" width="10%">Manual Adjustment</th>
+        <th width="55%">Remark</th>
+        <th width="10%"></th>
+    </tr>
+
+    @foreach (var manualAdjustment in Model.LeaveManualAdjustments)
+    {
+        <tr>
+            <td width="15%">@manualAdjustment.EffectiveDate.ToDisplayString()</td>
+            @*<td width="10%">@((Enabill.LeaveTypeEnum)manualAdjustment.LeaveTypeID)</td>*@
+            <td width="10%">@Enabill.Extensions.GetEnumDescriptionById((Enabill.LeaveTypeEnum)manualAdjustment.LeaveTypeID)</td>
+            <td align="center" width="10%">@manualAdjustment.ManualAdjustment</td>
+            <td width="55%">@manualAdjustment.Remark</td>
+            @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.Manager) || CurrentUser.HasRole(Enabill.UserRoleType.HR) || CurrentUser.HasRole(Enabill.UserRoleType.Accountant))
+            {
+                // Logged on user cannot make a manual adjustment on their own leave
+                if (CurrentUser.UserID != Model.User.UserID)
+                {
+                    // Only allow changes to manual adjustments for the current month
+                    if (manualAdjustment.EffectiveDate.ToPeriod() == DateTime.Now.ToPeriod())
+                    {
+                        <td width="10%">
+                            <img src="@Url.Content("~/Content/Img/edit_14.png")" alt="Edit" title="Edit" onclick="UserAllocation.addEditLeaveManualAdjustmentToUser(@manualAdjustment.LeaveManualAdjustmentID); return false;" style="cursor:pointer; height:14px" />
+                            <img src="@Url.Content("~/Content/Img/Delete.gif")" alt="Delete" style="cursor:pointer; height:14px" onclick="UserAllocation.deleteLeaveManualAdjustment(@manualAdjustment.LeaveManualAdjustmentID); return false;" />
+                        </td>
+                    }
+                }
+            }
+        </tr>
+    }
+
+    @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.Manager) || CurrentUser.HasRole(Enabill.UserRoleType.HR) || CurrentUser.HasRole(Enabill.UserRoleType.Accountant))
+    {
+        // Logged on user cannot make a manual adjustment on their own leave
+        if (CurrentUser.UserID != Model.User.UserID)
+        {
+            <tr>
+                <td colspan="5" align="right">
+                    <input type="button" value="Add" onclick="UserAllocation.addEditLeaveManualAdjustmentToUser(); return false;" />
+                </td>
+            </tr>
+        }
+    }
+</table>

@@ -1,0 +1,540 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{19516ADB-DC28-4B7C-A6FF-ABEA0F97374A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Enabill</RootNamespace>
+    <AssemblyName>Enabill.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <OutputPath>bin\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\Test\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.7.15\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=6.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Text.6.0.2\lib\net472\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Threading" />
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.8\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.8\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.8\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.8\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.8\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.8\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Code\Constants.cs" />
+    <Compile Include="Code\ReportHelpers.cs" />
+    <Compile Include="DB\EnabillContext.cs" />
+    <Compile Include="Models\ActivityWrapper.cs" />
+    <Compile Include="Models\BalanceType.cs" />
+    <Compile Include="Models\BalanceChangeType.cs" />
+    <Compile Include="Models\BalanceAuditTrail.cs" />
+    <Compile Include="Models\ClientDepartmentCode.cs" />
+    <Compile Include="Models\CurrencyType.cs" />
+    <Compile Include="Models\Dto\BillingMethodViewData.cs" />
+    <Compile Include="Models\Dto\WorkDayModel.cs" />
+    <Compile Include="Models\Dto\ActivityPostModel.cs" />
+    <Compile Include="Models\Dto\TrainingReportPrintModel.cs" />
+    <Compile Include="Models\Dto\ExpenseReportModel.cs" />
+    <Compile Include="Models\Dto\ExpenseFilterModel.cs" />
+    <Compile Include="Models\Dto\ExpenseDetail.cs" />
+    <Compile Include="Models\Dto\LeavePeriod.cs" />
+    <Compile Include="Models\Dto\LeaveBalanceDate.cs" />
+    <Compile Include="Models\Dto\ClientViewData.cs" />
+    <Compile Include="Models\Dto\ProjectViewData.cs" />
+    <Compile Include="Models\Dto\UserLeaveDiscrepancy.cs" />
+    <Compile Include="Models\Dto\ClientFilterModel.cs" />
+    <Compile Include="Models\Dto\EncentivizeReportModel.cs" />
+    <Compile Include="Models\Dto\InvoiceExport.cs" />
+    <Compile Include="Models\Dto\LeaveRequestsPendingModel.cs" />
+    <Compile Include="Models\Dto\LeaveWithLeaveCycleBalance.cs" />
+    <Compile Include="Models\Dto\PercentageAllocationModel.cs" />
+    <Compile Include="Models\Dto\EncentivizePrintModel.cs" />
+    <Compile Include="Models\Dto\EncentivizeModel.cs" />
+    <Compile Include="Models\Dto\UserLeaveGeneralModel.cs" />
+    <Compile Include="Models\Dto\UserReport.cs" />
+    <Compile Include="Models\Dto\UserTimesheet.cs" />
+    <Compile Include="Models\Dto\RatesModel.cs" />
+    <Compile Include="Models\Dto\UserWorkDayExcelModel.cs" />
+    <Compile Include="Models\Dto\UserWorkDayModel.cs" />
+    <Compile Include="Models\ApprovalStatusType.cs" />
+    <Compile Include="Models\Dto\WeekPasteDataModel.cs" />
+    <Compile Include="Models\ContractAttachment.cs" />
+    <Compile Include="Models\ExpenseAttachment.cs" />
+    <Compile Include="Models\GLAccounts.cs" />
+    <Compile Include="Models\IActivity.cs" />
+    <Compile Include="Models\IProject.cs" />
+    <Compile Include="Models\IResources.cs" />
+    <Compile Include="Models\IHoliday.cs" />
+    <Compile Include="Models\IWorkDay.cs" />
+    <Compile Include="Models\Expense.cs" />
+    <Compile Include="Models\ExpenseCategoryType.cs" />
+    <Compile Include="Models\Logs\LogEntry.cs" />
+    <Compile Include="Models\Logs\LogItem.cs" />
+    <Compile Include="Models\PrintTicketRemarkType.cs" />
+    <Compile Include="Models\Dto\DSActivityReportModel.cs" />
+    <Compile Include="Models\ProjectWrapper.cs" />
+    <Compile Include="Models\ResourcesWrapper.cs" />
+    <Compile Include="Models\ExpenseApproval.cs" />
+    <Compile Include="Models\UserLeave.cs" />
+    <Compile Include="Models\UserTimeSplitTotalHoursPerPeriod.cs" />
+    <Compile Include="Models\Dto\UserTimeSplitReportModel.cs" />
+    <Compile Include="Models\Dto\ProjectActivityTimeReportModel.cs" />
+    <Compile Include="Models\Dto\ProjectManagerActivityReportModel.cs" />
+    <Compile Include="Models\TicketTimeAllocation.cs" />
+    <Compile Include="Models\UserTimeSplit.cs" />
+    <Compile Include="Models\PassPhrase.cs" />
+    <Compile Include="Models\SupportEmail.cs" />
+    <Compile Include="Models\TicketPriority.cs" />
+    <Compile Include="Models\Dto\MISAllocatedTimePrintModel.cs" />
+    <Compile Include="Models\Dto\WorkAllocationExceptionPrintModel.cs" />
+    <Compile Include="Models\UserWorkAllocation.cs" />
+    <Compile Include="Models\WorkableDaysPerPeriod.cs" />
+    <Compile Include="Models\Dto\MISAllocatedTimeModel.cs" />
+    <Compile Include="Models\Dto\FlexiTimeReportModel.cs" />
+    <Compile Include="Models\Dto\LeaveOtherReportModel.cs" />
+    <Compile Include="Models\Dto\UserReportModel.cs" />
+    <Compile Include="Models\Dto\ForecastWithInvoiceSummaryExtendedModel.cs" />
+    <Compile Include="Models\Dto\ForecastWithInvoiceExtendedModel.cs" />
+    <Compile Include="Models\ForecastWithInvoicesSummaries.cs" />
+    <Compile Include="Models\DoesForecastHeaderHaveInvoiceLink.cs" />
+    <Compile Include="Models\Dto\ForecastInvoiceLinkExtendedModel.cs" />
+    <Compile Include="Models\InvoicesWithoutForecast.cs" />
+    <Compile Include="Models\ForecastWithOutInvoice.cs" />
+    <Compile Include="Models\ForecastWithInvoice.cs" />
+    <Compile Include="Models\ForecastInvoiceLink.cs" />
+    <Compile Include="Models\FeedbackAttachment.cs" />
+    <Compile Include="Models\ClientProjectTicket.cs" />
+    <Compile Include="Models\TicketType.cs" />
+    <Compile Include="Models\TicketStatusChange.cs" />
+    <Compile Include="Models\TicketAssignmentChange.cs" />
+    <Compile Include="Models\Dto\TicketClientStatusTotalModel.cs" />
+    <Compile Include="Models\Ticket.cs" />
+    <Compile Include="Models\TicketFilter.cs" />
+    <Compile Include="Models\TicketLine.cs" />
+    <Compile Include="Models\TicketLineAttachment.cs" />
+    <Compile Include="Models\Dto\ForecastDefaultReferenceExtendedModel.cs" />
+    <Compile Include="Models\ForecastReferenceDefault.cs" />
+    <Compile Include="Models\Dto\ForecastDetailExtendedModel.cs" />
+    <Compile Include="Models\ForecastHeaderMostRecentResourceAssignment.cs" />
+    <Compile Include="Models\ForecastHeaderLastPeriodDetail.cs" />
+    <Compile Include="Models\ForecastHeaderMostRecentDetailLine.cs" />
+    <Compile Include="Models\Dto\ForecastHeaderExtendedModel.cs" />
+    <Compile Include="Models\ForecastResourceAssignment.cs" />
+    <Compile Include="Models\ForecastHeader.cs" />
+    <Compile Include="Models\ForecastDetail.cs" />
+    <Compile Include="Models\TicketLog.cs" />
+    <Compile Include="Models\TicketReferenceNumber.cs" />
+    <Compile Include="Models\TicketStatus.cs" />
+    <Compile Include="Models\UsersLastWorkSession.cs" />
+    <Compile Include="Models\Dto\LeaveBalanceSummarisedReportModel.cs" />
+    <Compile Include="Models\IndividualLeaveDays.cs" />
+    <Compile Include="Models\Dto\LeaveBalanceExtendedReportModel.cs" />
+    <Compile Include="Models\Dto\LeaveCycleExtendedReportModel.cs" />
+    <Compile Include="Models\LeaveCycleBalances.cs" />
+    <Compile Include="Models\Dto\UserAllocationExtendedModel.cs" />
+    <Compile Include="Models\LeaveManualAdjustment.cs" />
+    <Compile Include="Models\Dto\ActivityReportPrintModel.cs" />
+    <Compile Include="Models\ReportEmail.cs" />
+    <Compile Include="Models\Report.cs" />
+    <Compile Include="Models\Frequency.cs" />
+    <Compile Include="Models\TrainingCategories.cs" />
+    <Compile Include="Models\Dto\ActivityExtendedReportModel.cs" />
+    <Compile Include="Models\NonWorkSession.cs" />
+    <Compile Include="Models\Holiday.cs" />
+    <Compile Include="Models\WorkDayWrapper.cs" />
+    <Compile Include="Models\WorkSessionStatus.cs" />
+    <Compile Include="Models\Dto\ActivityPrintModel.cs" />
+    <Compile Include="Models\Dto\ActivityUser.cs" />
+    <Compile Include="Models\Dto\MonthlyActivityCostDTOModel.cs" />
+    <Compile Include="Models\Dto\TimesheetDetailsPrintModel.cs" />
+    <Compile Include="Models\Dto\TimesheetPrintModel.cs" />
+    <Compile Include="Models\Dto\UserCostToCompanyExtendedModel.cs" />
+    <Compile Include="Models\Dto\UserPrintModel.cs" />
+    <Compile Include="Models\Dto\WorkAllocationExceptionModel.cs" />
+    <Compile Include="Models\Dto\NoteDetailModel.cs" />
+    <Compile Include="Models\Dto\WorkSessionExtendedModel.cs" />
+    <Compile Include="Models\FeedbackPost.cs" />
+    <Compile Include="Models\FeedbackThread.cs" />
+    <Compile Include="Models\FeedbackType.cs" />
+    <Compile Include="Models\FeedbackUrgencyType.cs" />
+    <Compile Include="Models\FinPeriod.cs" />
+    <Compile Include="Models\FlexiBalanceAdjustment.cs" />
+    <Compile Include="Models\FlexiDay.cs" />
+    <Compile Include="Models\InvoiceCredit.cs" />
+    <Compile Include="Models\LeaveBalance.cs" />
+    <Compile Include="Models\Dto\ContactSelectModel.cs" />
+    <Compile Include="Models\Dto\InvoiceExtendedDetail.cs" />
+    <Compile Include="Models\Dto\InvoiceRuleExtendedDetail.cs" />
+    <Compile Include="Models\Dto\InvoiceRuleModel.cs" />
+    <Compile Include="Models\Dto\ProjectSelectModel.cs" />
+    <Compile Include="Models\InvoiceContact.cs" />
+    <Compile Include="Models\InvoiceRuleContact.cs" />
+    <Compile Include="Models\InvoiceRuleLine.cs" />
+    <Compile Include="Models\InvoiceStatus.cs" />
+    <Compile Include="Models\Leave.cs" />
+    <Compile Include="Models\FlexiBalance.cs" />
+    <Compile Include="Models\LeaveType.cs" />
+    <Compile Include="Models\LeaveTypeHistory.cs" />
+    <Compile Include="Models\LoginLog.cs" />
+    <Compile Include="Models\Month.cs" />
+    <Compile Include="Models\PrintOption.cs" />
+    <Compile Include="Models\SecondaryManagerAllocation.cs" />
+    <Compile Include="Models\TimesheetApproval.cs" />
+    <Compile Include="Models\UserCostToCompany.cs" />
+    <Compile Include="Models\UserHistory.cs" />
+    <Compile Include="Models\UserPreference.cs" />
+    <Compile Include="Models\VATHistory.cs" />
+    <Compile Include="Models\WebHistory.cs" />
+    <Compile Include="Models\UserRole.cs" />
+    <Compile Include="Code\Enums.cs" />
+    <Compile Include="Code\Exceptions.cs" />
+    <Compile Include="Code\Extensions.cs" />
+    <Compile Include="Code\Helpers.cs" />
+    <Compile Include="Models\BillableIndicator.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\BillingMethod.cs" />
+    <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\Division.cs" />
+    <Compile Include="Models\Dto\ActivityDetail.cs" />
+    <Compile Include="Models\Dto\ActivityUserDetail.cs" />
+    <Compile Include="Models\Dto\InvoiceDetail.cs" />
+    <Compile Include="Models\Dto\ProjectActivityUserDetail.cs" />
+    <Compile Include="Models\Dto\ProjectDetail.cs" />
+    <Compile Include="Models\Dto\WorkAllocationExtendedModel.cs" />
+    <Compile Include="Models\EmploymentType.cs" />
+    <Compile Include="Models\InvoiceCategory.cs" />
+    <Compile Include="Models\InvoiceRule.cs" />
+    <Compile Include="Models\InvoiceRuleActivity.cs" />
+    <Compile Include="Models\InvoiceSubCategory.cs" />
+    <Compile Include="Models\Note.cs" />
+    <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\Menu.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\UserActivity.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\WorkAllocation.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserAllocation.cs" />
+    <Compile Include="Models\WorkDay.cs" />
+    <Compile Include="Models\WorkSession.cs" />
+    <Compile Include="Models\Activity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Publishers\EventPublisher.cs" />
+    <Compile Include="Publishers\ExecutionRequest.cs" />
+    <Compile Include="Publishers\IEmailer.cs" />
+    <Compile Include="Publishers\ISink.cs" />
+    <Compile Include="Repos\ActivityRepo.cs" />
+    <Compile Include="Repos\BaseRepo.cs" />
+    <Compile Include="Repos\BillableIndicatorRepo.cs" />
+    <Compile Include="Repos\BillingMethodRepo.cs" />
+    <Compile Include="Repos\ClientProjectTicketRepo.cs" />
+    <Compile Include="Repos\ClientRepo.cs" />
+    <Compile Include="Repos\ContactRepo.cs" />
+    <Compile Include="Repos\BalanceAuditTrailRepo.cs" />
+    <Compile Include="Repos\ClientDepartmentCodeRepo.cs" />
+    <Compile Include="Repos\CurrencyTypeRepo.cs" />
+    <Compile Include="Repos\ExpenseCategoryTypeRepo.cs" />
+    <Compile Include="Repos\ContractRepo.cs" />
+    <Compile Include="Repos\GLAccountRepo.cs" />
+    <Compile Include="Repos\ExpenseRepo.cs" />
+    <Compile Include="Repos\UserLeaveGeneralRepo.cs" />
+    <Compile Include="Repos\PercentageAllocationReportRepo.cs" />
+    <Compile Include="Repos\PrintTicketRemarkOptionRepo.cs" />
+    <Compile Include="Repos\EmploymentTypeRepo.cs" />
+    <Compile Include="Repos\EncentivizeReportRepo.cs" />
+    <Compile Include="Repos\RatesRepo.cs" />
+    <Compile Include="Repos\TicketTimeAllocationRepo.cs" />
+    <Compile Include="Repos\UserTimeSplitRepo.cs" />
+    <Compile Include="Repos\PassPhraseRepo.cs" />
+    <Compile Include="Repos\TicketPriorityRepo.cs" />
+    <Compile Include="Repos\ForecastWithInvoiceSummaryRepo.cs" />
+    <Compile Include="Repos\InvoicesWithoutForecastRepo.cs" />
+    <Compile Include="Repos\ForecastWithOutInvoiceRepo.cs" />
+    <Compile Include="Repos\ForecastWithInvoiceRepo.cs" />
+    <Compile Include="Repos\ForecastInvoiceLinkRepo.cs" />
+    <Compile Include="Repos\FeedbackAttachmentRepo.cs" />
+    <Compile Include="Repos\TicketTypeRepo.cs" />
+    <Compile Include="Repos\TicketStatusChangeRepo.cs" />
+    <Compile Include="Repos\TicketAssignmentChangeRepo.cs" />
+    <Compile Include="Repos\TicketStatusRepo.cs" />
+    <Compile Include="Repos\TicketFilterRepo.cs" />
+    <Compile Include="Repos\TicketLineAttachmentRepo.cs" />
+    <Compile Include="Repos\ForecastReferenceDefaultRepo.cs" />
+    <Compile Include="Repos\ForecastResourceAssignmentRepo.cs" />
+    <Compile Include="Repos\ForecastHeaderRepo.cs" />
+    <Compile Include="Repos\ForecastDetailRepo.cs" />
+    <Compile Include="Repos\LeaveCycleBalanceRepo.cs" />
+    <Compile Include="Repos\ReportEmailRepo.cs" />
+    <Compile Include="Repos\ReportRepo.cs" />
+    <Compile Include="Repos\FrequencyRepo.cs" />
+    <Compile Include="Repos\TicketLineRepo.cs" />
+    <Compile Include="Repos\TicketLogRepo.cs" />
+    <Compile Include="Repos\TicketReferenceNumberRepo.cs" />
+    <Compile Include="Repos\TicketRepo.cs" />
+    <Compile Include="Repos\HolidayRepo.cs" />
+    <Compile Include="Repos\WorkSessionStatusRepo.cs" />
+    <Compile Include="Repos\DepartmentRepo.cs" />
+    <Compile Include="Repos\DivisionRepo.cs" />
+    <Compile Include="Repos\FeedbackPostRepo.cs" />
+    <Compile Include="Repos\FeedbackThreadRepo.cs" />
+    <Compile Include="Repos\FeedbackTypeRepo.cs" />
+    <Compile Include="Repos\FeedbackUrgencyTypeRepo.cs" />
+    <Compile Include="Repos\FinPeriodRepo.cs" />
+    <Compile Include="Repos\FlexiBalanceRepo.cs" />
+    <Compile Include="Repos\FlexiDayRepo.cs" />
+    <Compile Include="Repos\InvoiceRuleActivityRepo.cs" />
+    <Compile Include="Repos\InvoiceCategoryRepo.cs" />
+    <Compile Include="Repos\InvoiceRepo.cs" />
+    <Compile Include="Repos\InvoiceRuleContactRepo.cs" />
+    <Compile Include="Repos\InvoiceRuleLineRepo.cs" />
+    <Compile Include="Repos\InvoiceRuleRepo.cs" />
+    <Compile Include="Repos\InvoiceStatusRepo.cs" />
+    <Compile Include="Repos\InvoiceSubCategoryRepo.cs" />
+    <Compile Include="Repos\LeaveBalanceRepo.cs" />
+    <Compile Include="Repos\LeaveRepo.cs" />
+    <Compile Include="Repos\LeaveTypeHistoryRepo.cs" />
+    <Compile Include="Repos\LoginLogRepo.cs" />
+    <Compile Include="Repos\MenuRepo.cs" />
+    <Compile Include="Repos\MonthRepo.cs" />
+    <Compile Include="Repos\NoteRepo.cs" />
+    <Compile Include="Repos\PrintOptionRepo.cs" />
+    <Compile Include="Repos\ProcessRepo.cs" />
+    <Compile Include="Repos\ProjectRepo.cs" />
+    <Compile Include="Repos\RegionRepo.cs" />
+    <Compile Include="Repos\RoleRepo.cs" />
+    <Compile Include="Repos\UserAllocationRepo.cs" />
+    <Compile Include="Repos\UserCostToCompanyRepo.cs" />
+    <Compile Include="Repos\UserHistoryRepo.cs" />
+    <Compile Include="Repos\UserPreferenceRepo.cs" />
+    <Compile Include="Repos\UserRepo.cs" />
+    <Compile Include="Repos\VATHistoryRepo.cs" />
+    <Compile Include="Repos\WebHistoryRepo.cs" />
+    <Compile Include="Repos\WorkAllocationRepo.cs" />
+    <Compile Include="Repos\WorkDayRepo.cs" />
+    <Compile Include="Repos\WorkSessionRepo.cs" />
+    <Compile Include="Code\EnabillSettings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="ClassDiagram2.cd" />
+    <None Include="packages.config" />
+    <None Include="Scripts\jquery-3.6.0.min.map" />
+    <None Include="Scripts\jquery-3.6.0.slim.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-noscript.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-ui-noscript.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-ui.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload.css" />
+    <Content Include="Content\jQuery.FileUpload\img\loading.gif" />
+    <Content Include="Content\jQuery.FileUpload\img\progressbar.gif" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\themes\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\jquery-ui.css" />
+    <Content Include="Content\themes\jquery-ui.min.css" />
+    <Content Include="Scripts\jquery-3.6.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.6.0.js" />
+    <Content Include="Scripts\jquery-3.6.0.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
+    <Content Include="Scripts\jquery-ui-1.13.1.js" />
+    <Content Include="Scripts\jquery-ui-1.13.1.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

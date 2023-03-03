@@ -1,0 +1,13 @@
+﻿@model Enabill.Web.Models.TimeIndexModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "User Timesheet";
+}
+
+<div id="ucIndex" class="marginView">
+    @Html.Partial("ucIndex", Model)
+</div>

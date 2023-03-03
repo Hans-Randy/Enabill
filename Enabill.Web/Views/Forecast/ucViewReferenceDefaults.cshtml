@@ -1,0 +1,20 @@
+﻿@model Enabill.Web.Models.ForecastDefaultReferenceModel
+
+<form id="ViewDefaultReferenceFrm" action="" method="post">
+    <table class="fullWidth underline">
+
+        <tr>
+            <th>Reference</th>
+            <th>Effective Date</th>
+            <th>Modified By</th>
+        </tr>
+        @foreach (var reference in Model.ForecastDefaultReferenceExtendedModel.OrderByDescending(r => r.ForecastReferenceDefault.EffectiveDate))
+        {
+            <tr>
+                <td>@reference.ForecastReferenceDefault.Reference</td>
+                <td>@reference.ForecastReferenceDefault.EffectiveDate.ToDisplayString()</td>
+                <td>@reference.ModifiedBy</td>
+            </tr>
+        }
+    </table>
+</form>

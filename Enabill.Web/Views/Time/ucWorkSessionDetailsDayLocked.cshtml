@@ -1,0 +1,9 @@
+﻿@model Enabill.Models.WorkSession
+
+<tr id="WorkSession@(Model.WorkSessionID)">
+    <td><strong>@Model.StartTime.ToString("HH:mm")</strong></td>
+    <td><strong>@Model.EndTime.ToString("HH:mm")</strong></td>
+    <td><strong>@(Model.LunchTime)</strong></td>
+    <td><strong>@Model.TotalTime.ToString()</strong></td>
+    <td> </td>
+</tr>

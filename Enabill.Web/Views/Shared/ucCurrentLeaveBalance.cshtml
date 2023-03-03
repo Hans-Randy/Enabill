@@ -1,0 +1,23 @@
+﻿@model Enabill.Web.Models.CurrentLeaveBalanceModel
+
+<table class="cleanTable fullWidth">
+    <tr>
+        <th width="74%">Opening annual leave balance as at @Model.StartDate.ToDisplayString()</th>
+        <td width="26%" class="@Model.AnnualLeaveOpeningBalanceClass center">@Model.AnnualLeaveOpeningBalance</td>
+    </tr>
+    <tr>
+        <th>Annual leave approved</th>
+        <td class="center">@Model.AnnualLeaveTaken</td>
+    </tr>
+    <tr>
+        <th>Closing annual leave balance as at @Model.EndDate.ToDisplayString()</th>
+        <td class="@Model.AnnualLeaveClosingBalanceClass center">@Model.AnnualLeaveClosingBalance</td>
+    </tr>
+    <tr>
+        <td class="lightGrey" colspan="2"></td>
+    </tr>
+    <tr>
+        <th>Other leave approved</th>
+        <td class="center">@Model.OtherLeaveTaken</td>
+    </tr>
+</table>

@@ -1,0 +1,35 @@
+﻿@model Enabill.Web.Models.LeaveIndexModel
+
+@Html.TitleTable("tblLeave", "", "<b>Leave Overview:</b> " + Model.User.FullName, Url.Content("~/Content/Img/timesheet_20x20.png"), "ucIndexCol3Partial", Model, null, null, "ucIndexCol5", Model.User)
+<div class="padView">
+    <table class="subTable fullWidth">
+        @if (ContextUser.IsLeaveUser)
+        {
+            <tr>
+                <td width="60%" valign="top">
+                    @Html.Partial("ucLeaveBalances", Model.LeaveBalanceModel)
+                </td>
+                <td width="40%" valign="top">
+                    <h2>Leave Days</h2>
+                    @Html.Partial("ucLeaveDays", Model.LeaveDays)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <h2>Manual Adjustments</h2>
+                    @Html.Partial("ucLeaveManualAdjustments", Model.UserLeaveManualAdjustments)
+                </td>
+                <td width="40%" valign="top">
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    <h2>Leave Days</h2>
+                    @Html.Partial("ucLeaveDays", Model.LeaveDays)
+                </td>
+            </tr>
+        }
+    </table>
+</div>

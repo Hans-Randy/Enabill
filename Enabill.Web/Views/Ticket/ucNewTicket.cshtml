@@ -1,0 +1,52 @@
+﻿@model string
+<form id="frmNewTicket" method="post">
+    <fieldset>
+        <legend><h3>Details</h3></legend>
+        @Html.Hidden("TicketID", 0)
+        <table class="general fullWidth">
+            <tr>
+                <td style="font-size:7.5pt;">
+                    <span>Client:</span>
+                    <span style="margin-left: 5px;">@Html.DropDownList("Client", null, new { onchange = "Ticket.refreshProjects(); return true;" })</span>
+                    <span style="margin-left: 15px;">Project:</span>
+                    <span style="margin-left: 5px;">@Html.DropDownList("Project", null, new { onchange = "Ticket.setSubject(); return true;" })</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:7.5pt;">
+                    <span>Ticket Type:</span>
+                    <span style="margin-left: 5px;">@Html.DropDownList("TicketType")</span>
+                    <span style="margin-left: 15px;">Assigned To:</span>
+                    <span style="margin-left: 5px;">@Html.DropDownList("AssignedUser")</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:7.5pt;">
+                    <span>Priority:</span>
+                    <span style="margin-left: 5px;">@Html.DropDownList("Priority")</span>
+                    <span>Additional Email Addresses:</span>
+                    <span style="margin-left: 5px;">@Html.TextBox("EmailAddresses", null, new { style = "width:200px;" })</span>
+                    @*  <span style="margin-left: 15px;">Effort:</span>
+                        <span style="margin-left: 5px;">@Html.TextBox("Effort", null, new { style = "width:50px;" })<text>1=Easy 10=Difficult</text></span>*@
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:7.5pt;">
+                    <span>Subject:</span>
+                    @Html.TextBox("Subject", @Model, new { style = "width: 90%; margin: auto;" })
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:7.5pt;">
+                    <span>Details:&nbsp</span>
+                    @Html.TextBox("Details", null, new { style = "width: 90%; margin: auto;" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextArea("PostText", null, new { style = "width: 90%; margin: auto;", @class = "crudFCK" })
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</form>

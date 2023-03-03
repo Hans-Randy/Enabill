@@ -1,0 +1,66 @@
+﻿@model Enabill.Web.Models.LogOnModel
+
+@{
+    ViewBag.Title = "Home Page";
+
+    Layout = "~/Views/Shared/_WelcomeLayout.cshtml";
+}
+
+@section errorPlaceHolder
+{
+    @if (Model.IsLoginUnsuccessful)
+    {
+        <div class="errormodel">
+            <table>
+                <tr>
+                    <td>
+                        <img src="../Content/Img/error_24x24.png" class="icon24x24" />
+                    </td>
+                    <td>
+                        Login failed. Please try again.
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+    else if (Model.IsAccesDenied)
+    {
+        <div class="errormodel">
+            <table>
+                <tr>
+                    <td>
+                        <img src="../Content/Img/deactivate_24x24.png" class="icon24x24" />
+                    </td>
+                    <td>
+                        Access denied. This account has been disabled.
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+    else
+    {
+    }
+}
+
+@using (Html.BeginForm("LogOn", "Account", FormMethod.Post))
+{
+    <input type="hidden" name="returnUrl" value="@Request["ReturnUrl"]" />
+    <p class="LogInHeader">Email:</p>
+    @Html.TextBox("UserName", null, new { @class = "LogOnInput required" })
+    <br />
+    <p class="LogInHeader">Password:</p>
+    @Html.Password("Password", null, new { @class = "LogOnInput" })
+    <br />
+    <input id="LogOnSubmit" class="noButton" type="submit" value="Log on" />
+}
+
+@section navigation
+{
+    <a id="navigationLink" href="/Account/ForgotPassword/">Forgot your password?</a>
+}
+
+@using (Html.BeginForm("SocialAuthLogin", "Account", FormMethod.Post, new { style = "float:right" }))
+{
+    @*<input name="socialLogin" type="image" src="../../Content/Img/google.png" value="Login with Google" title="Login with Google" />*@
+}

@@ -1,0 +1,13 @@
+﻿@model List<Enabill.Models.User>
+
+<a href="#" onclick="NoteSearch.selectUsers(); return false;">Select all</a> | <a href="#" onclick="NoteSearch.deselectUsers(); return false;">Deselect all</a>
+
+<ul>
+    @foreach (Enabill.Models.User user in Model)
+    {
+        <li style="list-style-type: none;">
+            <input type="checkbox" id="User@(user.UserID)" class="userSelect" value="@user.UserID" />
+            @user.FullName
+        </li>
+    }
+</ul>

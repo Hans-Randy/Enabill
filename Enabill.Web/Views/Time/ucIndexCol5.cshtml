@@ -1,0 +1,12 @@
+﻿@model Enabill.Web.Models.TimeIndexModel
+
+@Html.Partial("ucTimeSheetLock", Model)
+
+@*
+    <div style="float: right; position: relative;" class="actionDiv" onclick="window.location='/User/Profile/@Model.User.UserID'">
+        <span class="imageWithText">
+            <img alt="" height="16px" src="@Url.Content("~/Content/Img/redo_16x16.png")" />
+        </span>
+        Go to @(Model.User.UserID == CurrentUserID ? "My" : Model.User.FullName + "'s") Profile
+    </div>
+*@

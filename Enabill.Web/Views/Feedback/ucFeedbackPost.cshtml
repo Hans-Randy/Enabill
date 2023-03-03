@@ -1,0 +1,14 @@
+﻿@model Enabill.Models.FeedbackPost
+
+<table class="fullWidth">
+    <tr>
+        <th>
+            @Model.GetUser().FullName posted on @Model.DateAdded.ToLongDisplayString()
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <span style="margin-left: 30px;">@Html.Raw(Model.PostText)</span>
+        </td>
+    </tr>
+</table>

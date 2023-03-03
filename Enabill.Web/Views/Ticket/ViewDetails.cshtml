@@ -1,0 +1,25 @@
+﻿@model Enabill.Web.Models.TicketLineModel
+@section beginHead
+{
+    @IncludeRichEditor()
+}
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    Html.EnableClientValidation(false);
+    ViewBag.Title = "Ticket Details";
+}
+
+@Html.TitleTable("tblTicketDetail", "", "<b>Ticket Details</b>", "", null, "", null, null, "ucViewDetailsCol5", "")
+<div id="ucViewDetails" class="padView">
+    <table class="subTable fullWidth">
+        <tr>
+            <td id="viewDetailsTD" class="borderRight fullWidth" valign="top">
+                @Html.Partial("ucViewDetails", Model)
+            </td>
+        </tr>
+    </table>
+</div>

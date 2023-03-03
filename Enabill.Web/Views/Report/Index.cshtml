@@ -1,0 +1,197 @@
+﻿@{
+    ViewBag.Title = "Reports";
+}
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+<div class="marginView">
+    @Html.TitleTable("tblReports", "", "<b>Reports</b>")
+    <div class="padView">
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <table class="subTable">
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.Accountant) || CurrentUser.HasRole(Enabill.UserRoleType.Manager) || CurrentUser.HasRole(Enabill.UserRoleType.HR))
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#" onclick="Report.showActivityReportParameters(); return false;">Activity Report</a>
+                                </td>
+                            </tr>
+                        }
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.Accountant) || CurrentUser.HasRole(Enabill.UserRoleType.Manager) || CurrentUser.HasRole(Enabill.UserRoleType.HR))
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#" onclick="Report.showActivityReportParameters(true); return false;">Activity Analysis Report</a>
+                                </td>
+                            </tr>
+                        }
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.HR))
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink("Balance Audit Trail Report", "BalanceAuditTrailReportIndex", "Report", null, null)
+                                </td>
+                            </tr>
+                        }
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.ProjectOwner) || CurrentUser.HasRole(Enabill.UserRoleType.Manager))
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#" onclick="Report.showDSActivityReportParameters(); return false;">Development Services Activity Report</a>
+                                </td>
+                            </tr>
+                        }
+
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.PayRoll) || CurrentUser.HasRole(Enabill.UserRoleType.Accountant))
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#" onclick="Report.showExpenseReportParameters(); return false;">Expense Report</a>
+                                </td>
+                            </tr>
+                        }
+
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.HR))
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#" onclick="Report.showEncentivizeReportParameters(); return false;">Encentivize Report</a>
+                                </td>
+                            </tr>
+                        }
+                        @*<tr>
+                                <td>
+                                    @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.HR))
+                                    {
+                                        <a href="#" onclick="Report.showReportConsole(); return false;">Encentivize On-screen Report</a>
+                                    }
+                                </td>
+                            </tr>*@
+                        @*@if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.HR))
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink("Flexi Balance Report", "FlexiTimeBalanceReportIndex", "Report", null, null)
+                                    </td>
+                                </tr>
+                            }*@
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.HR))
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink("Leave Balance Report", "LeaveCycleReportIndex", "Report", null, null)
+                                </td>
+                            </tr>
+                        }
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.Manager))
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#" onclick="Report.showLeaveGeneralReportParameters(); return false;">Leave General Report</a>
+                                </td>
+                            </tr>
+                        }
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.Accountant) || CurrentUser.HasRole(Enabill.UserRoleType.Manager))
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#" onclick="Report.showLeaveRequestsPendingReportParameters(); return false;">Leave Requests Pending Report</a>
+                                </td>
+                            </tr>
+                        }
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.HR))
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink("Leave With Leave Balance Report", "LeaveWithLeaveBalanceReport", "Report", null, null)
+                                </td>
+                            </tr>
+                        }
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator))
+                        {
+                            if (Settings.Current.PassphraseIsValid)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink("MIS Allocated Time Report", "MISAllocatedTimeReportIndex", "Report", null, null)
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink("MIS Allocated Time Report", "Passphrase", "Home", new { cont = "Report", ac = "MISAllocatedTimeReportIndex" }, null)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.ProjectOwner))
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#" onclick="Report.showProjectActivityReportParameters(); return false;">Project Manager Activity Report</a>
+                                </td>
+                            </tr>
+                        }
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.Accountant) || CurrentUser.HasRole(Enabill.UserRoleType.HR))
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#" onclick="Report.showRatesReportParameters(); return false;">Rates Report</a>
+                                </td>
+                            </tr>
+                        }
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.TicketManager))
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#" onclick="Report.showTicketTimeAllocationReportParameters(); return false;">Ticket Time Allocation Report</a>
+                                </td>
+                            </tr>
+                        }
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.TimeCapturing))
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#" onclick="Report.showTimesheetReportParameters(); return false;">Timesheet</a>
+                                </td>
+                            </tr>
+                        }
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.HR))
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#" onclick="Report.showOnScreenTimeSheetApproval(); return false;">Timesheet Approval</a>
+                                </td>
+                            </tr>
+                        }
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.Accountant) || CurrentUser.HasRole(Enabill.UserRoleType.HR))
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#" onclick="Report.showTrainingReportParameters(); return false;">Training Report</a>
+                                </td>
+                            </tr>
+                        }
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator))
+                        {
+                            <tr>
+                                <td>
+                                    <a href="#" onclick="Report.showWAExceptionReportParameters(); return false;">Work Allocation Exceptions Report</a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </td>
+                <td style="width:85%;padding:0">
+                    <div id="reportConsole"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

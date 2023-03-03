@@ -1,0 +1,6 @@
+﻿Client:<br />
+@Html.DropDownList("ClientID", null, new { onchange = "Invoice.getProjectsAndContacts(); return false;" })<br />
+Projects:<br />
+@Html.DropDownList("ProjectID") <br />
+Invoice Contact:<br />
+@Html.DropDownList("InvoiceContactID")

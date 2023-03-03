@@ -1,0 +1,76 @@
+﻿@model List<Enabill.Web.Models.UserLeaveModel>
+
+    <h4 class="center">Recent Leave Days</h4>
+
+    <table class="underline fullWidth">
+        <tr class="general">
+            <th>
+                User
+            </th>
+            <th>
+                Leave Type
+            </th>
+            <th>
+                Date From
+            </th>
+            <th>
+                Date To
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+            </th>
+        </tr>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="20" class="center">
+                    There are no recent leave entries to display
+                </td>
+            </tr>
+        }
+
+        @foreach (var leave in Model)
+        {
+            <tr>
+                <td>
+                    @leave.LeaveUser
+                </td>
+                <td>
+                    @leave.LeaveType
+                </td>
+                <td>
+                    @leave.LeaveDateFrom.ToDisplayString()
+                </td>
+                <td>
+                    @leave.LeaveDateTo.ToDisplayString()
+                </td>
+                <td>
+                    @((Enabill.ApprovalStatusType)leave.LeaveApprovalStatusID)
+                </td>
+                <td>
+                    @if (leave.LeaveApprovalStatusID == 1)
+                    {
+                        //pending
+                        <a href="#" onclick="Leave.manage(@leave.LeaveID, true); return false;">Approve</a><text> | </text><a href="#" onclick="Leave.manage(@leave.LeaveID, false); return false;">Decline</a>
+                    }
+                    else if (leave.LeaveApprovalStatusID == 2)
+                    {
+                        //declined
+                        <a href="#" onclick="Leave.manage(@leave.LeaveID, true); return false;">Approve</a>
+                    }
+                    else if (leave.LeaveApprovalStatusID == 4)
+                    {
+                        //approved
+                        <a href="#" onclick="Leave.manage(@leave.LeaveID, false); return false;">Decline</a>
+                    }
+                </td>
+            </tr>
+        }
+        <tr>
+            <td class="center" colspan="6">
+                <input type="button" onclick="Leave.bookLeaveForUser(); return false;" value="Book Leave for User" />
+            </td>
+        </tr>
+    </table>

@@ -1,0 +1,35 @@
+﻿@model Enabill.Web.Models.FlexiTimeManualAdjustmentModel
+
+<table class="subTable underline fullWidth">
+    <tr class="general">
+        <th width="15%">Effective Date</th>
+        <th width="15%" align="center">Manual Adjustment</th>
+        <th width="20%">Modified By</th>
+        <th width="40%">Remark</th>
+    </tr>
+    @foreach (var manualAdjustment in Model.FlexiManualAdjustments)
+    {
+        <tr>
+            <td width="15%">@manualAdjustment.ImplementationDate.ToDisplayString()</td>
+            <td width="15%">@manualAdjustment.Adjustment</td>
+            <td width="20%">@manualAdjustment.UserAdjusted</td>
+            <td width="40%">@manualAdjustment.Remark</td>
+            @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.Manager) || CurrentUser.HasRole(Enabill.UserRoleType.HR))
+            {
+                <td colspan="2">
+                    <img src="@Url.Content("~/Content/Img/edit_14.png")" alt="Edit" title="Edit" onclick="FlexiBalance.adjustFlexiBalance(@manualAdjustment.FlexiBalanceAdjustmentID); return false;" style="cursor:pointer; height:14px" />
+                    <img src="@Url.Content("~/Content/Img/Delete.gif")" alt="Delete" style="cursor:pointer; height:14px" onclick="FlexiBalance.deleteFlexiBalanceAdjustment(@manualAdjustment.FlexiBalanceAdjustmentID); return false;" />
+                </td>
+            }
+        </tr>
+    }
+
+    @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.Manager) || CurrentUser.HasRole(Enabill.UserRoleType.HR))
+    {
+        <tr>
+            <td colspan="5" align="right">
+                <input type="button" value="Add" onclick="FlexiBalance.adjustFlexiBalance(0); return false;" />
+            </td>
+        </tr>
+    }
+</table>

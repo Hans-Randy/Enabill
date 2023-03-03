@@ -1,0 +1,9 @@
+﻿@model Enabill.Web.Models.LeaveCycleBalanceModel
+<div>
+    <span class="actionSpan" onclick="window.location='/Report/PrintLeaveReportToExcel/?leaveType=@Model.LeaveType';">
+        <span class="imageWithText">
+            <img alt="" height="16px" src="@Url.Content("~/Content/Img/PrintXls.png")" />
+        </span>
+        Print Report
+    </span>
+</div>

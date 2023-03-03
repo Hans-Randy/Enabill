@@ -1,0 +1,75 @@
+﻿@model Enabill.Web.Models.ProjectActivitiesModel
+<div id="ucActivityList">
+    @Html.Hidden("ProjectID", Model.Project.ProjectID)
+    <b>Status</b> @Html.DropDownList("ActivityFilter", null, new { style = "width:100px;", onchange = "Project.refreshActivityList(); return false;" })
+
+    @if (Model.ProjectActivities.Count == 0)
+    {
+        <p>No activities fount matching the filter criteria.</p>
+        return;
+    }
+
+    <table class="general fullWidth">
+        <tr>
+            <th></th>
+            <th></th>
+            <th>Activity Name</th>
+            <th>Phased Out</th>
+            <th>Status</th>
+            <th>Region</th>
+            <th>Department</th>
+            <th>Must Have Remarks?</th>
+            <th>Can Capture Notes?</th>
+            <th>Default</th>
+            @*<th>Project Differences</th>*@
+        </tr>
+        @foreach (var item in Model.ProjectActivities)
+        {
+            <tr>
+                <td>
+                    <a href="#" onclick="Crud.edit({id : @item.Activity.ProjectID, activityID : @item.Activity.ActivityID}); return false">
+                        Edit
+                    </a>
+                    @if (item.Activity.IsActive)
+                    {
+
+                        <text>|</text>
+                        <span class="point" onclick="Project.deleteActivity('@(item.Activity.ActivityID)')">
+                            Delete
+                        </span>
+                    }
+                </td>
+                <td>
+                    @item.Activity.ActivityID.ToString()
+                </td>
+                <td>
+                    @item.Activity.ActivityName
+                </td>
+                <td>
+                    @(item.Activity.IsDeactivated ? "Yes" : "No")
+                </td>
+                <td>
+                    @(item.Activity.IsActive ? "Active" : "Inactive")
+                </td>
+                <td>
+                    @item.RegionName
+                </td>
+                <td>
+                    @item.DepartmentName
+                </td>
+                <td>
+                    @(item.Activity.MustHaveRemarks ? "Yes" : "No")
+                </td>
+                <td>
+                    @(item.Activity.CanHaveNotes ? "Yes" : "No")
+                </td>
+                <td>
+                    @(item.Activity.IsDefault ? "Yes" : "No")
+                </td>
+                @*<td>
+                        @item.ProjectDifferences
+                    </td>*@
+            </tr>
+        }
+    </table>
+</div>

@@ -1,0 +1,70 @@
+﻿@model Enabill.Models.User
+
+@if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator))
+{
+    @Html.ActionLink("Edit", "Edit", "User", new { id = Model.UserID }, null)<text> | </text>
+}
+else
+{
+    <text>Edit | </text>
+}
+
+@if (CurrentUser.CanManage(Model) || CurrentUserID == Model.UserID || CurrentUser.HasRole(Enabill.UserRoleType.Accountant))
+{
+    @Html.ActionLink("Profile", "Profile", new { id = Model.UserID })<text> | </text>
+}
+else
+{
+    <text>Profile | </text>
+}
+
+@if ((CurrentUser.CanManage(Model) || CurrentUserID == Model.UserID || CurrentUser.HasRole(Enabill.UserRoleType.Accountant) || CurrentUser.IsOwnerOfUserProject(Model)) && Model.HasRole(Enabill.UserRoleType.TimeCapturing))
+{
+    @Html.ActionLink("View Time", "Index", "Time", new { id = Model.UserID }, null)<text> | </text>
+}
+else
+{
+    <text>View Time | </text>
+}
+
+@*@if ((CurrentUser.CanManage(Model) || CurrentUserID == Model.UserID) && Model.IsFlexiTimeUser)
+{
+    @Html.ActionLink("FlexiTime", "Index", "FlexiTime", new { id = Model.UserID }, null)<text> | </text>
+}
+else
+{
+    <text>FlexiTime | </text>
+}*@
+
+@if (CurrentUser.CanManage(Model) || CurrentUserID == Model.UserID)
+{
+    @*Always show leave. Leave view will change based on whether you a leaveuser or not   *@
+    @Html.ActionLink("Leave", "Index", "Leave", new { id = Model.UserID }, null)<text> | </text>
+}
+else
+{
+    <text>Leave | </text>
+}
+
+@if (CurrentUser.CanManage(Model) || CurrentUserID == Model.UserID)
+{
+    @*Change color of link if no expenses or pending approvals*@
+    int status = CurrentUser.ExpenseStatus(Model.UserID);
+
+    if (status == 1) // No Expenses
+    {
+        <text>Expenses</text>
+    }
+    else if (status == 2) // All Expenses approved
+    {
+        @Html.ActionLink("Expenses", "Index", "Expense", new { id = Model.UserID }, null)
+    }
+    else // Some Expenses unapproved
+    {
+        @Html.ActionLink("Expenses", "Index", "Expense", new { id = Model.UserID }, new { @class = "actionlinkclass" })
+    }
+}
+else
+{
+    <text>Expenses</text>
+}

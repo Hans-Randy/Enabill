@@ -1,0 +1,47 @@
+﻿@model Enabill.Models.LeaveManualAdjustment
+<form id="frmLeaveManualAdjustment" method="post" action="">
+    <table class="general">
+        @if (Model != null)
+        {
+            @Html.Hidden("LeaveManualAdjustmentID", Model.LeaveManualAdjustmentID)
+            <tr>
+                <td>Effective Date</td>
+                @*<td>@Html.DropDownList("MonthList")</td>*@
+                <td>@Html.Label(DateTime.Now.ToString("yyyy MMMM"))</td>
+            </tr>
+            <tr>
+                <td>Leave Type</td>
+                <td>@Html.DropDownList("LeaveType", null, new { style = "font-size: 12px;" })</td>
+            </tr>
+            <tr>
+                <td>Manual Adjustment</td>
+                <td>@Html.TextBox("ManualAdjustment", Model.ManualAdjustment)</td>
+            </tr>
+            <tr>
+                <td>Remark</td>
+                <td>@Html.TextBox("Remark", Model.Remark)</td>
+            </tr>
+        }
+        else
+        {
+            @Html.Hidden("LeaveManualAdjustmentID", 0)
+            <tr>
+                <td>Effective Date</td>
+                @*<td>@Html.DropDownList("MonthList")</td>*@
+                <td>@Html.Label(DateTime.Now.ToString("yyyy MMMM"))</td>
+            </tr>
+            <tr>
+                <td>Leave Type</td>
+                <td>@Html.DropDownList("LeaveType", null, new { style = "font-size: 12px;" })</td>
+            </tr>
+            <tr>
+                <td>Manual Adjustment</td>
+                <td>@Html.TextBox("ManualAdjustment")</td>
+            </tr>
+            <tr>
+                <td>Remark</td>
+                <td>@Html.TextBox("Remark")</td>
+            </tr>
+        }
+    </table>
+</form>

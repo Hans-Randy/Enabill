@@ -1,0 +1,55 @@
+﻿@model List<Enabill.Web.Models.UserLeaveModel>
+
+    <table class="subTable underline fullWidth">
+        <tr class="general">
+            <th>Type</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Days</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td class="center" colspan="7">
+                    There are no recent leave entries to display
+                </td>
+            </tr>
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.LeaveType</td>
+                <td>@item.LeaveDateFrom.ToExceptionDisplayString()</td>
+                <td>@item.LeaveDateTo.ToExceptionDisplayString()</td>
+                <td width="55px">@item.NumberOfWorkDays</td>
+                <td>@item.LeaveStatus</td>
+                @if (CurrentUser.HasRole(Enabill.UserRoleType.Manager) || CurrentUserID == ContextUserID)
+                {
+                    //Only the manager can approve and decline request. Take them to the details and allow them to approve or decline
+                    <td><a href="#" onclick="Leave.manage(@item.LeaveID, @item.LeaveApprovalStatusID); return false;">Manage</a></td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            </tr>
+        }
+
+        @if (CurrentUserID == ContextUserID || CurrentUser.HasRole(Enabill.UserRoleType.Manager))
+        {
+            <tr>
+                <td class="center" colspan="7">
+                    @if (CurrentUserID == ContextUserID)
+                {
+                        <input type="button" onclick="Leave.bookLeave(); return false;" value="Apply for Leave" />
+                    }
+                    else
+                    {
+                        <input type="button" onclick="Leave.bookLeave(); return false;" value="Book Leave for @ContextUser.FirstName" />
+                    }
+                </td>
+            </tr>
+        }
+    </table>

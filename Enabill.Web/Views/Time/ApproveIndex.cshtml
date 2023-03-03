@@ -1,0 +1,13 @@
+﻿@model Enabill.Web.Models.TimeApproveIndexModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "Timesheet Approval";
+}
+
+<div id="ucApproveIndex" class="marginView">
+    @Html.Partial("ucApproveIndex", Model)
+</div>

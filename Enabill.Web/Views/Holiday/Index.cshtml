@@ -1,0 +1,57 @@
+﻿@model Enabill.Web.Models.Holiday.HolidayViewModel
+
+@{
+
+    ViewBag.Title = "Holiday";
+
+}
+
+@section head{
+
+    <script type="text/javascript" charset="utf-8">
+        var showForm = "@Model.IsWorkDaySaved" !== "True";
+        var selectedYear = @Model.SelectedYear;
+        var nonWorkingDays = "@string.Join("|", Model.NonWorkDays)".split("|");
+        var holidays = "@string.Join("|", Model.CalendarHolidays)".split("|");
+    </script>
+
+}
+
+@IncludeControllerScript(false)
+
+<div id="ucDay" class="marginView">
+    @Html.TitleTable(
+        "", "",
+        "<b>Holiday Calendar: </b> ",
+        Url.Content("~/Content/Img/timesheet_20x20.png"),
+        "ucYearSelector", Model.SelectedYear,
+        null, null,
+        null, null)
+</div>
+
+
+<table class="fullWidth">
+    <tbody>
+        <tr>
+            <td class="halfWidth" style="padding: 0 20px; min-height: 100%;">
+                <div id="calendar"></div>
+            </td>
+            <td class="halfWidth" style="padding: 0 20px; min-height: 100%;">
+                <table class="fullWidth">
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.Partial("ucHolidays", Model)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.Partial("ucHolidayForm", Model)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

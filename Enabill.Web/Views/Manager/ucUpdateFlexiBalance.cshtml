@@ -1,0 +1,6 @@
+﻿User:<br />
+@Html.DropDownList("UserList")
+Adjusment Amount:<br />
+@Html.TextBox("Adjustment", 0)
+Implimentation Date:<br />
+@Html.TextBox("AdjDate", DateTime.Today.ToDisplayString(), new { @class = "datePicker" })

@@ -1,0 +1,16 @@
+﻿@model string
+
+<div class="padView">
+    <form id="frmTimesheetReport" method="post">
+        <table>
+            <tr>
+                <th>Date From</th>
+                <td>@Html.TextBox("DateFrom", DateTime.Today.ToFirstDayOfMonth().ToDisplayString())</td>
+            </tr>
+            <tr>
+                <th>Date To</th>
+                <td>@Html.TextBox("DateTo", DateTime.Today.ToLastDayOfMonth().ToDisplayString())</td>
+            </tr>
+        </table>
+    </form>
+</div>

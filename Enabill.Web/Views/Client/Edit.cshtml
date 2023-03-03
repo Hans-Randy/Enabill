@@ -1,0 +1,29 @@
+﻿@model Enabill.Web.Models.ClientEditModel
+
+@section head
+{
+    @IncludeControllerScript(true)
+}
+
+@{
+    string action = "";
+
+    if (Model.Client.ClientID > 0)
+    { action = "Edit"; }
+    else
+    { action = "Create"; }
+
+    ViewBag.Title = action;
+}
+
+<div class="marginView">
+    @Html.TitleTable("tblClientEdit", "", "<b>Client:</b> " + Model.Client.ClientName)
+    <div class="padView">
+
+        @Html.Tabs("tabs",
+            new TabPage("Client Details", "ucClientDetails", Model.Client, "tabs-0"),
+            new TabPage("Contacts", "ucClientContacts", Model, "tabs-1"),
+            new TabPage("Department Codes", "ucClientDepartmentCodes", Model, "tabs-2")
+          )
+    </div>
+</div>

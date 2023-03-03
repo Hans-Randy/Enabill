@@ -1,0 +1,47 @@
+﻿@model  IEnumerable<Enabill.Models.BalanceAuditTrail>
+@Html.TitleTable("tblBalanceAuditTrailReport", "", "<b>Balance Audit Trail Report</b>", null, null, null, null, null, "ucBalanceAuditTrailReportCol5", Model)
+@Html.Hidden("MonthList")
+<div class="padView">
+    <form id="frmBalanceAuditTrail" method="post">
+        <table>
+            <tr>
+                <th class="borderRight">
+                    Balance Type
+                    @Html.DropDownList("BalanceTypeList")
+                </th>
+                <th> Month @Html.DropDownList("MonthList") </th>
+                <th> User @Html.DropDownList("UserList") </th>
+                <th>
+                    <input type="submit" value="Search" />
+                </th>
+            </tr>
+        </table>
+    </form>
+
+    <table class="subTable general fullWidth">
+        <tr>
+            <th>User</th>
+            <th width="7%">Balance Affected</th>
+            <th width="7%">Balance Before</th>
+            <th width="7%">Date Changed</th>
+            <th width="7%">Hours\Days Changed By</th>
+            <th width="7%">Balance After</th>
+            <th>Summary of Change</th>
+            <th>Changed By</th>
+        </tr>
+
+        @foreach (var bat in Model.OrderByDescending(b => b.DateChanged).ThenByDescending(b => b.BalanceDate))
+        {
+            <tr>
+                <td>@bat.UserFullName</td>
+                <td>@bat.BalanceDate.ToDisplayString()</td>
+                <td>@bat.BalanceBefore.ToDoubleString()</td>
+                <td>@bat.DateChanged.ToDisplayString()</td>
+                <td>@bat.HoursChanged.ToDoubleString()</td>
+                <td>@bat.BalanceAfter.ToDoubleString()</td>
+                <td>@bat.ChangeSummary</td>
+                <td>@bat.ChangedByFullName</td>
+            </tr>
+        }
+    </table>
+</div>

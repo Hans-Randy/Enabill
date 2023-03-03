@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ERR_HourlyContractedUser_Message" xml:space="preserve">
+    <value>{0} is an hourly contracted user and therefore, FlexiBalances do not apply to " + {1} + ". This page cannot be viewed."</value>
+  </data>
+  <data name="ERR_HourlyContractedUser_Title" xml:space="preserve">
+    <value>FlexiTime does not apply to {0}</value>
+  </data>
+  <data name="ERR_NoActivityForDelete_Message" xml:space="preserve">
+    <value>The activity being deleted could not be found. Delete cancelled.</value>
+  </data>
+  <data name="ERR_NoActivityForUpdate_Message" xml:space="preserve">
+    <value>The activity being updated could not be found. Update of activity cancelled.</value>
+  </data>
+  <data name="ERR_NoClientForContactCreate_Message" xml:space="preserve">
+    <value>The client to which this contact would be assigned could not be found. Creation of the contact was cancelled.</value>
+  </data>
+  <data name="ERR_NoClientForContactDelete_Message" xml:space="preserve">
+    <value>The client of the contact being deleted could not be found. Delete of contact cancelled.</value>
+  </data>
+  <data name="ERR_NoClientForContactUpdate_Message" xml:space="preserve">
+    <value>The client that owns this contact could not be found. Update of contact was cancelled.</value>
+  </data>
+  <data name="ERR_NoClientForContact_Message" xml:space="preserve">
+    <value>The client could not be found and therefore, the contact cannot be retrieved.</value>
+  </data>
+  <data name="ERR_NoClientForRetrieveContactList_Message" xml:space="preserve">
+    <value>The selected client could not be found. The look up for contacts of the client was cancelled.</value>
+  </data>
+  <data name="ERR_NoClient_Message" xml:space="preserve">
+    <value>The selected client could not be found.</value>
+  </data>
+  <data name="ERR_NoContactForUpdate_Message" xml:space="preserve">
+    <value>The contact being updated could not be found. Update to contact cancelled.</value>
+  </data>
+  <data name="ERR_NoContact_Message" xml:space="preserve">
+    <value>The selected contact could not be found.</value>
+  </data>
+  <data name="ERR_NonTimeCapturerUser_Message" xml:space="preserve">
+    <value>{0} does not have the 'Time Capturer' role and therefore, this page cannot be viewed for {1}.</value>
+  </data>
+  <data name="ERR_NonTimeCapturerUser_Title" xml:space="preserve">
+    <value>{0} is not a 'Time Capturer'</value>
+  </data>
+  <data name="ERR_NoPermissionToViewPage_Message" xml:space="preserve">
+    <value>You do not have the required permissions to view this page.</value>
+  </data>
+  <data name="ERR_NoProjectForActivityCreate_Message" xml:space="preserve">
+    <value>The project that would own the activity being created could not be found. Creation of activity cancelled.</value>
+  </data>
+  <data name="ERR_NoProjectForActivityDelete_Message" xml:space="preserve">
+    <value>The project that owns the activity being deleted could not be found. Delete of activity cancelled.</value>
+  </data>
+  <data name="ERR_NoProjectForActivityList_Message" xml:space="preserve">
+    <value>The project could not be found, therefore, no activities for the project could be displayed.</value>
+  </data>
+  <data name="ERR_NoProjectForActivityUpdate_Message" xml:space="preserve">
+    <value>The project that owns the activity being updated could not be found. Update of activity cancelled.</value>
+  </data>
+  <data name="ERR_NoProjectForActivity_Message" xml:space="preserve">
+    <value>The project that the selected activity belongs to could not be found.</value>
+  </data>
+  <data name="ERR_NoProjectForUpdate_Message" xml:space="preserve">
+    <value>The selected project could not be found. Update to project cancelled.</value>
+  </data>
+  <data name="ERR_NoProject_Message" xml:space="preserve">
+    <value>The selected project could not be found.</value>
+  </data>
+  <data name="ERR_NoUser_Message" xml:space="preserve">
+    <value>The selected user could not be found.</value>
+  </data>
+  <data name="ERR_NoWorkAllocationForNoteCreateUpdate_Message" xml:space="preserve">
+    <value>The work allocation to which this note belongs could not be found. Save cancelled.</value>
+  </data>
+  <data name="ERR_NoWorkSession_Message" xml:space="preserve">
+    <value>The context work session could not be found.</value>
+  </data>
+  <data name="ERR_WeekendPublicHoliday_Message" xml:space="preserve">
+    <value>The selected date is either a public holiday or a weekend.</value>
+  </data>
+  <data name="ERR_NoWorkAllocationFound_Message" xml:space="preserve">
+    <value>The requested work allocation could not be found.</value>
+  </data>
+  <data name="ERR_NoExpense_Message" xml:space="preserve">
+    <value>The selected expense could not be found</value>
+  </data>
+  <data name="ERR_CreateExpense_Message" xml:space="preserve">
+    <value>An expense can only be created for yourself</value>
+  </data>
+  <data name="ERR_NoRegion_Message" xml:space="preserve">
+    <value>The selected region could not be found.</value>
+  </data>
+  <data name="ERR_NoRegionForUpdate_Message" xml:space="preserve">
+    <value>The selected region could not be found. Update to region cancelled.</value>
+  </data>
+  <data name="ERR_NoRegionName_Message" xml:space="preserve">
+    <value>Please enter a region name.</value>
+  </data>
+  <data name="ERR_NoRegionShortCode_Message" xml:space="preserve">
+    <value>Please enter a region short code.</value>
+  </data>
+  <data name="ERR_NoRegionStatus_Message" xml:space="preserve">
+    <value>Please select a region status.</value>
+  </data>
+  <data name="ERR_NoPermissionToUpdateRegion" xml:space="preserve">
+    <value>You do not have the required permissions to edit a region. Save cancelled.</value>
+  </data>
+</root>

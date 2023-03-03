@@ -1,0 +1,16 @@
+﻿@model Enabill.Models.Client
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="marginView">
+    @Html.TitleTable("tblCreateClient", "", "<b>Create Client<b>")
+    <div class="padView">
+        @Html.Partial("ucClientDetails", Model)
+    </div>
+</div>

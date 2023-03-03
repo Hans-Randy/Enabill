@@ -1,0 +1,24 @@
+﻿@model StoryWriter.Models.Story
+
+@if (Model.StoryID == 0)
+{
+    <text>No Story exists: <a href="/Story/Page/@Model.RefUrl">Create</a></text>
+}
+else
+{
+    <fieldset>
+        <legend>Story | @Html.ActionLink("Edit", "Edit", "Story", new { id = Model.StoryID }, null) | <a href="#" onclick="$('#story').hide();return false;">Hide</a> </legend>
+        <div class="display-label">StoryName</div>
+        <div class="display-field">@Model.StoryName</div>
+
+        <div class="display-label">StoryCode</div>
+        <div class="display-field">@Model.StoryNumber</div>
+        <div>@Html.Raw(Model.StoryText)</div>
+
+        <div>
+            <span class="StoryLines">As a:</span> @Model.ActorName<br />
+            <span class="StoryLines">I want to:</span> @Model.IWantToAction<br />
+            <span class="StoryLines">So that:</span> @Model.SoThatOutcome<br />
+        </div>
+    </fieldset>
+}

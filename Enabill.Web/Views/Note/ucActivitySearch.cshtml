@@ -1,0 +1,23 @@
+﻿@model Enabill.Web.Models.NoteActivityModel
+
+<ul>
+    @foreach (Enabill.Web.Models.ActivitySearchModel clientModel in Model.ClientDistinctList)
+    {
+        <li><a href="#" onclick="NoteSearch.toggleClientActivities(@clientModel.ClientID); return false;">@clientModel.ClientName</a></li>
+        <ul>
+            @foreach (Enabill.Web.Models.ActivitySearchModel projectModel in Model.ProjectDistinctList.Where(c => c.ClientID == clientModel.ClientID))
+            {
+                <li><a href="#" onclick="NoteSearch.toggleProjectActivities(@projectModel.ProjectID); return false;">@projectModel.ProjectName</a></li>
+                <ul>
+                    @foreach (Enabill.Web.Models.ActivitySearchModel activityModel in Model.ActivityModel.Where(a => a.ProjectID == projectModel.ProjectID))
+                    {
+                        <li style="list-style-type: none;">
+                            <input type="checkbox" id="Activity@(activityModel.ActivityID)" class="activitySelect c@(activityModel.ClientID) p@(activityModel.ProjectID)" value="@activityModel.ActivityID" />
+                            <span>@activityModel.ActivityName</span>
+                        </li>
+                    }
+                </ul>
+            }
+        </ul>
+    }
+</ul>

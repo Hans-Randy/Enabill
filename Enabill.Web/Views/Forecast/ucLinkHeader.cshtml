@@ -1,0 +1,28 @@
+﻿@model Enabill.Web.Models.ForecastLinkModel
+
+<table class="general fullWidth">
+    <tr>
+        <td>Client</td>
+        <td>@Model.ForecastHeader.Client</td>
+    </tr>
+    <tr>
+        <td>Project</td>
+        <td>@Model.ForecastHeader.Project</td>
+    </tr>
+    <tr>
+        <td>Resource</td>
+        <td>@Model.ForecastHeader.Resource</td>
+    </tr>
+    <tr>
+        <td>BillingMethod
+        <td>@((Enabill.BillingMethodType)Model.ForecastHeader.BillingMethod)</td>
+    </tr>
+    <tr>
+        <td>Period</td>
+        <td>@Html.DropDownList("MonthList", null, new { onchange = "Forecast.refreshInvoiceList(); return false;", style = "width:100px;" })</td>
+    </tr>
+    <tr>
+        <td>Forecast Amount R</td>
+        <td></td>
+    </tr>
+</table>

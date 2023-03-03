@@ -1,0 +1,13 @@
+﻿@model Enabill.Web.Models.MISAllocatedTimeReportModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "MIS Allocated Time Report";
+}
+
+<div id="ucMISAllocatedTimeReportIndex" class="marginView">
+    @Html.Partial("ucMISAllocatedTimeReportIndex", Model)
+</div>

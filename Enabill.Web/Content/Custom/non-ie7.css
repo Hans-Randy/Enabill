@@ -1,0 +1,14 @@
+﻿body
+{
+    overflow: hidden !important;
+}
+
+#page-div
+{
+    overflow: hidden !important;
+}
+
+#main
+{
+    overflow-y: scroll !important;
+}

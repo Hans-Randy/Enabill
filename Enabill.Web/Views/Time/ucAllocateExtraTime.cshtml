@@ -1,0 +1,52 @@
+﻿@model Enabill.Models.WorkAllocation
+
+<form id="frmExtraAllocation" method="post" action="">
+    <table class="general">
+        @Html.Hidden("ActivityID", Model.ActivityID)
+
+        @{
+            string ID = 0 + "__" + Model.ActivityID;
+            int NrOfAssociatedTickets = Enabill.Repos.TicketRepo.GetAssociatedProjectTickets(Model.GetProject().GetClient().ClientID, Model.GetProject().ProjectID).Count();
+        }
+        @Html.Hidden("ClientID" + ID, Model.GetProject().GetClient().ClientID)
+        @Html.Hidden("ProjectID" + ID, Model.GetProject().ProjectID)
+        <tr>
+            <td>Activity</td>
+            <td>@Model.GetActivity().ActivityName</td>
+        </tr>
+        <tr>
+            <td>Hours</td>
+            <td>@Html.TextBox("HoursWorked", string.Empty, new { })</td>
+        </tr>
+        <tr>
+            <td>Remark</td>
+            <td>@Html.TextBox("Remark", string.Empty, new { })</td>
+        </tr>
+        @if (NrOfAssociatedTickets > 0)
+        {
+            <tr>
+                <td>Ticket</td>
+                <td>
+                    @*@Html.TextBox("Ticket" + ID, null, new { @class="AutoComplete", onchange = "WorkAllocation.setAutoComplete(); return false;", style = "width:60px" })</td>      *@
+                @Html.TextBox("Ticket" + ID, null, new { @class = "AutoComplete", onchange = "WorkAllocation.setAutoComplete(); return false;", style = "width:60px" })
+            </td>
+            @Html.Hidden("TicketIDs")
+        </tr>
+        }
+        @if (Model.GetActivity().ActivityName == "Training")
+        {
+            <tr>
+                <td>Training Type</td>
+                <td> @Html.DropDownList("TrainingCategoryList" + ID, null, new { style = "background-color: #FDD; width: 150px;" })</td>
+            </tr>
+            <tr>
+                <td>Trainer Name</td>
+                <td>@Html.TextBox("TrainerName" + ID, string.Empty, new { style = "background-color: #FDD; width: 200px;", @class = "required" })</td>
+            </tr>
+            <tr>
+                <td>TrainingInstitute</td>
+                <td> @Html.TextBox("TrainingInstitute" + ID, string.Empty, new { style = "background-color: #FDD; width: 200px;", @class = "required" })</td>
+            </tr>
+        }
+    </table>
+</form>

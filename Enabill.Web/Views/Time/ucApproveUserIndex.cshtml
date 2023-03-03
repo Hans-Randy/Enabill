@@ -1,0 +1,103 @@
+﻿@model Enabill.Web.Models.TimeApproveModel
+@{
+    var managerList = new Dictionary<int, string>{
+{0, "All Staff"},
+{CurrentUserID, "My Staff"}
+};
+}
+<table class="headingTable">
+    <tbody>
+        <tr>
+            <td class="headingTableTitle">
+                <span class="imageWithText">
+                    <img src="/Content/Img/timesheet_20x20.png">
+                </span>
+                <b>Timesheet Approval User List</b>
+            </td>
+            <td class=" headingTableRoundingImage">
+                &nbsp;
+            </td>
+            <td class="headingTableCol3"></td>
+            <td class="headingTableCol4"></td>
+            <td class="headingTableCol5"></td>
+        </tr>
+    </tbody>
+</table>
+<div class="padView">
+    <table>
+        <tr>
+            <th>
+                <span class="ui-helper-hidden-accessible"><input type="text" /></span>
+                Date Range
+                @Html.TextBox("DateFrom", Model.DateFrom.ToString("yyyy-MM-dd"))
+
+                to
+                @Html.TextBox("DateTo", Model.DateTo.ToString("yyyy-MM-dd"))
+            </th>
+            <th class="borderRight">
+                Manager
+                @Html.DropDownList("ManagerList", managerList.Select(t => new SelectListItem { Text = t.Value, Value = t.Key.ToString(), Selected = t.Key == Model.ManagerID }))
+            </th>
+            <th class="borderRight">
+                Status
+                @Html.EnumDropDownListFor(m => m.UserWorkDayStatus, "--status")
+            </th>
+            <th>
+                <input type="button" id="btnSearch" value="Search" />
+            </th>
+        </tr>
+    </table>
+    <table class="subTable general fullWidth">
+        <tr>
+            <th width="25%">User Name</th>
+            <th width="25%">Full Name </th>
+            <th width="5%">Status</th>
+            <th width="15%">Exceptions</th>
+            <th width="15%">Unapproved</th>
+            <th width="15%">Approved</th>
+        </tr>
+        @foreach (var u in Model.Users.OrderBy(u => u.FullName))
+        {
+            var className = string.Empty;
+            var status = string.Empty;
+
+            if (!u.HasRole(Enabill.UserRoleType.TimeCapturing))
+            {
+                status = "N/A";
+                className = "NA";
+            }
+            else if (Model.UsersWorkDayModel.Where(uv => uv.User.UserID == u.UserID && uv.HasException).Count() > 0)
+            {
+                status = "Exception";
+                className = "Open";
+            }
+            else if (Model.UsersWorkDayModel.Where(uv => uv.User.UserID == u.UserID && uv.Status == Enabill.Models.UserWorkDayStatus.Unapproved && uv.WorkDay.IsWorkable).Count() > 0)
+            {
+                status = "Unapproved";
+                className = "Open";
+            }
+            else if (Model.UsersWorkDayModel.Where(uv => uv.User.UserID == u.UserID && uv.Status == Enabill.Models.UserWorkDayStatus.Approved && uv.WorkDay.IsWorkable).Count() > 0)
+            {
+                status = "Approved";
+                className = "";
+            }
+
+            <tr>
+                <td>@Html.ActionLink(u.UserName, "ApproveIndex", "Time", new { id = u.UserID, callingPage = "approval" }, null)</td>
+                <td>@u.FullName</td>
+                <td class="@className">
+                    @status
+                </td>
+                <td>
+                    @Model.UsersWorkDayModel.Where(uv => uv.User.UserID == u.UserID && uv.HasException).Count()
+                </td>
+                <td>
+                    @Model.UsersWorkDayModel.Where(uv => uv.User.UserID == u.UserID && uv.Status == Enabill.Models.UserWorkDayStatus.Unapproved && uv.WorkDay.IsWorkable).Count()
+                </td>
+                <td>
+                    @Model.UsersWorkDayModel.Where(uv => uv.User.UserID == u.UserID && uv.Status == Enabill.Models.UserWorkDayStatus.Approved && uv.WorkDay.IsWorkable).Count()
+                </td>
+            </tr>
+        }
+    </table>
+</div>

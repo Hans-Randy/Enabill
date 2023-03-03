@@ -1,0 +1,94 @@
+﻿@using System.Configuration;
+@*<!DOCTYPE html>*@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>Enabill - @ViewBag.Title</title>
+    <link rel="shortcut icon" href="../../Content/Img/Company.ico" />
+
+    @IncludeFiles("css", true, false, false,
+        "Site.css")
+    @IncludeFiles("css", false, false, false,
+        "themes/jquery-ui.css",
+        "themes/jquery-treeview.css")
+    @IncludeFiles("css", false, false, false,
+        "toastr.css",
+        "docuvieware-min.css")
+    @IncludeFiles("js", false, false, false,
+        "Built-In/jquery.js",
+        "Built-In/jquery-ui.min.js",
+        "Built-In/jquery.cookie.js",
+        "Built-In/jquery.form.js",
+        "Built-In/jquery.validate.min.js",
+        "Built-In/jquery.validate.unobtrusive.min.js")
+
+    @RenderSection("beginHead", false)
+
+    @IncludeFiles("js", false, false, false,
+        "Built-In/jquery.treeview.async.js",
+        "Built-In/jquery.treeview.js",
+        "Built-In/jquery.treeview.sortable.js")
+    @IncludeFiles("js", false, false, false,
+        "Enabill.js",
+        "_GeneralLayoutJS.js",
+        "CommonFunctions.js",
+        "toastr.js")
+
+    @RenderSection("head", false)
+
+    <!--[if IE 7]>
+    @IncludeFiles("css", false, false, false, "/Custom/ie7.css")
+    <![endif]-->
+    <!--[if IE]><![if !IE 7]><![endif]-->
+    @IncludeFiles("css", false, false, false, "/Custom/non-ie7.css")
+    <!--[if IE]><![endif]><![endif]-->
+</head>
+
+<body>
+    <div id="notifier" style="display:none"><span id="notify-text">Loading...</span></div>
+    <div id="page-div">
+
+        <div id="header">
+            <div id="upperHeader">
+
+                <img id="enabill_Logo" alt="enAbill" src="@Url.Content("~/Content/Img/logo.png")" />
+
+                <span id="logon-span">
+                    <span>
+                        @Html.Partial("_LogOnPartial")
+                    </span>
+                </span>
+            </div>
+
+            <div id="lowerHeader">
+
+                <span id="menuItems">
+                    @Html.Partial("ucMenu")
+                </span>
+            </div>
+
+            <div id="headerUnderline">
+            </div>
+        </div>
+
+        <div id="main">
+            <div id="story" class="Story"></div>
+
+            <div id="main-content">
+                @RenderBody()
+            </div>
+        </div>
+
+        <div id="footer">
+            <img src="@Url.Content("/Content/Img/Company_it.png")" />
+            <span style="position: relative; bottom: 4px;">
+                @Enabill.Code.Constants.COMPANYNAME Software • © Copyright @DateTime.Now.Year • v@(AppVersion.ToString())  • @Enabill.Code.Constants.CONFIG
+            </span>
+        </div>
+    </div>
+    <div id="dialog"><div class="contents"></div></div>
+
+    @Html.Hidden("CurrentUserID", CurrentUserID)
+    @Html.Hidden("ContextUserID", ContextUserID)
+</body>
+</html>

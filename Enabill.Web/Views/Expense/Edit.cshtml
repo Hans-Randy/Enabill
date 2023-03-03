@@ -1,0 +1,18 @@
+﻿@model Enabill.Web.Models.ExpenseEditModel
+
+@section beginhead{
+    @IncludeRichEditor()
+}
+
+@section head{
+    @IncludeControllerScript(true)
+    @IncludeDocumentViewer()
+}
+
+@{
+    ViewBag.Title = "Edit Expense: " + Model.User.FullName;
+}
+
+<div id="ucExpenseItem" class="marginView">
+    @Html.Partial("ucExpenseDetail", Model)
+</div>

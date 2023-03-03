@@ -1,0 +1,128 @@
+﻿@model Enabill.Web.Models.InvoiceWorkAllocationModel
+
+@if (Model.Invoice.IsOpen || Model.Invoice.IsInProgress)
+{
+
+    <table class="subTable general fullWidth">
+        <tr>
+            <th>
+                Client:
+            </th>
+            <th>
+                Billing Method
+            </th>
+            <th>
+                Invoice Dates
+            </th>
+            <th>
+                Period
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Model.Client.ClientName
+            </td>
+            <td>
+                @((Enabill.BillingMethodType)Model.Invoice.BillingMethodID)
+            </td>
+            <td>
+                @Model.Invoice.DateFrom.ToDisplayString() to @Model.Invoice.DateTo.ToDisplayString()
+            </td>
+            <td>
+                @Model.Invoice.Period
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Provisional Amount Excl (@Model.Invoice.Client.GetCurrency(Model.Invoice.Client.CurrencyTypeID).CurrencyISO)
+            </th>
+            <th>
+                Provisional Accrual Amount Excl (@Model.Invoice.Client.GetCurrency(Model.Invoice.Client.CurrencyTypeID).CurrencyISO)
+            </th>
+            <th>
+                Estimated Amount Excl (@Model.Invoice.Client.GetCurrency(Model.Invoice.Client.CurrencyTypeID).CurrencyISO)
+            </th>
+            <th>
+                Invoice Credit Amount (@Model.Invoice.Client.GetCurrency(Model.Invoice.Client.CurrencyTypeID).CurrencyISO)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Model.Invoice.ProvisionalIncomeAmount.Value.ToDoubleString()
+            </td>
+            <td>
+                @Model.Invoice.ProvisionalAccrualAmount.Value.ToDoubleString()
+            </td>
+            <td>
+                @Model.Invoice.ProjectedAmountExcl.Value.ToDoubleString()
+            </td>
+            <td>
+                @Html.TextBox("DirectInvoiceCredit", Model.Invoice.InvoiceCreditAmount.ToDoubleString(), new { @class = "requiresNumberFormatting" })
+            </td>
+        </tr>
+    </table>
+
+}
+else
+{
+
+    <table class="subTable general fullWidth">
+        <tr>
+            <th>
+                Client:
+            </th>
+            <th>
+                Billing Method
+            </th>
+            <th>
+                Invoice Dates
+            </th>
+            <th>
+                Period
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Model.Client.ClientName
+            </td>
+            <td>
+                @((Enabill.BillingMethodType)Model.Invoice.BillingMethodID)
+            </td>
+            <td>
+                @Model.Invoice.DateFrom.ToDisplayString() to @Model.Invoice.DateTo.ToDisplayString()
+            </td>
+            <td>
+                @Model.Invoice.Period
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Provisional Amount Excl (@Model.Invoice.Client.GetCurrency(Model.Invoice.Client.CurrencyTypeID).CurrencyISO)
+            </th>
+            <th>
+                Provisional Accrual Amount Excl (@Model.Invoice.Client.GetCurrency(Model.Invoice.Client.CurrencyTypeID).CurrencyISO)
+            </th>
+            <th>
+                Estimated Amount Excl (@Model.Invoice.Client.GetCurrency(Model.Invoice.Client.CurrencyTypeID).CurrencyISO)
+            </th>
+            <th>
+                Invoice Credit Amount (@Model.Invoice.Client.GetCurrency(Model.Invoice.Client.CurrencyTypeID).CurrencyISO)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Model.Invoice.ProvisionalIncomeAmount.Value.ToDoubleString()
+            </td>
+            <td>
+                @Model.Invoice.ProvisionalAccrualAmount.Value.ToDoubleString()
+            </td>
+            <td>
+                @Model.Invoice.ProjectedAmountExcl.Value.ToDoubleString()
+            </td>
+            <td>
+                @Model.Invoice.InvoiceCreditAmount.ToDoubleString()
+            </td>
+        </tr>
+    </table>
+
+}

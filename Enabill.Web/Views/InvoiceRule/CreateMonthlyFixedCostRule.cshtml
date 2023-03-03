@@ -1,0 +1,141 @@
+﻿@model Enabill.Web.Models.InvoiceRuleModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "Create Monthly Fixed Cost Rule";
+}
+<div class="marginView">
+    @Html.TitleTable("tblCreateMontlyFixedCost", string.Empty, "<b>Monthly Fixed Cost Invoice Rule:</b> " + Model.Client.ClientName)
+    <div class="padView">
+        <table class="subTable fullWidth">
+            <tr>
+                <td class="borderRight" valign="top">
+                    <form id="MonthlyFixedCostRule">
+                        <h4>
+                            Invoice Rule Details
+                        </h4>
+                        @*<table class="general halfWidth">*@
+                        <table class="underline fullWidth">
+                            <tr>
+                                <th>
+                                    Client
+                                </th>
+                                <td>
+                                    @Model.Client.ClientName
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Project
+                                </th>
+                                <td>
+                                    @Model.InvoiceRule.ProjectName
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Billing Method Type
+                                </th>
+                                <td>
+                                    Monthly Fixed Cost
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Invoice Sub Category
+                                </th>
+                                <td>
+                                    @Html.DropDownList("InvoiceSubCategoryID")
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Invoice Contact
+                                </th>
+                                <td>
+                                    @Html.DropDownList("DefaultContactID")
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Activation Date
+                                </th>
+                                <td>
+                                    @Html.TextBox("DateFrom", Model.InvoiceRule.DateFrom.ToDisplayString())
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Deactivation Date
+                                </th>
+                                <td>
+                                    @Html.TextBox("DateTo", Model.InvoiceRule.DateTo.ToDisplayString())
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Order Number
+                                </th>
+                                <td>
+                                    @Html.TextBox("OrderNo", Model.InvoiceRule.OrderNo)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Description
+                                </th>
+                                <td>
+                                    @Html.TextArea("Description", Model.InvoiceRule.Description)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Default Invoice Day of Month
+                                </th>
+                                <td>
+                                    @Html.DropDownList("InvoiceDay")
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.Label("Fixed Cost Amount (" + Model.Client.GetCurrency(Model.Client.CurrencyTypeID).CurrencyISO + ")")
+                                </th>
+                                <td>
+                                    @Html.TextBox("InvoiceAmountExclVAT", null, new { @class = "right requiresNumberFormatting" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <input type="button" id="Save" value="Save" onclick="InvoiceRule.saveMonthlyFixedCost()" />
+                                    <input type="button" value="Cancel" onclick="InvoiceRule.cancel();" />
+                                </td>
+                            </tr>
+                        </table>
+                        @Html.Hidden("ClientID", Model.Client.ClientID)
+                        @Html.Hidden("ProjectID", Model.Project.ProjectID)
+                        @Html.Hidden("InvoiceRuleID", Model.InvoiceRule.InvoiceRuleID)
+                        @Html.Hidden("ContactList")
+                    </form>
+                </td>
+                <td class="borderRight" valign="top">
+                    <h4>
+                        CC Contacts to Receive Invoice
+                    </h4>
+                    <div>
+                        @foreach (var cont in Model.InvoiceRuleContacts.Where(c => c.IsSelected))
+                        {
+                            <input class="Contacts" type="checkbox" value="@cont.Contact.ContactID" checked="checked" />@cont.Contact.ContactName
+                        }
+                        @foreach (var cont in Model.InvoiceRuleContacts.Where(c => !c.IsSelected))
+                        {
+                            <input class="Contacts" type="checkbox" value="@cont.Contact.ContactID" />@cont.Contact.ContactName
+                        }
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

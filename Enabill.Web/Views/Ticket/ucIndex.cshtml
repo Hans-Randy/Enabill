@@ -1,0 +1,54 @@
+﻿@model Enabill.Web.Models.TicketIndexModel
+
+@if (CurrentUser.HasRole(Enabill.UserRoleType.TicketManager) || CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.ProjectOwner))
+{
+    @Html.TitleTable("tblTicket", "", "<b>Ticket Dashboard</b>", "", "ucIndexCol3", "", "ucIndexCol4", "", "ucIndexCol5", "")
+}
+else
+{
+    @Html.TitleTable("tblTicket", "", "<b>Ticket Dashboard</b>", "", null, "", null, "", null, null)
+}
+<div class="padView">
+    <table>
+        <tr>
+            <th colspan="3">
+                Period
+                @Html.TextBox("DateFrom", Model.DateFrom.ToDisplayString(), new { style = "width:100px;" })
+                to
+                @Html.TextBox("DateTo", Model.DateTo.ToDisplayString(), new { style = "width:100px;" })
+            </th>
+
+            <th colspan="2">
+                <span>Type:</span>
+                <span>@Html.DropDownList("TicketTypeFilter", null, new { style = "width:100px;", onchange = "Ticket.refreshTickets(); return false;" })</span>
+            </th>
+
+            @*  @if (CurrentUser.HasRole(Enabill.UserRoleType.TicketManager) || CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.ProjectOwner))
+                {*@
+            <th colspan="2">
+                <span>Assigned To</span>
+                <span>@Html.DropDownList("FilterBy", null, new { style = "width:100px;", onchange = "Ticket.refreshTickets(); return false;" })</span>
+            </th>
+            @*  }*@
+
+            <th><input type="button" value="Search" onclick="Ticket.refreshTickets(); return false;" /></th>
+        </tr>
+    </table>
+
+    <table class="subTable fullWidth">
+        <tr>
+            <td id="ClientListsTD" class="borderRight" width="40%" valign="top">
+                @Html.Partial("ucTicketLists", Model)
+            </td>
+            <td id="ViewTicketsTD" class="borderRight" width="60%" valign="top">
+                @Html.Partial("ucViewTickets", Model.TicketList)
+            </td>
+        </tr>
+        <tr>
+            <td id="ViewUnassignedTicketsTD" class="borderRight" width="40%" valign="top">
+                @Html.Partial("ucViewUnassignedTickets", Model.UnassignedTicketList)
+            </td>
+            <td width="60%"></td>
+        </tr>
+    </table>
+</div>

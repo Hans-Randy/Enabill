@@ -1,0 +1,6 @@
+﻿@if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator))
+{
+    <div class="actionDiv">
+        <span>Status @Html.DropDownList("StatusFilter", null, new { style = "width:100px;", onchange = "Client.refreshList(); return false;" })</span>
+    </div>
+}

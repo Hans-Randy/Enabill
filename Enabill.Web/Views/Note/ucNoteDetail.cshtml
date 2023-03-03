@@ -1,0 +1,29 @@
+﻿@model Enabill.Models.Dto.NoteDetailModel
+
+@section beginHead {
+    @IncludeRichEditor()
+}
+
+@{
+    Layout = null;
+}
+
+<div id="Note@(Model.Note.NoteID)" class="genericItem seeLess row1">
+    <span class="genericHeader">
+        <span class="genericSubject">@Model.Project.GetClient().ClientName - @(Model.Project.ProjectName) - @Model.Activity.ActivityName</span>
+        <span class="genericInfo">@Model.WorkAllocation.DayWorked.ToDisplayString()</span>
+        <span class="clear"></span>
+    </span>
+    <span class="clear"></span>
+    <span id="genericText@(Model.Note.NoteID)" class="genericText">
+        @Html.Raw(Model.Note.NoteText)
+    </span>
+    <span class="genericBase">
+        <a id="genericState@(Model.Note.NoteID)" class="genericState" href="#" onclick="GenericList.toggle(@Model.Note.NoteID); return false;">Read more</a>
+        @if (Model.Note.CanEdit)
+        {
+            <text>|</text>
+            <a href="#" onclick="Note.editNote(@Model.WorkAllocation.WorkAllocationID, @Model.Note.NoteID); return false;">Edit</a>
+        }
+    </span>
+</div>

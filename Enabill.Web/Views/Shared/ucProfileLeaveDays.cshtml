@@ -1,0 +1,37 @@
+﻿@model List<Enabill.Web.Models.UserLeaveModel>
+
+    <table class="subTable underline fullWidth">
+        <tr class="general">
+            <th>Type</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Days</th>
+            <th>Status</th>
+        </tr>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td class="center" colspan="6">
+                    There are no recent leave entries to display
+                </td>
+            </tr>
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.LeaveType</td>
+                <td>@item.LeaveDateFrom.ToExceptionDisplayString()</td>
+                <td>@item.LeaveDateTo.ToExceptionDisplayString()</td>
+                <td width="55px">@item.NumberOfWorkDays</td>
+                <td>@item.LeaveStatus</td>
+            </tr>
+        }
+        @if (CurrentUser.CanManage(ContextUser))
+        {
+            <tr>
+                <td class="center" colspan="5">
+                    <input type="button" onclick="window.location='/Leave/Index/@ContextUserID';" value="Go to Leave page" />
+                </td>
+            </tr>
+        }
+    </table>

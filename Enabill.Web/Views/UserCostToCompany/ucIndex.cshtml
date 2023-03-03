@@ -1,0 +1,53 @@
+﻿@model Enabill.Web.Models.UserCostToCompanyIndexModel
+
+@Html.TitleTable("tblUserCTC", "", "<b>Cost to Company</b>", null, "ucIndexCol3", Model.MonthDate, null, null, null, null)
+<div class="padView">
+
+    <table class="subTable general fullWidth">
+        <tr>
+            <td>
+                <form id="UserCostToCompanyFrm" action="@Url.Content("/UserCostToCompany/Save/")" method="post">
+                    @Html.Hidden("MonthDate", Model.MonthDate)
+                    <h3>
+                        Overhead Percentage for @Model.MonthDate.ToMonthName() @Model.MonthDate.Year:
+                        @Html.TextBox("OverheadPercentage", Model.Month.OverheadPercentage * 100, new { style = "width: 40px;", @class = "right" }) %
+                    </h3>
+
+                    <hr />
+
+                    <table class="subTable general">
+                        <tr>
+                            <th>User</th>
+                            <th>Cost To Company</th>
+                        </tr>
+                        @foreach (var userCostToCompany in Model.UserCTCList)
+                        {
+                            <tr>
+                                <td class="vCenter">
+                                    @userCostToCompany.User.FullName
+                                </td>
+                                <td>
+                                    @{
+                                        bool isValid = false;
+                                        double cost = userCostToCompany.CostToCompany.GetCostToCompanyAmount(Settings.Current.Passphrase, out isValid);
+                                    }
+
+                                    @if (isValid)
+                                    {
+                                        <text>R </text>@Html.TextBox("dCost_" + userCostToCompany.CostToCompany.UserID, cost, new { style = "width: 100px;", @class = "right requiresNumberFormatting" })
+                                    }
+                                    else
+                                    {
+                                        <text>The passphrase entered is incorrect and this value cannot be displayed.</text>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                    <br />
+                    <input type="submit" value="Save" />
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>

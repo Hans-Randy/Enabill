@@ -1,0 +1,12 @@
+﻿ Book Multiple Leave Days | <a href="#" onclick="Leave.getBookLeaveDayForUser(); return false;">Book single leave day</a><br />
+<br />
+<form id="BookUserLeaveFrm">
+    User:<br />
+    @Html.DropDownList("UserID")<br />
+    Leave Type:<br />
+    @Html.DropDownList("LeaveTypeID")<br />
+    Leave From:<br />
+    @Html.TextBox("LeaveDateFrom", DateTime.Today.ToDisplayString(), new { @class = "datePicker" })<br />
+    Leave To:<br />
+    @Html.TextBox("LeaveDateTo", DateTime.Today.ToDisplayString(), new { @class = "datePicker" })
+</form>

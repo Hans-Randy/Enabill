@@ -1,0 +1,37 @@
+﻿@model Enabill.Web.Models.ForecastReportModel
+
+@Html.TitleTable("tblForecastReport", "", "<b>Forecast Report</b> ", "", null, "", null, "", "ucReturnToIndexCol5", "")
+
+<form id="frmForeCastReport" method="post">
+    <table>
+        <tr>
+            <th>
+                Region
+                @Html.DropDownList("Region", null, new { style = "width:100px;" })
+            </th>
+            <th>
+                Division
+                @Html.DropDownList("Division", null, new { style = "width:120px;" })
+            </th>
+            <th>
+                Period
+                @Html.DropDownList("ForecastReportPeriod", null, new { style = "width:120px;" })
+            </th>
+            <th><input type="submit" value="Search" /></th>
+        </tr>
+
+        <tr></tr>
+    </table>
+</form>
+
+<table class="fullWidth">
+    <tr>
+        <td>@Html.CollapsableTable("tblForecastWithInvoices", "fullWidth", "Forecast With Invoices", "ucForecastWithInvoicesSection", Model) </td>
+    </tr>
+    <tr>
+        <td>@Html.CollapsableTable("tblForecastWithOutInvoices", "fullWidth", "Forecast WithOut Invoices", "ucForecastWithOutInvoicesSection", Model) </td>
+    </tr>
+    <tr>
+        <td>@Html.CollapsableTable("tblInvoicesWithOutForecasts", "fullWidth", "Invoices Without Forecasts", "ucInvoicesWithoutForecastsSection", Model) </td>
+    </tr>
+</table>

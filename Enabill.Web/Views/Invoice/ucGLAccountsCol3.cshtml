@@ -1,0 +1,18 @@
+﻿@model string
+
+<div class="actionDiv" onclick="GLAccounts.createGLAccount(); return false;">
+    <span class="imageWithText">
+        <img alt="" height="18px" src="@Url.Content("~/Content/Img/add_plus_green.png")" />
+    </span>
+    Create New
+</div>
+
+@*@if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator))
+    {
+        <div class="actionDiv" onclick="window.location = '/Invoice/CreateGLAccount/';">
+            <span class="imageWithText">
+                <img alt="" height="18px" src="@Url.Content("~/Content/Img/add_plus_green.png")" />
+            </span>
+            Create New
+        </div>
+    }*@

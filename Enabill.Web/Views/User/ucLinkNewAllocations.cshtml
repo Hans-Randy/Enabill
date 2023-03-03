@@ -1,0 +1,84 @@
+﻿@model Enabill.Web.Models.UserAllocationModel
+
+<table class="cleanTable fullWidth">
+    <tr>
+        <th>
+            Client
+        </th>
+        <th>
+            Region
+        </th>
+        <th>
+            Department
+        </th>
+        <th>
+            Project
+        </th>
+        <th>
+            Activity
+        </th>
+        <th>
+            <input type="button" value="Load All User Activities" name="submit" onclick="UserAllocation.GetAllActivities(); return false;" />
+        </th>
+    </tr>
+    @if (Model.UserActivities != null)
+    {
+
+        foreach (var clientModel in Model.UserActivities)
+        {
+            foreach (var projectModel in clientModel.ProjectList)
+            {
+                foreach (var activityModel in projectModel.ActivityList)
+                {
+                    <tr>
+                        <td>
+                            @activityModel.ClientName
+                        </td>
+                        <td>
+                            @activityModel.RegionName
+                        </td>
+                        <td>
+                            @activityModel.DepartmentName
+                        </td>
+                        <td>
+                            @activityModel.ProjectName
+                        </td>
+                        <td>
+                            <input type="checkbox" name="activityID" class="activityID" value="@activityModel.ActivityID" />
+                            @activityModel.ActivityName
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    }
+</table>
+<br />
+
+<form id="UserAllocationFrm">
+    @Html.Hidden("activityIDs", null)
+    <table class="cleanTable center">
+        <tr>
+            <th colspan="5">Assign @Model.User.FullName to activities</th>
+        </tr>
+        <tr>
+            <td>
+                Hourly Rate:<br />
+                @Html.TextBox("HourRate")
+            </td>
+            <td>
+                Date Range:<br />
+                @Html.TextBox("StartDate")
+                -
+                @Html.TextBox("EndDate")
+            </td>
+            <td>
+                Is Confirmed:<br />
+                <input type="checkbox" name="IsConfirmed" />
+            </td>
+            <td>
+                <input type="button" value="Save Allocation" onclick="UserAllocation.assignToActivities(); return false;" />
+            </td>
+        </tr>
+    </table>
+</form>

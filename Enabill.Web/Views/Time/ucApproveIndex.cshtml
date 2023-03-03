@@ -1,0 +1,203 @@
+﻿@model Enabill.Web.Models.TimeApproveIndexModel
+
+@if (Model.CallingPage == "invoice")
+{
+    @Html.TitleTable("tblTimesheetApproval", "", "<b>Approve Timesheet for:</b> " + Model.User.FullName, Url.Content("~/Content/Img/timesheet_20x20.png"), null, Model, "ucApproveIndexCol3", Model, "ucApproveUserIndexCol5", "")
+}
+else
+{
+    @Html.TitleTable("tblTimesheetApproval", "", "<b>Approve Timesheet for:</b> " + Model.User.FullName, Url.Content("~/Content/Img/timesheet_20x20.png"), null, Model, null, null, "ucApproveUserIndexCol5", "")
+}
+
+@{
+    var hasExceptions = "false";
+    var isUserDaysApproved = "false";
+    var isUserDaysUnapproved = "false";
+}
+
+<div class="padView">
+    <form id="frmApproveTime" method="post">
+        <table>
+            <tr>
+                @Html.Hidden("CallingPage", Model.CallingPage)
+                @Html.Hidden("InvoiceID", Model.InvoiceID)
+                <th>
+                    Date Range
+                    @Html.TextBox("DateFrom", Model.DateFrom.ToDisplayString())
+                    to
+                    @Html.TextBox("DateTo", Model.DateTo.ToDisplayString())
+                </th>
+                <th class="borderRight">
+                    User
+                    @Html.DropDownList("UserList")
+                </th>
+                <th>
+                    <input type="submit" value="Search" />
+                </th>
+            </tr>
+        </table>
+    </form>
+    <table class="subTable calendarTable fullWidth" style="font-size: 9px;">
+
+        <tr>
+            <th>Weekday</th>
+            <th>Date Worked</th>
+            <th class="center">Status</th>
+            <th class="center">Hours</th>
+            <th class="center">Unallocated</th>
+            <th class="center">Has Notes</th>
+
+            @foreach (var activity in Model.ActivityList)
+            {
+                <th class="center">@Html.Raw(activity.Value)</th>
+            }
+        </tr>
+        @if (Model.Calendar.Count() > 0)
+        {
+            foreach (var day in Model.Calendar)
+            {
+                <tr class="@day.WorkDayClass">
+                    @{
+                        var worksessionStatus = string.Empty;
+                        switch (day.WorkSessionStatus.ToString())
+                        {
+                            case "0":
+                                worksessionStatus = "Exception";
+                                break;
+                            case "BeforeStartDate":
+                                worksessionStatus = "Before Employee Start Date";
+                                break;
+                            default:
+                                worksessionStatus = day.WorkSessionStatus.ToString();
+                                break;
+                        }
+                        //var worksessionStatus = day.WorkSessionStatus.ToString() == "0" ? "Exception" : day.WorkSessionStatus.ToString();
+
+                        if (day.HasExceptions)
+                        {
+                            hasExceptions = "true";
+                        }
+
+                        if (day.NrOfApprovedDays > 0)
+                        {
+                            isUserDaysApproved = "true";
+                        }
+
+                        if (day.NrOfUnapprovedDays > 0)
+                        {
+                            isUserDaysUnapproved = "true";
+                        }
+
+                        if (day.FlexiOrLeaveDayText != "")
+                        {
+                            worksessionStatus = day.FlexiOrLeaveDayText;
+                        }
+                        else
+                        {
+                            if (day.WorkDayClass == "weekend")
+                            {
+                                worksessionStatus = "";
+                            }
+                        }
+                    }
+
+                    <td>@day.WorkDay.ToString("dddd")</td>
+                    <td>
+                        @if (!day.IsBeforeStartDate)
+                        {
+                            @Html.ActionLink(day.WorkDay.ToDisplayString(), "Day", "Time", new { id = Model.TimeApprovalUser, dateString = day.WorkDay.ToDisplayString(), callingPage = "approval" }, null)
+                        }
+                        else
+                        {
+                            @day.WorkDay.ToDisplayString()
+                        }
+                    </td>
+                    <td class="center @day.WorkDayStatusClass">@worksessionStatus</td>
+                    <td align="center">
+                        @foreach (var ws in day.DailyWorkSessions)
+                        {
+                            @ws.TotalTime.ToString("0.00")<br />
+                        }
+                    </td>
+                    @{
+                        var dash = " - ";
+                        var unallocated = day.User.GetUnallocatedTime(day.WorkDay);
+                        string IsZero = string.Empty;
+                        if (unallocated != 0)
+                        {
+                            IsZero = "error";
+                        }
+                    }
+
+                    <td align="center" class="@IsZero">
+                        @if (day.User.GetUnallocatedTime(day.WorkDay) != 0)
+                        {
+                            @day.User.GetUnallocatedTime(day.WorkDay).ToString("0.00")
+                        }
+                    </td>
+                    <td id="Note@(day.WorkDay.Day)" class="center">
+
+                        @if (day.DayHasNotes)
+                        {
+                            <img alt="Yes" src="@Url.Content("~/Content/Img/tick_green_small.gif")" height="14px" title="Day Has Notes" />
+                        }
+                    </td>
+                    @foreach (var activity in Model.ActivityList)
+                    {
+                        <td class="left">
+                            @foreach (var wa in day.WorkAllocationsInclRemarks)
+                            {
+                                if (wa.ActivityID == activity.Key)
+                                {
+                                    @wa.HoursWorked.ToDoubleString()
+                                    @dash
+                                    @wa.Remark
+                                    if (!string.IsNullOrEmpty(@wa.TicketReference))
+                                    {
+                                        <span>(@wa.TicketReference)</span>
+                                    }
+                                    <br />
+                                }
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+            <tr>
+                <th>Total</th>
+                <th></th>
+                <th></th>
+                <th style="text-align: center !important;">@Model.Calendar.Sum(ws => ws.DailyWorkSessions.Sum(dws => dws.TotalTime)).ToDoubleString()</th>
+                <th></th>
+                <th></th>
+                @for (int k = 1; k <= Model.ActivityList.Count(); k++)
+                {
+                    <th style="text-align: center !important;">@Model.Calendar.Sum(ws => ws.WorkAllocations[k - 1]).ToDoubleString()</th>
+                }
+            </tr>
+            <tr>
+                @{
+                    var colSpan = Model.ActivityList.Count() + 6;
+                }
+                <td colspan="@colSpan" align="right">
+                    @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.Manager) || CurrentUser.HasRole(Enabill.UserRoleType.ProjectOwner))
+                    {
+                        <input type="button" value="UnApprove" onclick="WorkSession.unapproveWS('@isUserDaysApproved'); return false;" />
+                        <input type="button" value="Approve" onclick="WorkSession.approveWS('@hasExceptions','@isUserDaysUnapproved'); return false;" />
+                    }
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                @{
+                    var colSpanNoRecs = Model.ActivityList.Count() + 6;
+                }
+                <td colspan="@colSpanNoRecs" align="center">No records were found matching the selected criteria.</td>
+            </tr>
+        }
+    </table>
+</div>
+
+@Html.Hidden("WorkDay", Model.WorkDay)

@@ -1,0 +1,3 @@
+﻿CREATE LOGIN [Enabill_User]
+    WITH PASSWORD = N'oevlmdbrxcpaKolgHjknlxgUmsFT7_&#$!~<xZqsaD rsn9{', SID = 0x4D8916859A5B8548805618E4C3BE0FDE, DEFAULT_DATABASE = [Enabill], DEFAULT_LANGUAGE = [us_english], CHECK_POLICY = OFF;
+

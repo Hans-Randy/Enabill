@@ -1,0 +1,6 @@
+﻿var CommonLeave = {
+
+    bookLeaveDay: function () {
+    }
+
+};

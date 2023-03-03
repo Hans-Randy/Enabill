@@ -1,0 +1,199 @@
+﻿@model Enabill.Web.Models.InvoiceIndexModel
+
+@section head{
+    @IncludeControllerScript(true)
+
+    <script type="text/javascript">
+
+        $(function () {
+            if (@CurrentUserPreference.InvoiceIndexDateSelector == 0)
+            {
+                $('#dateSelectorTH').html('<a href="#" onclick="InvoiceIndex.changeDateSelector(1); return false;">Date range</a>');
+            }
+            else{
+                $('#dateSelectorTH').html('<a href="#" onclick="InvoiceIndex.changeDateSelector(0); return false;">Period</a>');
+            }
+        });
+    </script>
+}
+
+@{
+    ViewBag.Title = "Invoices";
+}
+
+<div class="marginView">
+    @Html.TitleTable("tblInvoices", "", "<b>Invoices</b>", "", "ucIndexCol3", "", "ucIndexCol4", "", "ucIndexCol5", "")
+    <div class="padView">
+        <table class="subTable fullWidth">
+            <tr>
+                <td>
+                    <form id="InvoiceIndexFrm" method="post">
+                        <table class="general center">
+                            <tr>
+                                <th>
+                                    Client
+                                </th>
+                                <th id="dateSelectorTH">
+                                </th>
+                                <th>
+                                    Billing Method
+                                </th>
+                                <th>
+                                    Invoice Status
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td class="left">
+                                    @Html.DropDownList("ClientList")
+                                    @if (Model.ShowMyClientsCheckBox)
+                                    {
+                                        <label style="display: inline-block;">
+                                            @Html.CheckBox("MyClients", Model.MyClients)My Clients
+                                        </label>
+                                    }
+                                </td>
+                                <td class="left">
+                                    <div id="dateRangeSelector" style="display: @(CurrentUserPreference.InvoiceIndexDateSelector == 0 ? "inherit" : "none")">
+                                        @Html.TextBox("DateFrom", Model.DateFrom.ToDisplayString())
+                                        to
+                                        @Html.TextBox("DateTo", Model.DateTo.ToLastDayOfMonth().ToDisplayString())
+                                    </div>
+
+                                    <div id="periodSelector" style="display: @(CurrentUserPreference.InvoiceIndexDateSelector == 0 ? "none" : "inherit")">
+                                        @Html.TextBox("InvoicePeriod", Model.InvoicePeriod, new { @class = "right", style = "width: 100px;" })
+                                    </div>
+                                </td>
+
+                                <td class="left">
+
+                                    <span style="display: inline-block;">
+                                        @if (Model.TimeMaterial)
+                                        {
+                                            <input type="checkbox" name="@Enabill.BillingMethodType.TimeMaterial" checked="true" />@Enabill.BillingMethodType.TimeMaterial
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="@Enabill.BillingMethodType.TimeMaterial" />@Enabill.BillingMethodType.TimeMaterial
+                                        }
+                                    </span>
+                                    <span style="display: inline-block;">
+                                        @if (Model.FixedCost)
+                                        {
+                                            <input type="checkbox" name="@Enabill.BillingMethodType.FixedCost" checked="true" />@Enabill.BillingMethodType.FixedCost
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="@Enabill.BillingMethodType.FixedCost" />@Enabill.BillingMethodType.FixedCost
+                                        }
+                                    </span>
+                                    <span style="display: inline-block;">
+                                        @if (Model.MonthlyFixedCost)
+                                        {
+                                            <input type="checkbox" name="@Enabill.BillingMethodType.MonthlyFixedCost" checked="true" />@Enabill.BillingMethodType.MonthlyFixedCost
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="@Enabill.BillingMethodType.MonthlyFixedCost" />@Enabill.BillingMethodType.MonthlyFixedCost
+                                        }
+                                    </span>
+                                    <span style="display: inline-block;">
+                                        @if (Model.ActivityFixedCost)
+                                        {
+                                            <input type="checkbox" name="@Enabill.BillingMethodType.ActivityFixedCost" checked="true" />@Enabill.BillingMethodType.ActivityFixedCost
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="@Enabill.BillingMethodType.ActivityFixedCost" />@Enabill.BillingMethodType.ActivityFixedCost
+                                        }
+                                    </span>
+                                    <span style="display: inline-block;">
+                                        @if (Model.SLA)
+                                        {
+                                            <input type="checkbox" name="@Enabill.BillingMethodType.SLA" checked="true" />@Enabill.BillingMethodType.SLA
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="@Enabill.BillingMethodType.SLA" />@Enabill.BillingMethodType.SLA
+                                        }
+                                    </span>
+                                    <span style="display: inline-block;">
+                                        @if (Model.Travel)
+                                        {
+                                            <input type="checkbox" name="@Enabill.BillingMethodType.Travel" checked="true" />@Enabill.BillingMethodType.Travel
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="@Enabill.BillingMethodType.Travel" />@Enabill.BillingMethodType.Travel
+                                        }
+                                    </span>
+                                    <span style="display: inline-block;">
+                                        @if (Model.AdHoc)
+                                        {
+                                            <input type="checkbox" name="@Enabill.BillingMethodType.AdHoc" checked="true" />@Enabill.BillingMethodType.AdHoc
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="@Enabill.BillingMethodType.AdHoc" />@Enabill.BillingMethodType.AdHoc
+                                        }
+                                    </span>
+                                </td>
+                                <td class="left">
+
+                                    <span style="display: inline-block;">
+                                        @if (Model.Open)
+                                        {
+                                            <input type="checkbox" name="@Enabill.InvoiceStatusType.Open" checked="checked" />@Enabill.InvoiceStatusType.Open
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="@Enabill.InvoiceStatusType.Open" />@Enabill.InvoiceStatusType.Open
+                                        }
+                                    </span>
+                                    <span style="display: inline-block;">
+                                        @if (Model.InProgress)
+                                        {
+                                            <input type="checkbox" name="@Enabill.InvoiceStatusType.InProgress" checked="checked" />@Enabill.InvoiceStatusType.InProgress
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="@Enabill.InvoiceStatusType.InProgress" />@Enabill.InvoiceStatusType.InProgress
+                                        }
+                                    </span>
+                                    <span style="display: inline-block;">
+                                        @if (Model.Ready)
+                                        {
+                                            <input type="checkbox" name="@Enabill.InvoiceStatusType.Ready" checked="checked" />@Enabill.InvoiceStatusType.Ready
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="@Enabill.InvoiceStatusType.Ready" />@Enabill.InvoiceStatusType.Ready
+                                        }
+                                    </span>
+                                    <span style="display: inline-block;">
+                                        @if (Model.Complete)
+                                        {
+                                            <input type="checkbox" name="@Enabill.InvoiceStatusType.Complete" checked="checked" />@Enabill.InvoiceStatusType.Complete
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="@Enabill.InvoiceStatusType.Complete" />@Enabill.InvoiceStatusType.Complete
+                                        }
+                                    </span>
+                                </td>
+                                <td class="left">
+                                    <input type="button" value="Search" onclick="InvoiceIndex.search(); return false;" />
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <br />
+                    <div id="ucIndex">
+                        @Html.Partial("ucInvoiceList", Model)
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

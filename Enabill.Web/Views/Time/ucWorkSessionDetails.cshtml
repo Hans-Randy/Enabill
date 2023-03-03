@@ -1,0 +1,18 @@
+﻿@model Enabill.Models.WorkSession
+
+<tr id="WorkSession@(Model.WorkSessionID)">
+    <td><strong>@Model.StartTime.ToString("HH:mm")</strong></td>
+    <td><strong>@Model.EndTime.ToString("HH:mm")</strong></td>
+    <td><strong>@(Model.LunchTime)</strong></td>
+    <td><strong>@Model.TotalTime.ToString()</strong></td>
+    <td>
+        @if (Model.CanEdit)
+        {
+            <img src="@Url.Content("~/Content/Img/edit_14.png")" alt="Edit" title="Edit work session" onclick="WorkSession.edit(@Model.WorkSessionID); return false;" style="cursor:pointer; height:14px" />
+        }
+        @if (Model.CanDelete)
+        {
+            <img src="@Url.Content("~/Content/Img/Delete.gif")" alt="Delete" style="cursor:pointer; height:14px" onclick="WorkSession.delWS(@Model.WorkSessionID); return false;" />
+        }
+    </td>
+</tr>

@@ -1,0 +1,29 @@
+﻿@model List<Enabill.Web.Models.TimeCalendarModel>
+
+    <table class="calendarTable fullWidth">
+        <tr>
+            <th>Date</th>
+            <th>Day</th>
+            <th class="center">Allocated Time</th>
+            <th class="center">Allocation Difference</th>
+        </tr>
+
+        @foreach (var workDay in Model.OrderByDescending(d => d.WorkDay).ToList())
+        {
+            <tr class="@workDay.WorkDayClass">
+                <td>@Html.ActionLink(workDay.WorkDay.Date.ToDisplayString(), "Day", "Time", new { id = CurrentUserID, dateString = workDay.WorkDay.ToDisplayString() }, null)</td>
+
+                <td>@(workDay.WorkDay == DateTime.Today ? "Today" : workDay.WeekDay)</td>
+
+                @if (string.IsNullOrEmpty(workDay.DayUsedForLeaveOrFlexiDay))
+                {
+                    <td class="center">@workDay.AllocatedTime</td>
+                    <td class="@workDay.AllocationClass center">@workDay.UnallocatedTime</td>
+                }
+                else
+                {
+                    <td colspan="2" class="error center">@workDay.DayUsedForLeaveOrFlexiDay</td>
+                }
+            </tr>
+        }
+    </table>

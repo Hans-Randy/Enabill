@@ -1,0 +1,26 @@
+﻿@model Enabill.Web.Models.ForecastLinkModel
+<div class="padView">
+    <form id="LinkInvoicesFrm" action="" method="post">
+        <table class="subTable fullWidth">
+            @Html.Hidden("ForecastHeaderID", Model.ForecastHeader.ForecastHeaderID)
+            @Html.Hidden("BillingMethod", Model.ForecastHeader.BillingMethod)
+            @Html.Hidden("ClientID", Model.ForecastHeader.ClientID.HasValue ? Model.ForecastHeader.ClientID.Value : 0)
+            <tr>
+                <td>
+                    <fieldset>
+                        <legend>ForecastHeader</legend>
+                        @Html.Partial("ucLinkHeader", Model)
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <fieldset>
+                        <legend>Matching Invoices</legend>
+                        @Html.Partial("ucMatchingInvoices", Model)
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>  

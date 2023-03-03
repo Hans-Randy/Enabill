@@ -1,0 +1,41 @@
+﻿@model Enabill.Web.Models.UserExistingAllocationModel
+
+<table class="general fullWidth">
+    <tr>
+        <th>Client</th>
+        <th>Region</th>
+        <th>Department</th>
+        <th>Project</th>
+        <th>Activity</th>
+        <th>Rate</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th></th>
+    </tr>
+
+    @foreach (var allocation in Model.UserAllocations)
+    {
+        <tr>
+            <td>@allocation.Client.ClientName</td>
+            <td>@allocation.Region.RegionName</td>
+            <td>@allocation.Department.DepartmentName</td>
+            <td>@allocation.Project.ProjectName</td>
+            <td>@allocation.Activity.ActivityName</td>
+            <td><text>R </text>@allocation.UserAllocation.ChargeRate.ToDoubleString()</td>
+            <td>@allocation.UserAllocation.StartDate.ToDisplayString()</td>
+            @if (@allocation.UserAllocation.ConfirmedEndDate.HasValue)
+            {
+                <td>@allocation.UserAllocation.ConfirmedEndDate.ToDisplayString() <text> (confirmed)</text></td>
+            }
+            else
+            {
+                <td>@allocation.UserAllocation.ScheduledEndDate.ToDisplayString()</td>
+            }
+            <td>
+                <img src="@Url.Content("~/Content/Img/edit_14.png")" alt="Edit" title="Edit" onclick="UserAllocation.addEditUserAllocation(@allocation.UserAllocation.UserAllocationID); return false;" style="cursor:pointer; height:14px" />
+                <img src="@Url.Content("~/Content/Img/Delete.gif")" alt="Delete" style="cursor:pointer; height:14px" onclick="UserAllocation.deleteUserAllocation(@allocation.UserAllocation.UserAllocationID); return false;" />
+            </td>
+        </tr>
+    }
+</table>
+<br />

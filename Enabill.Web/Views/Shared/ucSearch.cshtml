@@ -1,0 +1,14 @@
+﻿@if (ViewBag.CanSearch != null && ViewBag.CanSearch == true)
+{
+    <div id="search-area">
+        <form action="@Url.Action("index")" method="get">
+            @*<span class="searchcontext">Search @ViewBag.SearchLabelText:</span>*@
+            <input type="text" name="q" id="q" value="@ViewBag.q" />
+            <input type="hidden" name="isClientActive" id="isClientActive" value="@ViewBag.Client_b" />
+            <input type="hidden" name="isUserActive" id="isUserActive" value="@ViewBag.User_b" />
+            <input type="hidden" name="isProjectActive" id="isProjectActive" value="@ViewBag.Project_b" />
+            <input type="submit" value="Search" />
+            <input type="submit" onclick="$('#q').val('');" value="Reset" />
+        </form>
+    </div>
+}

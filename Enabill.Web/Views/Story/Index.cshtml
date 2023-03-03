@@ -1,0 +1,31 @@
+﻿@model IEnumerable<StoryWriter.Models.DTO.StorySearchResult>
+    @{
+        ViewBag.Title = "Domain Stories";
+    }
+    <h2> Domain Stories | @Html.ActionLink("Create New", "Create") | @Html.ActionLink("All Stories", "Board") </h2>
+    <table>
+        <tr>
+            <th></th>
+            <th>Story </th>
+            <th>Code </th>
+            <th>Ref </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.StoryID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.StoryID }) |
+                </td>
+                <td>
+                    @item.StoryName
+                </td>
+                <td>
+                    @item.StoryNumber
+                </td>
+                <td>
+                    @item.RefUrl
+                </td>
+            </tr>
+        }
+    </table>

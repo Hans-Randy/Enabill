@@ -1,0 +1,241 @@
+﻿@model Enabill.Models.EncentivizeReportModel
+@{
+    int counter = 1;
+}
+<h1 style="margin:0">Encentivize On-screen Report</h1>
+<table>
+    <tr>
+        <th>Date From </th>
+        <td>@Html.TextBox("DateFrom")</td>
+        <td><input type="button" value="Show" onclick="Report.showOnsScreenEncetivizeReport();" /></td>
+    </tr>
+    <tr>
+        <th>Date To </th>
+        <td>@Html.TextBox("DateTo")</td>
+        <td>
+            <input type="button" value="Print" onclick="Report.printEncentivizeReport();" />
+        </td>
+    </tr>
+</table>
+@*<div style="height:200px;overflow:auto">
+        <table>
+            @foreach(var i in Model.NonReportUsers)
+            {
+            <tr>
+                <th>@i.UserName </th>
+            </tr>
+            }
+        </table>
+    </div>*@
+<table class="calendarTable fullWidth">
+    <tbody>
+        <tr class="today">
+            <td style="font-size:8pt">
+                User Count
+            </td>
+            <td colspan="7" style="font-size:8pt">
+                @Model.ReportUsers.Count
+            </td>
+        </tr>
+        <tr class="today">
+            <td style="font-size:8pt">
+                Total Eligible Users
+            </td>
+            <td colspan="7" style="font-size:8pt">
+                @Model.TotalEligibleUsers
+            </td>
+        </tr>
+        @foreach (var wd in Model.UsersWorkDays)
+        {
+            <tr>
+                <td colspan="8">&nbsp;</td>
+            </tr>
+            <tr>
+                <th colspan="2">User</th>
+                <th colspan="6">User Id</th>
+            </tr>
+            <tr>
+                <th style="width:10%">
+                    Day
+                </th>
+                <th style="width:30%">
+                    Work Session
+                </th>
+                <th style="width:20%">
+                    Work Allocations
+                </th>
+                <th style="width:8%">
+                    Leave Allocated
+                </th>
+                <th style="width:8%">
+                    Work Hours
+                </th>
+                <th style="width:8%">
+                    Duration
+                </th>
+                <th style="width:8%">
+                    Hours Worked
+                </th>
+                <th style="width:8%">
+                    Hours Diff
+                </th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @wd.FullName
+                    <div>
+                        Points allocated: @wd.PointsAwarded
+                    </div>
+                </td>
+                <td colspan="6">
+                    @wd.UserId
+                </td>
+            </tr>
+            foreach (var uw in wd.UserWorkDaysSessions)
+            {
+                <tr>
+                    <td valign="top">
+                        @uw.WorkDay.Day
+                    </td>
+                    <td>
+                        @if (uw.WorkSession == null)
+                        {
+                            <span>no</span>
+                        }
+                        else if (uw.Leave != null)
+                        {
+                            <span>Leave Day</span>
+                        }
+                        else if (uw.FlexiDay != null)
+                        {
+                            <span>FlexiDay</span>
+                        }
+                        else
+                        {
+                            <div>WorkSessions:</div>
+                            foreach (var ww in uw.WorkSession)
+                            {
+                                var wss = (Enabill.WorkSessionStatusType)ww.WorkSessionStatusID;
+                                <div style="margin-left:10px">
+                                    <div>From:@ww.StartTime.ToShortTimeString() to @ww.EndTime.ToShortTimeString()</div>
+                                    <div>Total Time:@ww.TotalTime hours</div>
+                                </div>
+                            }
+                        }
+                    </td>
+                    <td>
+                        <div>Work Allocations</div>
+                        @foreach (var wk in uw.WorkAllocations)
+                        {
+                            <div style="margin-left:10px">
+                                <div>
+                                    @wk.DateCreated.ToShortTimeString() - @wk.TotalHours hours
+                                </div>
+                            </div>
+                        }
+                    </td>
+                    <td>
+                        @if (uw.Leave != null)
+                        {
+                            <span>
+                                yes
+                            </span>
+                        }
+                        else
+                        {
+                            <span>
+                                no
+                            </span>
+                        }
+                    </td>
+                    <td>
+                        @uw.WorkHours
+                    </td>
+                    <td>
+                        @uw.Duration
+                    </td>
+                    <td>
+                        @uw.Hours
+                    </td>
+                    <td>
+                        @uw.HoursDiff
+                    </td>
+                </tr>
+            }
+            <tr>
+                <th>
+                </th>
+                <th>
+                </th>
+                <th colspan="4">
+                    Month To Date
+                </th>
+                <th colspan="2">
+                </th>
+            </tr>
+            <tr class="today">
+                <td colspan="3" style="font-size:8pt">
+                    Total Work Days:
+                </td>
+                <td colspan="2" style="font-size:8pt">@wd.TotalWorkDays</td>
+                <td colspan="3" style="font-size:8pt">&nbsp;</td>
+            </tr>
+            <tr class="today">
+                <td colspan="3" style="font-size:8pt">
+                    Total Work Sessions:
+                </td>
+                <td colspan="2" style="font-size:8pt">@wd.TotalWorkSessions</td>
+                <td colspan="3" style="font-size:8pt">&nbsp;</td>
+            </tr>
+            foreach (var leaveType in wd.TotalByLeaveType)
+            {
+                <tr class="today">
+                    <td colspan="3" style="font-size:8pt">
+                        Total @Model.LeaveTypes.Where(lt => lt.LeaveTypeID == leaveType.Key).First().LeaveTypeName Leave
+                    </td>
+                    <td colspan="2" style="font-size:8pt">
+                        @leaveType.Value
+                    </td>
+                    <td colspan="3" style="font-size:8pt">
+                        &nbsp;
+                    </td>
+                </tr>
+            }
+            <tr class="today">
+                <td colspan="3" style="font-size:8pt">
+                    Total Work Hours:
+                </td>
+                <td colspan="2" style="font-size:8pt">@wd.TotalWorkHours</td>
+                <td colspan="3" style="font-size:8pt">&nbsp;</td>
+            </tr>
+            <tr class="today">
+                <td colspan="3" style="font-size:8pt">
+                    Total Duration:
+                </td>
+                <td colspan="2" style="font-size:8pt">@wd.TotalWorkSessionDurationHours</td>
+                <td colspan="3" style="font-size:8pt">&nbsp;</td>
+            </tr>
+            <tr class="today">
+                <td colspan="3" style="font-size:8pt">
+                    Total Hours Worked:
+                </td>
+                <td colspan="2" style="font-size:8pt">@wd.TotalHoursWorked</td>
+                <td colspan="3" style="font-size:8pt">&nbsp;</td>
+            </tr>
+            <tr class="today">
+                <td colspan="3" style="font-size:8pt">
+                    Total Hours Diff Count:
+                </td>
+                <td colspan="2" style="font-size:8pt">@wd.TotalHoursDiff</td>
+                <td colspan="3" style="font-size:8pt">&nbsp;</td>
+            </tr>
+            <tr class="today">
+                <td colspan="3" style="font-size:8pt">
+                    Eligible:
+                </td>
+                <td colspan="2" style="font-size:8pt">@wd.IsEligible</td>
+                <td colspan="3" style="font-size:8pt">&nbsp;</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,45 @@
+﻿@model List<Enabill.Models.FlexiDay>
+
+    <table class="subTable underline fullWidth">
+        <tr class="general">
+            <th>Day of Week</th>
+            <th>Date of FlexiDay</th>
+            <th>Remark</th>
+            <th></th>
+            <th>Date Submitted</th>
+        </tr>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="5" class="center">
+                    There are no flexidays to display
+                </td>
+            </tr>
+        }
+        @foreach (var flexiDay in Model)
+        {
+            <tr>
+                <td>
+                    @((DayOfWeek)flexiDay.FlexiDate.DayOfWeek)
+                </td>
+                <td>
+                    @flexiDay.FlexiDate.ToExceptionDisplayString()
+                </td>
+                <td>
+                    @flexiDay.Remark
+                </td>
+                <td></td>
+                <td>
+                    @flexiDay.DateSubmitted.ToExceptionDisplayString()
+                </td>
+            </tr>
+        }
+        @if (CurrentUser.CanManage(ContextUser))
+        {
+            <tr>
+                <td class="center" colspan="5">
+                    <input type="button" onclick="window.location='/FlexiTime/Index/@ContextUserID';" value="Go to FlexiTime page" />
+                </td>
+            </tr>
+        }
+    </table>

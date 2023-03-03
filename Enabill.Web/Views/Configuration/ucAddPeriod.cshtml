@@ -1,0 +1,14 @@
+﻿<table>
+    <tr>
+        <td>Period From:</td>
+        <td>@Html.TextBox("PeriodFrom", DateTime.Now.ToFirstDayOfMonth().ToDisplayString(), new { @class = "datePicker", style = "background-color: #FFF; font-size: 80%;" })</td>
+    </tr>
+    <tr>
+        <td>Period To:</td>
+        <td>@Html.TextBox("PeriodTo", DateTime.Now.ToLastDayOfMonth().ToDisplayString(), new { @class = "datePicker", style = "background-color: #FFF; font-size: 80%;" })</td>
+    </tr>
+    <tr>
+        <td>@Html.CheckBox("IsCurrent")</td>
+        <td>Active</td>
+    </tr>
+</table>

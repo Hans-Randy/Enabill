@@ -1,0 +1,22 @@
+﻿@model Enabill.Web.Models.TimeDayModel
+@Html.Hidden("WorkDay", Model.WorkDay)
+<form id="BookflexiDayFrm" action="" method="post">
+    <table class="fullWidth underline">
+        <tr>
+            <td>
+                Date:
+            </td>
+            <td>
+                @Model.WorkDay.ToString("yyyy-MM-dd")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Remark:
+            </td>
+            <td>
+                @Html.TextBox("Remark", null)
+            </td>
+        </tr>
+    </table>
+</form>

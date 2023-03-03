@@ -1,0 +1,45 @@
+﻿@model Enabill.Web.Models.LeaveBalanceModel
+
+<h2>Monthly Leave Summary</h2>
+
+<table class="general fullWidth" style="font-size: 8px;">
+    <tr>
+        <th rowspan="2">Month</th>
+        <th class="center" colspan="5">Annual</th>
+        <th class="center" colspan="6" style="border-left:4px solid #eee;">Other</th>
+    </tr>
+    <tr class="subHeader">
+        <th class="center">Opening Balance</th>
+        <th class="center">Credited</th>
+        <th class="center">Taken</th>
+        <th class="center">Adjustment</th>
+        <th class="center">Closing Balance</th>
+        <th class="center" style="border-left:4px solid #eee;">Sick</th>
+        <th class="center">Family Responsibility</th>
+        <th class="center">Study</th>
+        <th class="center">Maternity</th>
+        <th class="center">Relocation</th>
+        <th class="center">Unpaid</th>
+
+        @foreach (var item in Model.LeaveBalances.OrderBy(d => d.Date))
+        {
+            if (item.EntryExists)
+            {
+            <tr>
+                <th>@item.Date.Year.ToString()-@(item.Date.Month < 10 ? "0" : "")@item.Date.Month.ToString() </th>
+                <td class="center">@item.AnnualLeaveOpeningBalance.ToDoubleString(false)</td>
+                <td class="center">@item.AnnualLeaveCredited.ToDoubleString(false)</td>
+                <td class="center">@item.AnnualLeaveTaken.ToDoubleString(false)</td>
+                <td class="center">@item.ManualAdjustment.ToDoubleString(false)</td>
+                <td class="center">@item.AnnualLeaveBalance.ToDoubleString(false)</td>
+                <td class="center" style="border-left:4px solid #eee;">@item.SickLeaveTaken.ToDoubleString(false)</td>
+                <td class="center">@item.CompassionateLeaveTaken.ToDoubleString(false)</td>
+                <td class="center">@item.StudyLeaveTaken.ToDoubleString(false)</td>
+                <td class="center">@item.MaternityLeaveTaken.ToDoubleString(false)</td>
+                <td class="center">@item.RelocationLeaveTaken.ToDoubleString(false)</td>
+                <td class="center">@item.UnpaidLeaveTaken.ToDoubleString(false)</td>
+            </tr>
+            }
+        }
+        </tr>
+    </table>

@@ -1,0 +1,203 @@
+﻿@model Enabill.Models.User
+
+<table class="subTable" style="width: 450px;">
+    <tr>
+        <td>
+            <form id="UserDetailsFrm">
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.UserID)
+                @Html.HiddenFor(model => model.UserName)
+                <br />
+                <fieldset>
+                    <legend>Personal Details</legend>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.FirstName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBox("FirstName", Model.FirstName, new { @class = "required" })
+                        @Html.ValidationMessageFor(model => model.FirstName)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.LastName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.LastName)
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.Email)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Email)
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.Phone)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Phone)
+                        @Html.ValidationMessageFor(model => model.Phone)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.BirthDate)
+                    </div>
+                    <div class="editor-field">
+                        @if (Model.BirthDate.HasValue)
+                        {
+                            @Html.TextBox("BirthDate", Model.BirthDate.Value.ToDisplayString(), new { @class = "datePicker" })
+                            @Html.ValidationMessageFor(model => model.BirthDate)
+                        }
+                        else
+                        {
+                            @Html.TextBox("BirthDate", null, new { @class = "datePicker" })
+                            @Html.ValidationMessageFor(model => model.BirthDate)
+                        }
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.RegionID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.RegionID, "RegionList")
+                        @Html.ValidationMessageFor(model => model.RegionID)
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Site Details</legend>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Manager)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ManagerID, "ManagerUserList")
+                        @Html.ValidationMessageFor(model => model.ManagerID)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.IsActive, "Is Active")
+                    </div>
+                    <div class="editor-field">
+                        @Html.DisplayFor(model => Model.IsActive)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.CanLogin)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.CanLogin)
+                        @Html.ValidationMessageFor(model => model.CanLogin)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.MustResetPwd)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.MustResetPwd)
+                        @Html.ValidationMessageFor(model => model.MustResetPwd)
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Corporate Details</legend>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.BillableIndicatorID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.BillableIndicatorID, "BillableIndicatorList")
+                        @Html.ValidationMessageFor(model => model.BillableIndicatorID)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.DivisionID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.DivisionID, "DivisionList")
+                        @Html.ValidationMessageFor(model => model.DivisionID)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.EmploymentTypeID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.EmploymentTypeID, "EmploymentTypeList")
+                        @Html.ValidationMessageFor(model => model.EmploymentTypeID)
+                    </div>
+                    <div class="editor-label">
+                        Daily Work Hours
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.WorkHours)
+                        @Html.ValidationMessageFor(model => model.WorkHours)
+                    </div>
+                    <div class="editor-label">
+                        Percentage Allocation (1-100)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBox("PercentageAllocation", Model.PercentageAllocation)
+                        @Html.ValidationMessageFor(model => model.PercentageAllocation)
+                    </div>
+                    <div class="editor-label">
+                        Employee Start Date
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBox("EmployStartDate", Model.EmployStartDate.ToDisplayString(), new { @class = "datePicker" })
+                        @Html.ValidationMessageFor(model => model.EmployStartDate.Date)
+                    </div>
+                    <div class="editor-label">
+                        Employee End Date
+                    </div>
+                    <div class="editor-field">
+                        @if (Model.EmployEndDate.HasValue)
+                        {
+                            @Html.TextBox("EmployEndDate", Model.EmployEndDate.ToDisplayString(), new { @class = "datePicker" })
+                        }
+                        else
+                        {
+                            @Html.TextBox("EmployEndDate", null, new { @class = "datePicker" })
+                        }
+                    </div>
+                    <div class="editor-label">
+                        Payroll Reference No
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBox("PayrollRefNo", Model.PayrollRefNo)
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Take-On Balances</legend>
+
+                    <div class="editor-label">
+                        Annual Leave Take-On Balance (Days)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBox("AnnualLeaveTakeOn", Model.AnnualLeaveTakeOn)
+                    </div>
+
+                    <div class="editor-label flexiBalanceDiv">
+                        FlexiTime Take-On Balance (Hours)
+                    </div>
+                    <div class="editor-field flexiBalanceDiv">
+                        @Html.TextBox("FlexiBalanceTakeOn", Model.FlexiBalanceTakeOn)
+                    </div>
+                </fieldset>
+
+                <div style="clear:both"></div>
+                <p>
+                    <input type="button" id="Close" value="Close" onclick="User.close(); return false;" />
+                    <input type="button" id="Cancel" value="Cancel" onclick="User.cancel(); return false;" />
+                    <input type="button" id="Save" value="Save" onclick="User.save(); return false;" />
+                    
+                    @if (Model.UserID > 0)
+                    {
+                        if (Model.IsActive)
+                        {
+                            <input type="button" id="DeactivateUser" value="Deactivate User" onclick="User.deactivate(@Model.UserID); return false;"
+                                   @if (!Model.EmployEndDate.HasValue) { @: disabled="disabled"
+                                   } />
+                        }
+                        else
+                        {
+                            <input type="button" id="ActivateUser" value="Activate User" onclick="User.activate(@Model.UserID); return false;" />
+                        }
+                    }
+                </p>
+            </form>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,49 @@
+﻿@model Enabill.Web.Models.ExpenseIndexModel
+
+<div class="padView">
+
+    <table class="subTable calendarTable fullWidth" style="font-size: 9px;">
+
+        <tr>
+            <th width="3%" class="center">Date</th>
+            <th width="2%" class="center">Weekday</th>
+            <th width="15%" class="center">Client</th>
+            <th width="15%" class="center">Project</th>
+            <th width="10%" class="center">Category</th>
+            <th width="3%" class="center">Cost</th>
+            <th width="1%" class="center">Billable</th>
+            <th width="1%" class="center">Locked</th>
+        </tr>
+        @foreach (var day in Model.Calendar)
+        {
+            <tr>
+                <td width="3%" class="center">
+                    @Html.ActionLink(day.ExpenseDate.ToDisplayString(), "Edit", "Expense", new { dateString = day.ExpenseDate.ToDisplayString(), expenseID = day.ExpenseID }, null)
+                </td>
+                <td width="2%" class="left">@day.ExpenseDate.ToString("dddd")</td>
+                <td width="15%" class="left">@day.ClientName</td>
+                <td width="15%" class="left">@day.ProjectName</td>
+                <td width="10%" class="left">@day.ExpenseCategoryTypeName</td>
+                <td width="3%" class="right">(@Enabill.Models.Client.GetClientByID(day.ClientID).GetCurrency(Enabill.Models.Client.GetClientByID(day.ClientID).CurrencyTypeID).CurrencyISO) @day.Amount.ToDoubleString(true)</td>
+                <td width="1%" id="Billable@(day.Billable)" class="center">
+                    @if (day.Billable)
+                    {
+                        <img alt="Yes" src="@Url.Content("~/Content/Img/tick_green_small.gif")" height="14px" title="Expense Billable" />
+                    }
+                </td>
+                <td width="1%" id="Locked@(day.Locked)" class="center">
+                    @if (day.Locked)
+                    {
+                        <img alt="Yes" src="@Url.Content("~/Content/Img/tick_green_small.gif")" height="14px" title="Expense Locked" />
+                    }
+                </td>
+            </tr>
+        }
+        <!-- <tr>
+         <th colspan="5" style="text-align: center !important;">Total</th>
+         <th style="text-align: right !important;">@Model.Calendar.Sum(e => e.Amount).ToDoubleString()</th>
+     </tr>-->
+    </table>
+</div>
+
+@Html.Hidden("ExpenseDate", Model.ExpenseDate)

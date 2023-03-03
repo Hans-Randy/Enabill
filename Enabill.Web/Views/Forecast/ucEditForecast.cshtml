@@ -1,0 +1,28 @@
+﻿@model Enabill.Web.Models.ForecastEditModel
+@Html.TitleTable("tblEditForecast", "", "<b>Edit Forecast </b> ", "", null, "", null, "", "ucReturnToIndexCol5", "")
+<div class="padView">
+    <form id="ForecastEditForecastFrm">
+        <table class="subTable fullWidth">
+            <tr>
+                <td>
+                    <fieldset>
+                        <legend>Header</legend>
+                        @Html.Partial("ucEditHeader", Model)
+                    </fieldset>
+                </td>
+                <td>
+                    <fieldset>
+                        <legend>Last Transaction Details</legend>
+                        @Html.Partial("ucViewDetail")
+                    </fieldset>
+                </td>
+            </tr>
+            <tr><td colspan="6"><input type="button" value="Save" onclick="Forecast.save(@Model.ForecastHeader.ForecastHeaderID); return false;" /></td></tr>
+            <tr>
+                <td colspan="2">
+                    @Html.CollapsableTable("tblHeaderDetails", "fullWidth", "Transactional History", "ucHeaderDetailedHistory", Model)
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

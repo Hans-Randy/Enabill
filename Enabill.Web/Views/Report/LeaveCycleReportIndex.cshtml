@@ -1,0 +1,13 @@
+﻿@model Enabill.Web.Models.LeaveCycleBalanceModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "Leave Balance Report";
+}
+
+<div id="ucLeaveCycleReportIndex" class="marginView">
+    @Html.Partial("ucLeaveCycleReportIndex", Model)
+</div>

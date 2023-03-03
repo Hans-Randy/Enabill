@@ -1,0 +1,16 @@
+﻿@model Enabill.Web.Models.InvoiceEditModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "Edit Invoice";
+}
+
+<div class="marginView">
+    @Html.TitleTable("tblInvoiceEdit", string.Empty, "<b>Edit Invoice:</b> " + (Model.Invoice.Client == null ? Model.Invoice.ClientName : Model.Invoice.Client.ClientName) + " - " + Model.Invoice.InvoiceID.ToString(), null, null, null, null, null, "ucEditCol5", Model.Invoice.InvoiceID)
+    <div id="InvoiceDiv" class="padView">
+        @Html.Partial("ucEdit", Model)
+    </div>
+</div>

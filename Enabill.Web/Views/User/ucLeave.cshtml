@@ -1,0 +1,16 @@
+﻿@model Enabill.Web.Models.UserEditModel
+
+<div class="padView">
+    <table class="subTable fullWidth">
+        <tr>
+            <td width="50%" valign="top">
+                <h2>Leave Manual Adjustments</h2>
+                @Html.Partial("ucLeaveManualAdjustments", Model.UserLeaveManualAdjustments)
+            </td>
+            <td width="50%" valign="top">
+                <h2>Leave Cycle Balances</h2>
+                @Html.Partial("ucLeaveCycleBalances", Model.UserLeaveCycleBalances)
+            </td>
+        </tr>
+    </table>
+</div>

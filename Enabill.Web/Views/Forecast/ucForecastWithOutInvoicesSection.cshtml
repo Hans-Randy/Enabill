@@ -1,0 +1,67 @@
+﻿@model Enabill.Web.Models.ForecastReportModel
+
+<div class="padView">
+    <table class="subTable fullWidth general fontIncrease">
+        @if (Model.ForecastWithOutInvoices.Count() == 0)
+        {
+            <tr><th colspan="11">No records found.</th></tr>
+        }
+        else
+        {
+            <tr>
+                <td class="ReportSectionColor" colspan="4"></td>
+                <td class="ReportSectionColor right">Forecast Amount</td>
+                <td class="ReportSectionColor right" colspan="6"></td>
+            </tr>
+
+            <tr>
+                <td class="GrandTotalColor" colspan="4">GrandTotal</td>
+                <td class="GrandTotalColor" style="text-align: right !important;">@Model.ForecastWithOutInvoices.Sum(r => r.ForecastAmount).ToDoubleString()</td>
+                <td class="GrandTotalColor" colspan="6"></td>
+            </tr>
+            foreach (var region in Model.ForecastWithOutInvoiceDistinctRegionList)
+            {
+                <tr>
+                    <td class="RegionColor" colspan="4">Region: @region.RegionName</td>
+                    <td class="RegionColor" style="text-align: right !important;">@Model.ForecastWithOutInvoices.Where(r => r.RegionID == region.RegionID).Sum(r => r.ForecastAmount).ToDoubleString()</td>
+                    <td class="RegionColor" colspan="6"></td>
+                </tr>
+
+                foreach (var division in Model.ForecastWithOutInvoiceDistinctDivisionList)
+                {
+                    if (Model.ForecastWithOutInvoices.Where(r => r.RegionID == region.RegionID && r.DivisionID == division.DivisionID).Sum(r => r.ForecastAmount) != 0)
+                    {
+                        <tr>
+                            <td class="DivisionColor" colspan="4">Division: @division.DivisionName</td>
+                            <td class="DivisionColor" style="text-align: right !important;">@Model.ForecastWithOutInvoices.Where(r => r.RegionID == region.RegionID && r.DivisionID == division.DivisionID).Sum(r => r.ForecastAmount).ToDoubleString()</td>
+                            <td class="DivisionColor" colspan="6"></td>
+                        </tr>
+                        <tr>
+                            <th>Billing Method</th>
+                            <th>Client</th>
+                            <th>Project</th>
+                            <th>Resource</th>
+                            <th class="right"></th>
+                            <th class="right"></th>
+                        </tr>
+                    }
+
+                    foreach (var forecastWithOutInvoice in Model.ForecastWithOutInvoices)
+                    {
+                        if (forecastWithOutInvoice.RegionID == region.RegionID && forecastWithOutInvoice.DivisionID == division.DivisionID)
+                        {
+                            <tr>
+                                <td>@((Enabill.BillingMethodType)forecastWithOutInvoice.BillingMethod)</td>
+                                <td>@forecastWithOutInvoice.Client</td>
+                                <td>@forecastWithOutInvoice.Project</td>
+                                <td>@forecastWithOutInvoice.Resource</td>
+                                <td class="right">@forecastWithOutInvoice.ForecastAmount.ToDoubleString()</td>
+                                <td><img src="@Url.Content("~/Content/Img/link.png")" alt="Link" title="Link Invoices" onclick="Forecast.linkInvoices(@forecastWithOutInvoice.ForecastHeaderID, @forecastWithOutInvoice.Period); return false;" style="cursor:pointer; height:14px" /></td>
+                            </tr>
+                        }
+                    }
+                }
+            }
+        }
+    </table>
+</div>

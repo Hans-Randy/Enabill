@@ -1,0 +1,101 @@
+﻿@model Enabill.Web.Models.TimeIndexModel
+
+@Html.TitleTable("tblTimesheet", "", "<b>Timesheet:</b> " + Model.User.FullName, Url.Content("~/Content/Img/timesheet_20x20.png"), "ucIndexCalendar", Model, null, null, null, Model)
+<div class="padView">
+
+    <table class="subTable calendarTable fullWidth" style="font-size: 9px;">
+
+        <tr>
+            <th width="4%">Weekday</th>
+            <th width="4%">Date Worked</th>
+            <th width="4%" class="center">Leave</th>
+            <th width="4%" class="center">Start</th>
+            <th width="4%" class="center">End</th>
+            <th width="4%" class="center">Lunch</th>
+            <th width="4%" class="center">Hours</th>
+            <th width="4%" class="center">Unallocated</th>
+            <th width="4% " class="center">Has Notes</th>
+
+            @foreach (var activity in Model.ActivityList)
+            {
+                <th width="10%" class="center">@Html.Raw(activity.Value)</th>
+            }
+        </tr>
+        @foreach (var day in Model.Calendar)
+        {
+            <tr class="@day.WorkDayClass">
+                <td width="4%">@day.WorkDay.ToString("dddd")</td>
+                <td width="4%">
+                    @Html.ActionLink(day.WorkDay.ToDisplayString(), "Day", "Time", new { dateString = day.WorkDay.ToDisplayString() }, null)
+                </td>
+                <td width="4%" class="center">@day.FlexiOrLeaveDayText</td>
+
+                <td width="4%" align="center">
+                    @foreach (var ws in day.DailyWorkSessions)
+                    {
+                        @ws.StartTime.ToString("HH:mm")<br />
+                    }
+                </td>
+                <td width="4%" align="center">
+                    @foreach (var ws in day.DailyWorkSessions)
+                    {
+                        @ws.EndTime.ToString("HH:mm")<br />
+                    }
+                </td>
+                <td width="4%" align="center">
+                    @foreach (var ws in day.DailyWorkSessions)
+                    {
+                        @ws.LunchTime.ToString("0.00")<br />
+                    }
+                </td>
+                <td width="4%" align="center">
+                    @foreach (var ws in day.DailyWorkSessions)
+                    {
+                        @ws.TotalTime.ToString("0.00")<br />
+                    }
+                </td>
+                @{
+                    var unallocated = day.User.GetUnallocatedTime(day.WorkDay);
+                    string IsZero = string.Empty;
+                    if (unallocated != 0)
+                    {
+                        IsZero = "error";
+                    }
+                }
+
+                <td width="4%" align="center" class="@IsZero">
+                    @if (day.User.GetUnallocatedTime(day.WorkDay) != 0)
+                    {
+                        @day.User.GetUnallocatedTime(day.WorkDay).ToString("0.00")
+                    }
+                </td>
+                <td width="4%" id="Note@(day.WorkDay.Day)" class="center">
+
+                    @if (day.DayHasNotes)
+                    {
+                        <img alt="Yes" src="@Url.Content("~/Content/Img/tick_green_small.gif")" height="14px" title="Day Has Notes" />
+                    }
+                </td>
+                @for (int k = 1; k <= Model.ActivityList.Count(); k++)
+                {
+                    <td width="10%" class="center">
+                        @(day.WorkAllocations[k - 1] == 0 ? "" : day.WorkAllocations[k - 1].ToDoubleString())
+                    </td>
+                }
+            </tr>
+        }
+        <tr>
+            <th colspan="5">Total</th>
+            <th style="text-align: center !important;">@Model.Calendar.Sum(ws => ws.DailyWorkSessions.Sum(dws => dws.LunchTime)).ToDoubleString()</th>
+            <th style="text-align: center !important;">@Model.Calendar.Sum(ws => ws.DailyWorkSessions.Sum(dws => dws.TotalTime)).ToDoubleString()</th>
+            <th colspan="2"></th>
+
+            @for (int k = 1; k <= Model.ActivityList.Count(); k++)
+            {
+                <th style="text-align: center !important;">@Model.Calendar.Sum(ws => ws.WorkAllocations[k - 1]).ToDoubleString()</th>
+            }
+        </tr>
+    </table>
+</div>
+
+@Html.Hidden("WorkDay", Model.WorkDay)

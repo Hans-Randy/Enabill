@@ -1,0 +1,19 @@
+﻿@model Enabill.Web.Models.InvoiceGLAccountsModel
+
+@section beginHead
+{
+    @IncludeRichEditor()
+}
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    Html.EnableClientValidation(false);
+    ViewBag.Title = "GL Accounts";
+}
+
+<div id="ucGLAccountIndex" class="marginView">
+    @Html.Partial("ucGLAccountIndex", Model)
+</div>

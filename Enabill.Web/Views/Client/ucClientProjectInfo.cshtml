@@ -1,0 +1,27 @@
+﻿@model Enabill.Models.Client
+
+<table class="underline">
+    <tr class="general">
+        <th>Code</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Billing Method</th>
+        <th>Book In Advance?</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+    </tr>
+    @foreach (var project in Model.GetProjects())
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(string.IsNullOrEmpty(project.ProjectCode) ? "No Code" : project.ProjectCode, "Edit", "Project", new { id = project.ProjectID }, null)
+            </td>
+            <td>@project.ProjectName</td>
+            <td>@project.ProjectDesc</td>
+            <td>@((Enabill.BillingMethodType)project.BillingMethodID)</td>
+            <td>@project.BookInAdvance</td>
+            <td>@project.StartDate.ToDisplayString()</td>
+            <td>@project.ConfirmedEndDate.ToDisplayString()</td>
+        </tr>
+    }
+</table>

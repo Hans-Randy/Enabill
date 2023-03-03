@@ -1,0 +1,85 @@
+﻿@model StoryWriter.Models.Story
+
+@{
+    string action = "Edit";
+    if (Model.StoryID == 0)
+    {
+        action = "Create";
+    }
+
+    ViewBag.Title = action;
+}
+
+<h2>@action Story | @Html.ActionLink("Go to List", "Index") </h2>
+
+@using (Html.BeginForm("Edit", "Story"))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Story</legend>
+
+        @Html.HiddenFor(model => model.StoryID)
+
+        <div class="editor-label">
+            @Html.CleanLabelFor(model => model.StoryName)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.StoryName, new { style = "width:500px" })
+            @Html.ValidationMessageFor(model => model.StoryName)
+        </div>
+        <div class="editor-label">
+            @Html.CleanLabelFor(model => model.StoryGroupID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StoryGroupID, "StoryGroupList")
+            @Html.ValidationMessageFor(model => model.StoryGroupID)
+        </div>
+        <div class="editor-label">
+            @Html.CleanLabelFor(model => model.StoryNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StoryNumber)
+            @Html.ValidationMessageFor(model => model.StoryNumber)
+        </div>
+        <div class="editor-label">
+            @Html.CleanLabelFor(model => model.RefUrl)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RefUrl)
+            @Html.ValidationMessageFor(model => model.RefUrl)
+        </div>
+        <div class="editor-label">
+            As A
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ActorID, "ActorList")
+            @Html.ValidationMessageFor(model => model.ActorID)
+        </div>
+        <div class="editor-label">
+            I want to
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IWantToAction)
+            @Html.ValidationMessageFor(model => model.IWantToAction)
+        </div>
+        <div class="editor-label">
+            So that
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SoThatOutcome)
+            @Html.ValidationMessageFor(model => model.SoThatOutcome)
+        </div>
+        <div style="margin-top:5px">
+            @Html.EditorFor(model => model.StoryText, "HtmlEditor")
+            @Html.ValidationMessageFor(model => model.StoryText)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

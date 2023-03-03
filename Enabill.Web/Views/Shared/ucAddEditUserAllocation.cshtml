@@ -1,0 +1,86 @@
+﻿@model Enabill.Models.UserAllocation
+<form id="frmUserAllocation" method="post" action="">
+    <table class="underline">
+        @if (Model != null)
+        {
+            @Html.Hidden("UserAllocationID", Model.UserAllocationID)
+            @Html.Hidden("Activity", Model.ActivityID)
+            <tr>
+                <th>Client</th>
+                <td>@Model.GetActivity().GetProject().GetClient().ClientName</td>
+            </tr>
+            <tr>
+                <th>Project</th>
+                <td>@Model.GetActivity().GetProject().ProjectName</td>
+            </tr>
+            <tr>
+                <th>Activity</th>
+                <td>@Model.GetActivity().ActivityName</td>
+            </tr>
+            <tr>
+                <th>Start Date</th>
+                <td>@Html.TextBox("UserAllocationStartDate", Model.StartDate.ToDisplayString(), new { @class = "datePicker" })</td>
+            </tr>
+            <tr>
+                <th>End Date</th>
+                @if (Model.ConfirmedEndDate.HasValue)
+                {
+                    <td>@Html.TextBox("UserAllocationEndDate", Model.ConfirmedEndDate.ToDisplayString(), new { @class = "datePicker" })</td>
+                }
+                else
+                {
+                    <td>@Html.TextBox("UserAllocationEndDate", Model.ScheduledEndDate.ToDisplayString(), new { @class = "datePicker" })</td>
+                }
+            </tr>
+            <tr>
+                @if (Model.ConfirmedEndDate.HasValue)
+                {
+                    <th>Is Confirmed</th>
+                    <td><input type="checkbox" name="EndDateIsConfirmed" checked /></td>
+                }
+                else
+                {
+                    <th>Is Confirmed</th>
+                    <td><input type="checkbox" name="EndDateIsConfirmed" /></td>
+                }
+            </tr>
+            <tr>
+                <th>Rate</th>
+                <td>@Html.TextBox("Rate", Model.ChargeRate)</td>
+            </tr>
+        }
+        else
+        {
+            @Html.Hidden("UserAllocationID", 0)
+            <tr>
+                <th>Client</th>
+                <td>@Html.DropDownList("Client")</td>
+            </tr>
+            <tr>
+                <th>Project</th>
+                <td>@Html.DropDownList("Project")</td>
+            </tr>
+            <tr>
+                <th>Activity</th>
+                <td>@Html.DropDownList("Activity")</td>
+            </tr>
+            <tr>
+                <th>Start Date</th>
+                <td>@Html.TextBox("UserAllocationStartDate", null, new { @class = "datePicker" })</td>
+            </tr>
+            <tr>
+                <th>End Date</th>
+                <td>@Html.TextBox("UserAllocationEndDate", null, new { @class = "datePicker" })</td>
+            </tr>
+            <tr>
+                <td>
+                    Is Confirmed: <input type="checkbox" name="EndDateIsConfirmed" />
+                </td>
+            </tr>
+            <tr>
+                <th>Rate</th>
+                <td>@Html.TextBox("Rate")</td>
+            </tr>
+        }
+    </table>
+</form>

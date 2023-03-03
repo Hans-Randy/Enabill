@@ -1,0 +1,32 @@
+﻿@model Enabill.Web.Models.ForecastCreateModel
+<table class="general fullWidth">
+    <tr>
+        @Html.Hidden("ForecastHeaderID", 0)
+        <td>Region</td>
+        <td>@Html.DropDownList("Region", null, new { style = "width:150px;" })</td>
+        <td>Division</td>
+        <td>@Html.DropDownList("Division", null, new { style = "width:150px;" })</td>
+    </tr>
+    <tr>
+        <td>Billing Method</td>
+        <td>@Html.DropDownList("BillingMethod", null, new { onchange = "Forecast.reloadCreateForm(); return false;", style = "width:150px;" })</td>
+        <td>Annuity Type</td>
+        <td>@Html.DropDownList("InvoiceCategory", null, new { style = "width:150px;" })</td>
+    </tr>
+    <tr>
+        <td>Client</td>
+        <td>@Html.TextBox("Client", Model.ForecastHeader.Client, new { onchange = "Forecast.setAutoComplete(); return false;", style = "width:200px;" })</td>
+        <td>Project</td>
+        <td>@Html.TextBox("Project", Model.ForecastHeader.Project, new { onchange = "Forecast.setAutoCompleteProject(); return false;", style = "width:200px" })</td>
+    </tr>
+    <tr>
+        <td>Resource</td>
+        <td>@Html.TextBox("HeaderResource", Model.ForecastHeader.Resource, new { onchange = "Forecast.setAutoCompleteUser(); return false;", style = "width:200px" })</td>
+        <td>Probability</td>
+        <td>@Html.TextBox("Probability", Model.ForecastHeader.Probability, new { style = "width:20px;" }) <text>%</text></td>
+    </tr>
+    <tr>
+        <td>Remark</td>
+        <td colspan="3">@Html.TextArea("Remark", Model.ForecastHeader.Remark, new { style = "width:500px; height:30px" })</td>
+    </tr>
+</table>

@@ -1,0 +1,44 @@
+﻿@model Enabill.Models.Region
+
+<table class="subTable general" style="width: 500px;">
+    <tr>
+        <td>
+            <form id="RegionDetailFrm">
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <legend>Region Details</legend>
+                    @Html.HiddenFor(model => model.RegionID, new { id = "hiddenRegionID" })
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.RegionName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.RegionName, new { @class = "required" })
+                        @Html.ValidationMessageFor(model => model.RegionName)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.RegionShortCode)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.RegionShortCode, new { @class = "required" })
+                        @Html.ValidationMessageFor(model => model.RegionShortCode)
+                    </div>
+                    @if (!Model.IsNew)
+                    {
+                        <div class="editor-label">
+                            @Html.Label("Status")
+                        </div>
+                        <div class="editor-field">
+                            @Html.DropDownList("RegionStatusID", (IEnumerable<SelectListItem>)ViewData["RegionStatusList"])
+                            @Html.ValidationMessageFor(model => model.IsActive)
+                        </div>
+                    }
+                </fieldset>
+                <p>
+                    <input type="button" id="Close" value="Close" onclick="Region.close(); return false;" />
+                    <input type="button" id="Save" value="Save" onclick="Region.save(@Model.RegionID); return false;" />
+                </p>
+            </form>
+        </td>
+    </tr>
+</table>

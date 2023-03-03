@@ -1,0 +1,12 @@
+﻿@model Enabill.Web.Models.UserProfileModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+<div id="ucProfile" class="marginView">
+    @Html.TitleTable("tblProfile", string.Empty, "<b>Profile:</b> " + Model.User.FullName)
+    <div class="padView">
+        @Html.Partial("ucProfile", Model)
+    </div>
+</div>

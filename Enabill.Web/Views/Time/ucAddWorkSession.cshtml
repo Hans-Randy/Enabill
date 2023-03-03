@@ -1,0 +1,29 @@
+﻿@model Enabill.Web.Models.TimeDayModel
+<form id="AddWorkSessionFrm">
+    <table class="fullWidth underline">
+        <tr>
+            <td>
+                Start Time
+            </td>
+            <td>
+                @Html.DropDownList("StartTime", Enabill.Web.Helpers.WorkTimeList(Model.WorkDay, Model.DayWorkSessions, Settings.Current.GetContextUserDayStartTime(Model.WorkDay)), new { })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                End Time
+            </td>
+            <td>
+                @Html.DropDownList("EndTime", Enabill.Web.Helpers.WorkTimeList(Model.WorkDay, Model.DayWorkSessions, Settings.Current.GetContextUserDayEndTime(Model.WorkDay)), new { })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Lunch Time
+            </td>
+            <td>
+                @Html.TextBox("LunchTime", Settings.Current.ContextUserPreferences.DefaultLunchDuration, new { })
+            </td>
+        </tr>
+    </table>
+</form>

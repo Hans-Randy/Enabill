@@ -1,0 +1,25 @@
+﻿@model List<Enabill.Web.Models.UserLeaveBalanceModel>
+
+<h4 class="center">Annual Leave Balances</h4>
+
+<table class="underline fullWidth">
+    <tr class="general">
+        <th>User</th>
+        <th>Leave Balance</th>
+        <th>Balance Date</th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="40">There are no leave balances to display</td>
+        </tr>
+    }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.UserFullName</td>
+            <td class="right">@item.LeaveBalance</td>
+            <td class="right">@item.LeaveBalanceDate.ToDisplayString()</td>
+        </tr>
+    }
+</table>

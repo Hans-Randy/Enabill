@@ -1,0 +1,105 @@
+﻿@model Enabill.Web.Models.TimeDayModel
+
+<form id="frmAddWS" method="post" action="">
+    @Html.Hidden("WorkDay", Model.WorkDay)
+    @Html.Hidden("User", Model.User)
+    @if (Model.TypeOfDay != "")
+    {
+        <br />
+        <h1 style="width: 100%; display: inline-block;" class="center">
+            @Model.TypeOfDay
+        </h1>
+    }
+
+    <h2>Work Sessions @Model.WorkDay.DayOfWeek.ToString() @Model.WorkDay.ToDisplayString()</h2>
+
+    @if (!Model.IsTimesheetLockedForDay || Model.DayWorkSessions.Count() > 0)
+    {
+        <table class="underline">
+
+            <tr class="general">
+                <th>From</th>
+                <th>To</th>
+                <th>Lunch</th>
+                <th>Hours</th>
+                <th></th>
+            </tr>
+            @foreach (var ws in Model.DayWorkSessions)
+            {
+                if (!Model.IsTimesheetLockedForDay)
+                {
+                    @Html.Partial("ucWorkSessionDetails", ws)
+                }
+                else
+                {
+                    @Html.Partial("ucWorkSessionDetailsDayLocked", ws)
+                }
+            }
+
+            @if (Model.DayWorkSessions.Count() > 0)
+            {
+                //only show the total line if work session exist
+                <tr class="general">
+                    <th>Total</th>
+                    <th></th>
+                    <th>@Model.DayWorkSessions.Sum(ws => ws.LunchTime).ToString()</th>
+                    <th>@Model.DayWorkSessions.Sum(ws => ws.TotalTime).ToString()</th>
+                    <th class="@Model.AllocationDifferenceErrorClass">
+                        @if (Model.AllocationDifference != 0)
+                        {
+                            <strong>@Model.AllocationDifference.ToString() @Model.AllocatedString</strong>
+                        }
+                    </th>
+                </tr>
+            }
+            @{
+                double defaultlunchtime = Settings.Current.ContextUserPreferences.DefaultLunchDuration;
+                if (Model.DayWorkSessions.Count > 0)
+                {
+                    defaultlunchtime = 0;
+                }
+            }
+
+            @if (!Model.IsTimesheetLockedForDay)
+            {
+                <tr class="underline">
+                    <td>@Html.DropDownList("StartTime", Enabill.Web.Helpers.WorkTimeList(Model.WorkDay, Model.DayWorkSessions, Settings.Current.GetContextUserDayStartTime(Model.WorkDay)), new { style = "width: 80px;" })</td>
+                    <td>@Html.DropDownList("EndTime", Enabill.Web.Helpers.WorkTimeList(Model.WorkDay, Model.DayWorkSessions, Settings.Current.GetContextUserDayEndTime(Model.WorkDay)), new { style = "width: 80px;" })</td>
+                    <td>@Html.TextBox("LunchTime", defaultlunchtime, new { style = "width: 80px;" })</td>
+                    <td></td>
+                    <td><input type="button" value="Add" onclick="WorkSession.addWS(); return false;" /></td>
+                </tr>
+            }
+            else
+            {
+                <tr></tr>
+                <tr></tr>
+                <tr class="underline">
+                    <td width="40%" colspan="5"><strong>THIS DAY HAS BEEN LOCKED.</strong></td>
+                </tr>
+            }
+        </table>
+                }
+                else if (Model.WorkDay < DateTime.Today)
+                {
+                    <h1 style="display: inline-block; width: 100%;" class="center">No work sessions or work allocations were captured for this day</h1>
+                }
+                else if (Model.WorkDay > DateTime.Today.ToLastDayOfMonth())
+                {
+                    <h1 style="display: inline-block; width: 100%;" class="center">Work sessions and work allocations can not be captured for future dates</h1>
+
+                    @*if (!Model.IsFlexiDay && !Model.IsLeaveDay && !Model.IsFlexiDayPending && Model.User.IsFlexiTimeUser)
+                    {
+                        //you can still book a flexi day for future dates
+                        <div>
+                            <input type="button" value="Book Flexi Day" onclick="FlexiDay.bookFlexiDay('@Model.WorkDay') ; return false;" />
+                        </div>
+                    }*@
+                }
+
+    @*@if (!Model.IsFlexiDay && !Model.IsFlexiDayPending && !Model.IsLeaveDay && !Model.IsTimesheetLockedForDay && Model.DayWorkSessions.Count() == 0 && Model.User.IsFlexiTimeUser)
+    {
+        <br />
+        <input type="button" value="Book Flexi Day" onclick="FlexiDay.bookFlexiDay() ; return false;" />
+    }*@
+</form>

@@ -1,0 +1,8 @@
+﻿@model DateTime
+
+<span>
+    <span class="actionSpan" onclick="View.showDay('@Model.AddDays(-1).ToDisplayString()'); return false;">Previous Day</span>
+    Date : @Html.TextBox("WorkDayDate", Model.ToDisplayString(), new { @class = "datePicker", style = "background-color: #FFF; font-size: 80%;" })
+    <input type="button" value="Go" onclick="View.showDay($('#WorkDayDate').val()); return false;" />
+    <span class="actionSpan" onclick="View.showDay('@Model.AddDays(1).ToDisplayString()'); return false;">Next Day</span>
+</span>

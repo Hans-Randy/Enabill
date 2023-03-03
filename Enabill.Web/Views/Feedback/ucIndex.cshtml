@@ -1,0 +1,24 @@
+﻿@model Enabill.Web.Models.FeedbackIndexModel
+
+@Html.TitleTable("tblFeedback", "", "<b>Feedback</b>", null, null, null, null, null, null, null)
+<div class="padView">
+    <table class="subTable fullWidth">
+        <tr>
+            <td id="FeedbackThreadListsTD" class="borderRight halfWidth" valign="top">
+                @Html.Partial("ucFeedbackLists", Model)
+                <a href="#" onclick="Feedback.view(0); return false;">Create new</a>
+            </td>
+
+            <td id="FeedbackThreadTD" valign="top">
+                @if (Model.FeedbackInstance.Thread.FeedbackThreadID != 0)
+                {
+                    @Html.Partial("ucExistingThread", Model.FeedbackInstance)
+                }
+                else
+                {
+                    @Html.Partial("ucNewThread", Model.FeedbackInstance)
+                }
+            </td>
+        </tr>
+    </table>
+</div>

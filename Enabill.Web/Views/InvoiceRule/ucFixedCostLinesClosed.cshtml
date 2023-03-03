@@ -1,0 +1,43 @@
+﻿@model Enabill.Web.Models.InvoiceRuleModel
+
+<form id="fcLines">
+    <table class="general fullWidth"
+        <tr>
+            <th colspan="2">Fixed Cost Amount @Model.Client.GetCurrency(Model.Client.CurrencyTypeID).CurrencyISO</th>
+            <td class="right">@(Model.InvoiceRule.InvoiceAmountExclVAT.Value.ToDoubleString())</td>
+        </tr>
+        <tr>
+            <th colspan="2">Accrual Periods</th>
+            <td class="right">@Model.InvoiceRule.AccrualPeriods Months</td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+        </tr>
+    </table>
+
+    <table class="general fullWidth"
+        <tr>
+            <th colspan="3" class="center">Accrual Period Breakdown</th>
+        </tr>
+        <tr>
+            <th>Period</th>
+            <th class="right">Customer Amount@Model.Client.GetCurrency(Model.Client.CurrencyTypeID).CurrencyISO</th>
+            <th class="right">Accrual Amount @Model.Client.GetCurrency(Model.Client.CurrencyTypeID).CurrencyISO</th>
+        </tr>
+
+        @foreach (var line in Model.FixedCostAccrualBreakdown)
+        {
+            <tr>
+                <td>@line.Period</td>
+                <td class="right">R@(line.CustomerAmount.ToDoubleString())</td>
+                <td class="right">R@(line.AccrualAmount.ToDoubleString())</td>
+            </tr>
+        }
+
+        <tr>
+            <th></th>
+            <th class="right"><span id="CustomerSum">R@(Model.FixedCostAccrualBreakdown.Sum(m => m.AccrualAmount).ToDoubleString())</span></th>
+            <th class="right"><span id="AccrualSum">R@(Model.FixedCostAccrualBreakdown.Sum(m => m.AccrualAmount).ToDoubleString())</span></th>
+        </tr>
+    </table>
+</form>

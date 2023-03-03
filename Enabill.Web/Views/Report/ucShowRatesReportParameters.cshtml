@@ -1,0 +1,16 @@
+﻿@model string
+
+<div class="padView">
+    <form id="frmRatesReport" method="post">
+        <table>
+            <tr>
+                <th>Employees</th>
+                <td>@Html.DropDownList("EmployeeRatesList")</td>
+            </tr>
+            <tr>
+                <th>Clients</th>
+                <td>@Html.DropDownList("ClientRatesList")</td>
+            </tr>
+        </table>
+    </form>
+</div>

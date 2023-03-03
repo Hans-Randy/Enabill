@@ -1,0 +1,29 @@
+﻿@model Enabill.Web.Models.ClientEditModel
+
+@if (Model.Contacts.Count() <= 0)
+{
+    <text>This client has no contacts</text>
+    return;
+}
+
+<table class="general fullWidth">
+    <tr>
+        <th></th>
+        <th>Contact Name</th>
+        <th>Job Title</th>
+        <th>E-mail</th>
+        <th>Telephone Number</th>
+        <th>Cellphone Number</th>
+    </tr>
+    @foreach (var contact in Model.Contacts)
+    {
+        <tr>
+            <td><a href="#" onclick="Crud.edit({id: @contact.ContactID, clientID: @contact.ClientID}); return false">Edit</a></td>
+            <td>@contact.ContactName</td>
+            <td>@contact.JobTitle</td>
+            <td>@contact.Email</td>
+            <td>@contact.TelephoneNo</td>
+            <td>@contact.CellphoneNo</td>
+        </tr>
+    }
+</table>

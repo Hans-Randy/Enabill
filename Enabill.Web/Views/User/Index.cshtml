@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Enabill.Models.User>
+
+@{
+    ViewBag.Title = Enabill.Code.Constants.COMPANYNAME + " - Users";
+    if (IsAjax)
+    {
+        Layout = null;
+    }
+}
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+<div id="Index" class="marginView">
+    @Html.TitleTable("tblUsers", "", "<b>Users</b>", Url.Content("/Content/Img/admin_20x20.png"), "ucIndexCol3", "", "ucIndexCol4", "", null, null)
+    <div class="padView">
+
+        <table class="subTable general">
+            <tr>
+                <th>Action</th>
+                <th>ID </th>
+                <th>Username </th>
+                <th>Full Name</th>
+                <th>Managed By</th>
+                <th>Employment Type</th>
+                <th>Payroll Reference No</th>
+                <th>Status</th>
+            </tr>
+            @foreach (var user in Model)
+            {
+                var employmentType = (Enabill.EmploymentTypeEnum)user.EmploymentTypeID;
+                <tr>
+                    <td>@Html.Partial("ucUserNavigationOptions", user)</td>
+                    <td>@user.UserID</td>
+                    <td>@user.UserName</td>
+                    <td>@user.FullName</td>
+                    <td>@(user.Manager != null ? user.Manager.FullName : string.Empty)</td>
+                    <td>@employmentType</td>
+                    <td>@user.PayrollRefNo</td>
+                    <td>@(user.IsActive ? "Active" : "Inactive")</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

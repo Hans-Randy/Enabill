@@ -1,0 +1,52 @@
+﻿@model List<Enabill.Models.Contact>
+    @{
+        ViewBag.Title = "Contacts";
+    }
+
+    <div class="marginView">
+        @Html.TitleTable("tblContacts", "", "<b>Contacts</b>")
+        <div class="padView">
+
+            <table class="subTable general">
+                <tr>
+                    <th>Contact Name</th>
+                    <th>Client Name</th>
+                    <th>Email</th>
+                    <th>Telephone No</th>
+                    <th>Cellphone No</th>
+                    <th>Job Title</th>
+                    <th>Is Active</th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContactName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GetClient().ClientName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TelephoneNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CellphoneNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JobTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsActive)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Client", new { id = item.ClientID }, null)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>

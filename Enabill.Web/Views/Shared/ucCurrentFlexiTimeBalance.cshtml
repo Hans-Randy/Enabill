@@ -1,0 +1,38 @@
+﻿@model Enabill.Web.Models.CurrentFlexiBalanceModel
+
+<table class="cleanTable fullWidth">
+    <tr>
+        <th>Balance on @Model.LastBalanceDate.ToDisplayString()</th>
+        <td class="@Model.MostRecentBalanceClass center">@Model.MostRecentBalance hrs</td>
+    </tr>
+    @*<tr class="lightGrey">
+        <td colspan="2"></td>
+    </tr>
+    <tr>
+        <th>Required hours at end of today</th>
+        <td class="center">@Model.HoursRequiredSinceLastBalance hrs</td>
+    </tr>
+    <tr>
+        <th>Hours worked since @Model.LastBalanceDate.ToDisplayString()</th>
+        <td class="center">@Model.HoursWorkedSinceLastBalance hrs</td>
+    </tr>
+    <tr>
+        <th>Hours assigned to leave</th>
+        <td class="center">@Model.HoursTakenAsLeave hrs</td>
+    </tr>
+    <tr>
+        <th>FlexiTime adjustments</th>
+        <td class="center">@Model.FlexiHoursAdjustmentSinceLastBalance hrs</td>
+    </tr>
+    <tr>
+        <th>@Model.DifferenceString</th>
+        <td class="@Model.DifferenceClass center">@Model.Difference hrs</td>
+    </tr>
+    <tr class="lightGrey">
+        <td colspan="2"></td>
+    </tr>
+    <tr>
+        <th>Current balance</th>
+        <td class="@Model.CurrentBalanceClass center">@Model.FlexiBalanceToday hrs</td>
+    </tr>*@
+</table>

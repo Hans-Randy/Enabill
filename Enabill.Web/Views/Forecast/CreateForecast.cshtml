@@ -1,0 +1,14 @@
+﻿@model Enabill.Web.Models.ForecastCreateModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{ ViewBag.Title = "Create"; }
+
+<div class="marginView">
+    @Html.TitleTable("tblCreateForecast", "", "<b>Create Forecast </b> ", "", null, "", null, "", "ucReturnToIndexCol5", "")
+    <div class="padView">
+        @Html.Partial("ucCreateForecast", Model)
+    </div>
+</div>

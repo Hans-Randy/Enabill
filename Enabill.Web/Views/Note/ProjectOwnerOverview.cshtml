@@ -1,0 +1,60 @@
+﻿@model Enabill.Web.Models.NoteProjectOwnerOverviewIndexModel
+
+@section beginHead{
+    @IncludeRichEditor()
+}
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "Notes";
+}
+
+<div class="marginView">
+    @Html.TitleTable("tblNotes", string.Empty, "<b>Notes For My Projects</b>")
+    <div class="padView">
+
+        <form id="NoteSearch">
+            <table class="subTable general fullWidth">
+                <tr>
+                    <th>Activities</th>
+                    <th>Users</th>
+                    <th>Dates</th>
+                    <th></th>
+                </tr>
+                <td valign="top" rowspan="3">
+                    @Html.Partial("ucActivitySearch", Model.ActivityModel)
+                </td>
+                <td valign="top" rowspan="3">
+                    @Html.Partial("ucUserSearch", Model.UserList)
+                </td>
+                <td valign="top" align="center">
+                    From Date: @Html.TextBox("DateFrom", Enabill.Extensions.ToFirstDayOfMonth(DateTime.Today).ToDisplayString(), new { @class = "datePicker" })
+                    -
+                    To Date: @Html.TextBox("DateTo", Enabill.Extensions.ToLastDayOfMonth(DateTime.Today).ToDisplayString(), new { @class = "datePicker" })
+                </td>
+                <td align="center" rowspan="3">
+                    <input type="button" value="Search" onclick="NoteSearch.search(); return false;" />
+                </td>
+                </tr>
+                <tr>
+                    <th>Other</th>
+                </tr>
+                <tr>
+                    <td valign="top" align="center">
+                        Keyword: @Html.TextBox("KeyWord")
+                    </td>
+                </tr>
+            </table>
+
+            @Html.Hidden("ActivityList")
+            @Html.Hidden("UserList")
+        </form>
+
+        <div id="NoteList">
+            @Html.Partial("ucNoteList", Model.NoteList)
+        </div>
+    </div>
+</div>

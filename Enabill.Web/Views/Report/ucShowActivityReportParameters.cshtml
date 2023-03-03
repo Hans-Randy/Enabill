@@ -1,0 +1,135 @@
+﻿@model Enabill.Web.Models.ActivityReportDisplayModel
+@{
+    var clientList = new List<SelectListItem>();
+    var projectList = new List<SelectListItem>();
+    var divisionList = new List<SelectListItem>();
+    var employeeList = new List<SelectListItem>();
+    var employmentTypeList = new List<SelectListItem>();
+    var activityList = new List<SelectListItem>();
+    var managerList = new List<SelectListItem>();
+
+    if (Model.Managers != null)
+    {
+        //Managers
+        managerList.Add(new SelectListItem
+        {
+            Value = "0",
+            Text = "--all managers"
+        });
+
+        managerList.AddRange(Model.Managers.OrderBy(m => m.FullName).Select(m => new SelectListItem { Text = m.FullName, Value = m.UserID.ToString(), Selected = m.UserID == Model.ManagerId }));
+    }
+
+    //Client
+    clientList.Add(new SelectListItem
+    {
+        Value = "0",
+        Text = "--all clients"
+    });
+
+    clientList.AddRange(Model.Clients.OrderBy(c => c.ClientName).Select(c => new SelectListItem { Text = c.ClientName, Value = c.ClientID.ToString(), Selected = c.ClientID == Model.ClientId }));
+
+    //Project
+    projectList.Add(new SelectListItem
+    {
+        Value = "0",
+        Text = "--all projects"
+    });
+
+    projectList.AddRange(Model.Projects.GroupBy(pr => pr.ProjectName).OrderBy(p => p.Key).Select(p => new SelectListItem { Text = p.First().ProjectName, Value = p.First().ProjectID.ToString(), Selected = p.First().ProjectID == Model.ProjectId }));
+
+    //Division
+    divisionList.Add(new SelectListItem
+    {
+        Value = "0",
+        Text = "--all divisions"
+    });
+
+    divisionList.AddRange(Model.Divisions.OrderBy(d => d.DivisionName).Select(d => new SelectListItem { Text = d.DivisionName, Value = d.DivisionID.ToString(), Selected = d.DivisionID == Model.DivisionId }));
+
+    //Employee
+    employeeList.Add(new SelectListItem
+    {
+        Value = "0",
+        Text = "--all employees"
+    });
+
+    employeeList.AddRange(Model.Users.OrderBy(u => u.FullName).Select(u => new SelectListItem { Text = u.FullName, Value = u.UserID.ToString(), Selected = u.UserID == Model.UserId }));
+
+    //Employment Type
+    employmentTypeList.Add(new SelectListItem
+    {
+        Value = "0",
+        Text = "--all employment types"
+    });
+
+    employmentTypeList.AddRange(Model.EmploymentTypes.OrderBy(t => t.EmploymentTypeName).Select(et => new SelectListItem { Value = et.EmploymentTypeID.ToString(), Text = et.EmploymentTypeName, Selected = et.EmploymentTypeID == Model.EmploymentTypeId }));
+
+    //Activity
+    activityList.Add(new SelectListItem
+    {
+        Value = "0",
+        Text = "--all activities"
+    });
+
+    activityList.AddRange(Model.Activities.GroupBy(ac => ac.ActivityName).OrderBy(a => a.Key).Select(a => new SelectListItem { Text = a.First().ActivityName, Value = a.First().ActivityID.ToString(), Selected = a.First().ActivityID == Model.ActivityId }));
+}
+
+<div class="padView">
+    <form id="frmActivityReport" method="post">
+        <table>
+            <tbody>
+                <tr>
+                    <th>Date From</th>
+                    <td>
+                        <span class="ui-helper-hidden-accessible"><input type="text" /></span>
+                        @Html.TextBox("DTFrom", Model.DateFrom.ToString("yyyy-MM-dd"), new { @class = "datePicker" })
+                    </td>
+                </tr>
+                <tr>
+                    <th>Date To</th>
+                    <td>
+                        @Html.TextBox("DTTo", Model.DateTo.ToString("yyyy-MM-dd"), new { @class = "datePicker" })
+                    </td>
+                </tr>
+                <tr>
+                    <th class="borderRight">Client</th>
+                    <td>
+                        @Html.DropDownList("ClientList", clientList)
+                    </td>
+                </tr>
+                <tr>
+                    <th class="borderRight">Project</th>
+                    <td>@Html.DropDownList("ProjectList", projectList)</td>
+                </tr>
+                <tr>
+                    <th class="borderRight">Activity</th>
+                    <td>@Html.DropDownList("ActivityList", activityList)</td>
+                </tr>
+                <tr>
+                    <th class="borderRight">EmploymentType</th>
+                    <td>@Html.DropDownList("EmploymentTypeList", employmentTypeList)</td>
+                </tr>
+                <tr>
+                    <th class="borderRight">Division</th>
+                    <td>@Html.DropDownList("DivisionList", divisionList)</td>
+                </tr>
+                @if (Model.Managers != null)
+                {
+                    <tr>
+                        <th class="borderRight">Managers</th>
+                        <td>@Html.DropDownList("ManagerList", managerList)</td>
+                    </tr>
+                }
+                <tr>
+                    <th class="borderRight">Employee</th>
+                    <td>@Html.DropDownList("UserList", employeeList)</td>
+                </tr>
+                <tr>
+                    <th class="borderRight">Include Leave</th>
+                    <td>@Html.CheckBox("IncludeLeave", false)</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

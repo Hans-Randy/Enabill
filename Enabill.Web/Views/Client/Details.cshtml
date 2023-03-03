@@ -1,0 +1,20 @@
+﻿@model Enabill.Web.Models.ClientEditModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "Client Details";
+}
+
+<div class="marginView">
+    @Html.TitleTable("tblClientDetail", string.Empty, "<b>Details:</b> " + Model.Client.ClientName)
+    <div class="padView">
+
+        @Html.Tabs("tabs",
+            new TabPage("Client Details", "ucClientInfo", Model.Client, "tabs-0"),
+            new TabPage("Projects", "ucClientProjectInfo", Model.Client, "tabs-1")
+          )
+    </div>
+</div>

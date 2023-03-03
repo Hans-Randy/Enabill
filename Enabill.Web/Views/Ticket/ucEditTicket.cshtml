@@ -1,0 +1,61 @@
+﻿@model Enabill.Web.Models.TicketLineModel
+
+@using (Html.BeginForm("SubmitTicketLine", "Ticket", FormMethod.Post, new { id = "frmSubmitTicketLine", enctype = "multipart/form-data" }))
+{
+    <fieldset>
+        <legend><h3>Edit</h3></legend>
+        <table class="general halfWidth">
+            @Html.Hidden("TicketID", Model.Ticket.TicketID)
+            @if (Model.Ticket.TicketSubject == "No Subject Specified")
+            {
+                <tr>
+                    <td>Override Default Subject:</td>
+                    <td colspan="4">@Html.TextBox("TicketSubject")</td>
+                </tr>
+            }
+            else
+            {
+                @Html.Hidden("TicketSubject", Model.Ticket.TicketSubject)
+            }
+            <tr>
+                <td>Project:</td>
+                <td>@Html.DropDownList("Project", null, new { onchange = "Ticket.refreshUsers(); return true;", style = "width:150px;font-size:7.5pt;" })</td>
+                <td width="30%" style="font-size:7.5pt;">Type:</td>
+                <td>@Html.DropDownList("TicketType", null, new { style = "width:100px;font-size:7.5pt;" })</td>
+            </tr>
+            <tr>
+                <td width="30%" style="font-size:7.5pt;">Priority:</td>
+                <td>@Html.DropDownList("Priority", null, new { style = "width:100px;font-size:7.5pt;" })</td>
+                <td width="30%" style="font-size:7.5pt;">Status:</td>
+                <td>@Html.DropDownList("TicketStatus", null, new { style = "width:100px;font-size:7.5pt;" })</td>
+            </tr>
+            <tr>
+                <td width="30%" style="font-size:7.5pt;">Assigned To:</td>
+                <td>@Html.DropDownList("AssignedUser", null, new { style = "width:150px;font-size:7.5pt;" })</td>
+                <td width="30%" style="font-size:7.5pt;">Time Spent:</td>
+                <td width="30%" style="font-size:7.5pt;">@Html.TextBox("TimeSpent", Model.Ticket.TimeSpent.ToDoubleString(), new { style = "width:50px;font-size:7.5pt;" })</td>
+            </tr>
+
+            <tr>
+                <td width="30%" style="font-size:7.5pt;">Add Attachments:</td>
+                <td><input type="file" name="FileUpload" /><br /></td>
+            </tr>
+
+            <tr>
+                <td width="30%" style="font-size:7.5pt;">Details:</td>
+                <td colspan="3">@Html.TextArea("TicketDetails", Model.Ticket.TicketDetails, new { style = "font-family:Arial;font-size:7.5pt;width:480px;height:100px;resize:none;", maxlength = 512 })</td>
+            </tr>
+
+            <tr>
+                <td colspan="4">
+                    @Html.TextArea("PostText", string.Empty, new { @class = "crudFCK" })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="left">
+                    <input type="submit" onclick="return Ticket.submitTicketLine(@Model.Ticket.TicketID);" value="Submit" />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}

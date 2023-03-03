@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Enabill.Models.ProjectSearchResult>
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{ ViewBag.Title = "List of projects"; }
+
+<div id="Index" class="marginView">
+    @Html.TitleTable("tblProjects", string.Empty, "<b>Projects</b>", "", "ucIndexCol3", "", "ucIndexCol4", "", null, null)
+    <div class="padView">
+
+        @if (Model.Count() == 0)
+        {
+            @Html.Partial("ucNoSearchResults", "projects")
+            return;
+        }
+
+        <table class="subTable general">
+            <tr>
+                <th></th>
+                <th>Client </th>
+                <th>Project</th>
+                <th>Billing Method Type</th>
+                <th>Activities</th>
+                <th>Region</th>
+                <th>Department</th>
+                <th>Code</th>
+                <th>Scheduled EndDate</th>
+                <th>Active</th>
+                <th>Value</th>
+            </tr>
+            @foreach (var item in Model.Where(p => p.IsActive == p.Project.IsProjectActive).OrderBy(p => p.ClientName).ThenBy(p => p.ProjectName))
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ProjectID }) @*|
+                            @Html.ActionLink("Details", "Details", new { id = item.ProjectID })*@
+                    </td>
+                    <td>
+                        @item.ClientName
+                    </td>
+                    <td>
+                        @item.ProjectName
+                    </td>
+                    <td>
+                        @item.BillingMethodTypeName
+                    </td>
+                    <td>
+                        @if (item.Activities != null)
+                        {
+                            foreach (string activity in item.Activities)
+                            {
+                                @activity
+                                <br />
+                            }
+                        }
+                    </td>
+                    <td>
+                        @item.Region
+                    </td>
+                    <td>
+                        @item.Department
+                    </td>
+                    <td>
+                        @item.ProjectCode
+                    </td>
+                    <td>@item.ScheduledEndDate.ToDisplayString()</td>
+                    <td>
+                        @(item.Project.IsProjectActive.ToString())
+                    </td>
+
+                    <td align="right">
+                        @(item.IsFixedCost ? String.Format($"{item.ProjectValue:N0}") : "--")
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

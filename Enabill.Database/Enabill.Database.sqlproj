@@ -1,0 +1,541 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Enabill.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{da3900f4-991a-41e6-a7d9-8fc5d3cc9db1}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql140DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Enabill.Database</RootNamespace>
+    <AssemblyName>Enabill.Database</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="Security\" />
+    <Folder Include="SQLScripts" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\Stored Procedures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Security\EnabillReportRole.sql" />
+    <Build Include="Security\EnabillReportRole2.sql" />
+    <Build Include="Security\Enabill_User.sql" />
+    <Build Include="Security\Enabill_User_1.sql" />
+    <Build Include="Security\RoleMemberships.sql" />
+    <Build Include="dbo\Tables\WorkSessionStatus.sql" />
+    <Build Include="dbo\Tables\WorkSessions.sql" />
+    <Build Include="dbo\Tables\WorkDays.sql" />
+    <Build Include="dbo\Tables\WorkAllocations.sql" />
+    <Build Include="dbo\Tables\WebHistories.sql" />
+    <Build Include="dbo\Tables\Users.sql" />
+    <Build Include="dbo\Tables\UserRoles.sql" />
+    <Build Include="dbo\Tables\UserPreferences.sql" />
+    <Build Include="dbo\Tables\UserHistories.sql" />
+    <Build Include="dbo\Tables\UserCostToCompanies.sql" />
+    <Build Include="dbo\Tables\UserAllocations.sql" />
+    <Build Include="dbo\Tables\TrainingCategories.sql" />
+    <Build Include="dbo\Tables\TimesheetApprovals.sql" />
+    <Build Include="dbo\Tables\TicketTypes.sql" />
+    <Build Include="dbo\Tables\TicketStatusChanges.sql" />
+    <Build Include="dbo\Tables\TicketStatus.sql" />
+    <Build Include="dbo\Tables\Tickets.sql" />
+    <Build Include="dbo\Tables\TicketReferenceNumbers.sql" />
+    <Build Include="dbo\Tables\TicketPriorities.sql" />
+    <Build Include="dbo\Tables\TicketLogTypes.sql" />
+    <Build Include="dbo\Tables\TicketLogs.sql" />
+    <Build Include="dbo\Tables\TicketLineSourceTypes.sql" />
+    <Build Include="dbo\Tables\TicketLines.sql" />
+    <Build Include="dbo\Tables\TicketLineAttachments.sql" />
+    <Build Include="dbo\Tables\TicketFilters.sql" />
+    <Build Include="dbo\Tables\TicketAssignmentChanges.sql" />
+    <Build Include="dbo\Tables\SecondaryManagerAllocations.sql" />
+    <Build Include="dbo\Tables\Roles.sql" />
+    <Build Include="dbo\Tables\Reports.sql" />
+    <Build Include="dbo\Tables\ReportEmails.sql" />
+    <Build Include="dbo\Tables\Regions.sql" />
+    <Build Include="dbo\Tables\Projects.sql" />
+    <Build Include="dbo\Tables\PrintTicketRemarkOptions.sql" />
+    <Build Include="dbo\Tables\PrintOptions.sql" />
+    <Build Include="dbo\Tables\PassPhrases.sql" />
+    <Build Include="dbo\Tables\Notes.sql" />
+    <Build Include="dbo\Tables\NonWorkSessions.sql" />
+    <Build Include="dbo\Tables\Months.sql" />
+    <Build Include="dbo\Tables\Menus.sql" />
+    <Build Include="dbo\Tables\LoginLogs.sql" />
+    <Build Include="dbo\Tables\LogEntries.sql" />
+    <Build Include="dbo\Tables\LeaveTypes.sql" />
+    <Build Include="dbo\Tables\Leaves.sql" />
+    <Build Include="dbo\Tables\LeaveManualAdjustments.sql" />
+    <Build Include="dbo\Tables\LeaveCycleBalances.sql" />
+    <Build Include="dbo\Tables\LeaveBalances.sql" />
+    <Build Include="dbo\Tables\InvoiceSubCategories.sql" />
+    <Build Include="dbo\Tables\InvoiceStatus.sql" />
+    <Build Include="dbo\Tables\Invoices.sql" />
+    <Build Include="dbo\Tables\InvoiceRules.sql" />
+    <Build Include="dbo\Tables\InvoiceRuleLines.sql" />
+    <Build Include="dbo\Tables\InvoiceRuleContacts.sql" />
+    <Build Include="dbo\Tables\InvoiceRuleActivities.sql" />
+    <Build Include="dbo\Tables\InvoiceCredits.sql" />
+    <Build Include="dbo\Tables\InvoiceContacts.sql" />
+    <Build Include="dbo\Tables\InvoiceCategories.sql" />
+    <Build Include="dbo\Tables\GLAccounts.sql" />
+    <Build Include="dbo\Tables\Frequencies.sql" />
+    <Build Include="dbo\Tables\ForecastResourceAssignments.sql" />
+    <Build Include="dbo\Tables\ForecastReferenceDefaults.sql" />
+    <Build Include="dbo\Tables\ForecastInvoiceLinks.sql" />
+    <Build Include="dbo\Tables\ForecastHeaders.sql" />
+    <Build Include="dbo\Tables\ForecastDetails.sql" />
+    <Build Include="dbo\Tables\FlexiDays.sql" />
+    <Build Include="dbo\Tables\FlexiBalances.sql" />
+    <Build Include="dbo\Tables\FlexiBalanceAdjustments.sql" />
+    <Build Include="dbo\Tables\FinPeriods.sql" />
+    <Build Include="dbo\Tables\FeedbackUrgencyTypes.sql" />
+    <Build Include="dbo\Tables\FeedbackTypes.sql" />
+    <Build Include="dbo\Tables\FeedbackThreads.sql" />
+    <Build Include="dbo\Tables\FeedbackPosts.sql" />
+    <Build Include="dbo\Tables\FeedbackAttachments.sql" />
+    <Build Include="dbo\Tables\EmploymentTypes.sql" />
+    <Build Include="dbo\Tables\ELMAH_Error.sql" />
+    <Build Include="dbo\Tables\Divisions.sql" />
+    <Build Include="dbo\Tables\Departments.sql" />
+    <Build Include="dbo\Tables\Contacts.sql" />
+    <Build Include="dbo\Tables\Clients.sql" />
+    <Build Include="dbo\Tables\ClientDepartmentCode.sql" />
+    <Build Include="dbo\Tables\Calendar.sql" />
+    <Build Include="dbo\Tables\BillingMethods.sql" />
+    <Build Include="dbo\Tables\BillableIndicators.sql" />
+    <Build Include="dbo\Tables\BalanceTypes.sql" />
+    <Build Include="dbo\Tables\BalanceChangeTypes.sql" />
+    <Build Include="dbo\Tables\BalanceAuditTrails.sql" />
+    <Build Include="dbo\Tables\AuditTrails.sql" />
+    <Build Include="dbo\Tables\Articles.sql" />
+    <Build Include="dbo\Tables\Activities.sql" />
+    <Build Include="dbo\Views\vwWorkSessionOverview.sql" />
+    <Build Include="dbo\Views\vwWorkAllocationsWithLeave.sql" />
+    <Build Include="dbo\Views\vwWorkableDaysPerPeriod.sql" />
+    <Build Include="dbo\Views\vwUserWorkSessionNotCaptured.sql" />
+    <Build Include="dbo\Views\vwUserWorkAllocationExceptions.sql" />
+    <Build Include="dbo\Views\vwUserTimeSplitTotalHoursPerPeriod.sql" />
+    <Build Include="dbo\Views\vwUserTimeSplit.sql" />
+    <Build Include="dbo\Views\vwUserLastWorkSessions.sql" />
+    <Build Include="dbo\Views\vwUserIndividualLeaveDaysPending.sql" />
+    <Build Include="dbo\Views\vwUserIndividualLeaveDaysApproved.sql" />
+    <Build Include="dbo\Views\vwUserActivityTimeSpent.sql" />
+    <Build Include="dbo\Views\vwTimeSpentPerClientPerProject.sql" />
+    <Build Include="dbo\Views\vwTicketTurnaroundTime.sql" />
+    <Build Include="dbo\Views\vwTicketTimeAllocation.sql" />
+    <Build Include="dbo\Views\vwTicketsReceivedSinceStartOfMonth.sql" />
+    <Build Include="dbo\Views\vwTicketsReceivedFromPreviousMonths.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_Woolworths.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_Uniflo.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_PerUser.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_PaarlMedia.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_Netcare.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_MMI.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_MHS.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_IDS.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_HSM.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_Gallo.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_FCM.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_EHL.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_BSAR.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_AlacrityHosted.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_Alacrity.sql" />
+    <Build Include="dbo\Views\vwTicketsOutstandingPerPriority.sql" />
+    <Build Include="dbo\Views\vwTicketsOutstandingFromThisMonth.sql" />
+    <Build Include="dbo\Views\vwTicketsOutstandingFromPreviousMonths.sql" />
+    <Build Include="dbo\Views\vwTicketsClosedThisMonthForPreviousMonths.sql" />
+    <Build Include="dbo\Views\vwTicketsClosedSinceStartOfMonth.sql" />
+    <Build Include="dbo\Views\vwTicketsClosedInPreviousMonths.sql" />
+    <Build Include="dbo\Views\vwTicketsAllParked.sql" />
+    <Build Include="dbo\Views\vwTicketsAllDeleted.sql" />
+    <Build Include="dbo\Views\vwTicketExceptionReport.sql" />
+    <Build Include="dbo\Views\vwSupportEmails.sql" />
+    <Build Include="dbo\Views\vwPriorPeriodInvoiceOpen.sql" />
+    <Build Include="dbo\Views\vwLeonProjectMISSamROllUp.sql" />
+    <Build Include="dbo\Views\vwLeonProjectMISSam.sql" />
+    <Build Include="dbo\Views\vwLeonProjectMISProv.sql" />
+    <Build Include="dbo\Views\vwLeonProjectMIS2.sql" />
+    <Build Include="dbo\Views\vwLeonProjectMIS.sql" />
+    <Build Include="dbo\Views\vwLeonProjectByMonthByRegion.sql" />
+    <Build Include="dbo\Views\vwLeonProjectByMonth.sql" />
+    <Build Include="dbo\Views\vwLeonActivitiesByMonth.sql" />
+    <Build Include="dbo\Views\vwLeonActivities.sql" />
+    <Build Include="dbo\Views\vwLatestUserAllocationEntry.sql" />
+    <Build Include="dbo\Views\vwLatestInvoiceRuleEntry.sql" />
+    <Build Include="dbo\Views\vwInvoiceWorkAllocationExceptions.sql" />
+    <Build Include="dbo\Views\vwInvoicesWithoutForecasts.sql" />
+    <Build Include="dbo\Views\vwInvoiceRulesWithAllocatedTimeButNoInvoice.sql" />
+    <Build Include="dbo\Views\vwInvoiceRuleInactiveButUserAllocationActive.sql" />
+    <Build Include="dbo\Views\vwInvoiceRuleActivities.sql" />
+    <Build Include="dbo\Views\vwIndividualLeaveDays.sql" />
+    <Build Include="dbo\Views\vwForecastWithOutInvoices.sql" />
+    <Build Include="dbo\Views\vwForecastWithInvoicesSummaries.sql" />
+    <Build Include="dbo\Views\vwForecastWithInvoicesDetails.sql" />
+    <Build Include="dbo\Views\vwForecastWithInvoices.sql" />
+    <Build Include="dbo\Views\vwForecastLastPeriod.sql" />
+    <Build Include="dbo\Views\vwForecastHeaderMostRecentResourceAssignments.sql" />
+    <Build Include="dbo\Views\vwForecastHeaderMostRecentDetailLines.sql" />
+    <Build Include="dbo\Views\vwForecastHeaderLastPeriodDetails.sql" />
+    <Build Include="dbo\Views\vwForecastAmountByClientBillingMethodTotals.sql" />
+    <Build Include="dbo\Views\vwDoesForecastHeaderHaveInvoiceLinks.sql" />
+    <Build Include="dbo\Views\vwCostToCompany.sql" />
+    <Build Include="dbo\Views\vwClientProjectTickets.sql" />
+    <Build Include="dbo\Views\vwClientProjectFeedback.sql" />
+    <Build Include="dbo\Views\vwBillableTimeNotInvoiced.sql" />
+    <Build Include="dbo\Views\vwBillableTimeInvoiced.sql" />
+    <Build Include="dbo\Views\vwActivityOverview.sql" />
+    <Build Include="dbo\Views\vwActivityNotLinkedToInvoiceRule.sql" />
+    <Build Include="dbo\Functions\Fn_OptimalThroughputFillFactorForRandom.sql" />
+    <Build Include="dbo\Functions\EnCryptDec.sql" />
+    <Build Include="dbo\Functions\DeCryptDec.sql" />
+    <Build Include="dbo\Functions\F_GetLeaveDatesBetweenRangesByUserID.sql" />
+    <Build Include="dbo\Functions\F_Calendar.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\UserLeave_LSP.sql" />
+    <Build Include="dbo\Stored Procedures\sproc_revenue_actual_vs_invoiced.sql" />
+    <Build Include="dbo\Stored Procedures\sproc_monthly_invoices.sql" />
+    <Build Include="dbo\Stored Procedures\rSP_ResourceUtilisation.sql" />
+    <Build Include="dbo\Stored Procedures\Report_LSP_UserTimeAllocationBreakdown.sql" />
+    <Build Include="dbo\Stored Procedures\PercentageAllocationReport_LSP.sql" />
+    <Build Include="dbo\Stored Procedures\Passphrase_RSP_Check.sql" />
+    <Build Include="dbo\Stored Procedures\InsertNonWorkSessionDaysByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetWorkSessionsByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetWorkSessions.sql" />
+    <Build Include="dbo\Stored Procedures\GetWorkDays.sql" />
+    <Build Include="dbo\Stored Procedures\GetWorkAllocationsByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetWorkAllocations.sql" />
+    <Build Include="dbo\Stored Procedures\GetUsersWorkAllocations.sql" />
+    <Build Include="dbo\Stored Procedures\GetUsers.sql" />
+    <Build Include="dbo\Stored Procedures\GetUserByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetUser.sql" />
+    <Build Include="dbo\Stored Procedures\GetTrainingCategories.sql" />
+    <Build Include="dbo\Stored Procedures\GetTimesheets.sql" />
+    <Build Include="dbo\Stored Procedures\GetTimesheetByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetRegions.sql" />
+    <Build Include="dbo\Stored Procedures\GetProjects.sql" />
+    <Build Include="dbo\Stored Procedures\GetOutstandingNonWorkSessionDaysByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetNoOfWorkDays.sql" />
+    <Build Include="dbo\Stored Procedures\GetNonWorkSessionDaysByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetLeavesByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetLeaves.sql" />
+    <Build Include="dbo\Stored Procedures\GetLeaveDatesBetweenRangesByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetLeaveBalanceDiscrepancies.sql" />
+    <Build Include="dbo\Stored Procedures\GetFlexiDaysByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetFlexiDays.sql" />
+    <Build Include="dbo\Stored Procedures\GetEmploymentTypes.sql" />
+    <Build Include="dbo\Stored Procedures\GetDivisions.sql" />
+    <Build Include="dbo\Stored Procedures\GetDepartments.sql" />
+    <Build Include="dbo\Stored Procedures\GetDaysInLeaveCycleByUser.sql" />
+    <Build Include="dbo\Stored Procedures\GetClients.sql" />
+    <Build Include="dbo\Stored Procedures\GetBillableIndicators.sql" />
+    <Build Include="dbo\Stored Procedures\GetActivityAndLeaveByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetActivityAndLeaveAllUsers.sql" />
+    <Build Include="dbo\Stored Procedures\GetActivities.sql" />
+    <Build Include="dbo\Stored Procedures\EnCryptDecSP.sql" />
+    <Build Include="dbo\Stored Procedures\ELMAH_LogError.sql" />
+    <Build Include="dbo\Stored Procedures\ELMAH_GetErrorXml.sql" />
+    <Build Include="dbo\Stored Procedures\ELMAH_GetErrorsXml.sql" />
+    <Build Include="dbo\Stored Procedures\DeCryptDecSP.sql" />
+    <Build Include="dbo\Stored Procedures\DeactivateLeaveCycleBalanceRecords.sql" />
+    <Build Include="dbo\Stored Procedures\CorrectLeaveCycleBalanceRecords.sql" />
+    <Build Include="dbo\Stored Procedures\Calendar_USP_WorkableDays.sql" />
+    <Build Include="dbo\Tables\WorkSessionStatus.sql" />
+    <Build Include="dbo\Tables\WorkSessions.sql" />
+    <Build Include="dbo\Tables\WorkDays.sql" />
+    <Build Include="dbo\Tables\WorkAllocations.sql" />
+    <Build Include="dbo\Tables\WebHistories.sql" />
+    <Build Include="dbo\Tables\Users.sql" />
+    <Build Include="dbo\Tables\UserRoles.sql" />
+    <Build Include="dbo\Tables\UserPreferences.sql" />
+    <Build Include="dbo\Tables\UserHistories.sql" />
+    <Build Include="dbo\Tables\UserCostToCompanies.sql" />
+    <Build Include="dbo\Tables\UserAllocations.sql" />
+    <Build Include="dbo\Tables\TrainingCategories.sql" />
+    <Build Include="dbo\Tables\TimesheetApprovals.sql" />
+    <Build Include="dbo\Tables\TicketTypes.sql" />
+    <Build Include="dbo\Tables\TicketStatusChanges.sql" />
+    <Build Include="dbo\Tables\TicketStatus.sql" />
+    <Build Include="dbo\Tables\Tickets.sql" />
+    <Build Include="dbo\Tables\TicketReferenceNumbers.sql" />
+    <Build Include="dbo\Tables\TicketPriorities.sql" />
+    <Build Include="dbo\Tables\TicketLogTypes.sql" />
+    <Build Include="dbo\Tables\TicketLogs.sql" />
+    <Build Include="dbo\Tables\TicketLineSourceTypes.sql" />
+    <Build Include="dbo\Tables\TicketLines.sql" />
+    <Build Include="dbo\Tables\TicketLineAttachments.sql" />
+    <Build Include="dbo\Tables\TicketFilters.sql" />
+    <Build Include="dbo\Tables\TicketAssignmentChanges.sql" />
+    <Build Include="dbo\Tables\SecondaryManagerAllocations.sql" />
+    <Build Include="dbo\Tables\Roles.sql" />
+    <Build Include="dbo\Tables\Reports.sql" />
+    <Build Include="dbo\Tables\ReportEmails.sql" />
+    <Build Include="dbo\Tables\Regions.sql" />
+    <Build Include="dbo\Tables\Projects.sql" />
+    <Build Include="dbo\Tables\PrintTicketRemarkOptions.sql" />
+    <Build Include="dbo\Tables\PrintOptions.sql" />
+    <Build Include="dbo\Tables\PassPhrases.sql" />
+    <Build Include="dbo\Tables\Notes.sql" />
+    <Build Include="dbo\Tables\NonWorkSessions.sql" />
+    <Build Include="dbo\Tables\Months.sql" />
+    <Build Include="dbo\Tables\Menus.sql" />
+    <Build Include="dbo\Tables\LoginLogs.sql" />
+    <Build Include="dbo\Tables\LogEntries.sql" />
+    <Build Include="dbo\Tables\LeaveTypes.sql" />
+    <Build Include="dbo\Tables\Leaves.sql" />
+    <Build Include="dbo\Tables\LeaveManualAdjustments.sql" />
+    <Build Include="dbo\Tables\LeaveCycleBalances.sql" />
+    <Build Include="dbo\Tables\LeaveBalances.sql" />
+    <Build Include="dbo\Tables\InvoiceSubCategories.sql" />
+    <Build Include="dbo\Tables\InvoiceStatus.sql" />
+    <Build Include="dbo\Tables\Invoices.sql" />
+    <Build Include="dbo\Tables\InvoiceRules.sql" />
+    <Build Include="dbo\Tables\InvoiceRuleLines.sql" />
+    <Build Include="dbo\Tables\InvoiceRuleContacts.sql" />
+    <Build Include="dbo\Tables\InvoiceRuleActivities.sql" />
+    <Build Include="dbo\Tables\InvoiceCredits.sql" />
+    <Build Include="dbo\Tables\InvoiceContacts.sql" />
+    <Build Include="dbo\Tables\InvoiceCategories.sql" />
+    <Build Include="dbo\Tables\GLAccounts.sql" />
+    <Build Include="dbo\Tables\Frequencies.sql" />
+    <Build Include="dbo\Tables\ForecastResourceAssignments.sql" />
+    <Build Include="dbo\Tables\ForecastReferenceDefaults.sql" />
+    <Build Include="dbo\Tables\ForecastInvoiceLinks.sql" />
+    <Build Include="dbo\Tables\ForecastHeaders.sql" />
+    <Build Include="dbo\Tables\ForecastDetails.sql" />
+    <Build Include="dbo\Tables\FlexiDays.sql" />
+    <Build Include="dbo\Tables\FlexiBalances.sql" />
+    <Build Include="dbo\Tables\FlexiBalanceAdjustments.sql" />
+    <Build Include="dbo\Tables\FinPeriods.sql" />
+    <Build Include="dbo\Tables\FeedbackUrgencyTypes.sql" />
+    <Build Include="dbo\Tables\FeedbackTypes.sql" />
+    <Build Include="dbo\Tables\FeedbackThreads.sql" />
+    <Build Include="dbo\Tables\FeedbackPosts.sql" />
+    <Build Include="dbo\Tables\FeedbackAttachments.sql" />
+    <Build Include="dbo\Tables\Expenses.sql" />
+    <Build Include="dbo\Tables\ExpenseCategoryTypes.sql" />
+    <Build Include="dbo\Tables\ExpenseAttachments.sql" />
+    <Build Include="dbo\Tables\EmploymentTypes.sql" />
+    <Build Include="dbo\Tables\ELMAH_Error.sql" />
+    <Build Include="dbo\Tables\Divisions.sql" />
+    <Build Include="dbo\Tables\Departments.sql" />
+    <Build Include="dbo\Tables\Contacts.sql" />
+    <Build Include="dbo\Tables\Clients.sql" />
+    <Build Include="dbo\Tables\ClientDepartmentCode.sql" />
+    <Build Include="dbo\Tables\Calendar.sql" />
+    <Build Include="dbo\Tables\BillingMethods.sql" />
+    <Build Include="dbo\Tables\BillableIndicators.sql" />
+    <Build Include="dbo\Tables\BalanceTypes.sql" />
+    <Build Include="dbo\Tables\BalanceChangeTypes.sql" />
+    <Build Include="dbo\Tables\BalanceAuditTrails.sql" />
+    <Build Include="dbo\Tables\AuditTrails.sql" />
+    <Build Include="dbo\Tables\Articles.sql" />
+    <Build Include="dbo\Tables\ApprovalStatus.sql" />
+    <Build Include="dbo\Tables\Activities.sql" />
+    <Build Include="dbo\Views\vwWorkSessionOverview.sql" />
+    <Build Include="dbo\Views\vwWorkAllocationsWithLeave.sql" />
+    <Build Include="dbo\Views\vwWorkableDaysPerPeriod.sql" />
+    <Build Include="dbo\Views\vwUserWorkSessionNotCaptured.sql" />
+    <Build Include="dbo\Views\vwUserWorkAllocationExceptions.sql" />
+    <Build Include="dbo\Views\vwUserTimeSplitTotalHoursPerPeriod.sql" />
+    <Build Include="dbo\Views\vwUserTimeSplit.sql" />
+    <Build Include="dbo\Views\vwUserLastWorkSessions.sql" />
+    <Build Include="dbo\Views\vwUserIndividualLeaveDaysPending.sql" />
+    <Build Include="dbo\Views\vwUserIndividualLeaveDaysApproved.sql" />
+    <Build Include="dbo\Views\vwUserActivityTimeSpent.sql" />
+    <Build Include="dbo\Views\vwTimeSpentPerClientPerProject.sql" />
+    <Build Include="dbo\Views\vwTicketTurnaroundTime.sql" />
+    <Build Include="dbo\Views\vwTicketTimeAllocation.sql" />
+    <Build Include="dbo\Views\vwTicketsReceivedSinceStartOfMonth.sql" />
+    <Build Include="dbo\Views\vwTicketsReceivedFromPreviousMonths.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_Woolworths.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_Uniflo.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_PerUser.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_PaarlMedia.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_Netcare.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_MMI.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_MHS.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_IDS.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_HSM.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_Gallo.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_FCM.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_EHL.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_BSAR.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_AlacrityHosted.sql" />
+    <Build Include="dbo\Views\vwTicketsOverview_Alacrity.sql" />
+    <Build Include="dbo\Views\vwTicketsOutstandingPerPriority.sql" />
+    <Build Include="dbo\Views\vwTicketsOutstandingFromThisMonth.sql" />
+    <Build Include="dbo\Views\vwTicketsOutstandingFromPreviousMonths.sql" />
+    <Build Include="dbo\Views\vwTicketsClosedThisMonthForPreviousMonths.sql" />
+    <Build Include="dbo\Views\vwTicketsClosedSinceStartOfMonth.sql" />
+    <Build Include="dbo\Views\vwTicketsClosedInPreviousMonths.sql" />
+    <Build Include="dbo\Views\vwTicketsAllParked.sql" />
+    <Build Include="dbo\Views\vwTicketsAllDeleted.sql" />
+    <Build Include="dbo\Views\vwTicketExceptionReport.sql" />
+    <Build Include="dbo\Views\vwSupportEmails.sql" />
+    <Build Include="dbo\Views\vwPriorPeriodInvoiceOpen.sql" />
+    <Build Include="dbo\Views\vwLeonProjectMISSamROllUp.sql" />
+    <Build Include="dbo\Views\vwLeonProjectMISSam.sql" />
+    <Build Include="dbo\Views\vwLeonProjectMISProv.sql" />
+    <Build Include="dbo\Views\vwLeonProjectMIS2.sql" />
+    <Build Include="dbo\Views\vwLeonProjectMIS.sql" />
+    <Build Include="dbo\Views\vwLeonProjectByMonthByRegion.sql" />
+    <Build Include="dbo\Views\vwLeonProjectByMonth.sql" />
+    <Build Include="dbo\Views\vwLeonActivitiesByMonth.sql" />
+    <Build Include="dbo\Views\vwLeonActivities.sql" />
+    <Build Include="dbo\Views\vwLatestUserAllocationEntry.sql" />
+    <Build Include="dbo\Views\vwLatestInvoiceRuleEntry.sql" />
+    <Build Include="dbo\Views\vwInvoiceWorkAllocationExceptions.sql" />
+    <Build Include="dbo\Views\vwInvoicesWithoutForecasts.sql" />
+    <Build Include="dbo\Views\vwInvoiceRulesWithAllocatedTimeButNoInvoice.sql" />
+    <Build Include="dbo\Views\vwInvoiceRuleInactiveButUserAllocationActive.sql" />
+    <Build Include="dbo\Views\vwInvoiceRuleActivities.sql" />
+    <Build Include="dbo\Views\vwIndividualLeaveDays.sql" />
+    <Build Include="dbo\Views\vwForecastWithOutInvoices.sql" />
+    <Build Include="dbo\Views\vwForecastWithInvoicesSummaries.sql" />
+    <Build Include="dbo\Views\vwForecastWithInvoicesDetails.sql" />
+    <Build Include="dbo\Views\vwForecastWithInvoices.sql" />
+    <Build Include="dbo\Views\vwForecastLastPeriod.sql" />
+    <Build Include="dbo\Views\vwForecastHeaderMostRecentResourceAssignments.sql" />
+    <Build Include="dbo\Views\vwForecastHeaderMostRecentDetailLines.sql" />
+    <Build Include="dbo\Views\vwForecastHeaderLastPeriodDetails.sql" />
+    <Build Include="dbo\Views\vwForecastAmountByClientBillingMethodTotals.sql" />
+    <Build Include="dbo\Views\vwDoesForecastHeaderHaveInvoiceLinks.sql" />
+    <Build Include="dbo\Views\vwCostToCompany.sql" />
+    <Build Include="dbo\Views\vwClientProjectTickets.sql" />
+    <Build Include="dbo\Views\vwClientProjectFeedback.sql" />
+    <Build Include="dbo\Views\vwBillableTimeNotInvoiced.sql" />
+    <Build Include="dbo\Views\vwBillableTimeInvoiced.sql" />
+    <Build Include="dbo\Views\vwActivityOverview.sql" />
+    <Build Include="dbo\Views\vwActivityNotLinkedToInvoiceRule.sql" />
+    <Build Include="dbo\Functions\Fn_OptimalThroughputFillFactorForRandom.sql" />
+    <Build Include="dbo\Functions\EnCryptDec.sql" />
+    <Build Include="dbo\Functions\DeCryptDec.sql" />
+    <Build Include="dbo\Functions\F_GetLeaveDatesBetweenRangesByUserID.sql" />
+    <Build Include="dbo\Functions\F_Calendar.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\UserLeave_LSP.sql" />
+    <Build Include="dbo\Stored Procedures\UserClientRates.sql" />
+    <Build Include="dbo\Stored Procedures\sproc_revenue_actual_vs_invoiced.sql" />
+    <Build Include="dbo\Stored Procedures\sproc_monthly_invoices.sql" />
+    <Build Include="dbo\Stored Procedures\rSP_ResourceUtilisation.sql" />
+    <Build Include="dbo\Stored Procedures\Report_LSP_UserTimeAllocationBreakdown.sql" />
+    <Build Include="dbo\Stored Procedures\PercentageAllocationReport_LSP.sql" />
+    <Build Include="dbo\Stored Procedures\Passphrase_RSP_Check.sql" />
+    <Build Include="dbo\Stored Procedures\InsertNonWorkSessionDaysByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetWorkSessionsByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetWorkSessions.sql" />
+    <Build Include="dbo\Stored Procedures\GetWorkOrNonWorkDays.sql" />
+    <Build Include="dbo\Stored Procedures\GetWorkDays.sql" />
+    <Build Include="dbo\Stored Procedures\GetWorkAllocationsByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetWorkAllocations.sql" />
+    <Build Include="dbo\Stored Procedures\GetUsersWorkAllocationsWithLeave.sql" />
+    <Build Include="dbo\Stored Procedures\GetUsersWorkAllocations.sql" />
+    <Build Include="dbo\Stored Procedures\GetUsers.sql" />
+    <Build Include="dbo\Stored Procedures\GetUserByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetUserById.sql" />
+    <Build Include="dbo\Stored Procedures\GetUser.sql" />
+    <Build Include="dbo\Stored Procedures\GetTrainingCategories.sql" />
+    <Build Include="dbo\Stored Procedures\GetTimesheets.sql" />
+    <Build Include="dbo\Stored Procedures\GetTimesheetByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetRegions.sql" />
+    <Build Include="dbo\Stored Procedures\GetProjects.sql" />
+    <Build Include="dbo\Stored Procedures\GetOutstandingNonWorkSessionDaysByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetNoOfWorkDays.sql" />
+    <Build Include="dbo\Stored Procedures\GetNonWorkSessionDaysByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetLeavesWithUserName.sql" />
+    <Build Include="dbo\Stored Procedures\GetLeavesByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetLeaves.sql" />
+    <Build Include="dbo\Stored Procedures\GetLeaveGeneral.sql" />
+    <Build Include="dbo\Stored Procedures\GetLeaveDatesBetweenRangesByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetLeaveBalanceDiscrepancies.sql" />
+    <Build Include="dbo\Stored Procedures\GetFlexiDaysByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetFlexiDays.sql" />
+    <Build Include="dbo\Stored Procedures\GetEmploymentTypes.sql" />
+    <Build Include="dbo\Stored Procedures\GetDivisions.sql" />
+    <Build Include="dbo\Stored Procedures\GetDepartments.sql" />
+    <Build Include="dbo\Stored Procedures\GetDaysInLeaveCycleByUser.sql" />
+    <Build Include="dbo\Stored Procedures\GetClients.sql" />
+    <Build Include="dbo\Stored Procedures\GetBillableIndicators.sql" />
+    <Build Include="dbo\Stored Procedures\GetActualLeaveDaysForMonth.sql" />
+    <Build Include="dbo\Stored Procedures\GetActivityAndLeaveByUserID.sql" />
+    <Build Include="dbo\Stored Procedures\GetActivityAndLeaveAllUsers.sql" />
+    <Build Include="dbo\Stored Procedures\GetActivities.sql" />
+    <Build Include="dbo\Stored Procedures\EnCryptDecSP.sql" />
+    <Build Include="dbo\Stored Procedures\ELMAH_LogError.sql" />
+    <Build Include="dbo\Stored Procedures\ELMAH_GetErrorXml.sql" />
+    <Build Include="dbo\Stored Procedures\ELMAH_GetErrorsXml.sql" />
+    <Build Include="dbo\Stored Procedures\DuplicateWorkDay.sql" />
+    <Build Include="dbo\Stored Procedures\DeCryptDecSP.sql" />
+    <Build Include="dbo\Stored Procedures\DeactivateLeaveCycleBalanceRecords.sql" />
+    <Build Include="dbo\Stored Procedures\CorrectLeaveCycleBalanceRecords.sql" />
+    <Build Include="dbo\Stored Procedures\Calendar_USP_WorkableDays.sql" />
+    <None Include="SQLScripts\Version_3.0.1.1.sql" />
+    <Build Include="dbo\Tables\CurrencyType.sql" />
+    <Build Include="dbo\Stored Procedures\GetCurrencyType.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dbo\Tables\ApprovalStatus.sql" />
+    <None Include="dbo\Stored Procedures\GetLeavesWithUserName.sql" />
+    <None Include="dbo\Stored Procedures\GetUsersWorkAllocationsWithLeave.sql" />
+    <None Include="SQLScripts\Version_3.0.3.0.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Enabill.Database.refactorlog" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,266 @@
+﻿@model Enabill.Web.Models.ForecastIndexModel
+
+@Html.TitleTable("tblForecast", "", "<b>Forecast Adminstration </b> ", "", "ucIndexCol3", "", "ucIndexCol4", "", "ucIndexCol5", "")
+
+<div class="padView">
+    <form id="frmForeCastSearch" method="post">
+        <table>
+            <tr>
+                <th>
+                    Region
+                    @Html.DropDownList("Region", null, new { style = "width:100px;" })
+                </th>
+                <th>
+                    Division
+                    @Html.DropDownList("Division", null, new { style = "width:120px;" })
+                </th>
+                <th>
+                    Period
+                    @Html.DropDownList("PeriodFrom", null, new { style = "width:120px;" })
+                    to
+                    @Html.DropDownList("PeriodTo", null, new { style = "width:120px;" })
+                </th>
+                <th>
+                    Probability
+                    @Html.TextBox("Probability", null, new { style = "width:30px;" })
+                    %
+                </th>
+                <th>
+                    SnapShot
+                    @Html.TextBox("SnapShotDate", Model.SnapShotDate.ToDisplayString(), new { @class = "datePicker", style = "width:30px;" })
+                </th>
+                <th>
+                    Clients
+                    @Html.TextBox("SelectedClients", Model.Clients, new { disabled = "disabled;", style = "width:50px;" })
+                    <a href="#" onclick="Forecast.selectClients('@Model.Clients'); return false;">...</a>
+                </th>
+                <th>
+                    References
+                    @Html.TextBox("SelectedReferences", Model.References, new { disabled = "disabled;", style = "width:50px;" })
+                    <a href="#" onclick="Forecast.selectReferences('@Model.References'); return false;">...</a>
+                </th>
+            </tr>
+            <tr><th><input type="submit" value="Search" /></th></tr>
+
+            <tr></tr>
+        </table>
+    </form>
+    <table class="subTable fullWidth general">
+        <tr>
+            <th></th>
+            @* <th>Division</th>*@
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            @foreach (string period in Model.PeriodStringList)
+            {
+                <td class="center YearMonthColor">
+                    @period
+                </td>
+            }
+            <th></th>
+        </tr>
+
+        @* Write the grand total line*@
+        <tr>
+            <td colspan="6" class="GrandTotalColor">Grand Total</td>
+
+            @foreach (int period in Model.PeriodIntList)
+            {
+                <td class="GrandTotalColor" style="text-align: right !important;">@Model.MostRecentDetailLines.Where(d => d.MostRecentForecastDetail.Period == period).Sum(d => d.MostRecentForecastDetail.Amount).ToDoubleString()</td>
+            }
+            <th></th>
+        </tr>
+
+        @*Group by region and write the total line*@
+        @foreach (var region in Model.DistinctRegionList)
+        {
+            <tr>
+                <td colspan="6" class="RegionColor"><text>Region : </text>@region.RegionName</td>
+
+                @foreach (int period in Model.PeriodIntList)
+                {
+                    <td class="RegionColor" style="text-align: right !important;">@Model.MostRecentDetailLines.Where(h => h.ForecastHeader.RegionID == region.RegionID && h.MostRecentForecastDetail.Period == period).Sum(d => d.MostRecentForecastDetail.Amount).ToDoubleString()</td>
+                }
+                <th></th>
+            </tr>
+
+            @*Group by division and write the total line*@
+        foreach (var division in Model.DistinctDivisionList)
+        {
+            if (Model.MostRecentDetailLines.Where(h => h.ForecastHeader.RegionID == region.RegionID && h.ForecastHeader.DivisionID == division.DivisionID).Count() > 0)
+            {
+                <tr>
+                    <td colspan="6" class="DivisionColor"><text>Division : </text>@division.DivisionName</td>
+
+                    @foreach (int period in Model.PeriodIntList)
+                    {
+                        <td class="DivisionColor" style="text-align: right !important;">@Model.MostRecentDetailLines.Where(h => h.ForecastHeader.RegionID == region.RegionID && h.ForecastHeader.DivisionID == division.DivisionID && h.MostRecentForecastDetail.Period == period).Sum(d => d.MostRecentForecastDetail.Amount).ToDoubleString()</td>
+                    }
+                    <th></th>
+                </tr>
+                //Write column headings below each division
+                <tr>
+                    <th>Billing Method</th>
+                    <th>Annuity Type</th>
+                    <th>Client</th>
+                    <th>Project</th>
+                    <th>Resource</th>
+                    <th class="center">Probability</th>
+                    @foreach (string period in Model.PeriodStringList)
+                        {
+                        <th class="center">
+                        </th>
+                    }
+                    <th></th>
+                </tr>
+
+                foreach (var forecastHeader in Model.ForecastHeaders)
+                {
+                    if (forecastHeader.ForecastHeader.RegionID == region.RegionID && forecastHeader.ForecastHeader.DivisionID == division.DivisionID)
+                    {
+                        int headerPeriodWrittenCount = 0;
+                        string headerID = "ShowDetailedHistoryHeader" + forecastHeader.ForecastHeader.ForecastHeaderID.ToString();
+                        string lineID = "ShowDetailedHistoryLines" + forecastHeader.ForecastHeader.ForecastHeaderID.ToString();
+
+                        <tr>
+                            <td>@((Enabill.BillingMethodType)forecastHeader.ForecastHeader.BillingMethod)</td>
+                            <td>@forecastHeader.ForecastHeader.InvoiceCategory</td>
+                            <td>@forecastHeader.ForecastHeader.Client</td>
+                            <td>@forecastHeader.ForecastHeader.Project</td>
+                            <td>@forecastHeader.ForecastHeader.Resource</td>
+                            <td class="center">@forecastHeader.ForecastHeader.Probability.ToDoubleString()<text>%</text></td>
+
+                            @foreach (var forecastRecentDetail in Model.MostRecentDetailLines.OrderBy(d => d.MostRecentForecastDetail.ForecastHeaderID).OrderBy(d => d.MostRecentForecastDetail.Period))
+                            {
+                                if (forecastHeader.ForecastHeader.ForecastHeaderID == forecastRecentDetail.ForecastHeader.ForecastHeaderID)
+                                {
+                                    int? nrOfMonths = 0;
+                                    if (forecastRecentDetail.MostRecentForecastDetail.Period.ToString().Substring(0, 4).ToInt() == Model.PeriodIntList[0].ToString().Substring(0, 4).ToInt())
+                                    {
+                                        nrOfMonths = forecastRecentDetail.MostRecentForecastDetail.Period - Model.PeriodIntList[0] + 1;
+                                    }
+                                    else
+                                    {
+                                        nrOfMonths = (12 - Model.PeriodIntList[0].ToString().Substring(4, 2).ToInt()) + forecastRecentDetail.MostRecentForecastDetail.Period.ToString().Substring(4, 2).ToInt();
+                                    }
+
+                                    for (int i = 0; i < nrOfMonths.Value; i++)
+                                    {
+                                        if (nrOfMonths.Value - headerPeriodWrittenCount > 1)
+                                        {
+                                            <td></td>
+                                            headerPeriodWrittenCount++;
+                                        }
+                                    }
+
+                                    <td class="right">
+                                        @{
+                                            int? mostRecentPeriodYear = forecastRecentDetail.MostRecentForecastDetail.Period.ToString().Substring(0, 4).ToInt();
+                                            int? mostRecentPeriodMonth = forecastRecentDetail.MostRecentForecastDetail.Period.ToString().Substring(4, 2).ToInt();
+                                            DateTime mostRecentPeriodDate = new DateTime(mostRecentPeriodYear.Value, mostRecentPeriodMonth.Value, 1);
+                                        }
+                                        @Html.ActionLink(forecastRecentDetail.MostRecentForecastDetail.Amount.ToDoubleString(), "EditForecast", "Forecast", new { forecastHeaderID = forecastHeader.ForecastHeader.ForecastHeaderID, mostRecentDetailID = forecastRecentDetail.MostRecentForecastDetail.ForecastDetailID, yearMonth = mostRecentPeriodDate }, null)
+                                    </td>
+                                                    headerPeriodWrittenCount++;
+                                                }
+                                            }
+
+                            @if (headerPeriodWrittenCount != Model.PeriodIntList.Count())
+                            {
+                                for (int i = 0; i < Model.PeriodIntList.Count() - headerPeriodWrittenCount; i++)
+                                {
+                                    <td></td>
+                                }
+                            }
+
+                            <th>
+                                <img src="@Url.Content("~/Content/Img/add_14.png")" alt="Expand" title="Expand" onclick="Forecast.expand(@forecastHeader.ForecastHeader.ForecastHeaderID); return false;" style="cursor:pointer; height:14px" />
+                                <img src="@Url.Content("~/Content/Img/copy.png")" alt="Copy" title="Copy" onclick="Forecast.copy(@forecastHeader.LastForecastPeriodDetail.ForecastDetailID); return false;" style="cursor:pointer; height:14px" />
+
+                                @if (forecastHeader.HasInvoicesLink == "false")
+                                {
+                                    <img src="@Url.Content("~/Content/Img/redlink.png")" alt="Link" title="Link Invoices" onclick="Forecast.linkInvoices(@forecastHeader.ForecastHeader.ForecastHeaderID, 0); return false;" style="cursor:pointer; height:14px" />
+                                }
+                                else
+                                {
+                                    <img src="@Url.Content("~/Content/Img/greenlink.png")" alt="Link" title="Link Invoices" onclick="Forecast.linkInvoices(@forecastHeader.ForecastHeader.ForecastHeaderID, 0); return false;" style="cursor:pointer; height:14px" />
+                                }
+                            </th>
+                        </tr>
+
+                            <tr id="@headerID" class="padView hide @lineID">
+                                <td></td>
+                                <td class="DetailsHeadingColor">Entry Date</td>
+                                <td class="DetailsHeadingColor">Remark</td>
+                                <td class="DetailsHeadingColor">Reference</td>
+                                <td class="DetailsHeadingColor">Resources</td>
+                                <td class="DetailsHeadingColor">ModifiedBy</td>
+                                @foreach (int period in Model.PeriodIntList)
+                                {
+                                    <td class="DetailsHeadingColor"></td>
+                                }
+                            </tr>
+
+                                            foreach (var forecastDetailUniquekey in Model.ForecastHeaderAllForecastDetails.OrderByDescending(d => d.ForecastDetail.EntryDate).Select(h => h.ForecastDetailUniqueKey).Distinct())
+                                            {
+                                                int test = 0;
+                                                string currentUniqueKeyPeriod = "0";
+                                                string previousUniqueKeyPeriod = "0";
+                                                string[] uniqueKeyParts = forecastDetailUniquekey.Split('_');
+                                                int uniqueKeyCounter = 0;
+                                                if (uniqueKeyParts[1].ToInt() == forecastHeader.ForecastHeader.ForecastHeaderID)
+                                                {
+                                                    <tr id="@lineID" class="padView hide @lineID">
+                                                        <td></td>
+                                                        <td class="DetailsColor">@uniqueKeyParts[0]</td>
+                                                        <td class="DetailsColor">@uniqueKeyParts[2]</td>
+                                                        <td class="DetailsColor">@uniqueKeyParts[3]</td>
+                                                        <td class="DetailsColor">@uniqueKeyParts[4]</td>
+                                                        <td class="DetailsColor">@uniqueKeyParts[5]</td>
+
+                                                        @foreach (var forecastDetail in Model.ForecastHeaderAllForecastDetails.OrderBy(d => d.ForecastDetailUniqueKey).ThenBy(p => p.PeriodPosition))
+                                                        {
+                                                            currentUniqueKeyPeriod = forecastDetail.ForecastDetailUniqueKey + "_" + forecastDetail.ForecastDetail.Period.ToString();
+                                                            if (forecastDetail.ForecastDetail.ForecastHeaderID == forecastHeader.ForecastHeader.ForecastHeaderID && forecastDetailUniquekey == forecastDetail.ForecastDetailUniqueKey && currentUniqueKeyPeriod != previousUniqueKeyPeriod)
+                                                            {
+                                                                if (forecastDetail.PeriodPosition > 1)
+                                                                {
+                                                                    int nrOfBlankColums = forecastDetail.PeriodPosition - uniqueKeyCounter;
+                                                                    for (int i = 0; i <= nrOfBlankColums; i++)
+                                                                    {
+                                                                        if (forecastDetail.PeriodPosition - uniqueKeyCounter > 1)
+                                                                        {
+                                                                            <td class="DetailsColor"></td>
+                                                                            uniqueKeyCounter++;
+                                                                        }
+                                                                    }
+                                                                }
+                                                                <td class="DetailsColor right">@forecastDetail.ForecastDetail.Adjustment</td>
+                                                                @*<td class="DetailsColor right">period | @forecastDetail.ForecastDetail.Period | pos @forecastDetail.PeriodPosition | counter @uniqueKeyCounter | ival @test ID| @forecastDetail.ForecastDetail.ForecastDetailID</td>*@
+                                                                uniqueKeyCounter++;
+                                                            }
+
+                                                            previousUniqueKeyPeriod = currentUniqueKeyPeriod;
+                                                        }
+
+                                                        @if (uniqueKeyCounter != Model.PeriodIntList.Count())
+                                                        {
+                                                            for (int i = uniqueKeyCounter; i < Model.PeriodIntList.Count(); i++)
+                                                            {
+                                                                <td class="DetailsColor"></td>
+                                                                uniqueKeyCounter++;
+                                                            }
+                                                        }
+                                                    </tr>
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+    </table>
+</div>

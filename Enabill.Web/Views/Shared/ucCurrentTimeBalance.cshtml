@@ -1,0 +1,20 @@
+﻿@model Enabill.Web.Models.CurrentTimeBalanceModel
+
+<table class="cleanTable fullWidth">
+    <tr>
+        <th>Total hours worked for the month</th>
+        <td class="center">@Model.MonthTotal hrs</td>
+    </tr>
+    <tr>
+        <th>Total hours required so far for the month</th>
+        <td class="center">@Model.MonthGoalToDate hrs</td>
+    </tr>
+    <tr>
+        <th>Deficit/Surplus for the month</th>
+        <td class="@Model.MonthBalanceClass center">@Model.MonthBalance hrs</td>
+    </tr>
+    @*<tr>
+        <th>Hours allocated to leave for the month</th>
+        <td class="center">@Model.MonthLeave hrs</td>
+    </tr>*@
+</table>

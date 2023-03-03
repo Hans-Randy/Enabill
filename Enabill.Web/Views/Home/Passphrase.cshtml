@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Passphrase";
+}
+
+<div class="marginView">
+    @Html.TitleTable("tblPassphrase", "", "<b>Passphrase</b>")
+    <div class="padView">
+        <table class="subTable">
+            <tr>
+                <td valign="top">
+                    <h3>
+                        Currently, your session passphrase is @(Settings.Current.PassphraseIsValid ? "valid" : "invalid")
+                    </h3>
+
+                    @using (Html.BeginForm("Passphrase", "Home", FormMethod.Post))
+                    {
+                        <text>Passphrase: </text>@Html.Password("Passphrase")
+
+                        <input type="hidden" name="cont" value="@ViewData["cont"]" />
+                        <input type="hidden" name="ac" value="@ViewData["ac"]" />
+
+                        <input type="submit" value="OK" />
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

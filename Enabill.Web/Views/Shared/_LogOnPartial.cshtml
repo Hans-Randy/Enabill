@@ -1,0 +1,27 @@
+﻿@if (IsLoggedIn)
+{
+    <table>
+        <tr>
+            <td>
+                Welcome <b>@CurrentUser.FullName</b>
+            </td>
+            <td class="spaceMe"></td>
+            <td>
+                @*<a href="@Url.Content("/Feedback/")"><img alt="" src="@Url.Content("/Content/Img/feedback_20x20.png")" />Feedback</a>*@
+                @*<a href="https://alacritytechnologies.atlassian.net/servicedesk/customer/portals" target="_blank">Help Desk</a>*@
+            </td>
+            <td class="spaceMe"></td>
+            <td>
+                <a href="@Url.Content("/Configuration/")"><img alt="" src="@Url.Content("/Content/Img/config_20x20.png")" />Configuration</a>
+            </td>
+            <td class="spaceMe"></td>
+            <td>
+                <a href="@Url.Content("/Account/ChangePassword/")"><img alt="" src="@Url.Content("/Content/Img/change_password_20x20.png")" />Change Password</a>
+            </td>
+            <td class="spaceMe"></td>
+            <td>
+                <a href="@Url.Content("/Account/LogOff/")"><img alt="" src="@Url.Content("/Content/Img/logout_20x20.png")" />Log Off</a>
+            </td>
+        </tr>
+    </table>
+}

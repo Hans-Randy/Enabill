@@ -1,0 +1,45 @@
+﻿@model Enabill.Models.ClientDepartmentCode
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "Edit Department Code";
+}
+@{
+    bool isSelected = false;
+    if (Model.IsActive)
+    {
+        isSelected = true;
+    }
+}
+<form id="frmEditDepartmentCode" method="post" action="">
+    @Html.Hidden("ClientDepartmentCodeID", @Model.ClientDepartmentCodeID)
+    @Html.Hidden("ClientID", @Model.ClientID)
+    @Html.Hidden("IsActive", isSelected)
+
+    <div>
+        <table>
+            <tr>
+                <td style="width:auto">Department Code:</td>
+                <td style="width:auto">@Html.TextBox("DepartmentCode", Model.DepartmentCode)</td>
+            </tr>
+            <tr>
+                <td style="width:auto">Status:</td>
+                <td width="10%">
+                    @if (Model.ClientDepartmentCodeID == 0)
+                    {
+                        @Html.CheckBox("IsActive", true)
+                    }
+                    else
+                    {
+                        @Html.CheckBox("IsActive", Model.IsActive)
+                    }
+
+                    @* <input type="checkbox" id="IsActive" name="IsActive"  @isSelected />   *@
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

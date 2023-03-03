@@ -1,0 +1,43 @@
+﻿@model Enabill.Web.Models.ForecastLinkModel
+
+<table class="cleantable fullWidth">
+    <tr>
+        <th>Invoice#</th>
+        <th>Client</th>
+        <th>OrderNo</th>
+        <th>Amount ExclVAT</th>
+    </tr>
+    @{
+        var previousUniqueInvoiceKey = "";
+        var previousIsSelected = "";
+        int counter = 0;
+    }
+
+    @foreach (var invoice in Model.Invoices.OrderBy(i => i.Invoice.OrderNo))
+    {
+        var isSelected = invoice.ForecastHeaderID == Model.ForecastHeader.ForecastHeaderID && invoice.Invoice.InvoiceID == @invoice.ForecastInvoiceLinkID ? "checked" : "";
+        var uniqueInvoiceKey = invoice.Invoice.Client.ClientName + "_" + invoice.Invoice.OrderNo + "_" + invoice.Invoice.InvoiceAmountExclVAT.ToDoubleString();
+        bool onlyOneOccurenceOfInvoiceWithinHeader = Model.Invoices.Where(i => i.Invoice.Client.ClientName + "_" + i.Invoice.OrderNo + "_" + i.Invoice.InvoiceAmountExclVAT.ToDoubleString() == uniqueInvoiceKey).Count() == 1 ? true : false;
+
+        if (previousUniqueInvoiceKey == "" || uniqueInvoiceKey != previousUniqueInvoiceKey)
+        {
+            counter = 1;
+        }
+    else
+    {
+    counter++;
+    }
+
+    if (invoice.ForecastHeaderID == Model.ForecastHeader.ForecastHeaderID || onlyOneOccurenceOfInvoiceWithinHeader || counter == 1)
+    {
+    <tr>
+        <td><input type="checkbox" id="@invoice.Invoice.InvoiceID" name="@invoice.Invoice.InvoiceID.ToString()" class="forecastInvoiceIDs" @isSelected /> </td>
+        <td>@invoice.Invoice.Client.ClientName</td>
+        <td>@invoice.Invoice.OrderNo</td>
+        <td>@invoice.Invoice.InvoiceAmountExclVAT.ToDoubleString()</td>
+    </tr>
+    }
+    previousUniqueInvoiceKey = invoice.Invoice.Client.ClientName + "_" + invoice.Invoice.OrderNo + "_" + invoice.Invoice.InvoiceAmountExclVAT.ToDoubleString();
+    previousIsSelected = isSelected;
+    }
+</table>

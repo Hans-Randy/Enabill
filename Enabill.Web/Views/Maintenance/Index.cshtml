@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Maintenance";
+}
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+<div class="marginView">
+    @Html.TitleTable("tblReports", "", "<b>Maintenance</b>")
+    <div class="padView">
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <table class="subTable">                
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator))
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink("Regions", "Index", "Region", null, null)
+                                    </td>
+                                </tr>
+                            }                    
+                    </table>
+                </td>
+                <td style="width:85%;padding:0">
+                    <div id="reportConsole"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

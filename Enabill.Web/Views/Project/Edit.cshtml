@@ -1,0 +1,21 @@
+﻿@model Enabill.Web.Models.ProjectEditModel
+
+@section head{
+    @IncludeControllerScript(true)
+    @IncludeDocumentViewer()
+}
+
+@{ ViewBag.Title = "Edit Project"; }
+
+<div class="marginView">
+    @Html.TitleTable("tblProjectEdit", string.Empty, "<b>Edit " + Model.ClientName + "'s Project:</b> " + Model.Project.ProjectName + "<span style='font-size: 10px;'> (" + ((Enabill.BillingMethodType)Model.Project.BillingMethodID) + " | " + Model.ProjectRegionName + " | " + Model.ProjectDepartmentName + ")</span>")
+    <div class="padView">
+        @Html.Tabs("tabs",
+            new TabPage("Project Details", "ucProjectDetail", Model.Project),
+            new TabPage("Activities", "ucProjectActivities", Model.ProjectActivities),
+            new TabPage("Users", "ucActivityUsers", Model.ProjectActivityUsers),
+            new TabPage("Invoice Rules", "ucProjectInvoiceRuleList", Model.ProjectInvoiceRules),
+            new TabPage("Contracts", "ucProjectContractDetail", Model.ProjectContractAttachments)
+        )
+    </div>
+</div>

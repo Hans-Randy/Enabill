@@ -1,0 +1,26 @@
+﻿@model Enabill.Models.Dto.WorkAllocationExtendedModel
+<form id="frmTrainingDetails" method="post" action="">
+    <table class="general">
+        @{
+            string ID = Model.WorkAllocation.WorkAllocationID.ToString() + "__" + Model.WorkAllocation.ActivityID;
+        }
+
+        @Html.Hidden("WorkAllocationID", Model.WorkAllocation.WorkAllocationID)
+        @Html.Hidden("ActivityID", Model.WorkAllocation.ActivityID)
+        @Html.Hidden("Hours", Model.WorkAllocation.HoursWorked)
+        @Html.Hidden("Remark", Model.WorkAllocation.Remark)
+
+        <tr>
+            <td>Training Type</td>
+            <td> @Html.DropDownList("TrainingCategoryList" + ID, null, new { style = "background-color: #FDD; width: 150px;" })</td>
+        </tr>
+        <tr>
+            <td>Trainer Name</td>
+            <td>@Html.TextBox("TrainerName" + ID, Model.WorkAllocation.TrainerName, new { style = "background-color: #FDD; width: 200px;", @class = "required" })</td>
+        </tr>
+        <tr>
+            <td>Training Institute</td>
+            <td> @Html.TextBox("TrainingInstitute" + ID, Model.WorkAllocation.TrainingInstitute, new { style = "background-color: #FDD; width: 200px;", @class = "required" })</td>
+        </tr>
+    </table>
+</form>

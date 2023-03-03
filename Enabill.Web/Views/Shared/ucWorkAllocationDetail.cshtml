@@ -1,0 +1,54 @@
+﻿@model Enabill.Models.Dto.WorkAllocationExtendedModel
+
+<table class="fullWidth general">
+    <tr>
+        <th rowspan="2" style="width: 80px; background-color: #999; color: #000;">
+            @Model.WorkAllocation.WorkAllocationID
+
+            @if (Model.IsSelected)
+            {
+                <input type="checkbox" value="@Model.WorkAllocation.WorkAllocationID" class="workAllocation" checked="checked" />
+            }
+            else
+            {
+                <input type="checkbox" value="@Model.WorkAllocation.WorkAllocationID" class="workAllocation" />
+            }
+        </th>
+        <th colspan="2">
+            @Model.User.FullName
+        </th>
+        <th>
+            @Model.WorkAllocation.DayWorked.ToDisplayString()
+        </th>
+        <th>
+            Hours: @Model.WorkAllocation.HoursWorked
+        </th>
+    </tr>
+    <tr class="left">
+        <td>
+            @(Model.Project.ProjectName + " - " + Model.Activity.ActivityName)
+        </td>
+        <td>
+            @if (Model.NoteID.HasValue)
+            {
+                @Html.ActionLink("Note", "Edit", "Note", new { id = Model.WorkAllocation.WorkAllocationID }, null)
+            }
+            else
+            {
+                @Html.ActionLink("Create Note", "Edit", "Note", new { id = Model.WorkAllocation.WorkAllocationID }, null)
+            }
+        </td>
+        <td colspan="2">
+            @Model.WorkAllocation.Remark
+        </td>
+    </tr>
+    @if (Model.NoteID.HasValue && Model.NoteID > 0)
+    {
+        <tr>
+            <td colspan="10">
+                @Html.Raw(Model.NoteText)
+            </td>
+        </tr>
+    }
+</table>
+<br />

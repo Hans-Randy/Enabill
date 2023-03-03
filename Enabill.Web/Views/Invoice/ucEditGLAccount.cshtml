@@ -1,0 +1,32 @@
+﻿@model Enabill.Web.Models.InvoiceGLAccountEditModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "Edit GL Account";
+}
+
+<form id="frmEditGLAccount" method="post" action="">
+    @Html.Hidden("GLAccountID", @Model.GLAccount.GLAccountID)
+
+    <div>
+        <table>
+            <tr>
+                <td style="width:auto">GL Account Code:</td>
+                <td style="width:auto">@Model.GLAccount.GLAccountCode</td>
+            </tr>
+            <tr>
+                <td style="width:auto">GL Account Name:</td>
+                <td style="width:auto;color:White">
+                    @Html.TextBox("GLAccountName", Model.GLAccount.GLAccountName)
+                </td>
+            </tr>
+            <tr>
+                <td style="width:auto">Active:</td>
+                <td style="width:auto;color:White"> @Html.CheckBox("IsActive", Model.GLAccount.IsActive)</td>
+            </tr>
+        </table>
+    </div>
+</form>

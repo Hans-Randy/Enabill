@@ -1,0 +1,13 @@
+﻿table.collapseTable
+{
+    table-layout: fixed;
+}
+
+#page-div
+{
+    overflow: scroll;
+}
+
+#main
+{
+}

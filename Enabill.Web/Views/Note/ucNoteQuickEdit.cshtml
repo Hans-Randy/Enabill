@@ -1,0 +1,22 @@
+﻿@model Enabill.Models.Dto.NoteDetailModel
+
+<form id="NoteForm">
+    <table class="general fullWidth">
+        <tr>
+            <th colspan="4"></th>
+        </tr>
+        <tr>
+            <td>@(Model.User.UserID == CurrentUserID ? "My Note" : Model.User.FullName + "'s Note")</td>
+            <td>@Model.Project.ProjectName</td>
+            <td>@Model.Activity.ActivityName</td>
+            <td>@Model.WorkAllocation.DayWorked.ToDisplayString()</td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                @Html.Hidden("WorkAllocationID", Model.WorkAllocation.WorkAllocationID)
+                @Html.TextArea("NoteText", Model.Note.NoteText, new { @class = "crudFCK" })
+                <br />
+            </td>
+        </tr>
+    </table>
+</form>

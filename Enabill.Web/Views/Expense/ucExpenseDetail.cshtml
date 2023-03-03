@@ -1,0 +1,207 @@
+﻿﻿@model Enabill.Web.Models.ExpenseEditModel
+
+
+<table class="subTable" style="width: 100%;">
+    <tr>
+        <td width="15%">
+            <form id="ExpenseDetailFrm">
+                @Html.ValidationSummary(true)
+                <br />
+
+                <fieldset id="disableControls" class="disableControls">
+                    <legend>Expense @Model.User.FullName</legend>
+                    <br />
+                    @Html.HiddenFor(model => model.ExpenseID)
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.ExpenseDate)
+                    </div>
+                    <div class="editor-field">
+                        @if (Model.Locked == true)
+                        {
+                            @Html.TextBox("ExpenseDate", Model.ExpenseDate.ToDisplayString())
+                        }
+                        else
+                        {
+                            @Html.TextBox("ExpenseDate", Model.ExpenseDate.ToDisplayString(), new { @class = "datePicker", @style = "font-family: Arial; font-size: 1em" })
+                            @Html.ValidationMessageFor(model => model.ExpenseDate)
+                        }
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.ClientID)
+                    </div>
+                    <div class="editor-field">
+                          @Html.EditorFor(model => model.ClientID, "ClientList")
+                            @Html.ValidationMessageFor(model => model.ClientID)                      
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.ProjectID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ProjectID, "ProjectList")
+                        @Html.ValidationMessageFor(model => model.ProjectID)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.ExpenseCategoryTypeID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ExpenseCategoryTypeID, "ExpenseCategoryTypeList")
+                        @Html.ValidationMessageFor(model => model.ExpenseCategoryTypeID)
+                    </div>
+                    <div class="editor-label" id="MileageLabel" name="MileageLabel">
+                        Mileage (KM)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Mileage, new { htmlAttributes = new { @style = "width:200px;font-family: Arial; font-size: 1em" }, })
+                        @Html.ValidationMessageFor(model => model.Mileage)
+                    </div>
+                    <div class="editor-label" id="Cost" name="Cost">
+
+                         @if (Model.ClientID > 0)
+                        {
+                            @Html.Label("Cost (" + Enabill.Models.Client.GetClientByID(@Model.ClientID).GetCurrency(Enabill.Models.Client.GetClientByID(Model.ClientID).CurrencyTypeID).CurrencyISO + ")")
+                        }
+                        else
+                        {
+                            @Html.Label("Cost")
+                        }
+
+                        @Html.ValidationMessageFor(model => model.Amount)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @style = "width:200px;font-family: Arial; font-size: 1em" }, })
+                        @Html.ValidationMessageFor(model => model.Amount)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.Notes)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextAreaFor(model => model.Notes, new { @style = "width:200px;font-family: Arial; font-size: 1em" })
+                        @Html.ValidationMessageFor(model => model.Notes)
+                    </div>
+                    <div class="editor-label" style="width:60px; margin-top:8px;">
+                        @Html.LabelFor(model => model.Billable)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Billable)
+                        @Html.ValidationMessageFor(model => model.Billable)
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Expense Controls</legend>
+                    <br />
+                    @* If Manager (and not Manager's own expense) then allow to Approve or Lock. *@
+                    @if ((CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.Manager)) && (ContextUserID != CurrentUserID))
+                    {
+                        <div class="editor-label">
+                            Approved
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Locked)
+                            @Html.ValidationMessageFor(model => model.Locked)
+                        </div>
+                    }
+                    else
+                    {
+                        if (Model.Locked == true)
+                        {
+                            <div class="editor-label">
+                                Approved
+                            </div>
+                            <div class="editor-field only">
+                                @Html.DisplayFor(model => Model.Locked)
+                            </div>
+                        }
+                    }
+                    <br />
+                    @* If not locked allow user to delete their own expense. *@
+                    @if (Model.Locked == false && Model.ExpenseID > 0 && (ContextUserID == CurrentUserID))
+                    {
+                        <input type="button" onclick="Expense.delete(@Model.UserID, @Model.ExpenseID); return false;" value="Delete" />
+                    }
+
+                    <input type="button" id="Close" value="Close" onclick="Expense.close(@Model.UserID); return false;" />
+                    <input type="button" id="Cancel" value="Cancel" onclick="Expense.cancel(@Model.UserID); return false;" />
+
+                    @* If not locked allow user to save their own expense. If locked, allow manager to save expense. *@
+                    @if (Model.Locked == false || CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.Manager))
+                    {
+                        <input type="button" id="Save" value="Save" onclick="Expense.save(@Model.ExpenseID); return false;" />
+                    }
+                </fieldset>
+            </form>
+    
+            @if (Model.ExpenseID > 0)
+            {
+                <fieldset id="disableControls" class="disableControls">
+                    <legend>Attachments Controls</legend>
+                    <br />
+                    <br />
+                    @* If not locked allow user to upload or delete their own expense attachments or if locked, allow manager to upload or delete attachments *@
+                    @if ((Model.Locked == false && (ContextUserID == CurrentUserID)) || (Model.Locked == false && CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || CurrentUser.HasRole(Enabill.UserRoleType.Manager)))
+                    {
+                        using (Html.BeginForm("FileAdd", "Expense", new { userID = Model.UserID, expenseID = Model.ExpenseID, expenseDate = Model.ExpenseDate }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <input type="file" name="AttachmentFile" required>
+                            <br />
+                            <br />
+                            <input type="submit" value="Add" />
+
+                            if (Model.ListOfFiles.Count > 0)
+                            {
+                                <input type="button" id="DeleteAttachment" value="Delete" onclick="ExpenseAttachment.delete(@Model.UserID, @Model.ExpenseID); return false;" />
+                            }
+                        }
+                    }
+                </fieldset>
+            }
+        </td>
+        <td width="8%">
+            <br />
+            <form id="Attachments">
+                <fieldset id="disableControls" class="disableControls">
+                    <legend>Attachments</legend>
+                    @if (Model.ExpenseID > 0)
+                    {
+                        <br />
+                        <div id="gallery_panel_content" style="height: 545px; overflow: auto">
+                            @foreach (var file in Model.ListOfFiles)
+                            {
+                                var img = string.Format($"/Expense/Image?mimeType={file.MimeType}&filePath={file.FilePath}&fileName={file.FileName}");
+
+                                <input type="checkbox" class="chkBox" id="@file.FileName" value="value" style="float:left; margin-top:17px">
+
+                                <div onclick="ExpenseAttachment.displayDocument('@Model.UserID','@Model.ExpenseID','@file.FileName','@file.FilePath');">
+                                    <div style="margin-bottom: 3px; cursor: pointer;">
+                                        <img src="@Url.Content(img)" alt="@file.FileName" height="47" multiple />
+                                    </div>
+                                </div>
+                                <br />
+                            }
+                        </div>
+                    }
+                </fieldset>
+            </form>
+        </td>
+        <td width="77%">
+            <div id="viewer_container" style="height: 1000px; margin-top: 15px;">
+                @{
+                    if (Model.FileName != "")
+                    {
+
+                        var docuVieware = new GdPicture14.WEB.DocuVieware
+                        {
+                            ID = "DocuVieware1",
+                            Height = new System.Web.UI.WebControls.Unit("100%"),
+                            Width = new System.Web.UI.WebControls.Unit("100%")
+                        };
+
+                        var filePathAndName = string.Format($"{Model.FilePath}{Model.FileName}").Replace("/", @"\");
+
+                        docuVieware.LoadFromStream(new FileStream(filePathAndName, FileMode.Open, FileAccess.Read), true, Model.FileName);
+                        docuVieware.RenderControl(Output);
+                    }
+                }
+            </div>
+        </td>
+    </tr>
+</table>

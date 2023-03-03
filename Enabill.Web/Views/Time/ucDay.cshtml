@@ -1,0 +1,41 @@
+﻿@model Enabill.Web.Models.TimeDayModel
+
+@if (Model.CallingPage == "approval")
+{
+    @Html.TitleTable("tblTimeDay", "", "<b>WorkAllocation Overview:</b> " + Model.User.FullName, Url.Content("~/Content/Img/timesheet_20x20.png"), "ucDayCol3", Model.WorkDay, null, null, "ucApproveIndexCol5", "")
+}
+else
+{
+    if (Model.CallingPage == "activity")
+    {
+        @Html.TitleTable("tblTimeDay", "", "<b>WorkAllocation Overview:</b> " + Model.User.FullName, Url.Content("~/Content/Img/timesheet_20x20.png"), "ucDayCol3", Model.WorkDay, null, null, "ucActivityIndexCol5", "")
+    }
+    else
+    {
+        if (Model.CallingPage == "training")
+        {
+            @Html.TitleTable("tblTimeDay", "", "<b>WorkAllocation Overview:</b> " + Model.User.FullName, Url.Content("~/Content/Img/timesheet_20x20.png"), "ucDayCol3", Model.WorkDay, null, null, "ucTrainingIndexCol5", "")
+        }
+        else
+        {
+            @Html.TitleTable("tblTimeDay", "", "<b>WorkAllocation Overview:</b> " + Model.User.FullName, Url.Content("~/Content/Img/timesheet_20x20.png"), "ucDayCol3", Model.WorkDay, null, null, null, null)
+        }
+    }
+}
+
+<div class="padView">
+
+    <table class="subTable general fullWidth">
+        <tr>
+            <td>
+                @Html.Partial("ucWorkSessions")
+                @Html.Hidden("DayWorkSessions", Model.DayWorkSessions.Count())
+                @Html.Hidden("User", Model.User)
+            </td>
+            <td>
+                @Html.Partial("ucWorkAllocations")
+                @Html.Hidden("DayWorkAllocations", Model.WorkAllocations.Where(wa => wa.WorkAllocation.HoursWorked > 0).Count())
+            </td>
+        </tr>
+    </table>
+</div>

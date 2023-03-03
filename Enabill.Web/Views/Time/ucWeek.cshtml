@@ -1,0 +1,29 @@
+﻿@model Enabill.Web.Models.TimeWeekModel
+
+@Html.TitleTable("tblTimeDay", "", "<b>WorkAllocation Weekly Overview:</b> " + Model.User.FullName, Url.Content("~/Content/Img/timesheet_20x20.png"), "ucWeekPeriod", Model.StartDate, null, null, null, null)
+
+<div class="padView">
+    <div id="dataTable"></div>
+</div>
+
+<script>
+    var arrayOfArrays = JSON.parse(@Html.Raw(Json.Encode(Model.GetWorkListJson())));
+    dataTable.week
+        (
+        arrayOfArrays,
+        '@Model.StartDate',
+        '@Model.IsMondayWorkable',
+        '@Model.IsTuesdayWorkable',
+        '@Model.IsWednesdayWorkable',
+        '@Model.IsThursdayWorkable',
+        '@Model.IsFridayWorkable',
+        '@Model.DayLockedMonday',
+        '@Model.DayLockedTuesday',
+        '@Model.DayLockedWednesday',
+        '@Model.DayLockedThursday',
+        '@Model.DayLockedFriday',
+        '@Model.DayLockedSaturday',
+        '@Model.DayLockedSunday',
+        '@Model.ThreeState'
+        );
+</script>

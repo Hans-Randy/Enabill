@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Dates>
+  <!--Dates that automated Email reminders should be sent-->
+  <!--
+  Key:
+      12 = Actual day.
+      FirstDayOfMonth = First day of the month
+      LastDayOfMonth = Last day of the month
+  Value (Of current month):
+      -7 = Plus or minus the number of days from value in Key
+      WorkingDayBefore = Last Working Day Before value in Key
+      WorkingDayAfter = Last Working Day After value in Key
+  -->
+  <ReminderDate day ="26"></ReminderDate>
+  <ReminderDate day ="LastDayOfMonth">-7</ReminderDate>
+  <ReminderDate day ="LastDayOfMonth">WorkingDayBefore</ReminderDate>
+</Dates>

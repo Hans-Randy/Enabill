@@ -1,0 +1,69 @@
+﻿@model Enabill.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>User</legend>
+
+    <div class="display-label">User Name</div>
+    <div class="display-field">@Model.UserName</div>
+
+    <div class="display-label">First Name</div>
+    <div class="display-field">@Model.FirstName</div>
+
+    <div class="display-label">Last Name</div>
+    <div class="display-field">@Model.LastName</div>
+
+    <div class="display-label">Email</div>
+    <div class="display-field">@Model.Email</div>
+
+    <div class="display-label">Phone Number</div>
+    <div class="display-field">@Model.Phone</div>
+
+    <div class="display-label">Birth Date</div>
+    <div class="display-field">@Model.BirthDate</div>
+
+    <br /><br />
+
+    <div class="display-label">Managed By</div>
+    <div class="display-field">@Model.Manager.FullName</div>
+
+    <div class="display-label">Hours Per Day</div>
+    <div class="display-field">@Model.WorkHours</div>
+
+    <br /><br />
+
+    <div class="display-label">Region</div>
+    <div class="display-field">@Model.RegionID</div>
+
+    <div class="display-label">Division</div>
+    <div class="display-field">@Model.DivisionID</div>
+
+    <div class="display-label">Employment Type</div>
+    <div class="display-field">@((Enabill.EmploymentTypeEnum)Model.EmploymentTypeID)</div>
+
+    <div class="display-label">Billable Indicator</div>
+    <div class="display-field">@((Enabill.BillableIndicatorType)Model.BillableIndicatorID)</div>
+
+    <div class="display-label">Employment Date</div>
+    <div class="display-field">@Model.EmployStartDate.ToDisplayString()</div>
+
+    <br /><br />
+
+    <div class="display-label">Can Log In</div>
+    <div class="display-field">@(Model.CanLogin ? "Yes" : "No")</div>
+
+    <div class="display-label">Must Reset Password ?</div>
+    <div class="display-field">@(Model.MustResetPwd ? "Yes" : "No")</div>
+
+    <div class="display-label">External Reference</div>
+    <div class="display-field">@Model.ExternalRef</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

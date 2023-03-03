@@ -1,0 +1,58 @@
+﻿@*@model Enabill.Web.Models.NoteIndexModel
+
+    @section beginHead{
+        @IncludeRichEditor()
+    }
+
+    @section head{
+        @IncludeControllerScript(true)
+    }
+
+    @{
+        ViewBag.Title = "Notes";
+    }
+
+    <h3>@Model.User.FullName's Notes | @Html.ActionLink("Note Index", "Index")</h3>
+
+    <table width="100%">
+        <tr>
+            @if (Model.UserProjectActivitiesThatAllowNotes.Count > 0)
+            {
+            <th colspan="@Model.UserProjectActivitiesThatAllowNotes.Count">
+                Projects and Activities
+                <a href="#" onclick="FilterBy.showAllNotes(); return false;">Show All</a>
+            </th>
+            }
+            <th>
+                Amount to List
+            </th>
+        </tr>
+        <tr>
+            @foreach (var projectActs in Model.UserProjectActivitiesThatAllowNotes)
+            {
+                <td>
+                    <a href="#" onclick="FilterBy.showProjectNotes(@projectActs.Project.ProjectID); return false;" >@projectActs.Project.ProjectName</a>
+                    <ul>
+                        @foreach (var activity in projectActs.ProjectActivities.Where(a => a.Activity.MustHaveRemarks))
+                        {
+                            <li>
+                                <a href="#" onclick="FilterBy.showActivityNotes(@activity.Activity.ActivityID); return false;">@activity.Activity.ActivityName</a>
+                            </li>
+                        }
+                    </ul>
+                </td>
+            }
+            <td>
+                <ul>
+                    <li><a href="#" onclick="FilterBy.amtToList(5); return false;" >5</a></li>
+                    <li><a href="#" onclick="FilterBy.amtToList(15); return false;" >15</a></li>
+                    <li><a href="#" onclick="FilterBy.amtToList(30); return false;" >30</a></li>
+                    <li><a href="#" onclick="FilterBy.amtToList(50); return false;" >50</a></li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    <div id="noteList">
+        @Html.Partial("ucNoteList", Model.NoteList)
+    </div>*@

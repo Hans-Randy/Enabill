@@ -1,0 +1,227 @@
+﻿@using Enabill;
+@model Enabill.Web.Models.TimeApproveModel
+@{
+    var usersList = Model.Users.Select(t => new SelectListItem { Value = t.UserID.ToString(), Selected = t.UserID == Model.User.UserID ? true : false, Text = t.FullName }).OrderBy(f => f.Text).ToList();
+    var timesheetSchedules = Enabill.Extensions.GetEnumSelectList<TimesheetSchedule>();
+    foreach (var t in timesheetSchedules)
+    {
+        if (t.Value == Model.TimesheetSchedule.ToString())
+        {
+            t.Selected = true;
+        }
+    }
+    var siteStartDate = Enabill.EnabillSettings.SiteStartDate;
+    var months = new List<SelectListItem>();
+    for (DateTime date = siteStartDate; date <= DateTime.Now; date = date.AddMonths(1))
+    {
+        months.Add(new SelectListItem
+        {
+            Text = date.ToString("MMMM yyyy"),
+            Value = date.ToString(),
+            Selected = Model.DateFrom.Date == date.Date
+        });
+    }
+    var lastWorkingDayDate = Model.UsersWorkDayModel.Where(d => d.WorkDay.IsWorkable).OrderByDescending(de => de.WorkDay.WorkDate).First();
+}
+<h2 style="margin:0">
+    Timesheet Approval Data
+</h2>
+<table>
+    <tbody>
+        <tr>
+            <td style="font-size:12px;padding-left:0">
+                Users:
+                @Html.DropDownList("userList", usersList)
+            </td>
+            <td style="font-size:12px;padding-left:0">
+                Date From:
+                @Html.TextBox("DTFrom", Model.DateFrom.ToString("yyyy-MM-dd"))
+            </td>
+            <td style="font-size:12px;padding-left:0">
+                Date To:
+                @Html.TextBox("DTTo", Model.DateTo.ToString("yyyy-MM-dd"))
+            </td>
+            <td style="font-size:12px;padding-left:0">
+                @Html.DropDownList("userList", usersList, "--select a user")
+            </td>
+            <td>
+                <button type="button" value="Refresh" onclick="Report.showOnScreenTimeSheetApproval(); return false;">Refresh</button>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size:12px;padding-left:0">
+                Schedule:
+                @Html.DropDownList("timesheetSchedule", timesheetSchedules)
+            </td>
+            <td style="font-size:12px;padding-left:0">
+                Month:
+                @Html.DropDownList("months", months)
+            </td>
+            <td>
+                <button type="button" onclick="Report.validateTimesheets(); return false;">Validate Timesheets</button>
+            </td>
+
+            <td>
+                <button type="button" onclick="Report.testJob(); return false;">Test Job</button>
+            </td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<table style="width:100%" class="calendarTable">
+    <tr>
+        <th>
+            Work Day
+        </th>
+        <th>
+            Workable
+        </th>
+        <th>
+            Reason
+        </th>
+        <th>
+            Total Work Sessions
+        </th>
+        <th>
+            Total Time
+        </th>
+        <th>
+            Total Work Allocations
+        </th>
+        <th>
+            Total Allocated Time
+        </th>
+        <th>
+            Total Unallocated Time
+        </th>
+        <th>
+            Leave
+        </th>
+        <th>
+            Flexi
+        </th>
+        <th>
+            Before start date
+        </th>
+        <th>
+            After last end date
+        </th>
+        <th>
+            Has Exception
+        </th>
+    </tr>
+    @foreach (var m in Model.UsersWorkDayModel)
+    {
+        var dayIndex = Model.UsersWorkDayModel.IndexOf(m);
+        var trClass = "";
+        if (!m.WorkDay.IsWorkable)
+        {
+            trClass = "weekend";
+        }
+        <tr class="@trClass">
+            <td>
+                @if (dayIndex == 0)
+                {
+                    <span style="color:chocolate;font-weight:bold">
+                        @m.WorkDay.WorkDate.ToShortDateString()
+                    </span>
+                }
+                else if (dayIndex == (Model.UsersWorkDayModel.Count - 1) - 6)
+                {
+                    <span style="color:coral;font-weight:bold">
+                        @m.WorkDay.WorkDate.ToShortDateString()
+                    </span>
+                }
+                else if (m.WorkDay.WorkDate.Date == lastWorkingDayDate.WorkDay.WorkDate.Date)
+                {
+                    <span style="color:darkgoldenrod;font-weight:bold">
+                        @m.WorkDay.WorkDate.ToShortDateString()
+                    </span>
+                }
+                else
+                {
+                    @m.WorkDay.WorkDate.ToShortDateString()
+                }
+            </td>
+            <td>
+                @if (m.WorkDay.IsWorkable)
+                {
+                    <span>Workable</span>
+                }
+                else
+                {
+                    <span>Not Workable</span>
+                }
+            </td>
+            <td>
+                @m.Reason
+            </td>
+            <td>
+                @m.WorkSessions.Count
+            </td>
+            <td>
+                @m.TotalTime
+            </td>
+            <td>
+                @m.WorkAllocations.Count
+            </td>
+            <td>
+                @m.AllocatedTime
+            </td>
+            <td>
+                @m.UnAllocatedTime
+            </td>
+            <td>
+                @if (m.IsPendingLeaveDay)
+                {
+                    <span>Pending</span>
+                }
+                else if (m.IsLeaveDay)
+                {
+                    <span>Leave</span>
+                }
+                else
+                {
+                    <span>No Leave</span>
+                }
+            </td>
+            <td>
+                @if (m.IsPendingFlexiDay)
+                {
+                    <span>Pending</span>
+                }
+                else if (m.IsFlexiDay)
+                {
+                    <span>Flexi</span>
+                }
+                else
+                {
+                    <span>No Flexi Leave</span>
+                }
+            </td>
+            <td>
+                @if (m.IsBeforeStartDay)
+                {
+                    <span>Before Start Day</span>
+                }
+                else
+                {
+                    <span>After Start Day</span>
+                }
+            </td>
+            <td>
+                @if (m.IsAfterEndDate)
+                {
+                    <span>After End Date</span>
+                }
+                else
+                {
+                    <span>Before End Date</span>
+                }
+            </td>
+            <td>
+                @m.HasException
+            </td>
+        </tr>
+    }
+</table>

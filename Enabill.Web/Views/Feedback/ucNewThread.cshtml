@@ -1,0 +1,39 @@
+﻿@model Enabill.Web.Models.FeedbackInstanceModel
+<form id="FeedbackFrm">
+    @Html.Hidden("ThreadID", 0)
+    <table class="general fullWidth">
+        <tr>
+            <th colspan="4" class="center">Feedback Thread</th>
+        </tr>
+        <tr>
+            <td>
+                <span>Feedback Type:</span>
+                <span style="margin-left: 5px;">@Html.DropDownList("FeedbackTypeID")</span>
+            </td>
+            <td>
+                <span>Urgency:</span>
+                <span style="margin-left: 5px;">@Html.DropDownList("FeedbackUrgencyTypeID")</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span>Subject:</span>
+                <br />
+                @Html.TextBox("Subject", Model.Thread.FeedbackSubject, new { style = "width: 99%; margin: auto;" })
+            </td>
+        </tr>
+        <tr>
+            <th class="center" colspan="4">Feedback Message:</th>
+        </tr>
+        <tr>
+            <td colspan="4">
+                @Html.TextArea("PostText", null, new { @class = "crudFCK" })
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="center">
+                <input type="button" onclick="Feedback.submitFeedbackPost(); return false;" value="Submit" />
+            </td>
+        </tr>
+    </table>
+</form>

@@ -1,0 +1,2067 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7F557000-1C79-4410-9C07-2F37751149E1}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Enabill.Web</RootNamespace>
+    <AssemblyName>Enabill.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <JSLintSkip>
+    </JSLintSkip>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>true</IISExpressUseClassicPipelineMode>
+    <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DesktopBuildPackageLocation>..\..\Users\Jovan.Links.jovan-ntb\Desktop\Enabill_Deploy\Enabill.Web.zip</DesktopBuildPackageLocation>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.2</LangVersion>
+    <TypeScriptTarget>ES2015</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptModuleKind>ES6</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+    <DesktopBuildPackageLocation>..\..\Users\Jovan.Links.jovan-ntb\Desktop\Enabill_Deploy\Enabill.Web.zip</DesktopBuildPackageLocation>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Autofac, Version=6.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.6.3.0\lib\netstandard2.0\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=6.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.6.0.0\lib\net472\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=6.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.6.1.0\lib\net472\Autofac.Integration.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML">
+      <HintPath>..\CommonFiles\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>..\CommonFiles\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.3.4.13329\lib\net45-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.3.4.13329\lib\net45-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.3.4.13329\lib\net45-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="Enabill.Common, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Enabill.Common\bin\Debug\Enabill.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FredCK.FCKeditorV2">
+      <HintPath>..\CommonFiles\FredCK.FCKeditorV2.dll</HintPath>
+    </Reference>
+	 <Reference Include="GdPicture.NET.14.WEB.DocuVieware, Version=3.1.0.108, Culture=neutral, PublicKeyToken=25f8997d3c36b11a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\GdPicture.NET 14\Redist\DocuVieware (.NET Framework 4.6)\GdPicture.NET.14.WEB.DocuVieware.dll</HintPath>
+	  </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.7.15\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=6.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Text.6.0.2\lib\net472\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="StoryWriter.Common">
+      <HintPath>..\CommonFiles\StoryWriter.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.0\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.8\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Threading" />
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.8\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.8\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.8\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.8\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.8\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.8\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.8\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.8\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Code\AjaxCreateConfig.cs" />
+    <Compile Include="Code\BaseController.cs" />
+    <Compile Include="Code\BaseWebViewPage.cs" />
+    <Compile Include="Code\DiskFileStore.cs" />
+    <Compile Include="Code\Extensions.cs" />
+    <Compile Include="Code\Helpers.cs" />
+    <Compile Include="Code\HtmlHelpers.cs" />
+    <Compile Include="Code\IInputHistory.cs" />
+    <Compile Include="Code\InputHistory.cs" />
+    <Compile Include="Code\InputHistoryWrapper.cs" />
+    <Compile Include="Code\ISettings.cs" />
+    <Compile Include="Code\MimeTypes.cs" />
+    <Compile Include="Code\Settings.cs" />
+    <Compile Include="Code\TabPage.cs" />
+    <Compile Include="Code\Utils.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\ConfigurationController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\RegionController.cs" />
+    <Compile Include="Controllers\MaintenanceController.cs" />
+    <Compile Include="Controllers\HolidayController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
+    <Compile Include="Controllers\ExpenseController.cs" />
+    <Compile Include="Controllers\TicketController.cs" />
+    <Compile Include="Controllers\ForecastController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
+    <Compile Include="Controllers\FlexiTimeController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Controllers\InvoiceRuleController.cs" />
+    <Compile Include="Controllers\LeaveController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Controllers\NoteController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\StoryController.cs" />
+    <Compile Include="Controllers\TimeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserCostToCompanyController.cs" />
+    <Compile Include="Models\Account\AccountModels.cs" />
+    <Compile Include="Models\Client\ContactEditModel.cs" />
+    <Compile Include="Models\Contract\ContractEditModel.cs" />
+    <Compile Include="Models\Expense\ExpenseIndexModel.cs" />
+    <Compile Include="Models\Expense\ExpenseCalendarModel.cs" />
+    <Compile Include="Models\Expense\ExpenseEditModel.cs" />
+    <Compile Include="Models\Holiday\HolidayLiteModel.cs" />
+    <Compile Include="Models\Holiday\HolidayModel.cs" />
+    <Compile Include="Models\Holiday\HolidayViewModel.cs" />
+    <Compile Include="Models\Invoice\InvoiceIndexFilterModel.cs" />
+    <Compile Include="Models\Leave\LeaveWithLeaveCycleBalanceModel.cs" />
+    <Compile Include="Models\Leave\UserLeaveModel.cs" />
+    <Compile Include="Models\Project\ProjectEditView\ProjectInvoiceRuleModel.cs" />
+    <Compile Include="Models\Region\RegionEditModel.cs" />
+    <Compile Include="Models\Region\RegionModel.cs" />
+    <Compile Include="Models\Report\ExpenseReportDisplayModel.cs" />
+    <Compile Include="Models\Report\ActivityReportDisplayModel.cs" />
+    <Compile Include="Models\Configuration\DailyProcessExceptionModel.cs" />
+    <Compile Include="Models\Configuration\FinPeriodEditModel.cs" />
+    <Compile Include="Models\Configuration\TimesheetExceptionItemModel.cs" />
+    <Compile Include="Models\Configuration\TimesheetExceptionModel.cs" />
+    <Compile Include="Models\FlexiTime\FlexiTimeMonthSummaryModel.cs" />
+    <Compile Include="Models\FlexiTime\FlexiTimeManualAdjustmentModel.cs" />
+    <Compile Include="Models\Invoice\InvoiceExportToCSCWriter.cs" />
+    <Compile Include="Models\Invoice\InvoiceGLAccountCreateModel.cs" />
+    <Compile Include="Models\Invoice\InvoiceGLAccountsModel.cs" />
+    <Compile Include="Models\Invoice\InvoiceGLAccountEditModel.cs" />
+    <Compile Include="Models\Report\UserLeaveGeneralReportModel.cs" />
+    <Compile Include="Models\Report\RatesReportModel.cs" />
+    <Compile Include="Models\Report\TicketTimeAllocationReportModel.cs" />
+    <Compile Include="Models\Report\FlexiTimeMonthModel.cs" />
+    <Compile Include="Models\Report\MISAllocatedTimeReportModel.cs" />
+    <Compile Include="Models\Report\WorkAllocationExceptionReportModel.cs" />
+    <Compile Include="Models\Report\TimesheetReportModel.cs" />
+    <Compile Include="Models\Ticket\TicketUnassignedModel.cs" />
+    <Compile Include="Models\Ticket\TicketDetailModel.cs" />
+    <Compile Include="Models\Ticket\TicketIndexModel.cs" />
+    <Compile Include="Models\Ticket\TicketInstanceModel.cs" />
+    <Compile Include="Models\Ticket\TicketLineModel.cs" />
+    <Compile Include="Models\Error\ErrorModel.cs" />
+    <Compile Include="Models\FlexiTime\Feedback\FeedbackIndexModel.cs" />
+    <Compile Include="Models\FlexiTime\Feedback\FeedbackInstanceModel.cs" />
+    <Compile Include="Models\FlexiTime\Feedback\FeedbackListModel.cs" />
+    <Compile Include="Models\FlexiTime\FlexiTimeBalanceModel.cs" />
+    <Compile Include="Models\FlexiTime\FlexiTimeDayModel.cs" />
+    <Compile Include="Models\FlexiTime\FlexiTimeIndexModel.cs" />
+    <Compile Include="Models\FlexiTime\FlexiTimeStatementModel.cs" />
+    <Compile Include="Models\FlexiTime\FlexiDayModel.cs" />
+    <Compile Include="Models\Forecast\ForecastLinkModel.cs" />
+    <Compile Include="Models\Forecast\ForecastCreateModel.cs" />
+    <Compile Include="Models\Forecast\ForecastDefaultReferenceModel.cs" />
+    <Compile Include="Models\Forecast\ForecastCopyModel.cs" />
+    <Compile Include="Models\Forecast\ForecastIndexModel.cs" />
+    <Compile Include="Models\Forecast\ForecastEditModel.cs" />
+    <Compile Include="Models\Home\ManagerDashboardModel.cs" />
+    <Compile Include="Models\InvoiceRule\InvoiceRuleClientModel.cs" />
+    <Compile Include="Models\InvoiceRule\InvoiceRuleIndexModel.cs" />
+    <Compile Include="Models\Invoice\InvoiceClientModel.cs" />
+    <Compile Include="Models\Leave\LeaveCycleBalanceModel.cs" />
+    <Compile Include="Models\Leave\CurrentLeaveBalanceModel.cs" />
+    <Compile Include="Models\Invoice\InvoiceWorkAllocationModel.cs" />
+    <Compile Include="Models\Leave\LeaveIndexModel.cs" />
+    <Compile Include="Models\Note\NoteManagerOverviewIndexModel.cs" />
+    <Compile Include="Models\Note\NoteOverviewIndexModel.cs" />
+    <Compile Include="Models\Note\NoteProjectOwnerOverviewIndexModel.cs" />
+    <Compile Include="Models\Note\ActivitySearchModel.cs" />
+    <Compile Include="Models\Note\NoteActivityModel.cs" />
+    <Compile Include="Models\Note\NoteCompleteOverviewIndexModel.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Activity\ActivityListModel.cs" />
+    <Compile Include="Models\Activity\ActivityUserModel.cs" />
+    <Compile Include="Models\Client\ClientEditModel.cs" />
+    <Compile Include="Models\Common\CommonModelFunctions.cs" />
+    <Compile Include="Models\FlexiTime\CurrentFlexiBalanceModel.cs" />
+    <Compile Include="Models\Home\DashboardViewModel.cs" />
+    <Compile Include="Models\Invoice\InvoiceLineModel.cs" />
+    <Compile Include="Models\InvoiceRule\InvoiceRuleModel.cs" />
+    <Compile Include="Models\Invoice\InvoiceEditAdHoc.cs" />
+    <Compile Include="Models\Invoice\InvoiceEditModel.cs" />
+    <Compile Include="Models\Invoice\InvoiceIndexModel.cs" />
+    <Compile Include="Models\Invoice\InvoiceListModel.cs" />
+    <Compile Include="Models\Manager\ManagerIndexModel.cs" />
+    <Compile Include="Models\Manager\UserFlexiDayModel.cs" />
+    <Compile Include="Models\Manager\UserFlexiBalanceModel.cs" />
+    <Compile Include="Models\Manager\UserLeaveBalanceModel.cs" />
+    <Compile Include="Models\Leave\LeaveBalanceMonthModel.cs" />
+    <Compile Include="Models\Project\ProjectEditView\ProjectActivitiesModel.cs" />
+    <Compile Include="Models\Project\ProjectEditView\ProjectActivityUsersModel.cs" />
+    <Compile Include="Models\Project\ProjectEditView\ProjectDetailModel.cs" />
+    <Compile Include="Models\Project\ProjectEditView\ProjectEditModel.cs" />
+    <Compile Include="Models\Project\ProjectEditView\ProjectInvoiceModel.cs" />
+    <Compile Include="Models\Account\EnabillMembershipService.cs" />
+    <Compile Include="Models\Report\ActivityReportModel.cs" />
+    <Compile Include="Models\Forecast\ForecastReportModel.cs" />
+    <Compile Include="Models\Report\FlexiBalanceReportModel.cs" />
+    <Compile Include="Models\Time\TimeApproveModel.cs" />
+    <Compile Include="Models\Time\TimeApproveUserIndexModel.cs" />
+    <Compile Include="Models\Time\TimeApproveIndexModel.cs" />
+    <Compile Include="Models\Time\CurrentTimeBalanceModel.cs" />
+    <Compile Include="Models\Time\TimeCalendarModel.cs" />
+    <Compile Include="Models\Time\TimeWeekModel.cs" />
+    <Compile Include="Models\Time\TimeDayModel.cs" />
+    <Compile Include="Models\Time\TimeIndexModel.cs" />
+    <Compile Include="Models\UserCostToCompany\UserCostToCompanyIndexModel.cs" />
+    <Compile Include="Models\User\UserEditView\ActivityWrapperModel.cs" />
+    <Compile Include="Models\User\UserEditView\ClientWrapperModel.cs" />
+    <Compile Include="Models\User\UserEditView\UserExistingAllocationModel.cs" />
+    <Compile Include="Models\User\UserEditView\UserLeaveManualAdjustmentModel.cs" />
+    <Compile Include="Models\User\UserEditView\UserReportEmailModel.cs" />
+    <Compile Include="Models\User\UserEditView\ProjectWrapperModel.cs" />
+    <Compile Include="Models\User\UserEditView\UserAllocationModel.cs" />
+    <Compile Include="Models\User\UserEditView\UserDetailModel.cs" />
+    <Compile Include="Models\User\UserEditView\UserEditModel.cs" />
+    <Compile Include="Models\User\UserEditView\UserRoleModel.cs" />
+    <Compile Include="Models\User\UserProfileModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\Leave\LeaveBalanceModel.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\ckeditor\ckeditor.js" />
+    <Content Include="Content\ckeditor\config.js" />
+    <Content Include="Content\ckeditor\contents.css" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\browser.css" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\browser.html" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\frmactualfolder.html" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\frmcreatefolder.html" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\frmfolders.html" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\frmresourceslist.html" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\frmresourcetype.html" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\frmupload.html" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\ButtonArrow.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\Folder.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\Folder32.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\FolderOpened.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\FolderOpened32.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\FolderUp.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\ai.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\avi.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\bmp.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\cs.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\default.icon.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\dll.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\doc.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\exe.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\fla.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\gif.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\htm.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\html.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\jpg.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\js.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\mdb.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\mp3.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\pdf.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\png.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\ppt.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\rdp.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\swf.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\swt.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\txt.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\vsd.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\xls.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\xml.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\32\zip.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\ai.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\avi.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\bmp.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\cs.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\default.icon.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\dll.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\doc.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\exe.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\fla.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\gif.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\htm.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\html.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\jpg.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\js.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\mdb.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\mp3.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\pdf.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\png.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\ppt.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\rdp.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\swf.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\swt.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\txt.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\vsd.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\xls.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\xml.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\icons\zip.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\images\spacer.gif" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\js\common.js" />
+    <Content Include="Content\ckeditor\filemanager\browser\default\js\fckxml.js" />
+    <Content Include="Content\ckeditor\filemanager\connectors\aspx\config.ascx" />
+    <Content Include="Content\ckeditor\filemanager\connectors\aspx\connector.aspx" />
+    <Content Include="Content\ckeditor\filemanager\connectors\aspx\upload.aspx" />
+    <Content Include="Content\ckeditor\filemanager\connectors\test.html" />
+    <Content Include="Content\ckeditor\filemanager\connectors\uploadtest.html" />
+    <Content Include="Content\ckeditor\lang\en-au.js" />
+    <Content Include="Content\ckeditor\lang\en-ca.js" />
+    <Content Include="Content\ckeditor\lang\en-gb.js" />
+    <Content Include="Content\ckeditor\lang\en.js" />
+    <Content Include="Content\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="Content\ckeditor\plugins\a11yhelp\lang\en.js" />
+    <Content Include="Content\ckeditor\plugins\a11yhelp\lang\he.js" />
+    <Content Include="Content\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="Content\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="Content\ckeditor\plugins\autogrow\plugin.js" />
+    <Content Include="Content\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Content\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <Content Include="Content\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Content\ckeditor\plugins\div\dialogs\div.js" />
+    <Content Include="Content\ckeditor\plugins\find\dialogs\find.js" />
+    <Content Include="Content\ckeditor\plugins\flash\dialogs\flash.js" />
+    <Content Include="Content\ckeditor\plugins\flash\images\placeholder.png" />
+    <Content Include="Content\ckeditor\plugins\forms\dialogs\button.js" />
+    <Content Include="Content\ckeditor\plugins\forms\dialogs\checkbox.js" />
+    <Content Include="Content\ckeditor\plugins\forms\dialogs\form.js" />
+    <Content Include="Content\ckeditor\plugins\forms\dialogs\hiddenfield.js" />
+    <Content Include="Content\ckeditor\plugins\forms\dialogs\radio.js" />
+    <Content Include="Content\ckeditor\plugins\forms\dialogs\select.js" />
+    <Content Include="Content\ckeditor\plugins\forms\dialogs\textarea.js" />
+    <Content Include="Content\ckeditor\plugins\forms\dialogs\textfield.js" />
+    <Content Include="Content\ckeditor\plugins\forms\images\hiddenfield.gif" />
+    <Content Include="Content\ckeditor\plugins\iframedialog\plugin.js" />
+    <Content Include="Content\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="Content\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="Content\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="Content\ckeditor\plugins\link\images\anchor.gif" />
+    <Content Include="Content\ckeditor\plugins\liststyle\dialogs\liststyle.js" />
+    <Content Include="Content\ckeditor\plugins\pagebreak\images\pagebreak.gif" />
+    <Content Include="Content\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="Content\ckeditor\plugins\pastetext\dialogs\pastetext.js" />
+    <Content Include="Content\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="Content\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="Content\ckeditor\plugins\showblocks\images\block_address.png" />
+    <Content Include="Content\ckeditor\plugins\showblocks\images\block_blockquote.png" />
+    <Content Include="Content\ckeditor\plugins\showblocks\images\block_div.png" />
+    <Content Include="Content\ckeditor\plugins\showblocks\images\block_h1.png" />
+    <Content Include="Content\ckeditor\plugins\showblocks\images\block_h2.png" />
+    <Content Include="Content\ckeditor\plugins\showblocks\images\block_h3.png" />
+    <Content Include="Content\ckeditor\plugins\showblocks\images\block_h4.png" />
+    <Content Include="Content\ckeditor\plugins\showblocks\images\block_h5.png" />
+    <Content Include="Content\ckeditor\plugins\showblocks\images\block_h6.png" />
+    <Content Include="Content\ckeditor\plugins\showblocks\images\block_p.png" />
+    <Content Include="Content\ckeditor\plugins\showblocks\images\block_pre.png" />
+    <Content Include="Content\ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\angel_smile.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\angry_smile.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\broken_heart.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\confused_smile.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\cry_smile.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\devil_smile.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\envelope.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\heart.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\kiss.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\lightbulb.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\omg_smile.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\regular_smile.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\sad_smile.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\shades_smile.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\teeth_smile.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\thumbs_down.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\thumbs_up.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\tounge_smile.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <Content Include="Content\ckeditor\plugins\smiley\images\wink_smile.gif" />
+    <Content Include="Content\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="Content\ckeditor\plugins\styles\styles\default.js" />
+    <Content Include="Content\ckeditor\plugins\tableresize\plugin.js" />
+    <Content Include="Content\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="Content\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="Content\ckeditor\plugins\templates\dialogs\templates.js" />
+    <Content Include="Content\ckeditor\plugins\templates\templates\default.js" />
+    <Content Include="Content\ckeditor\plugins\templates\templates\images\template1.gif" />
+    <Content Include="Content\ckeditor\plugins\templates\templates\images\template2.gif" />
+    <Content Include="Content\ckeditor\plugins\templates\templates\images\template3.gif" />
+    <Content Include="Content\ckeditor\plugins\uicolor\dialogs\uicolor.js" />
+    <Content Include="Content\ckeditor\plugins\uicolor\lang\en.js" />
+    <Content Include="Content\ckeditor\plugins\uicolor\plugin.js" />
+    <Content Include="Content\ckeditor\plugins\uicolor\uicolor.gif" />
+    <Content Include="Content\ckeditor\plugins\uicolor\yui\assets\hue_bg.png" />
+    <Content Include="Content\ckeditor\plugins\uicolor\yui\assets\hue_thumb.png" />
+    <Content Include="Content\ckeditor\plugins\uicolor\yui\assets\picker_mask.png" />
+    <Content Include="Content\ckeditor\plugins\uicolor\yui\assets\picker_thumb.png" />
+    <Content Include="Content\ckeditor\plugins\uicolor\yui\assets\yui.css" />
+    <Content Include="Content\ckeditor\plugins\uicolor\yui\yui.js" />
+    <Content Include="Content\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="Content\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="Content\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="Content\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="Content\ckeditor\skins\Blue\dialog.css" />
+    <Content Include="Content\ckeditor\skins\Blue\editor.css" />
+    <Content Include="Content\ckeditor\skins\Blue\icons.png" />
+    <Content Include="Content\ckeditor\skins\Blue\images\dialog_sides.gif" />
+    <Content Include="Content\ckeditor\skins\Blue\images\dialog_sides.png" />
+    <Content Include="Content\ckeditor\skins\Blue\images\dialog_sides_rtl.png" />
+    <Content Include="Content\ckeditor\skins\Blue\images\mini.gif" />
+    <Content Include="Content\ckeditor\skins\Blue\images\noimage.png" />
+    <Content Include="Content\ckeditor\skins\Blue\images\sprites.png" />
+    <Content Include="Content\ckeditor\skins\Blue\images\sprites_ie6.png" />
+    <Content Include="Content\ckeditor\skins\Blue\images\toolbar_start.gif" />
+    <Content Include="Content\ckeditor\skins\Blue\skin.js" />
+    <Content Include="Content\ckeditor\skins\Blue\templates.css" />
+    <Content Include="Content\ckeditor\skins\Green\dialog.css" />
+    <Content Include="Content\ckeditor\skins\Green\editor.css" />
+    <Content Include="Content\ckeditor\skins\Green\icons.png" />
+    <Content Include="Content\ckeditor\skins\Green\images\dialog_sides.gif" />
+    <Content Include="Content\ckeditor\skins\Green\images\dialog_sides.png" />
+    <Content Include="Content\ckeditor\skins\Green\images\dialog_sides_rtl.png" />
+    <Content Include="Content\ckeditor\skins\Green\images\mini.gif" />
+    <Content Include="Content\ckeditor\skins\Green\images\noimage.png" />
+    <Content Include="Content\ckeditor\skins\Green\images\sprites.png" />
+    <Content Include="Content\ckeditor\skins\Green\images\sprites_ie6.png" />
+    <Content Include="Content\ckeditor\skins\Green\images\toolbar_start.gif" />
+    <Content Include="Content\ckeditor\skins\Green\skin.js" />
+    <Content Include="Content\ckeditor\skins\Green\templates.css" />
+    <Content Include="Content\ckeditor\skins\kama\dialog.css" />
+    <Content Include="Content\ckeditor\skins\kama\editor.css" />
+    <Content Include="Content\ckeditor\skins\kama\icons.png" />
+    <Content Include="Content\ckeditor\skins\kama\images\dialog_sides.gif" />
+    <Content Include="Content\ckeditor\skins\kama\images\dialog_sides.png" />
+    <Content Include="Content\ckeditor\skins\kama\images\dialog_sides_rtl.png" />
+    <Content Include="Content\ckeditor\skins\kama\images\mini.gif" />
+    <Content Include="Content\ckeditor\skins\kama\images\noimage.png" />
+    <Content Include="Content\ckeditor\skins\kama\images\sprites.png" />
+    <Content Include="Content\ckeditor\skins\kama\images\sprites_ie6.png" />
+    <Content Include="Content\ckeditor\skins\kama\images\toolbar_start.gif" />
+    <Content Include="Content\ckeditor\skins\kama\skin.js" />
+    <Content Include="Content\ckeditor\skins\kama\templates.css" />
+    <Content Include="Content\ckeditor\skins\office2003\dialog.css" />
+    <Content Include="Content\ckeditor\skins\office2003\editor.css" />
+    <Content Include="Content\ckeditor\skins\office2003\icons.png" />
+    <Content Include="Content\ckeditor\skins\office2003\images\dialog_sides.gif" />
+    <Content Include="Content\ckeditor\skins\office2003\images\dialog_sides.png" />
+    <Content Include="Content\ckeditor\skins\office2003\images\dialog_sides_rtl.png" />
+    <Content Include="Content\ckeditor\skins\office2003\images\mini.gif" />
+    <Content Include="Content\ckeditor\skins\office2003\images\noimage.png" />
+    <Content Include="Content\ckeditor\skins\office2003\images\sprites.png" />
+    <Content Include="Content\ckeditor\skins\office2003\images\sprites_ie6.png" />
+    <Content Include="Content\ckeditor\skins\office2003\skin.js" />
+    <Content Include="Content\ckeditor\skins\office2003\templates.css" />
+    <Content Include="Content\ckeditor\skins\Pink\dialog.css" />
+    <Content Include="Content\ckeditor\skins\Pink\editor.css" />
+    <Content Include="Content\ckeditor\skins\Pink\icons.png" />
+    <Content Include="Content\ckeditor\skins\Pink\images\dialog_sides.gif" />
+    <Content Include="Content\ckeditor\skins\Pink\images\dialog_sides.png" />
+    <Content Include="Content\ckeditor\skins\Pink\images\dialog_sides_rtl.png" />
+    <Content Include="Content\ckeditor\skins\Pink\images\mini.gif" />
+    <Content Include="Content\ckeditor\skins\Pink\images\noimage.png" />
+    <Content Include="Content\ckeditor\skins\Pink\images\sprites.png" />
+    <Content Include="Content\ckeditor\skins\Pink\images\sprites_ie6.png" />
+    <Content Include="Content\ckeditor\skins\Pink\images\toolbar_start.gif" />
+    <Content Include="Content\ckeditor\skins\Pink\skin.js" />
+    <Content Include="Content\ckeditor\skins\Pink\templates.css" />
+    <Content Include="Content\ckeditor\skins\v2\dialog.css" />
+    <Content Include="Content\ckeditor\skins\v2\editor.css" />
+    <Content Include="Content\ckeditor\skins\v2\icons.png" />
+    <Content Include="Content\ckeditor\skins\v2\images\dialog_sides.gif" />
+    <Content Include="Content\ckeditor\skins\v2\images\dialog_sides.png" />
+    <Content Include="Content\ckeditor\skins\v2\images\dialog_sides_rtl.png" />
+    <Content Include="Content\ckeditor\skins\v2\images\mini.gif" />
+    <Content Include="Content\ckeditor\skins\v2\images\noimage.png" />
+    <Content Include="Content\ckeditor\skins\v2\images\sprites.png" />
+    <Content Include="Content\ckeditor\skins\v2\images\sprites_ie6.png" />
+    <Content Include="Content\ckeditor\skins\v2\images\toolbar_start.gif" />
+    <Content Include="Content\ckeditor\skins\v2\skin.js" />
+    <Content Include="Content\ckeditor\skins\v2\templates.css" />
+    <Content Include="Content\ckeditor\skins\Yellow\dialog.css" />
+    <Content Include="Content\ckeditor\skins\Yellow\editor.css" />
+    <Content Include="Content\ckeditor\skins\Yellow\icons.png" />
+    <Content Include="Content\ckeditor\skins\Yellow\images\dialog_sides.gif" />
+    <Content Include="Content\ckeditor\skins\Yellow\images\dialog_sides.png" />
+    <Content Include="Content\ckeditor\skins\Yellow\images\dialog_sides_rtl.png" />
+    <Content Include="Content\ckeditor\skins\Yellow\images\mini.gif" />
+    <Content Include="Content\ckeditor\skins\Yellow\images\noimage.png" />
+    <Content Include="Content\ckeditor\skins\Yellow\images\sprites.png" />
+    <Content Include="Content\ckeditor\skins\Yellow\images\sprites_ie6.png" />
+    <Content Include="Content\ckeditor\skins\Yellow\images\toolbar_start.gif" />
+    <Content Include="Content\ckeditor\skins\Yellow\skin.js" />
+    <Content Include="Content\ckeditor\skins\Yellow\templates.css" />
+    <Content Include="Content\fonts\font-license.txt" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Img\Company.png" />
+    <Content Include="Content\Img\time_green.png" />
+    <Content Include="Content\Img\time_orange.png" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-noscript.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-ui-noscript.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload-ui.css" />
+    <Content Include="Content\jQuery.FileUpload\css\jquery.fileupload.css" />
+    <Content Include="Content\jQuery.FileUpload\img\loading.gif" />
+    <Content Include="Content\jQuery.FileUpload\img\progressbar.gif" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\themes\jquery-treeview.css" />
+    <Content Include="Content\themes\jquery-ui.css" />
+    <Content Include="Content\themes\jquery-ui.min.css" />
+    <Content Include="Content\themes\jquery-ui.structure.css" />
+    <Content Include="Content\themes\jquery-ui.structure.min.css" />
+    <Content Include="Content\themes\jquery-ui.theme.css" />
+    <Content Include="Content\themes\jquery-ui.theme.min.css" />
+    <Content Include="Content\Custom\ie.css" />
+    <Content Include="Content\Custom\non-ie7.css" />
+    <Content Include="Content\docuvieware-min.css" />
+    <Content Include="Content\Files\Ico.ico" />
+    <Content Include="Content\Files\Jpg.jpg" />
+    <Content Include="Content\Files\Png.png" />
+    <Content Include="Content\Files\Tif.tif" />
+    <Content Include="Content\Files\Txt.txt" />
+    <Content Include="Content\Icons\aac.png" />
+    <Content Include="Content\Icons\ai.png" />
+    <Content Include="Content\Icons\aiff.png" />
+    <Content Include="Content\Icons\avi.png" />
+    <Content Include="Content\Icons\bmp.png" />
+    <Content Include="Content\Icons\c.png" />
+    <Content Include="Content\Icons\cpp.png" />
+    <Content Include="Content\Icons\css.png" />
+    <Content Include="Content\Icons\csv.png" />
+    <Content Include="Content\Icons\dat.png" />
+    <Content Include="Content\Icons\dmg.png" />
+    <Content Include="Content\Icons\doc.png" />
+    <Content Include="Content\Icons\docx.png" />
+    <Content Include="Content\Icons\dotx.png" />
+    <Content Include="Content\Icons\dwg.png" />
+    <Content Include="Content\Icons\dxf.png" />
+    <Content Include="Content\Icons\eps.png" />
+    <Content Include="Content\Icons\exe.png" />
+    <Content Include="Content\Icons\flv.png" />
+    <Content Include="Content\Icons\gif.png" />
+    <Content Include="Content\Icons\h.png" />
+    <Content Include="Content\Icons\hpp.png" />
+    <Content Include="Content\Icons\html.png" />
+    <Content Include="Content\Icons\ico.png" />
+    <Content Include="Content\Icons\ics.png" />
+    <Content Include="Content\Icons\iso.png" />
+    <Content Include="Content\Icons\java.png" />
+    <Content Include="Content\Icons\jpg.png" />
+    <Content Include="Content\Icons\js.png" />
+    <Content Include="Content\Icons\key.png" />
+    <Content Include="Content\Icons\less.png" />
+    <Content Include="Content\Icons\mid.png" />
+    <Content Include="Content\Icons\mp3.png" />
+    <Content Include="Content\Icons\mp4.png" />
+    <Content Include="Content\Icons\mpg.png" />
+    <Content Include="Content\Icons\odf.png" />
+    <Content Include="Content\Icons\ods.png" />
+    <Content Include="Content\Icons\odt.png" />
+    <Content Include="Content\Icons\otp.png" />
+    <Content Include="Content\Icons\ots.png" />
+    <Content Include="Content\Icons\ott.png" />
+    <Content Include="Content\Icons\pdf.png" />
+    <Content Include="Content\Icons\php.png" />
+    <Content Include="Content\Icons\png.png" />
+    <Content Include="Content\Icons\ppt.png" />
+    <Content Include="Content\Icons\psd.png" />
+    <Content Include="Content\Icons\py.png" />
+    <Content Include="Content\Icons\qt.png" />
+    <Content Include="Content\Icons\rar.png" />
+    <Content Include="Content\Icons\rb.png" />
+    <Content Include="Content\Icons\rtf.png" />
+    <Content Include="Content\Icons\sass.png" />
+    <Content Include="Content\Icons\scss.png" />
+    <Content Include="Content\Icons\sql.png" />
+    <Content Include="Content\Icons\tga.png" />
+    <Content Include="Content\Icons\tgz.png" />
+    <Content Include="Content\Icons\tif.png" />
+    <Content Include="Content\Icons\tiff.png" />
+    <Content Include="Content\Icons\txt.png" />
+    <Content Include="Content\Icons\wav.png" />
+    <Content Include="Content\Icons\xls.png" />
+    <Content Include="Content\Icons\xlsx.png" />
+    <Content Include="Content\Icons\xml.png" />
+    <Content Include="Content\Icons\yml.png" />
+    <Content Include="Content\Icons\zip.png" />
+    <Content Include="Content\Icons\_blank.png" />
+    <Content Include="Content\Icons\_page.png" />
+    <Content Include="Content\Img\About_H.png" />
+    <Content Include="Content\Img\About_N.png" />
+    <Content Include="Content\Img\accessDenied.jpg" />
+    <Content Include="Content\Img\add_14.png" />
+    <Content Include="Content\Img\add_plus_green.png" />
+    <Content Include="Content\Img\admin_20x20.png" />
+    <Content Include="Content\Img\Company - transparent.png" />
+    <Content Include="Content\Img\Company_it.png" />
+    <Content Include="Content\Img\Apple_Safari.png" />
+    <Content Include="Content\Img\arrow_left_16x16.png" />
+    <Content Include="Content\Img\arrow_right_16x16.png" />
+    <Content Include="Content\Img\banner_bg.png" />
+    <Content Include="Content\Img\BarLeftRound.png" />
+    <Content Include="Content\Img\BarRightRound.png" />
+    <Content Include="Content\Img\BarSpacer.png" />
+    <Content Include="Content\Img\ButtonLeftEdge.png" />
+    <Content Include="Content\Img\ButtonRightEdge.png" />
+    <Content Include="Content\Img\change_password_20x20.png" />
+    <Content Include="Content\Img\Clients_H.png" />
+    <Content Include="Content\Img\Clients_N.png" />
+    <Content Include="Content\Img\Closed.png" />
+    <Content Include="Content\Img\collapse.png" />
+    <Content Include="Content\Img\config_20x20.png" />
+    <Content Include="Content\Img\Contacts_H.png" />
+    <Content Include="Content\Img\Contacts_N.png" />
+    <Content Include="Content\Img\copy.png" />
+    <Content Include="Content\Img\date_control.png" />
+    <Content Include="Content\Img\deactivate_24x24.png" />
+    <Content Include="Content\Img\downArrow1.png" />
+    <Content Include="Content\Img\edit-pencil.png" />
+    <Content Include="Content\Img\ajax-loader.gif" />
+    <Content Include="Content\Img\Company.ico" />
+    <Content Include="Content\Img\archive.gif" />
+    <Content Include="Content\Img\calendar.gif" />
+    <Content Include="Content\Img\darkGrey_fade.png" />
+    <Content Include="Content\Img\darkRed_fade.png" />
+    <Content Include="Content\Img\Delete.gif" />
+    <Content Include="Content\Img\Company hi-res logo.jpg" />
+    <Content Include="Content\Img\edit_128.png" />
+    <Content Include="Content\Img\edit_14.png" />
+    <Content Include="Content\Img\email.jpg" />
+    <Content Include="Content\Img\email.png" />
+    <Content Include="Content\Img\enabill logo.png" />
+    <Content Include="Content\Img\error_24x24.png" />
+    <Content Include="Content\Img\feedback_20x20.png" />
+    <Content Include="Content\Img\file.gif" />
+    <Content Include="Content\Img\FlexiTime_H.png" />
+    <Content Include="Content\Img\FlexiTime_N.png" />
+    <Content Include="Content\Img\flexi_20x20.png" />
+    <Content Include="Content\Img\folder-closed.gif" />
+    <Content Include="Content\Img\folder.gif" />
+    <Content Include="Content\Img\google.png" />
+    <Content Include="Content\Img\GreenHeaderGradient.png" />
+    <Content Include="Content\Img\greenLink.PNG" />
+    <Content Include="Content\Img\Home_H.png" />
+    <Content Include="Content\Img\Home_N.png" />
+    <Content Include="Content\Img\icons.png" />
+    <Content Include="Content\Img\img-hero-home.png" />
+    <Content Include="Content\Img\broken_robot.png" />
+    <Content Include="Content\Img\info.png" />
+    <Content Include="Content\Img\infoBar_bg_grey.png" />
+    <Content Include="Content\Img\infoBar_Black.png" />
+    <Content Include="Content\Img\infoBar_Black_bg.png" />
+    <Content Include="Content\Img\infoBar_button_Down_bg.png" />
+    <Content Include="Content\Img\infoBar_button_Over_bg.png" />
+    <Content Include="Content\Img\input_back.png" />
+    <Content Include="Content\Img\Invoices.png" />
+    <Content Include="Content\Img\Invoices_H.png" />
+    <Content Include="Content\Img\Invoices_N.png" />
+    <Content Include="Content\Img\Leave_H.png" />
+    <Content Include="Content\Img\Leave_N.png" />
+    <Content Include="Content\Img\lightGrey_fade.png" />
+    <Content Include="Content\Img\loader8.gif" />
+    <Content Include="Content\Img\loading.gif" />
+    <Content Include="Content\Img\lock_20x20.png" />
+    <Content Include="Content\Img\login_bg.png" />
+    <Content Include="Content\Img\login_button_down.png" />
+    <Content Include="Content\Img\login_button_over.png" />
+    <Content Include="Content\Img\login_button_up.png" />
+    <Content Include="Content\Img\login_center_bg.png" />
+    <Content Include="Content\Img\login_textBox.png" />
+    <Content Include="Content\Img\logo.png" />
+    <Content Include="Content\Img\logout_20x20.png" />
+    <Content Include="Content\Img\Manager_H.png" />
+    <Content Include="Content\Img\Manager_N.png" />
+    <Content Include="Content\Img\maximize.png" />
+    <Content Include="Content\Img\menu_button1.png" />
+    <Content Include="Content\Img\minimize.png" />
+    <Content Include="Content\Img\minus.gif" />
+    <Content Include="Content\Img\monotone_plus_add.png" />
+    <Content Include="Content\Img\navBar_bg.png" />
+    <Content Include="Content\Img\navBar_bg_teal.png" />
+    <Content Include="Content\Img\notepad.png" />
+    <Content Include="Content\Img\notepad_icon.gif" />
+    <Content Include="Content\Img\menu_button.png" />
+    <Content Include="Content\Img\notes_20x20.png" />
+    <Content Include="Content\Img\Notes_H.png" />
+    <Content Include="Content\Img\Notes_N.png" />
+    <Content Include="Content\Img\pinkGlass.png" />
+    <Content Include="Content\Img\plus.gif" />
+    <Content Include="Content\Img\plus_add.png" />
+    <Content Include="Content\Img\plus_add_solid.png" />
+    <Content Include="Content\Img\PrintPdf.png" />
+    <Content Include="Content\Img\PrintXls.png" />
+    <Content Include="Content\Img\Projects_H.png" />
+    <Content Include="Content\Img\Projects_N.png" />
+    <Content Include="Content\Img\redLink.PNG" />
+    <Content Include="Content\Img\redo_16x16.png" />
+    <Content Include="Content\Img\red_fade.png" />
+    <Content Include="Content\Img\Reports_H.png" />
+    <Content Include="Content\Img\Reports_N.png" />
+    <Content Include="Content\Img\rightArrow1.png" />
+    <Content Include="Content\Img\Company_Blue.png" />
+    <Content Include="Content\Img\search.png" />
+    <Content Include="Content\Img\separator.png" />
+    <Content Include="Content\Img\TAPO.png" />
+    <Content Include="Content\Img\tick_green_small.gif" />
+    <Content Include="Content\Img\timesheet_20x20.png" />
+    <Content Include="Content\Img\timesheet_approved_20x20.png" />
+    <Content Include="Content\Img\timesheet_reject_20x20.png" />
+    <Content Include="Content\Img\Time_H.png" />
+    <Content Include="Content\Img\Time_N.png" />
+    <Content Include="Content\Img\today.png" />
+    <Content Include="Content\Img\treeview-black-line.gif" />
+    <Content Include="Content\Img\treeview-black.gif" />
+    <Content Include="Content\Img\treeview-default-line.gif" />
+    <Content Include="Content\Img\treeview-default.gif" />
+    <Content Include="Content\Img\treeview-famfamfam-line.gif" />
+    <Content Include="Content\Img\treeview-famfamfam.gif" />
+    <Content Include="Content\Img\treeview-gray-line.gif" />
+    <Content Include="Content\Img\treeview-gray.gif" />
+    <Content Include="Content\Img\treeview-red-line.gif" />
+    <Content Include="Content\Img\treeview-red.gif" />
+    <Content Include="Content\Img\unlock_20x20.png" />
+    <Content Include="Content\Img\Users_H.png" />
+    <Content Include="Content\Img\Users_N.png" />
+    <Content Include="Content\Img\waiting.gif" />
+    <Content Include="Content\Custom\ie7.css" />
+    <Content Include="Content\themes\images\treeview-default.gif" />
+    <Content Include="Content\themes\images\treeview-line.gif" />
+    <Content Include="Content\themes\images\treeview-vertical-line.gif" />
+    <Content Include="Content\themes\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\Theming\Welcome.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
+    <Content Include="Content\Views\Time.css" />
+    <Content Include="Content\webix.css" />
+    <Content Include="Content\webix.min.css" />
+    <Content Include="GdPicture.NET.14.barcode.1d.reader.64.dll" />
+    <Content Include="GdPicture.NET.14.barcode.2d.reader.64.dll" />
+    <Content Include="GdPicture.NET.14.document.analyzer.64.dll" />
+    <Content Include="GdPicture.NET.14.filters.64.dll" />
+    <Content Include="GdPicture.NET.14.image.gdimgplug.64.dll" />
+    <Content Include="GdPicture.NET.14.Imaging.Rendering.Skia.64.dll" />
+    <Content Include="GdPicture.NET.14.ocr.tesseract.3.64.dll" />
+    <Content Include="GdPicture.NET.14.omr.64.dll" />
+    <Content Include="GdPicture.NET.14.twain.client.64.dll" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
+    <Content Include="Content\Files\Docs.docx" />
+    <Content Include="Content\Files\Pdf.pdf" />
+    <Content Include="Content\Files\Xlsx.xlsx" />
+    <Content Include="App_Data\ActivityReport.xlsx" />
+    <Content Include="App_Data\AnnualLeaveReport.xlsx" />
+    <Content Include="App_Data\BalanceAuditTrailReport.xlsx" />
+    <Content Include="App_Data\DSActivityReport.xlsx" />
+    <Content Include="App_Data\EncentivizeReport.xlsx" />
+    <Content Include="App_Data\ExpenseReport.xlsx" />
+    <Content Include="App_Data\FlexiTimeReport.xlsx" />
+    <Content Include="App_Data\LeaveGeneralReport.xlsx" />
+    <Content Include="App_Data\MISAllocatedTimeReport.xlsx" />
+    <Content Include="App_Data\OtherLeaveReport.xlsx" />
+    <Content Include="App_Data\PercentageAllocationReport.xlsx" />
+    <Content Include="App_Data\PMActivityReport.xlsx" />
+    <Content Include="App_Data\RatesReport.xlsx" />
+    <Content Include="App_Data\SickCompassionateLeaveReport.xlsx" />
+    <Content Include="App_Data\TicketTimeAllocationReport.xlsx" />
+    <Content Include="App_Data\TimesheetReport.xlsx" />
+    <Content Include="App_Data\TrainingReport.xlsx" />
+    <Content Include="App_Data\WorkAllocationExceptionReport.xlsx" />
+    <Content Include="Content\fonts\PTS-webfont.woff" />
+    <Content Include="Content\fonts\PTS-bold.woff" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\Enabill Release.pubxml" />
+    <None Include="Properties\PublishProfiles\Enabill Staging.pubxml" />
+    <None Include="Properties\PublishProfiles\Enabill Test.pubxml" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Built-In\jquery-ui.js" />
+    <Content Include="Scripts\Built-In\jquery-ui.min.js" />
+    <Content Include="Scripts\Built-In\jquery.js" />
+    <Content Include="Scripts\CommonFunctions.js" />
+    <Content Include="Scripts\Component\DataTableWeek.js" />
+    <Content Include="Scripts\docuvieware-min.js" />
+    <Content Include="Scripts\Enabill.js" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Properties\PublishProfiles\Staging.pubxml" />
+    <None Include="Properties\PublishProfiles\Test.pubxml" />
+    <None Include="Scripts\Built-In\jquery-2.1.0-vsdoc.js" />
+    <Content Include="Scripts\Built-In\jquery.cookie.js" />
+    <Content Include="Scripts\Built-In\jquery.form.js" />
+    <Content Include="Scripts\Built-In\jquery.form.min.js" />
+    <Content Include="Scripts\Built-In\jquery-treeview-1.0.1.js" />
+    <Content Include="Scripts\Built-In\jquery.cookie-1.4.1.min.js" />
+    <Content Include="Scripts\Built-In\jquery.treeview.async.js" />
+    <Content Include="Scripts\Built-In\jquery.treeview.edit.js" />
+    <Content Include="Scripts\Built-In\jquery.treeview.js" />
+    <Content Include="Scripts\Built-In\jquery.treeview.sortable.js" />
+    <Content Include="Scripts\Built-In\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\Built-In\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <None Include="Scripts\jquery-3.6.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.6.0.js" />
+    <Content Include="Scripts\jquery-3.6.0.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
+    <Content Include="Scripts\jquery-ui-1.13.1.js" />
+    <Content Include="Scripts\jquery-ui-1.13.1.min.js" />
+    <Content Include="Scripts\jQuery.FileUpload\cors\jquery.postmessage-transport.js" />
+    <Content Include="Scripts\jQuery.FileUpload\cors\jquery.xdr-transport.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-audio.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-image.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-process.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-ui.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-validate.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload-video.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.fileupload.js" />
+    <Content Include="Scripts\jQuery.FileUpload\jquery.iframe-transport.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.form.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\Views\Expense.js" />
+    <Content Include="Scripts\Views\Client.js" />
+    <Content Include="Scripts\Views\Holiday.js" />
+    <Content Include="Scripts\Views\Region.js" />
+    <Content Include="Scripts\Views\Ticket.js" />
+    <Content Include="Scripts\Views\Forecast.js" />
+    <Content Include="Scripts\Views\Report.js" />
+    <Content Include="Scripts\Views\Feedback.js" />
+    <Content Include="Scripts\Views\FlexiTime.js" />
+    <Content Include="Scripts\Views\Home.js" />
+    <Content Include="Scripts\Views\Invoice.js" />
+    <Content Include="Scripts\Views\InvoiceRule.js" />
+    <Content Include="Scripts\Views\Leave.js" />
+    <Content Include="Scripts\Views\Manager.js" />
+    <Content Include="Scripts\Views\Note.js" />
+    <Content Include="Scripts\Views\Project.js" />
+    <Content Include="Scripts\Views\Configuration.js" />
+    <Content Include="Scripts\Views\Time.js" />
+    <Content Include="Scripts\Views\User.js" />
+    <Content Include="Scripts\Views\UserCostToCompany.js" />
+    <Content Include="Scripts\webix.js" />
+    <Content Include="Scripts\webix.min.js" />
+    <Content Include="Scripts\_GeneralLayoutJS.js" />
+    <Content Include="Scripts\_WelcomeLayoutJS.js" />
+    <Content Include="Views\Invoice\ucEditAdHocReady.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Built-In\jquery.validate.js" />
+    <Content Include="Scripts\Built-In\jquery.validate.min.js" />
+    <Content Include="Scripts\Built-In\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\Built-In\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Built-In\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Built-In\MicrosoftAjax.js" />
+    <Content Include="Scripts\Built-In\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\Built-In\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\Built-In\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\Built-In\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\Built-In\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
+    <Content Include="Views\Shared\LogOn.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LogOnPartial.cshtml" />
+    <Content Include="Views\Shared\_GeneralLayout.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Time\ApproveUserIndex.cshtml" />
+    <Content Include="Views\Report\ucOnScreenTimeSheetApproval.cshtml" />
+    <Content Include="Views\AdminView\Index.cshtml" />
+    <Content Include="Views\Report\ucOnScreenLeaveWithLeaveBalanceReport.cshtml" />
+    <Content Include="Views\Report\LeaveWithLeaveBalanceReport.cshtml" />
+    <Content Include="Views\Log\Index.cshtml" />
+    <Content Include="Views\Report\ucOnScreenTimeSheetUserList.cshtml" />
+    <Content Include="Views\Report\ucOnScreenUserTimesheet.cshtml" />
+    <Content Include="Views\Report\ucShowRatesReportParameters.cshtml" />
+    <Content Include="Views\Report\ucShowLeaveGeneralReportParameters.cshtml" />
+    <Content Include="Scripts\Built-In\jquery.form.min.js.map" />
+    <Content Include="Views\Expense\Index.cshtml" />
+    <Content Include="Views\Expense\ucIndex.cshtml" />
+    <Content Include="Views\Expense\ucIndexCalendar.cshtml" />
+    <Content Include="Views\Expense\ucExpenseDetail.cshtml" />
+    <Content Include="Views\Expense\Create.cshtml" />
+    <Content Include="Views\Expense\Edit.cshtml" />
+    <Content Include="Views\Expense\ucIndexCol3.cshtml" />
+    <Content Include="Views\Expense\ucIndexCol4.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ProjectList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ExpenseCategoryTypeList.cshtml" />
+    <Content Include="Views\Report\ucShowExpenseReportParameters.cshtml" />
+    <Content Include="Views\Time\Week.cshtml" />
+    <Content Include="Views\Time\ucWeekPeriod.cshtml" />
+    <Content Include="Views\Holiday\Index.cshtml" />
+    <Content Include="Views\Holiday\ucHolidays.cshtml" />
+    <Content Include="Views\Holiday\ucHolidayForm.cshtml" />
+    <Content Include="Views\Holiday\ucYearSelector.cshtml" />
+    <Content Include="Views\Time\ucWeek.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Project\ucProjectInvoiceRuleList.cshtml" />
+    <Content Include="Views\Project\ucIndexCol5.cshtml" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.6.0.min.map" />
+    <Content Include="Views\Project\ucProjectContractDetail.cshtml" />
+    <Content Include="Scripts\jquery.form.min.js.map" />
+    <Content Include="Views\Shared\EditorTemplates\CurrencyList.cshtml" />
+    <Content Include="Views\Maintenance\Index.cshtml" />
+    <Content Include="Views\Region\Index.cshtml" />
+    <Content Include="Views\Region\ucIndexCol3.cshtml" />
+    <Content Include="Views\Region\ucIndexCol4.cshtml" />
+    <Content Include="Views\Region\Create.cshtml" />
+    <Content Include="Views\Region\Edit.cshtml" />
+    <Content Include="Views\Region\Details.cshtml" />
+    <Content Include="Views\Region\ucRegionDetail.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Staging.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Test.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\tmp\" />
+    <Folder Include="Models\Maintenance\" />
+    <Folder Include="Templates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Enabill.Comms\Enabill.Comms.csproj">
+      <Project>{B24CDB3B-F21A-425C-8961-FD2A7CCDD002}</Project>
+      <Name>Enabill.Comms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Enabill.Emailing\Enabill.Emailing.csproj">
+      <Project>{2DD90E03-B9DA-4A4E-A8AE-589211EFA0A1}</Project>
+      <Name>Enabill.Emailing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Enabill.Print\Enabill.Print.csproj">
+      <Project>{CA7BE164-6DFB-4377-B483-FEDA1B2FDEE1}</Project>
+      <Name>Enabill.Print</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Enabill.Processes\Enabill.Processes.csproj">
+      <Project>{C1B82633-BFFD-4D25-9B54-14FD905934D8}</Project>
+      <Name>Enabill.Processes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Enabill.Repository\Enabill.Repository.csproj">
+      <Project>{7aa569d6-f34b-4c03-8fba-9df49e566af7}</Project>
+      <Name>Enabill.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucDay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Project\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Project\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Project\ucActivityList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\ucActivities.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\ucRoles.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Story\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Story\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\HtmlEditor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Story\Preview.cshtml" />
+    <Content Include="Views\Story\Details.cshtml" />
+    <Content Include="Views\Manager\Index.cshtml" />
+    <Content Include="Views\Shared\ucMenu.cshtml" />
+    <Content Include="Views\Shared\ucStory.cshtml" />
+    <Content Include="Views\Story\Board.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\InvoiceUserList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\ProjectOwnerUserList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\RegionList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DivisionList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\BillingMethodList.cshtml" />
+    <Content Include="Views\Client\Edit.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DepartmentList.cshtml" />
+    <Content Include="Views\Project\Create.cshtml" />
+    <Content Include="Views\Project\ucProjectDetail.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ClientList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ManagerUserList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EmploymentTypeList.cshtml" />
+    <Content Include="Views\Client\ucClientDetails.cshtml" />
+    <Content Include="Views\Client\ucClientContacts.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ActorList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\StoryGroupList.cshtml" />
+    <Content Include="Views\Project\EditActivity.cshtml" />
+    <Content Include="Views\Shared\ucSearch.cshtml" />
+    <Content Include="Views\Shared\ucNoSearchResults.cshtml" />
+    <Content Include="Views\Client\EditContact.cshtml" />
+    <Content Include="Views\Client\Details.cshtml" />
+    <Content Include="Views\Project\ucProjectActivities.cshtml" />
+    <Content Include="Views\Time\ucIndex.cshtml" />
+    <Content Include="Views\Client\ucContactList.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Note\UserNotes.cshtml" />
+    <Content Include="Views\Note\ucNoteList.cshtml" />
+    <Content Include="Views\Note\ucNoteDetail.cshtml" />
+    <Content Include="Views\Project\Details.cshtml" />
+    <Content Include="Views\Client\Create.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\BillableIndicatorList.cshtml" />
+    <Content Include="Views\Time\ucLockedDayWorkSessions.cshtml" />
+    <Content Include="Views\Time\ucEditableDayWorkSessions.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\InvoiceCategoryList.cshtml" />
+    <Content Include="Views\InvoiceRule\ucInvoiceRuleList.cshtml" />
+    <Content Include="Views\Invoice\ucInvoiceList.cshtml" />
+    <Content Include="Views\Invoice\Create.cshtml" />
+    <Content Include="Views\Invoice\Edit.cshtml" />
+    <Content Include="Views\Shared\ucWorkAllocationDetail.cshtml" />
+    <Content Include="Views\Note\Index.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Client\ucClientInfo.cshtml" />
+    <Content Include="Views\Client\ucClientProjectInfo.cshtml" />
+    <Content Include="Views\Project\ucActivityUsers.cshtml" />
+    <Content Include="Views\FlexiTime\ucBookFlexiDay.cshtml" />
+    <Content Include="Views\Shared\ucUserLeave.cshtml" />
+    <Content Include="Views\Invoice\ucEditOpen.cshtml" />
+    <Content Include="Views\Manager\ucRecentLeave.cshtml" />
+    <Content Include="Views\InvoiceRule\ucSetupInvoiceRuleDefaults.cshtml" />
+    <Content Include="Views\InvoiceRule\TimeMaterialRule.cshtml" />
+    <Content Include="Views\InvoiceRule\SLARule.cshtml" />
+    <Content Include="Views\InvoiceRule\EditFixedCostRule.cshtml" />
+    <Content Include="Views\InvoiceRule\CreateFixedCostRule.cshtml" />
+    <Content Include="Views\InvoiceRule\ucFixedCostLines.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\Manager\ucRecentFlexiDays.cshtml" />
+    <Content Include="Views\Manager\ucLeaveBalances.cshtml" />
+    <Content Include="Views\Manager\ucFlexiBalances.cshtml" />
+    <Content Include="Views\Manager\ucBookFlexiDay.cshtml" />
+    <Content Include="Views\FlexiTime\ucAdjustFlexiBalance.cshtml" />
+    <Content Include="Views\Invoice\EditAdHocInvoice.cshtml" />
+    <Content Include="Views\Invoice\ucSetupAdHocCreation.cshtml" />
+    <Content Include="Views\InvoiceRule\ucFixedCostLinesOpen.cshtml" />
+    <Content Include="Views\InvoiceRule\ucFixedCostLinesClosed.cshtml" />
+    <Content Include="Views\Note\ucNoteQuickEdit.cshtml" />
+    <Content Include="Views\Shared\ucGoHome.cshtml" />
+    <Content Include="Views\Note\CompleteOverview.cshtml" />
+    <Content Include="Views\Note\ucActivitySearch.cshtml" />
+    <Content Include="Views\Note\ProjectOwnerOverview.cshtml" />
+    <Content Include="Views\Note\ManagerOverview.cshtml" />
+    <Content Include="Views\Note\IndexOverview.cshtml" />
+    <Content Include="Views\Note\ucUserSearch.cshtml" />
+    <Content Include="Views\Time\ucWorkSessionDetails.cshtml" />
+    <Content Include="Views\Time\ucWorkSessionEdit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\ucUserDetail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Leave\ucBookLeaveDays.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Leave\ucBookLeaveDay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\ucUserAllocationEndDate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Feedback\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Feedback\ucFeedbackLists.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Feedback\ucNewThread.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Feedback\ucExistingThread.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Feedback\ucFeedbackPost.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Feedback\ucIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\Day.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Leave\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\FlexiTime\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\FlexiTime\ucIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\FlexiTime\ucFlexiDays.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\ucCurrentFlexiTimeBalance.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Leave\ucIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Leave\ucLeaveBalances.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Leave\ucLeaveDays.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\ucRunMonthEndLeaveFlexiBalanceProcess.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\CustomError.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucEditReady.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucEditComplete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucEdit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Manager\ucBookLeaveDayForUser.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Manager\ucBookLeaveDaysForUser.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\ucManagers.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\ucPreferences.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\InvoiceRule\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_WelcomeLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\ForgotPasswordNotFound.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\ucRecentWorkDays.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\ucRecentNotes.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\ucUpcomingLeave.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucEditAdHocOpen.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucEditAdHocComplete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Manager\ucUpdateFlexiBalance.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucTimeSheetLock.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\ucCurrentLeaveBalance.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\FlexiTime\ucIndexCol3.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Leave\ucIndexCol3Partial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Leave\ucManageLeave.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucIndexCalendar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\ucIndexCol3.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\FlexiTime\ucFlexiTimeStatement.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucIndexCol3.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucIndexCol5.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\InvoiceRule\ucIndexCol3.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\InvoiceRule\ucIndexCol5.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucWorkAllocations.cshtml" />
+    <Content Include="Views\Time\ucDayCol3.cshtml" />
+    <Content Include="Views\Time\ucWorkSessions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucAllocateExtraTime.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucAddWorkSession.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Manager\ucIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Client\ucIndexCol3.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Project\ucIndexCol3.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\ucCustomErrorDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucEditAdHoc.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\ucCurrentTimeBalance.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucEditAdHocInProgress.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucEditInProgress.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\ucWorkAllocationExceptionDetail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\WorkAllocations.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucInvoiceWorkAllocationsCol5.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucInvoiceWorkAllocationsDetail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucInvoiceWorkAllocationsEditable.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucInvoiceWorkAllocationsLocked.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucEditCol5.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\ucTimesheetExceptions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucManageInvoiceCredit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucRelatedInvoices.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\InvoiceRule\CreateMonthlyFixedCostRule.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\InvoiceRule\EditMonthlyFixedCostRule.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Invoice\ucWorkAllocations.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\Profile1.cshtml" />
+    <Content Include="Views\Shared\ucLeaveToApprove.cshtml" />
+    <Content Include="Views\User\ucProfileActivities1.cshtml" />
+    <Content Include="Views\User\ucProfileDetails1.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\FlexiTime\ucIndexCol5.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Leave\ucIndexCol5.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucIndexCol5.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\InvoiceRule\ucEditCol5.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\ucUserNavigationOptions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\ucManageFinPeriods.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\ucAddPeriod.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\InvoiceRule\ActivityFixedCostRule.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ApproveIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucApproveIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucIndexCol3Partial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\ucDailyProcessExceptions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucApproveIndexCol5.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Passphrase.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UserCostToCompany\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UserCostToCompany\ucIndexCol3.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UserCostToCompany\ucIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucApproveUserIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucApproveUserIndexCol5.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucWorkSessionDetailsDayLocked.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucApproveIndexCol3.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucActivityIndexCol5.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucTrainingIndexCol5.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Time\ucTrainingDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\ucReports.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\FlexiTime\ucManageFlexiDay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\ucLeaveManualAdjustments.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\ucAddLeaveManualAdjustment.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\ucAddEditUserAllocation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\ucLinkNewAllocations.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\ucExistingAllocations.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\ucLeave.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\ucLeaveCycleBalances.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ucLeaveCycleReportIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\LeaveCycleReportIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ucLeaveCycleReportCol5.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\FlexiTimeBalanceReportIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ucFlexiTimeBalanceReportIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Report\ucFlexiTimeBalanceReportCol5.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucIndexCol3.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\CreateForecast.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucCreateForecast.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucCreateHeader.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\EditForecast.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucEditForecast.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucEditHeader.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucHeaderDetailedHistory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucCreateDetail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucEditDetail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucCopyPeriod.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucSelectReferences.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucSelectClients.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucCreateReferenceDefault.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucIndexCol4.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucViewReferenceDefaults.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucIndexCol5.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucReturnToIndexCol5.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucLinkInvoices.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ForecastReportIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucForecastReportIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucMatchingInvoices.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucLinkHeader.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\ucRunMonthEndUserCostToCompanyProcess.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucViewDetail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucForecastWithInvoicesSection.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucForecastWithOutInvoicesSection.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Forecast\ucInvoicesWithoutForecastsSection.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ticket\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ticket\ucViewTickets.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ticket\ucTicketLists.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ticket\ucIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ticket\ucExistingTicket.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ticket\ucViewTicketLines.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ticket\ucNewTicket.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ticket\ucIndexCol3.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configuration\ucPassPhrase.cshtml" />
+    <Content Include="Views\Ticket\ucViewDetails.cshtml" />
+    <Content Include="Views\Ticket\ViewDetails.cshtml" />
+    <Content Include="Views\Ticket\ucEditTicket.cshtml" />
+    <Content Include="Views\Ticket\ucViewDetailsCol5.cshtml" />
+    <Content Include="Views\Ticket\ucClosed.cshtml" />
+    <Content Include="Views\Report\ucShowWAExceptionReportParameters.cshtml" />
+    <Content Include="Views\Report\MISAllocatedTimeReportIndex.cshtml" />
+    <Content Include="Views\Report\ucMISAllocatedTimeReportIndex.cshtml" />
+    <Content Include="Views\Report\ucMISAllocatedTimeReportCol5.cshtml" />
+    <Content Include="Views\Ticket\ucViewUnassignedTickets.cshtml" />
+    <Content Include="Views\FlexiTime\ucManualAdjustments.cshtml" />
+    <Content Include="Views\Ticket\ucIndexCol4.cshtml" />
+    <Content Include="Views\Ticket\ucDeleteTicket.cshtml" />
+    <Content Include="Views\Ticket\ucReActivateTicket.cshtml" />
+    <Content Include="Views\Ticket\ucIndexCol5.cshtml" />
+    <Content Include="Views\Ticket\ucEmailNotification.cshtml" />
+    <Content Include="Views\Ticket\ucFindTicket.cshtml" />
+    <Content Include="Views\Report\ucFlexiTimeIndexCol3.cshtml" />
+    <Content Include="Views\FlexiTime\ucWorkAllocationExceptions.cshtml" />
+    <Content Include="Views\Client\ucIndexCol4.cshtml" />
+    <Content Include="Views\Project\ucIndexCol4.cshtml" />
+    <Content Include="Views\User\ucIndexCol4.cshtml" />
+    <Content Include="Views\Report\ucBalanceAuditTrailReportIndex.cshtml" />
+    <Content Include="Views\Report\BalanceAuditTrailReportIndex.cshtml" />
+    <Content Include="Views\Report\ucBalanceAuditTrailReportCol5.cshtml" />
+    <Content Include="Views\Report\ucShowActivityReportParameters.cshtml" />
+    <Content Include="Views\Report\ucShowTrainingReportParameters.cshtml" />
+    <Content Include="Views\Report\ucShowTimesheetReportParameters.cshtml" />
+    <Content Include="Views\Report\ucShowTicketTimeAllocationReportParameters.cshtml" />
+    <Content Include="Views\Report\ucShowProjectManagerActivityReportParameters.cshtml" />
+    <Content Include="Views\Report\ucShowDSActivityReportParameters.cshtml" />
+    <Content Include="Views\Invoice\ucIndexCol4.cshtml" />
+    <Content Include="Views\Invoice\ucGLAccountIndex.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Invoice\ucEditGLAccount.cshtml" />
+    <Content Include="Views\Client\ucClientDepartmentCodes.cshtml" />
+    <Content Include="Views\Invoice\ucCreateGLAccount.cshtml" />
+    <Content Include="Views\Invoice\ucGLAccountsCol3.cshtml" />
+    <Content Include="Views\Invoice\GLAccountIndex.cshtml" />
+    <Content Include="Views\Client\EditClientDepartmentCode.cshtml" />
+    <Content Include="Views\Shared\Profile.cshtml" />
+    <Content Include="Views\Shared\ucProfile.cshtml" />
+    <Content Include="Views\Shared\ucUserDetailNonEdit.cshtml" />
+    <Content Include="Views\Shared\ucUserCalendar.cshtml" />
+    <Content Include="Views\Shared\ucProfileFlexiDays.cshtml" />
+    <Content Include="Views\Shared\ucProfileLeaveDays.cshtml" />
+    <Content Include="Views\Report\ucPercentageAllocationReportParameters.cshtml" />
+    <Content Include="Views\Report\ucShowEncentivizeReportParameters.cshtml" />
+    <Content Include="Views\Report\ucOnScreenEncentivizeReport.cshtml" />
+    <Content Include="Views\Report\ucOnScreenActivityReport.cshtml" />
+    <Content Include="Views\Report\ucOnScreenLeaveRequestsPending.cshtml" />
+    <Content Include="Views\Report\ucShowLeaveRequestsPendingReportParameters.cshtml" />
+    <None Include="Properties\PublishProfiles\Profile1.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>52510</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:52511/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="SelfHostServer">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:52511/" workingDir="" />
+          </servers>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.SlowCheetah.4.0.8\build\Microsoft.VisualStudio.SlowCheetah.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.SlowCheetah.4.0.8\build\Microsoft.VisualStudio.SlowCheetah.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Import Project="..\packages\Microsoft.VisualStudio.SlowCheetah.4.0.8\build\Microsoft.VisualStudio.SlowCheetah.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.SlowCheetah.4.0.8\build\Microsoft.VisualStudio.SlowCheetah.targets')" />
+</Project>

@@ -1,0 +1,82 @@
+﻿/* Week View Data Table
+----------------------------------------------------------*/
+#dataTable {
+    width: auto;
+    height: auto;
+    margin: 5px;
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.style-table {
+    height: auto !important;
+    font-family: "Arial", Helvetica, sans-serif !important;
+}
+
+    .style-table .webix_hcell {
+        height: 32px !important;
+        line-height: 32px !important;
+        font-size: 14px !important;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    .style-table .webix_ss_header {
+        font-family: inherit;
+        height: auto !important;
+        line-height: 35px;
+        z-index: 1;
+    }
+
+    .style-table .webix_ss_body {
+        z-index: 0;
+    }
+
+    .style-table .webix_view {
+        font-family: inherit;
+        font-size: 12px;
+    }
+
+    .style-table .centered {
+        text-align: center;
+    }
+
+    .style-table .non_workable {
+        background-color: #DEDEDE;
+    }
+
+    .style-table .must_have_remarks {
+        background-color: #FDD;
+    }
+
+    .style-table div.webix_tree_open, div.webix_tree_close {
+        color: #d0d0d0 !important;
+    }
+
+    .style-table div.webix_cell[aria-level="1"] {
+        background-color: #008080 !important;
+        color: #fff !important;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    .style-table div.webix_cell[aria-level="2"] {
+        background-color: #4ba995 !important;
+        color: #fff !important;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    .style-table div.webix_cell[aria-level="3"] {
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+/* message box - info */
+.webix_msginfo div {
+    background-color: #fff300 !important;
+}
+
+/* message box - success */
+.webix_msgsuccess div {
+    background-color: #1bf50a !important;
+}

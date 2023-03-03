@@ -1,0 +1,32 @@
+﻿@model  Enabill.Web.Models.ForecastEditModel
+<table class="general fullWidth">
+    @Html.Hidden("DefaultReference", Model.DefaultReference)
+    @Html.Hidden("ForecastWorkableDays", Model.NrOfWorkableDays)
+    @if ((Enabill.BillingMethodType)Model.ForecastHeader.BillingMethod == Enabill.BillingMethodType.TimeMaterial)
+    {
+        <tr>
+            <td>Period</td>
+            <td>@Html.DropDownList("MonthList", null, new { onchange = "Forecast.reloadEditForm(); return false;", style = "width:100px;" })</td>
+            <td>Hourly Rate</td>
+            <td>@Html.TextBox("viewForecastHourlyRate", Model.MostRecentForecastDetail.HourlyRate.ToDoubleString(), new { readOnly = "true", style = "width:50px;" })</td>
+        </tr>
+        <tr>
+            <td>%Allocation </td>
+            <td>@Html.TextBox("viewForecastAllocationPercentage", Model.MostRecentForecastDetail.AllocationPercentage.ToDoubleString(), new { readOnly = "true", style = "width:30px;" })</td>
+            <td><text>Forecast Amount R</text></td>
+            <td>@Html.TextBox("viewTMForecastAmount", Model.MostRecentForecastDetail.Amount.ToDoubleString(), new { readOnly = "true" })</td>
+        </tr>
+    }
+    <tr>
+        @if ((Enabill.BillingMethodType)Model.ForecastHeader.BillingMethod != Enabill.BillingMethodType.TimeMaterial)
+        {
+            <td>Period</td>
+            <td>@Html.DropDownList("MonthList", null, new { onchange = "Forecast.reloadEditForm(); return false;", style = "width:100px;" })</td>
+            <td class="NonTM show">Forecast Amount R </td>
+            <td>@Html.TextBox("viewNonTMForecastAmount", Model.MostRecentForecastDetail.Amount.ToDoubleString(), new { readOnly = "true", style = "width:120px;" })</td>
+        }
+    </tr>
+    <tr>
+    <tr><td colspan="6"><input type="button" value="Change" onclick="Forecast.editDetail(@Model.MostRecentForecastDetail.ForecastDetailID); return false;" /></td></tr>
+    </tr>
+</table>

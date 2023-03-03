@@ -1,0 +1,13 @@
+﻿    Client :
+<br />
+@Html.DropDownList("ClientRuleList", null, new { onchange = "RuleSetup.getProjects(); return false;" })
+<br />
+<br />
+<div id="projectDiv" style="display: none;">
+    Project:<br />
+    @Html.DropDownList("ProjectList", null, new { onchange = "RuleSetup.setValues(); return false;" })
+</div>
+<br />
+<div id="billingMethodDiv" style="display: none;">
+    Billing Method: <span id="billing_method"></span>
+</div>

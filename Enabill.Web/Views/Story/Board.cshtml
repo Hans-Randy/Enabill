@@ -1,0 +1,26 @@
+﻿@model IEnumerable<StoryWriter.Models.Story>
+
+    @{
+        ViewBag.Title = "Story Board";
+    }
+
+    <h1>Story Board | @Html.ActionLink("List", "Index") | @Html.ActionLink("Create New", "Create", "Story") </h1>
+
+    <div class="Story">
+        @foreach (var item in Model)
+        {
+            <h1>
+                Story: @item.StoryName (@item.StoryNumber) | @Html.ActionLink("Edit", "Edit", new { id = item.StoryID })
+            </h1>
+            <div>
+                @Html.Raw(item.StoryText)
+            </div>
+
+            <div>
+                <span class="StoryLines">As a:</span> @item.ActorName<br />
+                <span class="StoryLines">I want to:</span> @item.IWantToAction<br />
+                <span class="StoryLines">So that:</span> @item.SoThatOutcome<br />
+            </div>
+            <hr />
+        }
+    </div>

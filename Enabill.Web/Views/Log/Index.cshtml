@@ -1,0 +1,66 @@
+﻿@model IList<Enabill.Models.Dto.LogItem>
+    @{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Logs</title>
+    </head>
+    <body>
+        <h1>Logs</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th style="text-align:left">
+                        Date - Log Type - Source
+                    </th>
+                </tr>
+                <tr>
+                    <th style="text-align:left">
+                        Messages
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var l in Model)
+                {
+                    <tr>
+                        <td valign="top">
+                            @l.LogDate.ToShortTimeString() -
+                            @l.LogType -
+                            @if (!string.IsNullOrEmpty(l.LogSource))
+                            {
+                                @l.LogSource
+                            }
+                            else
+                            {
+                                <span>Unknown</span>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">
+                            <div style="overflow:hidden">
+                                <pre>
+                                @foreach (var m in l.LogMessages)
+                                {
+                                    var tabs = string.Empty;
+                                    for(var i = 0; i < m.IndentLevel;i++)
+                                    {
+                                        tabs += "\t";
+                                    }
+                                    @tabs @m.LogMessageContent
+                                }
+                            </pre>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </body>
+</html>

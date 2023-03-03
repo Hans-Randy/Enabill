@@ -1,0 +1,31 @@
+﻿@model Enabill.Web.Models.TicketUnassignedModel
+
+<fieldset>
+    <legend><h4>Unassigned Tickets</h4></legend>
+    <table class="general fullWidth">
+        <tr>
+            <th>Reference</th>
+            <th>Client</th>
+            <th>Project</th>
+            <th>Subject</th>
+            <th>Type</th>
+            <th>Date Logged</th>
+            <th></th>
+        </tr>
+
+        @foreach (var ticket in Model.UnassignedTickets)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(ticket.TicketReference, "ViewDetails", "Ticket", new { ticketReference = ticket.TicketReference }, null)
+                </td>
+                <td>@(ticket.ClientID != 0 ? @Enabill.Repos.ClientRepo.GetByID(ticket.ClientID).ClientName : "") </td>
+                <td>@(ticket.ProjectID != 0 ? @Enabill.Repos.ProjectRepo.GetByID(ticket.ProjectID).ProjectName : "") </td>
+                <td>@ticket.TicketSubject</td>
+                <td>@((Enabill.TicketTypeEnum)ticket.TicketType)</td>
+                <td>@ticket.DateCreated.ToDisplayString()</td>
+                <td><img src="@Url.Content("~/Content/Img/email.png")" alt="Email" title="Send Email Notification" onclick="Ticket.emailNotification(@ticket.TicketID); return false;" style="cursor:pointer; height:14px; width:14px;" /></td>
+            </tr>
+        }
+    </table>
+</fieldset>

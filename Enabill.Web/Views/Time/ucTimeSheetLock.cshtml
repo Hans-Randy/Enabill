@@ -1,0 +1,17 @@
+﻿@model Enabill.Web.Models.TimeIndexModel
+
+@if (CurrentUser.CanManage(Model.User) && Model.CanTimesheetLockStatusBeManaged)
+{
+    <div class="actionDiv" onclick="Timesheet.changeLockStatus('@Model.IsTimesheetLocked'); return false;">
+        @if (Model.IsTimesheetLocked)
+        {
+            <span class="imageWithText"><img alt="" src="@Url.Content("~/Content/Img/lock_20x20.png")" /></span>
+            <text>Timesheet Locked</text>
+        }
+        else
+        {
+            <span class="imageWithText"><img alt="" src="@Url.Content("~/Content/Img/unlock_20x20.png")" /></span>
+            <text>Timesheet Unlocked</text>
+        }
+    </div>
+}

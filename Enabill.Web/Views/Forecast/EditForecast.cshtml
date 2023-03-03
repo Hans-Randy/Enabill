@@ -1,0 +1,11 @@
+﻿@model Enabill.Web.Models.ForecastEditModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{ ViewBag.Title = "Edit"; }
+
+<div id="ucEditForecast" class="marginView">
+    @Html.Partial("ucEditForecast", Model)
+</div>

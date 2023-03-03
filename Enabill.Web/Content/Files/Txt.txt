@@ -1,0 +1,20 @@
+2017-10-14 17:15:11.2732 | Debug | Enabill.Models.User | 18 | APPLYING FOR LEAVE SECTION================================
+2017-10-14 17:15:14.1050 | Debug | Enabill.Models.User | 18 | Leave application passed all required tests. Logging out input values before we return the created leave object
+2017-10-14 17:15:15.8024 | Debug | Enabill.Models.User | 18 | Jackie Sonnenberg is applied for leave
+2017-10-14 17:15:17.4987 | Debug | Enabill.Models.User | 18 | Dumping out leave model that was saved
+2017-10-14 17:15:21.6079 | Debug | Enabill.Models.User | 18 | {
+	LeaveID: 6963,
+	UserID: 255,
+	Remark: Leave,
+	DateFrom: 2017-10-27,
+	DateTo: 2017-10-30,
+	NumberOfDays: 2,
+	LeaveType: 1,
+	DateRequested: 2017-10-14T17:15:11.1812243Z,
+	ApprovalStatus: 1,
+	LastModifiedBy: Jackie Sonnenberg,
+	IsPartialDay: False,
+	IsFullDay: True,
+	GetNumberOfHours: 16
+}
+2017-10-14 17:15:23.3373 | Debug | Enabill.Models.User | 18 | ==========================================================

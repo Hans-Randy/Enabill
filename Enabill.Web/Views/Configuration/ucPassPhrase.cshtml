@@ -1,0 +1,16 @@
+﻿@model string
+
+<table>
+    <tr>
+        <th>Old PassPhrase</th>
+        <td>@Html.Password("OldPassPhrase")</td>
+    </tr>
+    <tr>
+        <th>New PassPhrase</th>
+        <td>@Html.Password("NewPassPhrase")</td>
+    </tr>
+    <tr>
+        <th>Confirm New PassPhrase</th>
+        <td>@Html.Password("ConfirmNewPassPhrase")</td>
+    </tr>
+</table>

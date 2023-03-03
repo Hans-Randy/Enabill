@@ -1,0 +1,133 @@
+﻿@model Enabill.Models.Client
+
+<table class="subTable" style="width: 450px;">
+    <tr>
+        <td>
+
+            <form id="ClientDetailFrm">
+                @Html.ValidationSummary(true)
+                <fieldset>
+                    <legend>Client</legend>
+
+                    @Html.HiddenFor(model => model.ClientID)
+
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.ClientName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ClientName)
+                        @Html.ValidationMessageFor(model => model.ClientName)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.RegisteredName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.RegisteredName)
+                        @Html.ValidationMessageFor(model => model.RegisteredName)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.AccountCode)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.AccountCode)
+                        @Html.ValidationMessageFor(model => model.AccountCode)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.VATNo)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.VATNo)
+                        @Html.ValidationMessageFor(model => model.VATNo)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.VATRate) %
+                    </div>
+                    <div class="editor-field">
+                        @(Html.TextBox("VATRate", Model.VATRate.HasValue ? Model.VATRate : Model.GetVATRate(CurrentUser)))
+                        @Html.ValidationMessageFor(model => model.VATRate)
+                    </div>
+
+                    <br />
+
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.PostalAddress1)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PostalAddress1)
+                        @Html.ValidationMessageFor(model => model.PostalAddress1)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.PostalAddress2)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PostalAddress2)
+                        @Html.ValidationMessageFor(model => model.PostalAddress2)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.PostalAddress3)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PostalAddress3)
+                        @Html.ValidationMessageFor(model => model.PostalAddress3)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.PostalCode)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.PostalCode)
+                        @Html.ValidationMessageFor(model => model.PostalCode)
+                    </div>
+                    <div class="editor-label">
+                        @* @Html.CleanLabelFor(model => model.SupportEmailAddress)*@
+                        Enabill helpdesk email address
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.SupportEmailAddress)
+                        @Html.ValidationMessageFor(model => model.SupportEmailAddress)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.CurrencyTypeID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.CurrencyTypeID, "CurrencyList")
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.IsActive, "Is Active")
+                    </div>
+                    <div class="editor-field">
+                        @Html.DisplayFor(model => Model.IsActive)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.IsDeactivated, "Phased Out")
+                    </div>
+                    <div class="editor-field" title="Client will only become Inactive after all Projects have reached their Confirmed End Date.">
+                        @Html.DisplayFor(model => Model.IsDeactivated)
+                    </div>
+                    <br />
+
+                    <input type="button" value="Close" style="width: 100px" ; onclick="Client.close(); return false;" />
+                    <input type="button" value="Save" style="width: 100px;" onclick="Client.save(); return false;" />
+
+                    @if (Model.ClientID > 0)
+                    {
+                        if (Model.IsActive && !Model.IsDeactivated)
+                        {
+                            <input type="button" value="Phase Out This Client" onclick="Client.deactivate(@Model.ClientID)" />
+                        }
+                        else
+                        {
+                            <input type="button" value="Activate This Client" onclick="Client.activate(@Model.ClientID)" />
+                        }
+                    }
+                </fieldset>
+            </form>
+        </td>
+    </tr>
+</table>

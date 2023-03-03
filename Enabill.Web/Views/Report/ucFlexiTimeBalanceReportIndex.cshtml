@@ -1,0 +1,64 @@
+﻿@model Enabill.Web.Models.FlexiBalanceReportModel
+@Html.TitleTable("tblFlexiTimeBalanceReport", "", "<b>FlexiTime Balance Report</b>", "", "ucFlexiTimeIndexCol3", Model.SelectedMonth, null, null, "ucFlexiTimeBalanceReportCol5", Model)
+@Html.Hidden("SelectedMonth", Model.SelectedMonth)
+@Html.Hidden("CurrentDate", DateTime.Today)
+
+<div class="padView">
+    <table class="subTable general fullWidth">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="center" style="border-left:4px solid #eee;">@Model.SelectedMonth.AddMonths(-1).Month.ToShortMonthName()  @Model.SelectedMonth.AddMonths(-1).Year.ToString()</th>
+            <th colspan="6" style="border-left:4px solid #eee;">@Model.SelectedMonth.Month.ToShortMonthName()  @Model.SelectedMonth.Year.ToString()</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th width="15%">Full Name</th>
+            <th width="10">Employment Type</th>
+            <th width="15%">Manager</th>
+            <th width="10" style="border-left:4px solid #eee;">Closing Balance</th>
+            <th width="10" style="border-left:4px solid #eee;">Opening Balance</th>
+            <th width="10">Delta for month</th>
+            <th width="10">@(DateTime.Today == Model.SelectedMonth ? "Closing Balance (ToDate)" : "Closing Balance")</th>
+            <th width="10">Last WorkSession Date</th>
+            <th width="10">WA Exceptions</th>
+            <th width="10">Pending Approvals</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var flexiTimeBalance in Model.FlexiTimeReport.OrderBy(f => f.SelectedMonthsClosingBalance).ToList())
+        {
+            var previousMonthClosingBalanceClass = flexiTimeBalance.PreviousMonthsClosingBalance < 0 ? "error" : "";
+            var openingBalanceClass = flexiTimeBalance.SelectedMonthsOpeningBalance < 0 ? "error" : "";
+            var differenceClass = flexiTimeBalance.SelectedMonthsDelta < 0 ? "error" : "";
+            var flexiBalanceTodayClass = flexiTimeBalance.SelectedMonthsClosingBalance < 0 ? "error" : "";
+            <tr>
+                <td>@Html.ActionLink(flexiTimeBalance.FullName, "ShowUsersFlexi", "FlexiTime", new { userID = flexiTimeBalance.UserID, selectedMonth = Model.SelectedMonth }, null) </td>
+                <td>@flexiTimeBalance.EmploymentType</td>
+                <td>@flexiTimeBalance.Manager</td>
+                <td class="@previousMonthClosingBalanceClass" style="border-left:4px solid #eee;">@flexiTimeBalance.PreviousMonthsClosingBalance.ToDoubleString()</td>
+                <td class="@openingBalanceClass" style="border-left:4px solid #eee;">@flexiTimeBalance.SelectedMonthsOpeningBalance.ToDoubleString()</td>
+                <td class="@differenceClass">@flexiTimeBalance.SelectedMonthsDelta.ToDoubleString()</td>
+                <td class="@flexiBalanceTodayClass">@flexiTimeBalance.SelectedMonthsClosingBalance.ToDoubleString()</td>
+                <td>@flexiTimeBalance.LastWorkSessionDate</td>
+                <td>@(flexiTimeBalance.WorkAllocationExceptionsToDate != 0 ? flexiTimeBalance.WorkAllocationExceptionsToDate.ToDoubleString() : "") </td>
+                <td>@(flexiTimeBalance.PendingApprovalsToDate != 0 ? flexiTimeBalance.PendingApprovalsToDate.ToDoubleString() : "") </td>
+                <td>
+                    @if (flexiTimeBalance.PreviousMonthsClosingBalance.ToDoubleString() != flexiTimeBalance.SelectedMonthsOpeningBalance.ToDoubleString())
+                    {
+                        @Html.ActionLink("Fix OB", "FixFlexiOB", "Report", new { userID = flexiTimeBalance.UserID }, null)
+                    }
+                </td>
+                <td>
+                    @if (flexiTimeBalance.BalanceAuditTrailChanges > 0)
+                    {
+                        @Html.ActionLink("Audit Trail", "BalanceAuditTrailReportIndex", "Report", new { balanceTypeID = (int)Enabill.BalanceTypeEnum.Flexi, userID = flexiTimeBalance.UserID }, null)
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>

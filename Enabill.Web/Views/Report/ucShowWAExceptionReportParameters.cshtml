@@ -1,0 +1,20 @@
+﻿@model string
+
+<div class="padView">
+    <form id="frmWorkAllocationExceptionReport" method="post">
+        <table>
+            <tr>
+                <th>Date From </th>
+                <td>@Html.TextBox("DateFrom")</td>
+            </tr>
+            <tr>
+                <th>Date To </th>
+                <td>@Html.TextBox("DateTo")</td>
+            </tr>
+            <tr>
+                <th class="borderRight">Division</th>
+                <td> @Html.DropDownList("Division")</td>
+            </tr>
+        </table>
+    </form>
+</div>

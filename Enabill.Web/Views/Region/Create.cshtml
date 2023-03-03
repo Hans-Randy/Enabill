@@ -1,0 +1,15 @@
+﻿@model Enabill.Models.Region
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{ ViewBag.Title = "Create"; }
+
+<div class="marginView">
+    @Html.TitleTable("tblRegionCreate", string.Empty, "<b>Create A New Region</b>")
+    <div class="padView">
+
+        @Html.Partial("ucRegionDetail", Model)
+    </div>
+</div>

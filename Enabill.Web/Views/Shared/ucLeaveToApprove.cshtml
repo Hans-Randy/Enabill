@@ -1,0 +1,38 @@
+﻿@model List<Enabill.Web.Models.UserLeaveModel>
+    <table class="cleanTable fullWidth">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                From
+            </th>
+            <th>
+                To
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @{
+                    var selectedLeaveEntries = item.LeaveID;
+                }
+                <td>
+                    <a href="/Leave/Index/@item.LeaveUserID">@item.LeaveUser</a>
+                </td>
+                <td>@item.LeaveType</td>
+                <td>@item.LeaveDateFrom.ToDisplayString()</td>
+                <td>@item.LeaveDateTo.ToDisplayString()</td>
+                <td><input type="checkbox" id="@selectedLeaveEntries" name="@selectedLeaveEntries" class="leaveIDs" /></td>
+            </tr>
+                    }
+        <tr>
+            <td colspan="5" align="right">
+                <input type="button" value="Approve" onclick="Leave.approveLeave(); return false;" />
+            </td>
+        </tr>
+    </table>

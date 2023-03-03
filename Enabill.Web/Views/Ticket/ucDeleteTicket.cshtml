@@ -1,0 +1,15 @@
+﻿@model string
+<form id="frmDeleteTicket" method="post">
+    <table class="general fullWidth">
+        <tr>
+            <td style="font-size:7.5pt;">
+                <span>Enter reference numbers of tickets to be deleted. Seperate multiple reference numbers with a comma(eg ALA001, GAL003):</span>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size:7.5pt;">
+                <span style="margin-left: 5px;">@Html.TextBox("TicketReferenceList", null, new { style = "width:400px;" })</span>
+            </td>
+        </tr>
+    </table>
+</form>

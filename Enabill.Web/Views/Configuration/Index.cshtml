@@ -1,0 +1,111 @@
+﻿@section head{
+    @IncludeControllerScript(true)
+}
+@{
+    ViewBag.Title = "Configuration";
+}
+
+<div class="marginView">
+    @Html.TitleTable("tblConfig", string.Empty, "<b>Configuration</b>", Url.Content("~/Content/Img/config_20x20.png"), null, null, null, null, null, null)
+    <div class="padView">
+        <table>
+            <tr>
+                <td width="30%">
+                    <table class="subTable underline">
+                        @if ((CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator)) || (CurrentUser.HasRole(Enabill.UserRoleType.InvoiceAdministrator)))
+                        {
+                            if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator))
+                            {
+                                <tr>
+                                    <td class="center">
+                                        <a href="#" onclick="Processes.runMonthEndLeaveFlexiBalanceProcess(); return false;">
+                                            Run Month-End FlexiBalance And Leave Balance Procedure
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                            @* This step will be scheduled to auto run on 1st of each month after flexi balance update   if (Settings.Current.PassphraseIsValid)
+                                {
+                                <tr>
+                                    <td class="center">
+                                        <a href="#" onclick="Processes.runUserCostToCompanyProcess(); return false;">Run User Cost To Company Process</a>
+                                    </td>
+                                </tr>
+                                }
+                                else
+                                {
+                                <tr>
+                                    <td class="center">
+                                        @Html.ActionLink("Enter Passphrase to run User Cost To Company Process", "Passphrase", "Home", new { cont="Configuration", ac="Index"}, null)
+                                    </td>
+                                </tr>
+                                }*@
+
+                            if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator)
+                                    || CurrentUser.HasRole(Enabill.UserRoleType.Manager)
+                                    || CurrentUser.HasRole(Enabill.UserRoleType.InvoiceAdministrator)
+                                    || CurrentUser.HasRole(Enabill.UserRoleType.ProjectOwner)
+                                    || CurrentUser.HasRole(Enabill.UserRoleType.Accountant))
+                            {
+                                <tr>
+                                    <td class="center">
+                                        @Html.ActionLink("Go to \"User Cost To Company\"", "Index", "UserCostToCompany")
+                                    </td>
+                                </tr>
+                            }
+
+                            if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator))
+                            {
+                                var period = Enabill.Repos.FinPeriodRepo.GetCurrentFinPeriod().DateFrom.Month.ToMonthName() + " " + Enabill.Repos.FinPeriodRepo.GetCurrentFinPeriod().DateFrom.Year.ToString();
+                                @Html.Hidden("CurrentFinPeriod", period)
+                                <tr>
+                                    <td class="center">
+
+                                        <a href="#" onclick="Processes.runDailyInvoiceProcess(); return false;">Run Daily Invoice Process</a>
+                                    </td>
+                                </tr>
+                            }
+                            if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator))
+                            {
+                                <tr>
+                                    <td class="center">
+                                        <a href="#" onclick="Configuration.manageFinPeriods('No'); return false;">Manage Financial Periods</a>
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td class="center">
+                                    <a href="#" onclick="Processes.runTimeSheetApproval(); return false;">
+                                        Run Timesheet
+                                        Approval
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.TimeCapturing))
+                        {
+                            <tr>
+                                <td class="center">
+                                    <a href="#" onclick="Configuration.setPreferences(); return false;">Manage Your Preferences</a>
+                                </td>
+                            </tr>
+                        }
+
+                        @if (CurrentUser.HasRole(Enabill.UserRoleType.Accountant) || CurrentUser.HasRole(Enabill.UserRoleType.HR) || CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator))
+                        {
+                            <tr>
+                                <td class="center">
+                                    <a href="#" onclick="Configuration.setPassPhrase(); return false;">Reset User Cost To Company PassPhrase</a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </td>
+                <td width="70%">
+                    <div id="ConfigSection" width="100%">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+﻿@model Enabill.Web.Models.MISAllocatedTimeReportModel
+
+@Html.TitleTable("tblMISAllocationTimeReport", "", "<b>MIS Allocated Time Report</b>", null, null, null, null, null, "ucMISAllocatedTimeReportCol5", Model)
+
+<div class="padView">
+    <form id="frmMISAllocatedTimeReport" method="post">
+        <table>
+            <tr>
+                <th>
+                    Date Range
+                    @Html.TextBox("DateFrom", Model.MISAllocatedTimeDateFrom.ToDisplayString())
+                    to
+                    @Html.TextBox("DateTo", Model.MISAllocatedTimeDateTo.ToDisplayString())
+                </th>
+                <th class="borderRight">
+                    Division
+                    @Html.DropDownList("Division")
+                </th>
+                <th class="borderRight">
+                    Department
+                    @Html.DropDownList("Department")
+                </th>
+                <th>
+                    <input type="submit" value="Search" />
+                </th>
+            </tr>
+        </table>
+    </form>
+    <table class="subTable general fullWidth">
+        <tr>
+            <th>Region</th>
+            <th>Department</th>
+            <th>Client</th>
+            <th>Project</th>
+            <th>Billing Method</th>
+            <th>Resource</th>
+            <th>Hours Worked</th>
+            <th>Cost to Company</th>
+        </tr>
+        @foreach (var mis in Model.MISAllocatedTimeReport)
+        {
+            <tr>
+                <td>@mis.Region</td>
+                <td>@mis.Department</td>
+                <td>@mis.Client</td>
+                <td>@mis.Project</td>
+                <td>@mis.BillingMethod</td>
+                <td>@mis.Resource</td>
+                <td>@mis.HoursWorked</td>
+                <td>@mis.CostToCompany.ToDoubleString()</td>
+            </tr>
+        }
+    </table>
+</div>

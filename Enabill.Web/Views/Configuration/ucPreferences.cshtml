@@ -1,0 +1,20 @@
+﻿@model Enabill.Models.UserPreference
+
+Default Start Time:<br />
+@Html.DropDownList("StartTime", Enabill.Web.Helpers.WorkTimeList(Model.DefaultWorkSessionStartTime.HasValue ? Model.DefaultWorkSessionStartTime.Value.Date : DateTime.Today, null, Model.DefaultWorkSessionStartTime))<br /><br />
+Default End Time:<br />
+@Html.DropDownList("EndTime", Enabill.Web.Helpers.WorkTimeList(Model.DefaultWorkSessionEndTime.HasValue ? Model.DefaultWorkSessionEndTime.Value.Date : DateTime.Today, null, Model.DefaultWorkSessionEndTime))<br /><br />
+Default Lunch Duration (in Hours):<br />
+@Html.TextBox("Lunch", Model.DefaultLunchDuration, new { Title = "In hours or fractions of an hour. E.g. 0.5" } )<br /><br />
+View:<br />
+
+@if (Model.DayView == true)
+{
+    @Html.RadioButtonFor(m => m.DayView, Model.DayView, new { @checked = "checked" }) @:Day
+    @Html.RadioButtonFor(m => m.DayView, !Model.DayView, new { @id = "WeekView" }) @:Week
+}
+else
+{
+    @Html.RadioButtonFor(m => m.DayView, Model.DayView) @:Day
+    @Html.RadioButtonFor(m => m.DayView, !Model.DayView, new { @id = "WeekView", @checked = "checked" }) @:Week
+}

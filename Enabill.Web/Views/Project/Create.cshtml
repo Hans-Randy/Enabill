@@ -1,0 +1,15 @@
+﻿@model Enabill.Models.Project
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{ ViewBag.Title = "Create"; }
+
+<div class="marginView">
+    @Html.TitleTable("tblProjectCreate", string.Empty, "<b>Create A New Project</b>")
+    <div class="padView">
+
+        @Html.Partial("ucProjectDetail", Model)
+    </div>
+</div>

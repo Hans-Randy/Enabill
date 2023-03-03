@@ -1,0 +1,11 @@
+﻿@model string
+<form id="frmFindTicket" method="post">
+    <table class="general fullWidth">
+        <tr>
+            <td>Ticket Reference:</td>
+            <td style="font-size:7.5pt;">
+                <span style="margin-left: 5px;">@Html.TextBox("TicketToFind", null, new { style = "width:100px;" })</span>
+            </td>
+        </tr>
+    </table>
+</form>

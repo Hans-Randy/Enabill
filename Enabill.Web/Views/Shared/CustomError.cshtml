@@ -1,0 +1,38 @@
+﻿@model Enabill.Web.Models.ErrorModel
+
+@section head{
+    <style type="text/css">
+        #main-error {
+            max-width: 300px;
+            min-width: 600px !important;
+            margin: auto;
+            padding-top: 70px;
+            position: static;
+        }
+    </style>
+}
+
+@{
+    ViewBag.Title = "Error";
+    ViewBag.CanSearch = false;
+
+    if (Model.IsAccessDenied)
+    {
+        ViewBag.Title = "Access Denied";
+    }
+
+    if (CurrentUserID == 0)
+    {
+        Layout = "~/Views/Shared/_WelcomeLayout.cshtml";
+        @Html.Partial("ucCustomErrorDetails", Model)
+        return;
+    }
+}
+
+<div id="main-error">
+    <div class="marginView">
+        <div class="padView">
+            @Html.Partial("ucCustomErrorDetails", Model)
+        </div>
+    </div>
+</div>

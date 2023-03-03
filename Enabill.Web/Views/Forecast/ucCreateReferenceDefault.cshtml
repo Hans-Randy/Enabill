@@ -1,0 +1,20 @@
+﻿<form id="CreateDefaultReferenceFrm" action="" method="post">
+    <table class="fullWidth underline">
+        <tr>
+            <td>
+                Reference:
+            </td>
+            <td>
+                @Html.TextBox("DefaultReference")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Effective Date:
+            </td>
+            <td>
+                @Html.TextBox("EffectiveDate", null, new { @class = "datePicker" })
+            </td>
+        </tr>
+    </table>
+</form>

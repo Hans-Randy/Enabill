@@ -1,0 +1,36 @@
+﻿@model Enabill.Web.Models.TimesheetExceptionModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+@{
+    ViewBag.Title = "Timesheet Approval Exceptions";
+}
+<h2>Time Sheet Exceptions</h2>
+<table class="subTable calendarTable fullWidth" style="font-size: 9px;">
+    <tr>
+        <th class="center" width="20%">
+            User
+        </th>
+        <th class="center" width="20%">
+            Date
+        </th>
+        <th class="center" width="60%">
+            Message
+        </th>
+    </tr>
+    @foreach (var ex in Model.Exceptions)
+    {
+        <tr>
+            <td>
+                @ex.Username
+            </td>
+            <td>
+                @ex.WorkDay.ToDisplayString()
+            </td>
+            <td>
+                @ex.Message
+            </td>
+        </tr>
+    }
+</table>

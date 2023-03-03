@@ -1,0 +1,29 @@
+﻿@model Enabill.Web.Models.ErrorModel
+
+@Html.TitleTable("tblError", string.Empty, "<b>" + Model.Title + "</b>", string.Empty)
+<table class="fullWidth" style="background: #FFF;">
+    <tr>
+        <td valign="top" style="padding-top: 15px; width: 100%;">
+            @Model.ErrorMessage
+        </td>
+        @if (CurrentUserID != 0)
+        {
+            <td valign="bottom" align="right" rowspan="2" style="padding: 10px 20px 10px 5px;">
+                @{
+                    string url = "~/Content/Img/broken_robot.png";
+                    if (Model.IsAccessDenied)
+                    {
+                        url = "~/Content/Img/accessDenied.jpg";
+                    }
+                }
+                <img src="@Url.Content(url)" alt="" />
+            </td>
+                    }
+    </tr>
+    <tr>
+        <td colspan="2">
+            This is all we have for you now *<br />
+            @Html.ActionLink("Go Home", "Index", "Home")
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,66 @@
+﻿@model Enabill.Web.Models.InvoiceGLAccountsModel
+
+@section beginHead
+{
+    @IncludeRichEditor()
+}
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "GL Accounts";
+}
+
+<div id="Index" class="marginView">
+    @Html.TitleTable("tblGLAccounts", "", "<b>GL Accounts</b>", Url.Content("/Content/Img/admin_20x20.png"), "ucGLAccountsCol3", "", "", "", null, null)
+    <div class="padView">
+
+        <div id="GLAccountsListingDiv">
+            <table>
+                <tr>
+                    <th width="150px">
+                        GL Account Code
+                    </th>
+                    <th width="250px">
+                        GL Account Name
+                    </th>
+                    <th class="centre" width="150px">
+                        Active
+                    </th>
+                    <th class="centre" width="150px">
+                        Edit
+                    </th>
+                </tr>
+                @if (Model.GLAccounts.Count() == 0)
+                {
+                    <tr>
+                        <td class="center" colspan="1">
+                            <h2 style="margin: 50px; padding: 0px;">
+                                No active GL Accounts found
+                            </h2>
+                        </td>
+                    </tr>
+                }
+                @foreach (var account in Model.GLAccounts)
+                {
+                    <tr>
+                        <td class="left" width="150px">
+                            @account.GLAccountCode
+                        </td>
+                        <td class="left" width="250px">
+                            @account.GLAccountName
+                        </td>
+                        <td class="left" width="250px">
+                            @account.IsActive
+                        </td>
+                        <td class="centre" width="150px">
+                            <img src="@Url.Content("~/Content/Img/timesheet_approved_20x20.png")" alt="Edit" title="Edit GL Account" onclick="GLAccounts.editGLAccount(@account.GLAccountID); return false;" style="cursor:pointer; height:14px" />
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

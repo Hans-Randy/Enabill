@@ -1,0 +1,61 @@
+﻿@model Enabill.Web.Models.Holiday.HolidayViewModel
+
+<form id="HolidayForm" method="post" action="@Url.Content("/Holiday/Create")" >
+    <fieldset>
+        @Html.Hidden("HolidayId", Model.Holiday.HolidayId, new { @id = "holidayId" })
+        @Html.Hidden("Date", Model.Holiday.Date, new { @id = "holidayDate" })
+        @Html.Hidden("SelectedYear", Model.SelectedYear, new { @id = "selectedYear" })
+        <table class="general font-size-up">
+            <tr>
+                <td>Name</td>
+                <td>@Html.TextBox("Name", Model.Holiday.Name, new { @id = "holidayName" })</td>
+            </tr>
+            <tr>
+                <td>Date of Holiday</td>
+                <td>@Html.TextBox("DisplayDate", null, new { @readonly = "readonly", @id = "holidayDisplayDate" })</td>
+            </tr>
+            <tr>
+                <td>Is the holiday on a fixed date?</td>
+                <td><input id="holidayIsFixedDate" name="IsFixed" type="checkbox" /></td>
+            </tr>
+            <tr>
+                <td>Is the holiday repeated every year?</td>
+                <td><input id="holidayIsRepeated" name="IsRepeated" type="checkbox" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Save" id="holiday-save" />
+                    <input type="submit" value="Delete" id="holiday-delete" />
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+
+<form id="WorkableForm" method="post" action="@Url.Content("/Holiday/WorkDayChange")">
+    @Html.Hidden("Date", null, new {@id = "workdayDateValue" })
+    <fieldset>
+        <table class="general font-size-up">
+            <tr>
+                <td>Date</td>
+                <td>@Html.TextBox("DisplayDate", null, new {@id = "workdayDateDisplay", @readonly = "readonly"})</td>
+            </tr>
+            <tr>
+                <td>Is Workable</td>
+                <td>@Html.CheckBox("IsWorkable", true, new {@id="workdayIsWorkable"})</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="submit" value="Save" id="workable-save"/>
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</form>

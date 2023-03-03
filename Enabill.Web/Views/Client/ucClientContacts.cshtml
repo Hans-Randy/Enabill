@@ -1,0 +1,3 @@
+﻿@model Enabill.Web.Models.ClientEditModel
+
+@Html.AjaxCreateList("Client", "CreateContact", "EditContact", "SaveEditContact", "ListContacts", "DeleteContact", new { id = Model.Client.ClientID })

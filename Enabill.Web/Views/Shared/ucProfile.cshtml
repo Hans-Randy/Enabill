@@ -1,0 +1,40 @@
+﻿@model Enabill.Web.Models.UserProfileModel
+
+<table class="subTable fullWidth">
+    <tr style="height: 2px;">
+        <td style="width: 25%; padding: 20px 20px 10px 20px;">
+            @Html.CollapsableTable("tblUserFlexiTime", "fullWidth", "User Details", "ucUserDetailNonEdit", Model.UserDetails)
+        </td>
+
+        <td style="width: 25%; padding: 20px 20px 10px 20px;">
+            @if (Model.User.IsFlexiTimeUser)
+            {
+                @Html.CollapsableTable("tblFB", "focusTable fullWidth", "My Flexi-Time Balance", "ucCurrentFlexiTimeBalance", Model.CurrentFlexiBalance, Url.Content("~/Content/Img/flexi_20x20.png"))
+                <br />
+            }
+            else if (Model.User.HasRole(Enabill.UserRoleType.TimeCapturing))
+            {
+                @Html.CollapsableTable("tblTB", "focusTable fullWidth", "My Time Balance", "ucCurrentTimeBalance", Model.CurrentTimeBalance, Url.Content("~/Content/Img/flexi_20x20.png"))
+                <br />
+            }
+            @if (Model.User.IsLeaveUser)
+            {
+                @Html.CollapsableTable("tblCurrentLeaveBalance", "fullWidth", "Current Leave Balance", "ucCurrentLeaveBalance", Model.CurrentLeaveBalance)
+            }
+        </td>
+
+        <td class="halfWidth" style="padding: 20px 20px 10px 20px; min-height: 100%;" rowspan="2">
+            @Html.CollapsableTable("tblUserCalendar", "fullWidth", "Current Month", "ucUserCalendar", Model.Calendar)
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 20px 20px 10px 20px;" colspan="2">
+            @if (Model.User.IsFlexiTimeUser)
+            {
+                @Html.CollapsableTable("tblFlexiDays", "fullWidth", "FlexiDays", "ucProfileFlexiDays", Model.FlexiDays)
+            }
+            <br />
+            @Html.CollapsableTable("tblLeaveDays", "fullWidth", "Leave Days", "ucProfileLeaveDays", Model.LeaveDays)
+        </td>
+    </tr>
+</table>

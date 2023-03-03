@@ -1,0 +1,78 @@
+﻿@model Enabill.Web.Models.UserLeaveModel
+<form id="ManageLeaveFrm" action="" method="post">
+    <table class="fullWidth underline">
+        <tr>
+            <th>
+                User
+            </th>
+            <td>
+                @Model.LeaveUser
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Leave Type
+            </th>
+            <td>
+                @Model.LeaveType
+            </td>
+        </tr>
+
+        @if (Model.IsPartialDay)
+        {
+            //Partial Day
+            <tr>
+                <th>
+                    Leave Date
+                </th>
+                <td>
+                    @Html.TextBox("LeaveDate", Model.LeaveDateFrom.ToDisplayString())
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Number Of Hours
+                </th>
+                <td>
+                    @if (Model.LeaveType == "Birthday Leave")
+                    {
+                        @Html.DropDownList("Hours", null, new { disabled = "disabled" })
+                    }
+                    else
+                    {
+                        @Html.DropDownList("Hours")
+                    }
+                </td>
+            </tr>
+        }
+        else
+        {
+            //Full Day/s
+
+            <tr>
+                <th>
+                    Leave Start Date
+                </th>
+                <td>
+                    @Html.TextBox("LeaveDateFrom", Model.LeaveDateFrom.ToDisplayString(), new { @class = "datePicker" })
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Leave End Date
+                </th>
+                <td>
+                    @Html.TextBox("LeaveDateTo", Model.LeaveDateTo.ToDisplayString(), new { @class = "datePicker" })
+                </td>
+            </tr>
+        }
+        <tr>
+            <th>
+                Remark
+            </th>
+            <td>
+                @Html.TextBox("LeaveRemark", Model.LeaveRemark)
+            </td>
+        </tr>
+    </table>
+</form>

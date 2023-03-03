@@ -1,0 +1,11 @@
+﻿@model DateTime
+
+<span>
+    <span class="actionSpan" onclick="View.showDay('@Model.AddDays(-7).ToDisplayString()'); return false;">Previous Week &nbsp | </span>
+    Date : @Html.TextBox("WorkDayDate", Model.ToDisplayString(), new { @class = "datePicker", style = "background-color: #FFF; font-size: 80%;" })
+    <input type="button" value="Go" onclick="View.showDay($('#WorkDayDate').val()); return false;" />
+    &nbsp |&nbsp Date Period : @Model.ToDisplayString() <i>to</i> @Model.AddDays(6).ToDisplayString()
+    <span class="actionSpan" onclick="View.showDay('@Model.AddDays(7).ToDisplayString()'); return false;"> |&nbsp Next Week &nbsp |&nbsp</span>
+    <input type="button" value="Copy from previous week" onclick="WorkAllocation.copyWeek($('#WorkDayDate').val(), 'true');" />
+    <input type="button" value="Copy to next week" onclick="WorkAllocation.copyWeek($('#WorkDayDate').val(), 'false');" />
+</span>

@@ -1,0 +1,28 @@
+﻿@model Enabill.Web.Models.ForecastCreateModel
+
+<div class="padView">
+    <form id="ForecastCreateFrm">
+        <table class="subTable fullWidth">
+            <tr>
+                <td>
+                    <fieldset>
+                        <legend>Header</legend>
+                        @Html.Partial("ucCreateHeader", Model)
+                    </fieldset>
+                </td>
+                <td>
+                    <fieldset>
+                        <legend>Details</legend>
+                        @Html.Partial("ucCreateDetail", Model)
+                    </fieldset>
+                </td>
+            </tr>
+
+            <tr><td colspan="6"><input type="button" value="Save" onclick="Forecast.save(0); return false;" /></td></tr>
+            @Html.Hidden("ClientIDs")
+            @Html.Hidden("ProjectIDs")
+            @Html.Hidden("HeaderResourceIDs")
+            @Html.Hidden("Action", "Create")
+        </table>
+    </form>
+</div>

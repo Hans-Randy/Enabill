@@ -1,0 +1,9 @@
+﻿@model Enabill.Web.Models.TimeIndexModel
+
+<form id="frmTimeMonthList" method="post">
+    <span>
+        Month: @Html.DropDownList("MonthList")
+        <input type="submit" value="Go" />
+    </span>
+    @Html.Hidden("User", Model.User.UserID)
+</form>

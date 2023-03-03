@@ -1,0 +1,13 @@
+﻿@model Enabill.Web.Models.FlexiBalanceReportModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "FlexiTime Balance Report";
+}
+
+<div id="ucFlexiTimeBalanceReportIndex" class="marginView">
+    @Html.Partial("ucFlexiTimeBalanceReportIndex", Model)
+</div>

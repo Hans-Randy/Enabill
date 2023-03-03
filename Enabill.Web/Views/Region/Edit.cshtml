@@ -1,0 +1,17 @@
+﻿@model Enabill.Models.Region
+
+@section head{
+    @IncludeControllerScript(true)
+    @IncludeDocumentViewer()
+}
+
+@{ ViewBag.Title = "Edit Region"; }
+
+<div class="marginView">
+    @Html.TitleTable("tblRegionEdit", string.Empty, "<b>Edit " + Model.RegionName + " Region</b>")
+    <div class="padView">
+        @Html.Tabs("tabs",
+            new TabPage("Region Details", "ucRegionDetail", Model)
+        )
+    </div>
+</div>

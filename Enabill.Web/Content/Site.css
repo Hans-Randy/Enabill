@@ -1,0 +1,1319 @@
+﻿/*----------------------------------------------------------
+The base color for this template is #5c87b2. If you'd like
+to use a different color start by replacing all instances of
+#5c87b2 with your new color.
+----------------------------------------------------------*/
+body {
+    background-color: #FFF;
+    border: 0 none !important;
+    font-size: 75%;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #696969;
+    width: 100%;
+    height: 100%;
+}
+
+h2.trigger {
+    background: url("/Content/Img/rightArrow1.png") no-repeat scroll 7px center #EDEFFF;
+    margin: 0 0 0;
+    padding: 2px 10px 3px 30px;
+    position: relative;
+    text-align: left;
+    border-bottom: 1px solid #6A8DD2;
+    border-radius: 3px 3px 3px 3px;
+    font-family: Verdana,Helvetica,Sans-Serif;
+    font-size: 1.2em;
+    width: 700px;
+}
+
+    h2.trigger a {
+        color: #0D6B95;
+        border: 1px solid transparent;
+        font-weight: lighter;
+        text-decoration: none;
+    }
+
+        h2.trigger a:hover {
+            border: 1px solid transparent;
+            color: #B77B14;
+        }
+
+h2.active {
+    background: url("/Content/Img/downArrow1.png") no-repeat scroll 7px center #dfe3ff;
+}
+/*--When toggle is triggered, it will shift the image to the bottom to show its "opened" state--*/
+
+.toggle_container {
+    margin: 0 0 5px;
+    padding: 0;
+    overflow: hidden;
+    font-size: 1em;
+    clear: both;
+    border: 1px solid #C39B07;
+    border-top: 0 none;
+}
+
+    .toggle_container .block {
+        padding: 10px; /*--Padding of Container--*/
+        padding-bottom: 1px;
+        padding-top: 1px;
+        background: #FFFFFF; /*--Bottom rounded corners--*/
+    }
+
+h1 a {
+    font-size: 0.6em;
+}
+
+h2 a {
+    font-size: 0.75em;
+}
+
+h3 a {
+    font-size: 0.75em;
+}
+
+a:link {
+    color: #008080;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #008080;
+}
+
+a:hover {
+    color: #3A8;
+    text-decoration: none;
+}
+
+a:active {
+    color: #3A8;
+}
+
+p, ul {
+    margin-bottom: 20px;
+    line-height: 1.6em;
+}
+
+/* HEADINGS
+----------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6 {
+    font-size: 1.5em;
+    color: #008080;
+}
+
+h1 {
+    font-size: 1.8em;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+h2 {
+    padding: 0 0 10px 0;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+h5, h6 {
+    font-size: 1em;
+}
+
+/* this rule styles <h2> tags that are the
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2 {
+    margin-top: 0;
+}
+
+/* PRIMARY LAYOUT ELEMENTS
+----------------------------------------------------------*/
+
+/* you can specify a greater or lesser percentage for the
+page width. Or, you can specify an exact pixel width. */
+#page-div {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#header {
+    background-color: #000;
+    margin-bottom: 0px;
+    padding: 0;
+    height: 99px;
+    color: #FFF;
+    position: fixed;
+    min-width: 650px;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    right: 0;
+}
+
+    #header h1 {
+        font-weight: bold;
+        color: #FDFDFD;
+        font-size: 20px;
+        float: left;
+    }
+
+#upperHeader {
+    width: 100%;
+    display: block;
+    height: 64px;
+    margin: 0;
+    background: #161616 url('/Content/Img/banner_bg.png') repeat-x 0 50%;
+    color: #FFF;
+}
+
+#lowerHeader {
+    width: 100%;
+    display: block;
+    height: 28px;
+    margin: 0;
+    background: #FDFDFD url('/Content/Img/navBar_bg.png') repeat-x scroll 0 50%;
+}
+
+#headerUnderline {
+    height: 7px;
+    background-color: #008080;
+}
+
+#main {
+    background: #F0F0F0 repeat-x scroll 0 0;
+    position: absolute;
+    top: 99px;
+    bottom: 0px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    position: absolute;
+}
+
+#main-content {
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    width: auto;
+}
+
+#footer {
+    color: #999;
+    padding: 10px 0;
+    margin: 0;
+    padding: 4px 10px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    text-align: right;
+    font-size: 10pt;
+}
+
+/* MENU ITEMS
+----------------------------------------------------------*/
+
+#enabill_Logo {
+    display: inline-block;
+    z-index: 50;
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    width: 121px;
+    height: 37px;
+}
+
+#logon-span {
+    display: inline-block;
+    margin-top: 1px;
+    z-index: 50;
+    line-height: 52px;
+    position: absolute;
+    right: 10px;
+    font-size: 10pt;
+    font-weight: normal;
+    color: #DADADA;
+}
+
+    #logon-span b {
+        color: #FFF;
+        font-weight: bold;
+        font-size: 10pt;
+    }
+
+    #logon-span a {
+        color: #DADADA;
+        text-decoration: none;
+        display: inline-block;
+        border: none 0;
+    }
+
+        #logon-span a:hover {
+            color: #FFF;
+        }
+
+        #logon-span a img {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            top: 6px;
+            border: none 0;
+            margin-right: 5px;
+        }
+
+#menuItems {
+    display: inline-block;
+    z-index: 60;
+    float: left;
+    left: 0;
+    top: 64px;
+    position: absolute;
+    height: 28px;
+    width: 100%;
+    line-height: 28px;
+    overflow: hidden;
+}
+
+    #menuItems .menuAnchor {
+        float: left;
+        border: 0 none;
+        color: #333;
+        height: 100%;
+        display: inline-block;
+        width: 68px;
+        text-decoration: none;
+        font-weight: normal;
+    }
+
+        #menuItems .menuAnchor:hover {
+            background: #008080 url('../../Content/Img/navBar_bg_teal.png') repeat-x 0 0;
+            cursor: pointer;
+        }
+
+    #menuItems .menuText {
+        width: 100%;
+        text-align: center;
+        display: inline-block;
+        top: 65px;
+    }
+
+        #menuItems .menuText:hover {
+            color: #FFF;
+        }
+
+.menuSeparator {
+    display: inline-block;
+    z-index: 100;
+    float: left;
+}
+
+.ui-widget-header {
+    border: 1px solid #CFCFCF !important;
+    background: #CFCFCF url(../../Content/Img/GreenHeaderGradient.png) 50% 50% repeat-x !important;
+}
+
+/*--------------------------------------------------------*/
+
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+select {
+    font-size: 0.9em;
+    width: 206px;
+}
+
+input[type="text"] {
+    width: 200px;
+    border: 1px solid #CCC;
+}
+
+input[type="password"] {
+    width: 200px;
+    border: 1px solid #CCC;
+}
+
+/*this is to remove the borders around the focussed input in Google Chrome*/
+textarea:focus, input:focus {
+    outline: none
+}
+
+/* TABLE
+----------------------------------------------------------*/
+
+table {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    /*table-layout: auto;*/
+}
+
+    table th {
+        padding: 6px 5px;
+        text-align: left;
+    }
+
+    table td {
+        padding: 5px;
+        vertical-align: top;
+    }
+
+    /* General Table -- to be used for general tables
+----------------------------------------------------------*/
+    table.general {
+        border: #EEE solid 1px;
+    }
+
+        table.general > tbody > tr > th {
+            background-color: #EEE;
+            border: #EEE solid 1px;
+        }
+
+        table.general > tbody > tr > td {
+            border: #EEE solid 1px;
+        }
+
+    table > tbody > tr.general {
+        background-color: #EEE;
+    }
+
+    /* Underline Table -- to be used for tables that require the rows to be underlined
+----------------------------------------------------------*/
+    table.underline {
+    }
+
+        table.underline > tbody > tr > th {
+            border-bottom: #EEE solid 1px;
+        }
+
+        table.underline > tbody > tr > td {
+            border-bottom: #EEE solid 1px;
+        }
+
+    /* center Table -- to be used for tables that require to be in the middle of its parent
+----------------------------------------------------------*/
+    table.center {
+        margin: auto;
+    }
+
+        table.center > tbody > tr > th {
+            text-align: left;
+        }
+
+        table.center > tbody > tr > td {
+            text-align: left;
+        }
+
+    /* right Table -- to be used for tables that require to be on the rigth of its parent
+----------------------------------------------------------*/
+    table.right {
+        right: 0;
+    }
+
+    table > tbody > tr > td.right {
+        text-align: right;
+    }
+
+    table > tbody > tr > td.left {
+        text-align: left;
+    }
+
+    table > tbody > tr > td.center {
+        text-align: center;
+    }
+
+    table > tbody > tr.center {
+        text-align: center;
+    }
+
+    table > tbody > tr.borderBottom {
+        border-bottom: solid 1px #eee;
+    }
+
+    table > tbody > tr > td.borderLeft {
+        border-left: solid 1px #eee;
+    }
+
+    table > tbody > tr > td.borderRight {
+        border-right: solid 1px #eee;
+    }
+
+/* MISC
+----------------------------------------------------------*/
+.fullWidth {
+    width: 100%;
+}
+
+.halfWidth {
+    width: 50%;
+}
+
+.title {
+    color: #ED008C;
+}
+
+.clear {
+    clear: both;
+}
+
+.error {
+    color: red !important;
+}
+
+.active {
+    color: green !important;
+    font-weight: bold;
+}
+
+.information {
+    color: teal !important;
+    text-align: right;
+}
+
+.show {
+    display: block !important;
+}
+
+.hide {
+    display: none !important;
+}
+
+.fontIncrease {
+    font-size: 1.1em !important;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #ff0000;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #F00 !important;
+    background-color: #FEE !important;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/* Styles for editor and display helpers
+----------------------------------------------------------*/
+.display-label,
+.editor-label {
+    width: 200px;
+    float: left;
+    margin: 0.5em 0 0 0;
+    clear: both;
+}
+
+.display-field,
+.editor-field {
+    margin: 0.5em 0 0 0;
+    clear: right;
+}
+
+.text-box {
+    width: 30em;
+}
+
+.point {
+    text-decoration: underline;
+}
+
+    .point:hover {
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+input[type=text], textarea, input[type=password], select {
+    background: url('/Content/Img/input_back.png') repeat-x;
+    border: 1px solid #999;
+    padding: 2px
+}
+
+#search-area {
+    z-index: 100;
+    float: left;
+}
+
+    #search-area input[type=text] {
+        background-color: #FFF;
+    }
+
+.no-results {
+    font-style: italic;
+    color: #666;
+}
+
+#notifier {
+    margin: auto;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    top: 0px;
+    text-align: center;
+    padding-top: 5px;
+    z-index: 1000;
+}
+
+#notify-text {
+    padding: 5px 10px;
+    border: 1px solid #008080;
+    background-color: #ED008C;
+    color: #008080;
+    font-weight: bold;
+    background-color: #FFFFFF;
+}
+
+#ajax-create {
+    display: none;
+}
+
+table.tblAssign {
+    width: 700px;
+}
+
+    table.tblAssign > tbody > tr > th:first-child, table.tblAssign > tbody > tr > th:nth-child(3) {
+        width: 300px;
+    }
+
+.timeError {
+    color: Red;
+}
+
+/* Generic List Components
+**********************************************************/
+.genericItem {
+    width: 96%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.genericHeader {
+    height: 33px;
+    border-bottom: 2px solid #333;
+    display: inline-block;
+    width: 100%;
+    background-color: #999;
+}
+
+.genericSubject {
+    font-size: 22px;
+    padding: 5px;
+    padding-top: 8px;
+    color: #333;
+}
+
+.genericInfo {
+    float: right;
+    padding: 3px;
+    color: #FFF;
+}
+
+.genericText {
+    padding: 10px;
+    height: 50px;
+    display: block;
+    overflow: hidden;
+    min-height: 50px;
+}
+
+.genericBase {
+    display: block;
+    text-align: right;
+    padding-right: 16px;
+}
+
+.genericState {
+    display: inline-block;
+    height: 20px;
+}
+
+.genericFCK {
+    height: 400px;
+}
+
+/* ------- UI Theme overrides ----------- */
+.ui-icon {
+    width: 16px;
+    height: 16px;
+    background-image: url('custom-theme/images/ui-icons_ed008c_256x240.png');
+}
+
+.right {
+    text-align: right;
+}
+
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+.datePicker {
+    width: 80px !important;
+}
+
+.help {
+    font-size: smaller;
+    font-style: italic;
+}
+
+.OrangeError {
+    color: Orange;
+}
+
+div.contents {
+    width: 100%;
+    display: inline-block;
+}
+
+table.no-line {
+    border-style: none none solid solid !important;
+    border-width: 1px !important;
+    border-color: #e8eef4 !important;
+    /*table-layout: auto !important;*/
+    border-collapse: collapse !important;
+}
+
+img.icon {
+    cursor: pointer;
+    height: 14px;
+}
+
+img.icon24x24 {
+    height: 24px;
+    width: 24px;
+}
+
+.vCenter {
+    vertical-align: middle;
+}
+
+.headerButton {
+    height: 16px;
+    width: 40px;
+    margin: 0px 15px;
+}
+
+td.spaceMe {
+    width: 20px;
+}
+
+/* Invoice Related
+***************************************************************/
+
+.TimeMaterial {
+    background-color: #F4C1C1;
+    color: #000;
+}
+
+.FixedCost {
+    background-color: #C9D3E0;
+    color: #000;
+}
+
+.MonthlyFixedCost {
+    background-color: #CEC8E1;
+    color: #000;
+}
+
+.ActivityFixedCost {
+    background-color: #EECC99;
+    color: #000;
+}
+
+.SLA {
+    background-color: #DCE8C1;
+    color: #000;
+}
+
+.Travel {
+}
+
+.AdHoc {
+    background: #E8DFD2;
+    color: #000;
+}
+
+.Open {
+    background: #8F3103;
+    color: #FFF;
+}
+
+.NA {
+    background: #1d682a;
+    color: #FFF;
+}
+
+.InProgress {
+    background: #7C987D;
+    color: #FFF;
+}
+
+.Ready {
+    background: #B08D02;
+    color: #FFF;
+}
+
+.Complete {
+    background: #16410A;
+    color: #FFF;
+}
+
+/* Forecast Related
+***************************************************************/
+.YearMonthColor {
+    background: #B08D02;
+    color: #FFF;
+    font-size: 110%;
+    font-weight: bold
+}
+
+.RegionColor {
+    background-color: #F4C1C1;
+    color: #000;
+    font-size: 105%;
+    font-weight: bold
+}
+
+.GrandTotalColor {
+    background-color: #C9D3E0;
+    color: #000;
+    font-size: 105%;
+    font-weight: bold
+}
+
+.DivisionColor {
+    background-color: #DCE8C1;
+    color: #000;
+    font-size: 105%;
+    font-weight: bold
+}
+
+.DetailsHeadingColor {
+    background: #E8DFD2;
+    color: #000;
+    font-size: 90%;
+    font-weight: bold
+}
+
+.DetailsColor {
+    background: #E8DFD2;
+    color: #000;
+    font-size: 90%;
+    font-weight: normal
+}
+
+.ReportSectionColor {
+    background: #16410A;
+    color: #FFF;
+}
+
+/* Collapsable Table
+**************************************************************/
+
+table.collapseTable {
+    margin-bottom: 10px;
+    /*table-layout: fixed;*/
+}
+
+    table.collapseTable > tbody > tr > th {
+        background: #008080 url('../../Content/Img/navBar_bg_teal.png') repeat-x 0 0;
+        padding: 2px 10px;
+        color: #FFF;
+        font-size: 10pt;
+        height: 26px;
+        /*line-height: 0px;*/
+    }
+
+    table.collapseTable > tbody > tr > td {
+        background-color: #E3E8EE;
+        padding: 10px;
+    }
+
+    table.collapseTable > tbody > tr > th.iconCell {
+        width: 20px;
+        padding-right: 0px;
+    }
+
+    table.collapseTable > tbody > tr > th.headerIcon {
+    }
+
+    table.collapseTable > tbody > tr > th.noCell {
+        width: 0px;
+        padding: 0px;
+    }
+
+    table.collapseTable > tbody > tr > th.titleCell {
+    }
+
+    table.collapseTable > tbody > tr > th.toggleCell {
+        width: 16px;
+    }
+
+    table.collapseTable > tbody > tr > td.extended {
+    }
+
+    table.collapseTable > tbody > tr > td.collapsed {
+        min-height: 10px;
+    }
+
+    table.collapseTable.subFocusTable {
+    }
+
+.collapseTable.subFocusTable > tbody > tr > th {
+    background-image: url('../../Content/Img/infoBar_bg_grey.png');
+    background-color: #DEDEDE
+}
+
+table.collapseTable.subFocusTable > tbody > tr > td {
+    background-color: #DEDEDE
+}
+
+/* Clean Table
+********************************************/
+
+table.cleanTable {
+    background-color: #FFF;
+    color: #696969;
+    border: 1px solid #C9C9C9;
+}
+
+    table.cleanTable > tbody > tr {
+        background-color: #FFF;
+        color: #696969;
+        border: 1px solid #C9C9C9;
+    }
+
+        table.cleanTable > tbody > tr > th {
+            color: #666;
+            font-size: 120%;
+            line-height: 10px;
+            border: 1px solid #C9C9C9;
+        }
+
+        table.cleanTable > tbody > tr > td {
+            font-size: 110%;
+            line-height: 10px;
+            vertical-align: middle;
+            border: 1px solid #C9C9C9;
+        }
+
+/*
+************************************/
+
+table > tbody > tr > td.darkBackground {
+    background-color: #787D81;
+}
+
+/* Calendar Table
+************************************/
+
+table.calendarTable {
+    background-color: #FFF;
+    background-image: none;
+    color: #696969;
+}
+
+    table.calendarTable > tbody > tr {
+        background-color: #FFF;
+        background-image: none;
+        color: #696969;
+    }
+
+        table.calendarTable > tbody > tr > th {
+            background-color: #DEDEDE;
+            background-image: none;
+            color: #333;
+            border: solid 1px #C9C9C9;
+            font-size: 8pt;
+            padding: 1px;
+            line-height: 16px;
+        }
+
+        table.calendarTable > tbody > tr > td {
+            background-color: #FFF;
+            background-image: none;
+            color: #696969;
+            border: solid 1px #C9C9C9;
+            font-size: 8pt;
+            padding: 2px;
+            line-height: 16px;
+        }
+
+        table.calendarTable > tbody > tr.today > td {
+            background-color: #788991;
+            color: #FFF;
+            font-weight: 500;
+            font-size: 130%;
+        }
+
+            table.calendarTable > tbody > tr.today > td > a {
+                color: #FFF;
+            }
+
+        table.calendarTable > tbody > tr.weekend > td {
+            background-color: #DEDEDE;
+        }
+
+/* headingTable
+************************************/
+
+table.headingTable {
+    width: 100%;
+}
+
+    table.headingTable > tbody > tr {
+        background: #008080 url('../../../Content/Img/navBar_bg_teal.png') repeat-x scroll 50% 50%;
+        height: 28px;
+    }
+
+        table.headingTable > tbody > tr > td {
+            vertical-align: middle;
+            height: 28px !important;
+            line-height: 7px;
+            color: #FFF;
+            /*width: auto;*/
+            padding: 0px 5px;
+            white-space: nowrap;
+            font-size: 110%;
+        }
+
+table > tbody > tr > td.headingTableTitle {
+    background: #000 url('../../../Content/Img/infobar_Black_bg.png') repeat-x scroll 50% 50%;
+    border-spacing: 0px;
+}
+
+table > tbody > tr > td.headingTableRoundingImage {
+    background-image: url('../../../Content/Img/infoBar_Black.png');
+    background-position: -2px 0;
+    background-repeat: no-repeat;
+    padding: 0px;
+    padding-right: 28px;
+}
+
+table > tbody > tr > td.headingTableCol4 {
+    width: 100%;
+}
+
+table > tbody > tr > td.headingTableCol5 {
+    padding-right: 15px;
+}
+
+table > tbody > tr > td.headingTableRoundingImage.roundingImage {
+    height: 28px;
+    width: 28px;
+}
+
+/* subTable
+************************************/
+
+table.subTable {
+    background-color: #F9F9F9;
+}
+
+    table.subTable.calendarTable {
+        border: 1px solid #C9C9C9;
+        border-top: 0 none;
+    }
+
+        table.subTable.calendarTable > tbody > tr {
+        }
+
+            table.subTable.calendarTable > tbody > tr > th {
+                background-color: #E0E0E0;
+            }
+
+            table.subTable.calendarTable > tbody > tr > td {
+            }
+
+            table.subTable.calendarTable > tbody > tr.weekend > td {
+            }
+
+            table.subTable.calendarTable > tbody > tr.today > td {
+                color: #FFF;
+            }
+
+table.headingTable > tbody > tr > td > b {
+    font-size: 120%;
+}
+
+/*
+**********************************************************/
+
+div.actionDiv {
+    min-width: 100px;
+    height: 20px;
+    /*top: 4px;
+    position: relative;    */
+    padding: 0px 5px;
+    /*margin-top: 4px;*/
+    line-height: 20px;
+}
+
+    div.actionDiv:hover {
+        /*top: 3px;*/
+        margin-top: 0px;
+        background: transparent url('/Content/Img/infoBar_button_over_bg.png') repeat-x scroll 50% 50%;
+        border-top: 1px solid #BFBFBF;
+    }
+
+    div.actionDiv:active {
+        /*top: 3px;*/
+        margin-top: 0px;
+        padding-right: 5px;
+        background: transparent url('/Content/Img/infoBar_button_down_bg.png') repeat-x scroll 50% 50%;
+        border-top: 1px solid #CFCFCF;
+    }
+
+span.actionSpan {
+    cursor: pointer;
+    min-width: 100px;
+    height: 20px;
+    /*top: 4px;
+    position: relative;    */
+    padding: 0px 5px;
+    /*margin-top: 4px;*/
+    line-height: 20px;
+}
+
+    span.actionSpan:hover {
+        /*top: 3px;*/
+        margin-top: 0px;
+        background: transparent url('/Content/Img/infoBar_button_over_bg.png') repeat-x scroll 50% 50%;
+        border-top: 1px solid #BFBFBF;
+    }
+
+    span.actionSpan:active {
+        /*top: 3px;*/
+        margin-top: 0px;
+        padding-right: 5px;
+        background: transparent url('/Content/Img/infoBar_button_down_bg.png') repeat-x scroll 50% 50%;
+        border-top: 1px solid #CFCFCF;
+    }
+
+.marginView {
+    margin: 20px !important;
+    background-color: #E3E8EE;
+}
+
+.padView {
+    padding: 10px !important;
+}
+
+span.imageWithText {
+    display: inline-block;
+}
+
+    span.imageWithText > img {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    span.imageWithText > span {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+table.headingTable input.ui-button {
+    padding: 4px 5px !important;
+    font-size: 70%;
+}
+
+.lightGrey {
+    background-color: #DEDEDE !important;
+}
+
+.darkGrey {
+    background-color: #788991 !important;
+}
+
+label {
+    display: block;
+    padding-left: 15px;
+    text-indent: -15px;
+}
+
+.labelcheckboxinput {
+    width: 13px;
+    height: 13px;
+    padding: 0;
+    margin: 0;
+    vertical-align: bottom;
+    position: relative;
+    top: -1px;
+    *overflow: hidden;
+}
+
+table.calendarTable > tbody > tr.danger > td {
+    background-color: #f2dede
+}
+
+table.calendarTable > tbody > tr.success > td {
+    background-color: #dff0d8
+}
+
+a.actionlinkclass {
+    color: red;
+}
+
+    a.actionlinkclass:link {
+        color: red;
+    }
+
+    a.actionlinkclass:visited {
+        color: red;
+    }
+
+/* Start Holiday CSSS */
+
+/* ***  effects  **** */
+@@-webkit-keyframes holiday-flash {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@@keyframes holiday-flash {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+/* *** custom CSS *** */
+
+#HolidayForm, #holiday-apply, #WorkableForm {
+    display: none;
+}
+
+.custom-ui-state-holiday a {
+    background: lightgreen !important;
+}
+
+.custom-ui-state-non-workday a {
+    background: lightblue !important;
+}
+
+.custom-ui-state-weekend a {
+    background-color: lightgray !important;
+}
+
+/* public holidays thats not saved as a non work day and not on a weekend */
+.custom-ui-state-holiday:not(.custom-ui-state-non-workday.custom-ui-state-weekend) a {
+    background: orangered !important;
+    color: #fff !important;
+    -webkit-animation: holiday-flash linear 2s infinite !important;
+    animation: holiday-flash linear 2s infinite !important;
+}
+/* public holidays thats not saved as a non work day and on a weekend */
+.custom-ui-state-holiday.custom-ui-state-weekend.custom-ui-sunday:not(.custom-ui-state-non-workday) a,
+.custom-ui-state-holiday.custom-ui-state-weekend.custom-ui-saturday:not(.custom-ui-state-non-workday) a {
+    background: #ffff00 !important;
+    color: #f0f !important;
+}
+
+.custom-ui-state-active a {
+    background: orangered !important;
+    color: #fff !important;
+}
+
+.custom-ui-state-holiday.custom-ui-state-active:not(.custom-ui-state-non-workday) a {
+    -webkit-animation: none !important;
+    animation: none !important;
+}
+/* *** override CSS *** */
+/* Wrap calendar so that it shows as 4c x 3r */
+.ui-datepicker-multi .ui-datepicker-group:nth-child(5),
+.ui-datepicker-multi .ui-datepicker-group:nth-child(9) {
+    clear: left;
+}
+/* datepicker uses the entire row expecting it to 12 months in a row.  becasue of style class override above we need to shorten with style override below */
+.ui-datepicker-inline {
+    width: 50.5em !important;
+}
+
+/* hide the year */
+.ui-datepicker-title > .ui-datepicker-year {
+    display: none;
+}
+
+#holiday-delete:disabled {
+    background-color: darkgray;
+}
+
+/* ** OVERRIDES for Table ** */
+.font-size-up {
+    font-size: 1.2em;
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+    .ui-datepicker-inline {
+        width: 51.5em !important;
+    }
+}
+
+.holiday-entry-container {
+    width: 100%;
+}
+
+.holiday-entry {
+    width: 100%;
+    float: left;
+    margin-bottom: 0.2em;
+}
+
+div.holiday-entry div {
+    width: 50%;
+}
+
+/* End Holiday CSSS */

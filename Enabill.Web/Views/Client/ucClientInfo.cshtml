@@ -1,0 +1,38 @@
+﻿@model Enabill.Models.Client
+
+<table class="underline">
+    <tr class="general">
+        <th>Client Name</th>
+        <td>@Model.ClientName</td>
+    </tr>
+    <tr>
+        <th>Registered Name</th>
+        <td>@Model.RegisteredName</td>
+    </tr>
+    <tr>
+        <th>VAT No</th>
+        <td>@Model.VATNo</td>
+    </tr>
+    <tr>
+        <th>Contacts</th>
+        <td>
+            @foreach (var contact in Model.GetContacts())
+            {
+                <p>@contact.ContactName - @contact.JobTitle - @contact.Email</p>
+            }
+        </td>
+    </tr>
+    <tr>
+        <th rowspan="4">Address</th>
+        <td>@Model.PostalAddress1</td>
+    </tr>
+    <tr>
+        <td>@Model.PostalAddress2</td>
+    </tr>
+    <tr>
+        <td>@Model.PostalAddress3</td>
+    </tr>
+    <tr>
+        <td>@Model.PostalCode</td>
+    </tr>
+</table>

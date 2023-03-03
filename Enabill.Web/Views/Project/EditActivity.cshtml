@@ -1,0 +1,98 @@
+﻿@model Enabill.Models.Activity
+
+@{
+    var action = string.Empty;
+    if (Model.ActivityID > 0)
+    {
+        action = "Edit Activity: " + Model.ActivityName;
+        ViewBag.Title = action;
+    }
+    else
+    {
+        action = "Create an activity";
+        ViewBag.Title = action;
+    }
+
+    Layout = null;
+
+}
+
+<h2>@action</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Activity</legend>
+
+        @Html.HiddenFor(model => model.ActivityID)
+        @Html.HiddenFor(model => model.ProjectID)
+
+        <div class="editor-label">
+            @Html.CleanLabelFor(model => model.ActivityName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ActivityName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ActivityName)
+        </div>
+
+        @{Enabill.Models.Project project = Model.GetProject();}
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsActive, "Is Active")
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => Model.IsActive)
+        </div>
+        <div class="editor-label">
+            Phase Out
+        </div>
+        <div class="editor-field IsDeactivated">
+            @Html.EditorFor(model => model.IsDeactivated, new { htmlAttributes = new { Title = "Activity will only become Inactive after the latest Confirmed End Date." } })
+            @Html.ValidationMessageFor(model => model.IsDeactivated)
+        </div>
+
+        <div class="editor-label">
+            @Html.CleanLabelFor(model => model.RegionID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RegionID, "RegionList")
+            @Html.ValidationMessageFor(model => model.RegionID)
+        </div>
+
+        <div class="editor-label">
+            @Html.CleanLabelFor(model => model.DepartmentID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DepartmentID, "DepartmentList")
+            @Html.ValidationMessageFor(model => model.DepartmentID)
+        </div>
+
+        <br />
+
+        <div class="editor-label">
+            @Html.CleanLabelFor(model => model.MustHaveRemarks)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MustHaveRemarks, new { htmlAttributes = new { Title = "Picks up the default from the Project when created but can be set independently." } })
+            @Html.ValidationMessageFor(model => model.MustHaveRemarks)
+        </div>
+        <div class="editor-label">
+            @Html.CleanLabelFor(model => model.CanHaveNotes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CanHaveNotes)
+            @Html.ValidationMessageFor(model => model.CanHaveNotes)
+        </div>
+        <div class="editor-label">
+            @Html.CleanLabelFor(model => model.IsDefault)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsDefault)
+            @Html.ValidationMessageFor(model => model.IsDefault)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" /> <input type="button" onclick="Crud.cancelCreate(); return false;" value="Cancel" />
+        </p>
+    </fieldset>
+}

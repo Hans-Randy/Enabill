@@ -1,0 +1,16 @@
+﻿@model Enabill.Web.Models.FlexiTimeIndexModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = Model.User.FullName + "'s FlexiTime";
+    if (Model.User.UserID == CurrentUserID)
+    {
+        ViewBag.Title = "My FlexiTime";
+    }
+}
+<div id="ucIndex" class="marginView">
+    @Html.Partial("ucIndex", Model)
+</div>

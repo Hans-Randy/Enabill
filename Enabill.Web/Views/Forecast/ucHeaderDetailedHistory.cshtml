@@ -1,0 +1,28 @@
+﻿@model Enabill.Web.Models.ForecastEditModel
+
+<table class="cleanTable fullWidth">
+    <form id="ForecastCreateDefaultResourceFrm">
+        <tr>
+            <th>Entry Date</th>
+            <th>Adjustment</th>
+            <th>Forecast Amount</th>
+            <th>Resources</th>
+            <th>Remark</th>
+            <th>Reference</th>
+            <td>Modified By</td>
+        </tr>
+        @foreach (var forecastDetail in Model.ForecastDetailExtendedModels)
+        {
+            <tr>
+                <td>@forecastDetail.ForecastDetail.EntryDate.ToString()</td>
+                <td>@forecastDetail.ForecastDetail.Adjustment.ToDoubleString()</td>
+                <td>@forecastDetail.ForecastDetail.Amount.ToDoubleString()</td>
+                <td>@forecastDetail.Resources</td>
+                <td>@forecastDetail.ForecastDetail.Remark</td>
+                <td>@forecastDetail.ForecastDetail.Reference</td>
+                <td>@forecastDetail.ModifiedBy</td>
+            </tr>
+        }
+    </form>
+</table>
+<br />

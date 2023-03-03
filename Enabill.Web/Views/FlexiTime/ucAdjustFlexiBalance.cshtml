@@ -1,0 +1,20 @@
+﻿@model Enabill.Models.FlexiBalanceAdjustment
+
+<form id="frmFlexiManualAdjustment" method="post" action="">
+    <table class="general">
+
+        @Html.Hidden("FlexiManualAdjustmentID", Model.FlexiBalanceAdjustmentID)
+        <tr>
+            <td>Adjustment Amount</td>
+            <td>@Html.TextBox("Adjustment", Model.Adjustment)</td>
+        </tr>
+        <tr>
+            <td>Effective Date</td>
+            <td>@Html.TextBox("AdjDate", Model.ImplementationDate.ToDisplayString(), new { @class = "datePicker" })</td>
+        </tr>
+        <tr>
+            <td>Remark</td>
+            <td>@Html.TextBox("Remark", Model.Remark)</td>
+        </tr>
+    </table>
+</form>

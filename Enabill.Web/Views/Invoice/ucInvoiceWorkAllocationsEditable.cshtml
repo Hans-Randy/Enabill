@@ -1,0 +1,153 @@
+﻿@model Enabill.Web.Models.InvoiceWorkAllocationModel
+
+@* This view is heavily entwined into the javascript on invoice.js... if changing this html, please test and change on javascript - Gavin *@
+
+<table class="subTable general fullWidth">
+    <tr>
+        <td class="center" colspan="13">
+            <input type="button" onclick="InvoiceWorkAllocations.save(); return false;" value="Save Changes" />
+        </td>
+    </tr>
+    <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Owner</th>
+        <th>Remark</th>
+        <th>Note</th>
+        <th>Hours</th>
+        <th colspan="2">Rate (@Model.Invoice.Client.GetCurrency(Model.Invoice.Client.CurrencyTypeID).CurrencyISO)</th>
+        <th>Gross Amount (@Model.Invoice.Client.GetCurrency(Model.Invoice.Client.CurrencyTypeID).CurrencyISO)</th>
+        <th colspan="2">Credited Amount (@Model.Invoice.Client.GetCurrency(Model.Invoice.Client.CurrencyTypeID).CurrencyISO)</th>
+        <th>Nett Amount (@Model.Invoice.Client.GetCurrency(Model.Invoice.Client.CurrencyTypeID).CurrencyISO)</th>
+        <th>Status</th>
+        <th class="center">
+            <a href="#" onclick="InvoiceWorkAllocations.selectAll()">Select All</a>
+        </th>
+    </tr>
+    @foreach (var activity in Model.Activities)
+    {
+        <tr>
+            <th colspan="5">@activity.Activity.ActivityName</th>
+            <th class="center" id="TotalHours__@(activity.Activity.ActivityName.Replace(" ", "").Replace(".", ""))">
+                @activity.WorkAllocations.Sum(wa => wa.WorkAllocation.HoursWorked).ToDoubleString()
+            </th>
+            <th class="TotalGrossAmountTD right" id="TotalGross__@(activity.Activity.ActivityName.Replace(" ", "").Replace(".", ""))" colspan="3">
+                @activity.WorkAllocations.Sum(wa => wa.WorkAllocation.GrossAmount).ToDoubleString()
+            </th>
+            <th class="TotalCreditAmountTD right" id="TotalCredit__@(activity.Activity.ActivityName.Replace(" ", "").Replace(".", ""))">
+                @activity.WorkAllocations.Sum(wa => wa.WorkAllocation.CreditAmount).ToDoubleString()
+            </th>
+            <th class="TotalNettAmountTD right" colspan="2" id="TotalNett__@(activity.Activity.ActivityName.Replace(" ", "").Replace(".", ""))">
+                @activity.WorkAllocations.Sum(wa => wa.WorkAllocation.NettAmount).ToDoubleString()
+            </th>
+            <th>
+            </th>
+        </tr>
+
+        foreach (var item in activity.WorkAllocations)
+        {
+            <tr>
+                <td class="right">
+                    @item.WorkAllocation.WorkAllocationID
+                </td>
+                <td>
+                    @item.WorkAllocation.DayWorked.ToDisplayString()
+                </td>
+                <td>
+                    @item.User.FullName
+                </td>
+                <td>
+                    @item.WorkAllocation.Remark
+                </td>
+                <td class="center">
+                    @if (item.NoteID.HasValue)
+                    {
+                        <a href="#" onclick="Note.quickView(@item.WorkAllocation.WorkAllocationID); return false;">@item.NoteID</a>
+                    }
+                </td>
+                <td class="center">
+                    <input id="Hours__@(activity.Activity.ActivityName.Replace(" ", "").Replace(".", ""))--@(item.WorkAllocation.WorkAllocationID)" type="hidden" value="@item.WorkAllocation.HoursWorked" />
+                    @if (item.WorkAllocation.HoursBilled != null)
+                    {
+                        @item.WorkAllocation.HoursBilled.ToDoubleString()
+                    }
+                    else
+                    {
+                        @item.WorkAllocation.HoursWorked.ToDoubleString()
+                    }
+                </td>
+                <td id="HourlyRateTD__@(activity.Activity.ActivityName.Replace(" ", "").Replace(".", ""))--@(item.WorkAllocation.WorkAllocationID)" class="right">
+                    <input id="HourlyRate__@(activity.Activity.ActivityName.Replace(" ", "").Replace(".", ""))--@(item.WorkAllocation.WorkAllocationID)" class="hourlyRates" type="hidden" value="@item.WorkAllocation.HourlyRate" />
+                     @item.WorkAllocation.HourlyRate.ToDoubleString()
+                </td>
+                <td style="width: 16px;">
+                    <img src="@Url.Content("/Content/Img/edit_14.png")" class="point" alt="Edit Rate" onclick="HourlyRate.edit(@item.WorkAllocation.WorkAllocationID, '@item.Activity.ActivityName.Replace(" ", "").Replace(".", "")'); return false;" />
+                </td>
+                <td id="GrossAmountTD__@(activity.Activity.ActivityName.Replace(" ", ""))--@(item.WorkAllocation.WorkAllocationID)" class="right">
+                    <input type="hidden" id="GrossAmount__@(activity.Activity.ActivityName.Replace(" ", "").Replace(".", ""))--@(item.WorkAllocation.WorkAllocationID)" class="grossAmount@(activity.Activity.ActivityName.Replace(" ", "").Replace(".", ""))" value="@item.WorkAllocation.GrossAmount" />
+                     @item.WorkAllocation.GrossAmount.ToDoubleString()
+                </td>
+                <td id="CreditAmountTD__@(activity.Activity.ActivityName.Replace(" ", ""))--@(item.WorkAllocation.WorkAllocationID)" class="right">
+                    <input type="hidden" id="CreditAmount__@(activity.Activity.ActivityName.Replace(" ", "").Replace(".", ""))--@(item.WorkAllocation.WorkAllocationID)" class="credits credits@(activity.Activity.ActivityName.Replace(" ", "").Replace(".", ""))" value="@item.WorkAllocation.CreditAmount" />
+                    @if (item.WorkAllocation.CreditAmount > 0)
+                    {
+                        @item.WorkAllocation.CreditAmount.ToDoubleString()
+                    }
+                    </td>
+                <td id="CreditOptionsTD__@(activity.Activity.ActivityName.Replace(" ", "").Replace(".", ""))--@(item.WorkAllocation.WorkAllocationID)" style="width: 16px; margin: auto;">
+                    @if (item.WorkAllocation.InvoiceID == Model.Invoice.InvoiceID)
+                    {
+                        if (item.WorkAllocation.HasCredit)
+                        {
+                            <img src="@Url.Content("/Content/Img/edit_14.png")" class="point" height="14" width="14" alt="Edit credit" onclick="InvoiceCredit.addEditCredit(@item.WorkAllocation.WorkAllocationID, '@activity.Activity.ActivityName.Replace(" ", "").Replace(".", "")'); return false;" />
+                            <img src="@Url.Content("/Content/Img/Delete.gif")" class="point" height="14" width="14" alt="Remove credit" onclick="InvoiceCredit.removeCredit(@item.WorkAllocation.WorkAllocationID, '@activity.Activity.ActivityName.Replace(" ", "").Replace(".", "")'); return false;" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("/Content/Img/add_14.png")" class="point" height="14" width="14" alt="credit" onclick="InvoiceCredit.addEditCredit(@item.WorkAllocation.WorkAllocationID, '@activity.Activity.ActivityName.Replace(" ", "").Replace(".", "")'); return false;" />
+                        }
+                    }
+                </td>
+                <td id="NettAmountTD__@(activity.Activity.ActivityName.Replace(" ", "").Replace(".", ""))--@(item.WorkAllocation.WorkAllocationID)" class="right">
+                     @item.WorkAllocation.NettAmount.ToDoubleString()
+                </td>
+                <td>
+                    <a href="#" onclick="window.location= '/Time/ApproveIndex/?id=@item.User.UserID&workDay=@item.WorkAllocation.DayWorked&callingPage=invoice&statusID=@item.WorkSessionStatusID&invoiceID=@Model.Invoice.InvoiceID';">@((Enabill.WorkSessionStatusType)item.WorkSessionStatusID)</a>
+                </td>
+                <td class="center">
+                    @if (item.WorkAllocation.InvoiceID == Model.Invoice.InvoiceID)
+                    {
+                        <input id="Link__@(activity.Activity.ActivityName.Replace(" ", "").Replace(".", ""))--@(item.WorkAllocation.WorkAllocationID)" class="linked" type="checkbox" checked="checked" onclick="InvoiceWorkAllocations.changeWorkAllocationLinkStatus(@item.WorkAllocation.WorkAllocationID, '@activity.Activity.ActivityName.Replace(" ", "").Replace(".", "")');" />
+                    }
+                    else
+                    {
+                        <input id="Link__@(activity.Activity.ActivityName.Replace(" ", "").Replace(".", ""))--@(item.WorkAllocation.WorkAllocationID)" class="linked" type="checkbox" onclick="InvoiceWorkAllocations.changeWorkAllocationLinkStatus(@item.WorkAllocation.WorkAllocationID, '@activity.Activity.ActivityName.Replace(" ", "").Replace(".", "")');" />
+                    }
+                </td>
+            </tr>
+        }
+        @*    <tr>
+                <th colspan="5"></th>
+                <th class="center">
+                    @activity.WorkAllocations.Sum(wa => wa.WorkAllocation.HoursWorked).ToDoubleString()
+                </th>
+                <th class="TotalGrossAmountTD right" colspan="3">
+                    R @activity.WorkAllocations.Sum(wa => wa.WorkAllocation.GrossAmount).ToDoubleString()
+                </th>
+                <th class="TotalCreditAmountTD right">
+                    R @activity.WorkAllocations.Sum(wa => wa.WorkAllocation.CreditAmount).ToDoubleString()
+                </th>
+                <th class="TotalNettAmountTD right" colspan="2">
+                    R @activity.WorkAllocations.Sum(wa => wa.WorkAllocation.NettAmount).ToDoubleString()
+                </th>
+                <th>
+                </th>
+            </tr>
+        *@
+    }
+    <tr>
+        <td class="center" colspan="13">
+            <input type="button" onclick="InvoiceWorkAllocations.save(); return false;" value="Save Changes" />
+        </td>
+    </tr>
+</table>

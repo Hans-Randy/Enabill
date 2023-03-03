@@ -1,0 +1,36 @@
+﻿@model List<Enabill.Web.Models.UserFlexiDayModel>
+
+<h4 class="center">Recent FlexiDays</h4>
+
+<table class="underline fullWidth">
+    <tr class="general">
+        <th>User</th>
+        <th>FlexiDay</th>
+        <th></th>
+        <th>Date Submitted</th>
+        <th></th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="15" align="center">There are no recent FlexiDays to display</td>
+        </tr>
+    }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.UserFullName</td>
+            <td>@item.FlexiDate.ToDisplayString()</td>
+            <td></td>
+            <td>@item.FlexiSubmitDate</td>
+            <td>
+                <img class="pointer" title="Remove FlexiDay" alt="Delete" src="@Url.Content("~/Content/Img/Delete.gif")" onclick="FlexiDay.deleteFlexiDay(@item.FlexiDayID); return false;" />
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="30" class="center">
+            <input type="button" onclick="FlexiDay.bookFlexiDay(); return false;" value="Book FlexiDay for User" />
+        </td>
+    </tr>
+</table>

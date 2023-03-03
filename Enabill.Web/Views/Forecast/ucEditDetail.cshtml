@@ -1,0 +1,43 @@
+﻿@model  Enabill.Web.Models.ForecastEditModel
+<form id="ForecastEditDetailFrm">
+    <table class="general fullWidth">
+        @Html.Hidden("ForecastDetailID", Model.MostRecentForecastDetail.ForecastDetailID)
+        @Html.Hidden("DetailPeriod", Model.MostRecentForecastDetail.Period)
+        @Html.Hidden("DefaultReference", Model.DefaultReference)
+        @Html.Hidden("ForecastWorkableDays", Model.NrOfWorkableDays)
+        @if ((Enabill.BillingMethodType)Model.ForecastHeader.BillingMethod == Enabill.BillingMethodType.TimeMaterial)
+        {
+            <tr>
+                <td>Period</td>
+                <td>@Html.TextBox("MonthList", Model.MostRecentForecastDetail.Period, new { disabled = "disabled", style = "width:70px;" })</td>
+                <td>Hourly Rate</td>
+                <td>@Html.TextBox("ForecastHourlyRate", Model.MostRecentForecastDetail.HourlyRate.ToDoubleString(), new { onchange = "Forecast.recalculateForecastAmount(); return false;", style = "width:50px;" })</td>
+            </tr>
+            <tr>
+                <td>%Allocation </td>
+                <td>@Html.TextBox("ForecastAllocationPercentage", Model.MostRecentForecastDetail.AllocationPercentage.ToDoubleString(), new { onchange = "Forecast.recalculateForecastAmount(); return false;", style = "width:30px;" })</td>
+                <td><text>Forecast Amount R</text></td>
+                <td>@Html.TextBox("TMForecastAmount", Model.MostRecentForecastDetail.Amount.ToDoubleString(), new { onchange = "Forecast.useDefaultReference(); return false;" })</td>
+            </tr>
+        }
+        <tr>
+            @if ((Enabill.BillingMethodType)Model.ForecastHeader.BillingMethod != Enabill.BillingMethodType.TimeMaterial)
+            {
+                <td>Period</td>
+                <td>@Html.TextBox("MonthList", Model.MostRecentForecastDetail.Period, new { readOnly = "true", style = "width:70px;" })</td>
+                <td class="NonTM show">Forecast Amount R </td>
+                <td>@Html.TextBox("NonTMForecastAmount", Model.MostRecentForecastDetail.Amount.ToDoubleString(), new { onchange = "Forecast.useDefaultReference(); return false;", style = "width:120px;" })</td>
+            }
+        </tr>
+        <tr>
+            <td><text>Reference</text></td>
+            <td>@Html.TextBox("Reference", Model.DefaultReference, new { readOnly = "true" })</td>
+            <td>Resources</td>
+            <td colspan="2">@Html.TextArea("Resources", Model.Resources, new { style = "width:200px; height:80px" })</td>
+        </tr>
+        <tr>
+            <td>Reason for change</td>
+            <td colspan="3">@Html.TextArea("ReasonForChange", null, new { style = "width:500px; height:30px" })</td>
+        </tr>
+    </table>
+</form>

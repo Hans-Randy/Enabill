@@ -1,0 +1,24 @@
+﻿@model Enabill.Web.Models.TicketLineModel
+
+<div class="padView">
+    <table></table>
+    <table class="subTable fullWidth">
+        <tr>
+            <td id="TicketLinesTD" class="halfWidth" valign="top">
+                @Html.Partial("ucExistingTicket", Model)
+            </td>
+            @if (Model.Ticket.TicketStatus != (int)Enabill.TicketStatusEnum.Closed)
+            {
+                <td id="PostReplyTD" class="halfWidth" valign="top">
+                    @Html.Partial("ucEditTicket", Model)
+                </td>
+            }
+            else
+            {
+                <td id="ViewLinesTD" class="halfWidth" valign="top">
+                    @Html.Partial("ucViewTicketLines", Model)
+                </td>
+            }
+        </tr>
+    </table>
+</div>

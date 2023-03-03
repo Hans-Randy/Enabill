@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Enabill.Models.BalanceAuditTrail>
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "Balance AuditTrail Report";
+}
+
+<div id="ucBalanceAuditTrailReportIndex" class="marginView">
+    @Html.Partial("ucBalanceAuditTrailReportIndex", Model)
+</div>

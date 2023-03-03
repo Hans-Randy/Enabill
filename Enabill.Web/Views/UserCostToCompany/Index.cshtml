@@ -1,0 +1,13 @@
+﻿@model Enabill.Web.Models.UserCostToCompanyIndexModel
+
+@{
+    ViewBag.Title = "User Cost to Company";
+}
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+<div id="ucIndex" class="marginView">
+    @Html.Partial("ucIndex", Model)
+</div>

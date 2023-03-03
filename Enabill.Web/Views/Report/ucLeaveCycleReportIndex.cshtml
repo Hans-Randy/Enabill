@@ -1,0 +1,165 @@
+﻿@model Enabill.Web.Models.LeaveCycleBalanceModel
+@Html.TitleTable("tblLeaveCycleReport", "", "<b>Leave Balance Report</b>", null, null, null, null, null, "ucLeaveCycleReportCol5", Model)
+@Html.Hidden("MonthList")
+<div class="padView">
+    <form id="frmLeaveCycleReport" method="post">
+        <table>
+            <tr>
+                <th class="borderRight">
+                    Leave Type
+                    @Html.DropDownList("LeaveTypeList")
+                </th>
+                @if (Model.LeaveType != Enabill.LeaveTypeEnum.Sick && Model.LeaveType != Enabill.LeaveTypeEnum.Compassionate)
+            {
+                    <th> Month @Html.DropDownList("MonthList") </th>
+                }
+                <th>
+                    <input type="submit" value="Search" />
+                </th>
+            </tr>
+        </table>
+    </form>
+
+    <table class="subTable general fullWidth">
+
+        @if (Model.LeaveType == Enabill.LeaveTypeEnum.Sick || Model.LeaveType == Enabill.LeaveTypeEnum.Compassionate)
+        {
+            <tr>
+                <th>Full Name</th>
+                <th>Employment Type</th>
+                <th>Payroll Ref No</th>
+                <th>Manager</th>
+                <th>Leave Type</th>
+                <th width="7%">Date From</th>
+                <th width="7%">Date To</th>
+                <th width="10%" align="center">Opening Balance</th>
+                <th width="7%" align="center">Taken</th>
+                <th width="10%" align="center">Manual Adjustment</th>
+                <th width="10%" align="center">Closing Balance</th>
+                <th width="10%" align="center">Status</th>
+                <th width="10%">Last Updated</th>
+            </tr>
+
+            foreach (var leaveCycle in Model.LeaveCycleBalances)
+            {
+                <tr>
+                    <td>@leaveCycle.FullName</td>
+                    <td>@leaveCycle.EmploymentType</td>
+                    <td>@leaveCycle.PayrollRefNo</td>
+                    <td>@leaveCycle.Manager</td>
+                    <td>@leaveCycle.LeaveType</td>
+                    <td width="7%">@leaveCycle.DateFrom.ToDisplayString()</td>
+                    <td width="7%" align="center">@leaveCycle.DateTo.ToDisplayString()</td>
+                    <td width="10%" align="center">@leaveCycle.OpeningBalance.ToDoubleString()</td>
+                    <td width="7%" align="center">@leaveCycle.Taken.ToDoubleString()</td>
+                    <td align="center">@leaveCycle.ManualAdjustment.ToDoubleString()</td>
+                    @if (leaveCycle.ClosingBalance < 0)
+                    {
+                        <td width="10%" align="center" class="error">@leaveCycle.ClosingBalance.ToDoubleString()</td>
+                    }
+                    else
+                    {
+                        <td width="10%" align="center">@leaveCycle.ClosingBalance.ToDoubleString()</td>
+                    }
+                    <td width="10%">@leaveCycle.Status</td>
+                    <td width="10%">@leaveCycle.LastUpdated.ToDisplayString()</td>
+                </tr>
+            }
+        }
+        else
+        {
+            if (Model.LeaveType == Enabill.LeaveTypeEnum.Annual)
+            {
+
+                <tr>
+                    <th colspan="5"></th>
+                    <th colspan="6" class="center" style="border-left:5px solid #eee;">Annual Leave</th>
+                    <th colspan="7" class="center" style="border-left:5px solid #eee;">Other Approved Leave</th>
+                    <th colspan="2" class="center" style="border-left:5px solid #eee;">Next Month's Leave</th>
+                </tr>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Employment Type</th>
+                        <th>Payroll Ref No</th>
+                        <th>Manager</th>
+                        <th>Leave Type</th>
+                        <th>Date From</th>
+                        <th>Date To</th>
+                        <th class="center" style="border-left:5px solid #eee;">Opening Balance</th>
+                        <th class="center">Credited</th>
+                        <th class="center">Manual Adjustment</th>
+                        <th class="center">Approved</th>
+                        <th class="center">Pending</th>
+                        <th class="center">Closing Balance</th>
+                        <th class="center" style="border-left:5px solid #eee;">Sick</th>
+                        <th class="center">Family Responsibility</th>
+                        <th class="center">Study</th>
+                        <th class="center">Maternity</th>
+                        <th class="center">Relocation</th>
+                        <th class="center">Unpaid</th>
+                        <th align="center" style="border-left:5px solid #eee;">Approved</th>
+                        <th class="center">Pending</th>
+                    </tr>
+
+                foreach (var leave in Model.LeaveBalances.OrderBy(l => l.FullName))
+                {
+                    <tr>
+                        <td>@leave.FullName</td>
+                        <td>@leave.EmploymentType</td>
+                        <td>@leave.PayrollRefNo</td>
+                        <td>@leave.Manager</td>
+                        <td>@leave.LeaveType</td>
+                        <td>@leave.DateFrom.ToDisplayString()</td>
+                        <td>@leave.DateTo.ToDisplayString()</td>
+                        <td align="center" style="border-left:5px solid #eee;">@leave.OpeningBalance.ToDoubleString()</td>
+                        <td align="center">@leave.LeaveCredited.ToDoubleString()</td>
+                        <td align="center">@leave.ManualAdjustment.ToDoubleString()</td>
+                        <td align="center">@leave.Approved.ToDoubleString()</td>
+                        <td align="center">@leave.Pending.ToDoubleString()</td>
+                        <td align="center">@((leave.OpeningBalance + leave.LeaveCredited + leave.ManualAdjustment - leave.Approved - leave.Pending).ToDoubleString())</td>
+                        <td align="center" style="border-left:5px solid #eee;">@leave.Sick.ToDoubleString()</td>
+                        <td align="center">@leave.Compassionate.ToDoubleString()</td>
+                        <td align="center">@leave.Study.ToDoubleString()</td>
+                        <td align="center">@leave.Maternity.ToDoubleString()</td>
+                        <td align="center">@leave.Relocation.ToDoubleString()</td>
+                        <td align="center">@leave.Unpaid.ToDoubleString()</td>
+                        <td align="center" style="border-left:5px solid #eee;">@leave.NextMonthApprovedLeave.ToDoubleString()</td>
+                        <td align="center">@leave.NextMonthPendingLeave.ToDoubleString()</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <th>Full Name</th>
+                    <th>Employment Type</th>
+                    <th>Payroll Ref No</th>
+                    <th>Manager</th>
+                    <th>Leave Type</th>
+                    <th width="7%">Date From</th>
+                    <th width="7%">Date To</th>
+                    <th width="10%" align="center">Approved</th>
+                    <th width="10%" align="center">Pending</th>
+                </tr>
+
+                foreach (var leave in Model.LeaveBalances)
+                {
+                    if (leave.Approved > 0 || leave.Pending > 0)
+                    {
+                        <tr>
+                            <td>@leave.FullName</td>
+                            <td>@leave.EmploymentType</td>
+                            <td>@leave.PayrollRefNo</td>
+                            <td>@leave.Manager</td>
+                            <td>@leave.LeaveType</td>
+                            <td width="7%">@leave.DateFrom.ToDisplayString()</td>
+                            <td width="7%">@leave.DateTo.ToLastDayOfMonth().ToDisplayString()</td>
+                            <td width="10%" align="center">@leave.Approved.ToDoubleString()</td>
+                            <td width="10%" align="center">@leave.Pending.ToDoubleString()</td>
+                        </tr>
+                    }
+                }
+            }
+        }
+    </table>
+</div>

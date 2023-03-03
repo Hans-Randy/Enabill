@@ -1,0 +1,20 @@
+﻿@model Enabill.Models.Ticket
+<form id="frmEmailNotification" method="post">
+    <table class="general fullWidth">
+        <tr>
+            <td colspan="2" style="font-size:7.5pt;">
+                <span>Enter email addresses to which notification must be send. Seperate multiple reference numbers with a comma(eg bob@work.co.za, mary@home.co.za):</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Ticket Reference:</td>
+            <td>@Html.TextBox("TicketReference", @Model.TicketReference, new { readOnly = "true", style = "font-size:7.5pt;color:gray;" })</td>
+        </tr>
+        <tr>
+            <td>Email Adrress List</td>
+            <td style="font-size:7.5pt;">
+                <span>@Html.TextArea("EmailAddresses", null, new { style = "width:400px;" })</span>
+            </td>
+        </tr>
+    </table>
+</form>

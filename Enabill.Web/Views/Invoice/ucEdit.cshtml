@@ -1,0 +1,18 @@
+﻿@model Enabill.Web.Models.InvoiceEditModel
+
+@if (Model.Invoice.IsOpen)
+{
+    @Html.Partial("ucEditOpen", Model)
+}
+else if (Model.Invoice.IsInProgress)
+{
+    @Html.Partial("ucEditInProgress", Model)
+}
+else if (Model.Invoice.IsReady)
+{
+    @Html.Partial("ucEditReady", Model)
+}
+else if (Model.Invoice.IsComplete)
+{
+    @Html.Partial("ucEditComplete", Model)
+}

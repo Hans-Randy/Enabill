@@ -1,0 +1,18 @@
+﻿@model Enabill.Web.Models.TimeDayModel
+
+@section beginhead{
+    @IncludeRichEditor()
+}
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    Html.EnableClientValidation(false);
+    ViewBag.Title = Model.User.FullName + "'s Daily Timesheet";
+}
+
+<div id="ucDay" class="marginView">
+    @Html.Partial("ucDay", Model)
+</div>

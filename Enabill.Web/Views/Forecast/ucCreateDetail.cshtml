@@ -1,0 +1,38 @@
+﻿@model Enabill.Web.Models.ForecastCreateModel
+<table class="general fullWidth">
+    @Html.Hidden("ForecastWorkableDays", Model.NrOfWorkDays)
+    @if (Model.TMClass == "show")
+    {
+        <tr>
+            <td>Period</td>
+            <td>@Html.DropDownList("MonthList", null, new { onchange = "Forecast.reloadCreateForm(); return false;", style = "width:100px;" })</td>
+            <td>Hourly Rate R</td>
+            <td>@Html.TextBox("ForecastHourlyRate", null, new { onchange = "Forecast.recalculateForecastAmount(); return false;", style = "width:50px;" })</td>
+        </tr>
+        <tr>
+            <td>% Allocation</td>
+            <td>@Html.TextBox("ForecastAllocationPercentage", null, new { onchange = "Forecast.recalculateForecastAmount(); return false;", style = "width:30px;" })</td>
+            <td>Forecast Amount R</td>
+            <td>@Html.TextBox("TMForecastAmount", null, new { style = "width:120px;" })</td>
+        </tr>
+    }
+    <tr>
+        @if (Model.NonTMClass == "show")
+        {
+            <td>Period</td>
+            <td>@Html.DropDownList("MonthList", null, new { onchange = "Forecast.reloadCreateForm(); return false;", style = "width:100px;" })</td>
+            <td>Forecast Amount R</td>
+            <td>@Html.TextBox("NonTMForecastAmount", null, new { style = "width:120px;" })</td>
+        }
+    </tr>
+    <tr>
+        <td>Reference</td>
+        <td>@Html.TextBox("Reference", Model.DefaultReference)</td>
+        <td>Resources</td>
+        <td>@Html.TextArea("Resources", new { style = "width:200px; height:80px" })</td>
+    </tr>
+    <tr>
+        <td>Reason for change</td>
+        <td colspan="3">@Html.TextArea("ReasonForChange", new { style = "width:500px; height:30px" })</td>
+    </tr>
+</table>

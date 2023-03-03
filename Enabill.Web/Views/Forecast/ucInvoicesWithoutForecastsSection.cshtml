@@ -1,0 +1,68 @@
+﻿@model Enabill.Web.Models.ForecastReportModel
+
+<div class="padView">
+    <table class="subTable fullWidth general fontIncrease">
+        @if (Model.InvoicesWithoutForecasts.Count() == 0)
+        {
+            <tr><th colspan="11">No records found.</th></tr>
+        }
+        else
+        {
+            <tr>
+                <td class="ReportSectionColor" colspan="4"></td>
+                <td class="ReportSectionColor right">Projected Amount</td>
+                <td class="ReportSectionColor right">Invoice Amount</td>
+                <td class="ReportSectionColor right" colspan="5"></td>
+            </tr>
+
+            <tr>
+                <td class="GrandTotalColor" colspan="4">GrandTotal</td>
+                <td class="GrandTotalColor" style="text-align: right !important;">@Model.InvoicesWithoutForecasts.Sum(r => r.ProvisionalAccrualAmount).ToDoubleString()</td>
+                <td class="GrandTotalColor" style="text-align: right !important;">@Model.InvoicesWithoutForecasts.Sum(r => r.AccrualExclVAT).ToDoubleString()</td>
+                <td class="GrandTotalColor" colspan="5"></td>
+            </tr>
+
+            foreach (var region in Model.InvoicesWithoutForecastsDistinctRegionList)
+            {
+                <tr>
+                    <td class="RegionColor" colspan="4">Region: @region.RegionName</td>
+                    <td class="RegionColor" style="text-align: right !important;">@Model.InvoicesWithoutForecasts.Where(r => r.RegionID == region.RegionID).Sum(r => r.ProvisionalAccrualAmount).ToDoubleString()</td>
+                    <td class="RegionColor" style="text-align: right !important;">@Model.InvoicesWithoutForecasts.Where(r => r.RegionID == region.RegionID).Sum(r => r.AccrualExclVAT).ToDoubleString()</td>
+                    <td class="RegionColor" colspan="5"></td>
+                </tr>
+
+                <tr>
+                    <th>Billing Method</th>
+                    <th>Client</th>
+                    <th>Project</th>
+                    <th>Resource</th>
+                    <th class="right"></th>
+                    <th class="right"></th>
+                    <th class="right"></th>
+                    <th class="right"></th>
+                    <th class="right"></th>
+                    <th class="right"></th>
+                    <th class="right"></th>
+                </tr>
+
+                foreach (var invoiceWithoutForecast in Model.InvoicesWithoutForecasts)
+                {
+                    if (invoiceWithoutForecast.RegionID == region.RegionID)
+                    {
+                        <tr>
+                            <td>@invoiceWithoutForecast.BillingMethodName</td>
+                            <td>@invoiceWithoutForecast.ClientName</td>
+                            <td>@invoiceWithoutForecast.OrderNo</td>
+                            <td></td>
+                            <td class="right">@invoiceWithoutForecast.ProvisionalAccrualAmount.ToDoubleString()</td>
+                            <td class="right">@invoiceWithoutForecast.AccrualExclVAT.ToDoubleString()</td>
+                            <td class="right"></td>
+                            <td class="right"></td>
+                            <td class="right"></td>
+                        </tr>
+                    }
+                }
+            }
+        }
+    </table>
+</div>

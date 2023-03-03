@@ -1,0 +1,28 @@
+﻿@model Enabill.Web.Models.FlexiDayModel
+<form id="ManageFlexiDayFrm" action="" method="post">
+    <table class="fullWidth underline">
+        <tr>
+            <th>
+                User
+            </th>
+            <td>
+                @Model.FlexiDayUser
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Flexi Date
+            </th>
+            <td>
+                @Html.TextBox("FlexiDayDate", Model.FlexiDayDate.ToDisplayString(), new { @class = "datePicker" })
+            </td>
+        <tr>
+            <th>
+                Remark
+            </th>
+            <td>
+                @Html.TextBox("FlexiDayRemark", Model.FlexiDayRemark)
+            </td>
+        </tr>
+    </table>
+</form>

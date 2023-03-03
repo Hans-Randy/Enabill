@@ -1,0 +1,49 @@
+﻿@model IList<Enabill.Models.User>
+    <h2 style="margin:0">
+        Timesheet Approval Data
+    </h2>
+    <table>
+        <tbody>
+            <tr>
+                <td style="font-size:12px;padding-left:0">
+                    Date From:
+                    @Html.TextBox("DTFrom", DateTime.Now.ToFirstDayOfMonth().ToString("yyyy-MM-dd"))
+                </td>
+                <td style="font-size:12px;padding-left:0">
+                    Date To:
+                    @Html.TextBox("DTTo", DateTime.Now.ToLastDayOfMonth().ToString("yyyy-MM-dd"))
+                </td>
+                <td style="font-size:12px;padding-left:0">
+                    @Html.DropDownList("userList", Model.Select(t => new SelectListItem
+           {
+               Text = t.UserName,
+               Value = t.UserID.ToString()
+           }))
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table style="width:100%">
+        <tbody>
+            @foreach (var u in Model)
+            {
+                <tr>
+                    <td style="font-size:12px;padding-left:0">
+                        Date From:
+                        @Html.TextBox("DTFrom", DateTime.Now.ToFirstDayOfMonth().ToString("yyyy-MM-dd"))
+                    </td>
+                    <td style="font-size:12px;padding-left:0">
+                        Date To:
+                        @Html.TextBox("DTTo", DateTime.Now.ToLastDayOfMonth().ToString("yyyy-MM-dd"))
+                    </td>
+                    <td style="font-size:12px;padding-left:0">
+                        User:
+                        @Html.DropDownList("users", Model.Select(t => new SelectListItem { Text = t.UserName, Value = t.UserID.ToString() }))
+                    </td>
+                    <td>
+                        <button type="button" value="Refresh" onclick="Report.showOnScreenTimeSheetApproval(); return false;">Refresh</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>

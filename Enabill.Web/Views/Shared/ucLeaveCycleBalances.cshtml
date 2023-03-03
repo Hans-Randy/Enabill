@@ -1,0 +1,26 @@
+﻿@model Enabill.Web.Models.LeaveCycleBalanceModel
+
+<table class="general fullWidth">
+    <tr>
+
+        <th>LeaveType</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Opening Balance</th>
+        <th>Taken</th>
+        <th>Closing Balance</th>
+        <th>Last Update</th>
+    </tr>
+    @foreach (var cycle in Model.UserLeaveCycleBalances)
+    {
+        <tr>
+            <td>@((Enabill.LeaveTypeEnum)cycle.LeaveTypeID)</td>
+            <td>@cycle.StartDate.ToDisplayString()</td>
+            <td>@cycle.EndDate.ToDisplayString()</td>
+            <td>@cycle.OpeningBalance</td>
+            <td>@cycle.Taken</td>
+            <td>@cycle.ClosingBalance</td>
+            <td>@cycle.LastUpdatedDate.ToDisplayString()</td>
+        </tr>
+    }
+</table>

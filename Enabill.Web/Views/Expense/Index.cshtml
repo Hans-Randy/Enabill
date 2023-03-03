@@ -1,0 +1,16 @@
+﻿@model Enabill.Web.Models.ExpenseIndexModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{ViewBag.Title = "User Expenses";}
+
+<div id="Index" class="marginView">
+    @Html.TitleTable("tblExpense", "", "<b>Expense:</b> " + Model.User.FullName, Url.Content("~/Content/Img/timesheet_20x20.png"), "ucIndexCol3", "", "ucIndexCol4", Model, null, null)
+    <div class="padView">
+        <table class="subTable general">
+            @Html.Partial("ucIndex", Model)
+        </table>
+    </div>
+</div>

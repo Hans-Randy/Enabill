@@ -1,0 +1,105 @@
+﻿@model Enabill.Web.Models.FeedbackIndexModel
+
+<fieldset>
+    <legend><h3>Open Feedback</h3></legend>
+    <table class="underline fullWidth">
+        <tr class="general">
+            <th>ID</th>
+            <th>Feedback Type</th>
+            <th>Urgency</th>
+            <th>User</th>
+            <th>Date Started</th>
+            <th>Subject</th>
+            <th></th>
+        </tr>
+        @if (Model.FeedbackOpenList.Count() == 0)
+        {
+            <tr>
+                <td colspan="7" class="center">There are no threads to display</td>
+            </tr>
+        }
+        @foreach (var item in Model.FeedbackOpenList)
+        {
+            <tr>
+                <td>
+                    @item.Thread.FeedbackThreadID
+                </td>
+                <td>
+                    @item.Thread.FeedBackTypeName
+                </td>
+                <td>
+                    @item.Thread.FeedBackUrgencyTypeName
+                </td>
+                <td>
+                    @item.FeedbackUser
+                </td>
+                <td>
+                    @item.Thread.DateStarted.ToDisplayString()
+                </td>
+                <td>
+                    @item.Thread.FeedbackSubject
+                </td>
+                <td>
+                    <a href="#" onclick="Feedback.view(@item.Thread.FeedbackThreadID); return false;">View</a>
+                </td>
+            </tr>
+        }
+    </table>
+</fieldset>
+
+@*
+
+    @if (!CurrentUser.HasRole(Enabill.UserRoleType.FeedbackAdmin))
+    {
+        return;
+    }
+
+*@
+
+<fieldset>
+    <legend><h3>Closed Feedback</h3></legend>
+
+    <table class="underline fullWidth">
+        <tr class="general">
+            <th>ID</th>
+            <th>Feedback Type</th>
+            <th>Urgency</th>
+            <th>User</th>
+            <th>Date Started</th>
+            <th>Subject</th>
+            <th></th>
+        </tr>
+        @if (Model.FeedbackClosedList.Count() == 0)
+        {
+            <tr>
+                <td colspan="6" class="center">There are no threads to display</td>
+            </tr>
+        }
+        @foreach (var item in Model.FeedbackClosedList)
+        {
+            <tr>
+                <td>
+                    @item.Thread.FeedbackThreadID
+                </td>
+                <td>
+                    @item.Thread.FeedBackTypeName
+                </td>
+                <td>
+                    @item.Thread.FeedBackUrgencyTypeName
+                </td>
+                <td>
+                    @item.FeedbackUser
+                </td>
+                <td>
+                    @item.Thread.DateStarted.ToDisplayString()
+                </td>
+                <td>
+                    @item.Thread.FeedbackSubject
+                </td>
+                <td>
+                    <a href="#" onclick="Feedback.view(@item.Thread.FeedbackThreadID); return false;">View</a>
+                </td>
+            </tr>
+        }
+    </table>
+</fieldset>

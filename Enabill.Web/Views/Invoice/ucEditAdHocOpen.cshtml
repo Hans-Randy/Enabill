@@ -1,0 +1,280 @@
+﻿@model Enabill.Web.Models.InvoiceEditAdHoc
+
+<form id="InvoiceForm" method="post">
+    @Html.Hidden("InvoiceID", Model.Invoice.InvoiceID)
+    @Html.Hidden("InvoiceStatusID", Model.Invoice.InvoiceStatusID)
+    @Html.Hidden("BillingMethodID", Model.Invoice.BillingMethodID)
+    @Html.Hidden("InvoiceStatus", (Enabill.InvoiceStatusType)Model.Invoice.InvoiceStatusID)
+    @Html.Hidden("DeletedLines", string.Empty)
+    @Html.Hidden("ClientID", Model.Invoice.ClientID)
+    @Html.Hidden("ContactID", Model.Invoice.InvoiceContactID)
+    @Html.Hidden("ContactList")
+    @Html.Hidden("InvoiceIsTimeApproved", Model.Invoice.IsTimeApproved)
+
+    <table class="subTable general fullWidth">
+        <tr>
+            <td valign="top" align="left" style="width: 35%;">
+                <h2>
+                    Invoice Detail
+                </h2>
+                @*<form id="RuleSetup" method="post">*@
+                <div id="RuleSetup" method="post">
+                    <table class="general fullWidth">
+                        <tr>
+                            <th>
+                                Status
+                            </th>
+                            <td>
+                                @((Enabill.InvoiceStatusType)Model.Invoice.InvoiceStatusID)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Billing Method
+                            </th>
+                            <td>
+                                Ad Hoc
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Client
+                            </th>
+                            <td>
+                                @Model.ClientName
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Project
+                            </th>
+                            <td>
+                                @Html.DropDownList("ProjectID")
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Invoice Contact
+                            </th>
+                            <td>
+                                @Model.InvoiceContactName
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Description
+                            </th>
+                            <td>
+                                @Html.TextArea("Description", Model.Invoice.Description, new { style = "width: 200px; max-width: 300px;" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Invoice Sub Category
+                            </th>
+                            <td>
+                                @Html.DropDownList("InvoiceSubCategoryID")
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Dates Covered By Invoice
+                            </th>
+                            <td>
+                                @Html.TextBox("DateFrom", Model.Invoice.DateFrom.ToDisplayString())
+                                -
+                                @Html.TextBox("DateTo", Model.Invoice.DateTo.ToDisplayString())
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Is this an internal invoice?
+                            </th>
+                            <td>
+                                @Html.CheckBox("IsInternal", Model.Invoice.IsInternal)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Order Number
+                            </th>
+                            <td>
+                                @Html.TextBox("OrderNo", Model.Invoice.OrderNo)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Invoice Date to Display on Invoice
+                            </th>
+                            <td>
+                                @Html.TextBox("InvoiceDate", Model.Invoice.InvoiceDate.ToDisplayString(), new { @class = "datePicker" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Invoice Period
+                            </th>
+                            <td>
+                                @Html.TextBox("Period", Model.Invoice.Period, new { style = "width: 80px;" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <!--ice Amount Excl (Rand)
+                                 Invoice Amount Excl(@*Html.Label(Model.Invoice.GetClient(Enabill.Models.User.GetSystemUser()).GetCurrency(Model.Invoice.GetClient(Enabill.Models.User.GetSystemUser()).CurrencyTypeID).CurrencyISO)*@-->
+                                @Html.Label("Invoice Amount Excl (" + (Model.Invoice.GetClient(Enabill.Models.User.GetSystemUser()).GetCurrency(Model.Invoice.GetClient(Enabill.Models.User.GetSystemUser()).CurrencyTypeID).CurrencyISO) + ")")
+                            </th>
+                            </th>
+                            <td>
+                                @Html.TextBox("InvoiceAmountExclVAT", Model.Invoice.InvoiceAmountExclVAT.ToDoubleString(), new { @class = "requiresNumberFormatting" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <!-- Accrual Amount Excl(@*Html.Label(Model.Invoice.GetClient(Enabill.Models.User.GetSystemUser()).GetCurrency(Model.Invoice.GetClient(Enabill.Models.User.GetSystemUser()).CurrencyTypeID).CurrencyISO)*@-->
+                                @Html.Label("Accrual Amount Excl (" + (Model.Invoice.GetClient(Enabill.Models.User.GetSystemUser()).GetCurrency(Model.Invoice.GetClient(Enabill.Models.User.GetSystemUser()).CurrencyTypeID).CurrencyISO) + ")")
+                            </th>
+                            <td>
+                                @Html.TextBox("AccrualAmountExclVAT", Model.Invoice.AccrualExclVAT.ToDoubleString(), new { @class = "requiresNumberFormatting" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                VAT Rate %
+                            </th>
+                            <td>
+                                @Html.TextBox("VATRate", Model.Invoice.VATRate, new { style = "width: 80px;" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                               <!-- VAT Amount -->
+                                @Html.Label("VAT Amount (" + (Model.Invoice.GetClient(Enabill.Models.User.GetSystemUser()).GetCurrency(Model.Invoice.GetClient(Enabill.Models.User.GetSystemUser()).CurrencyTypeID).CurrencyISO) + ")")
+                            </th>
+                            <td>
+                                 @Model.Invoice.VATAmount.ToDoubleString()
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                @Html.Label("Invoice Amount Inclusive ("+(Model.Invoice.GetClient(Enabill.Models.User.GetSystemUser()).GetCurrency(Model.Invoice.GetClient(Enabill.Models.User.GetSystemUser()).CurrencyTypeID).CurrencyISO)+")")
+                            </th>
+                            <td>
+                                 @Model.Invoice.InvoiceAmountInclVAT.ToDoubleString()
+                            </td>
+                        </tr>
+                        <tr style="display:none">
+                            <th>
+                                Client Department Code
+                            </th>
+                            <td>
+                                @Html.DropDownList("ClientDepartmentCodeID")
+                            </td>
+                        </tr>
+                        <tr style="display:none">
+                            <th>
+                                GL Account Code
+                            </th>
+                            <td>
+                                @Html.DropDownList("GLAccountID")
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Print Option
+                            </th>
+                            <td>
+                                @Html.DropDownList("PrintOptionTypeID")
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Layout Option
+                            </th>
+                            <td>
+                                @Html.DropDownList("PrintLayoutTypeID")
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Ticket Remark Option
+                            </th>
+                            <td>
+                                @Html.DropDownList("PrintTicketRemarkOptions")
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Attach TimeSheets To Invoice
+                            </th>
+                            <td>
+                                @Html.CheckBox("PrintTimeSheet", Model.Invoice.PrintTimeSheet)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Print Credits
+                            </th>
+                            <td>
+                                @Html.CheckBox("PrintCredits", Model.Invoice.PrintCredits)
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <br />
+                    <input type="button" value="Save" onclick="AdHocInvoice.save();" />
+                    @if (Model.Invoice.CanBeMovedToOpen)
+                    {
+                        <input type="button" onclick="Invoice.moveToOpen(); return false;" value="Move Invoice to 'Open'" />
+                    }
+                    @if (Model.Invoice.CanBeMovedToInProgress)
+                    {
+                        <input type="button" onclick="Invoice.moveToInProgress(); return false;" value="Move Invoice to 'In Progress'" />
+                    }
+                    @if (Model.Invoice.CanBeMovedToReady)
+                    {
+                        <input type="button" onclick="Invoice.moveToReady(); return false;" value="Move Invoice to 'Ready'" />
+                    }
+                    @if (Model.Invoice.CanBeMovedToComplete)
+                    {
+                        <input type="button" onclick="Invoice.moveToComplete(); return false;" value="Move Invoice to 'Complete'" />
+                    }
+                    <input type="button" value="Delete" onclick="Invoice.deleteInvoice();" />
+                </div>
+            </td>
+            <td valign="top" align="center">
+                @*
+                    <h5><a href="#" onclick="InvoiceLine.addInvoiceLine(); return false;">Add Invoice Line</a></h5>
+
+                    <div id="InvoiceLines">
+                        @foreach (var item in Model.InvoiceLines)
+                        {
+                            @Html.Partial("ucInvoiceLineOpen", item)
+                        }
+                    </div>
+                *@
+            </td>
+            <td style="width: 40%;" valign="top">
+                <h4 class="left">
+                    CC Contacts to Receive Invoice
+                </h4>
+                <div style="width: 100%;">
+                    <ul style="list-style: none;">
+                        @foreach (var cont in Model.AdHocInvoiceContacts.Where(c => c.IsSelected))
+                        {
+                            <li>
+                                <input class="Contacts" type="checkbox" value="@cont.Contact.ContactID" checked="checked" />@cont.Contact.ContactName
+                            </li>
+                        }
+                        @foreach (var cont in Model.AdHocInvoiceContacts.Where(c => !c.IsSelected))
+                        {
+                            <li>
+                                <input class="Contacts" type="checkbox" value="@cont.Contact.ContactID" />@cont.Contact.ContactName
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>

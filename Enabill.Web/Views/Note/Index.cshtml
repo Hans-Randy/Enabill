@@ -1,0 +1,21 @@
+﻿@*@model List<Enabill.Web.Models.NoteModel>
+
+    @section beginHead{
+        @IncludeRichEditor()
+    }
+
+    @section head{
+        @IncludeControllerScript(true)
+    }
+
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h3>Notes | @Html.ActionLink("My Notes", "UserNotes")</h3>
+
+    @foreach (Enabill.Web.Models.NoteModel note in Model)
+    {
+        @Html.Partial("ucNoteDetail", note)
+    }
+*@

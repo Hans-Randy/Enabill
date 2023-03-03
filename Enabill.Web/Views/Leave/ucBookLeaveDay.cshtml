@@ -1,0 +1,43 @@
+﻿<form id="BookLeaveFrm">
+    @Html.Hidden("BirthdayHours")
+    <table class="underline fullWidth">
+        <tr>
+            <th colspan="2" class="center"><h2>Partial Day</h2></th>
+        </tr>
+        <tr>
+            <th>
+                Multiple/Partial
+            </th>
+            <th>
+                <label>
+                    <input type="checkbox" class="labelcheckboxinput" onclick="Leave.changeLeaveBookingType(2)" /> Multiple&nbsp;
+                    <input type="checkbox" class="labelcheckboxinput" onclick="Leave.changeLeaveBookingType(1)" checked="checked" /> Partial
+                </label>
+            </th>
+        </tr>
+        <tr>
+            <th>Leave Type</th>
+            <td>
+                @Html.DropDownList("LeaveType", null, new { onchange = "Leave.changeLeaveType(this.value)", style = "font-size: 12px;" })
+            </td>
+        </tr>
+        <tr>
+            <th>Leave Date</th>
+            <td>
+                @Html.TextBox("LeaveDate", null, new { @class = "datePicker" })
+            </td>
+        </tr>
+        <tr>
+            <th>Hours</th>
+            <td>
+                @Html.DropDownList("Hours", null, new { style = "width: 40px;" })
+            </td>
+        </tr>
+        <tr>
+            <th>Remark</th>
+            <td>
+                @Html.TextBox("LeaveRemark")
+            </td>
+        </tr>
+    </table>
+</form>

@@ -1,0 +1,12 @@
+﻿@model Enabill.Models.User
+@{
+    ViewBag.Title = "Profile";
+}
+<h2>
+    Profile
+</h2>
+
+@Html.Tabs("tabs",
+                    new TabPage("My Details", "ucProfileDetails", Model, "tabs-0"),
+                    new TabPage("Project Allocations", "ucProfileActivities", Model.GetActivities(), "tabs-1")
+          )

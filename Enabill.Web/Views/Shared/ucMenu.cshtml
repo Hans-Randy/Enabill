@@ -1,0 +1,13 @@
+﻿@foreach (var m in Settings.Current.VisibleMenus)
+{
+    if (m.IsActive)
+    {
+        @BaseWebViewPage.MenuButton(m.MenuName, m.Action ?? "Index", m.Controller)
+    }
+    else
+    {
+        continue;
+    }
+}
+
+@Html.Hidden("MenuCount", Settings.Current.VisibleMenus.Count())

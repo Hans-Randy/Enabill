@@ -1,0 +1,29 @@
+﻿@model string
+
+@*<div style="cursor:pointer; width:100px;" class="actionDiv" onclick="location.href='/Invoice/GLAccountIndex';">
+        <span class="imageWithText">
+            <img alt="" height="18px" src="@Url.Content("~/Content/Img/add_plus_green.png")" />
+        </span>
+        GL Accounts
+    </div>*@
+
+<table>
+    <tr>
+        <td>
+            <div style="cursor:pointer; width:100px;" class="actionDiv" onclick="location.href='/Invoice/GLAccountIndex';">
+                <span class="imageWithText">
+                    <img alt="" height="18px" src="@Url.Content("~/Content/Img/add_plus_green.png")" />
+                </span>
+                GL Accounts
+            </div>
+        </td>
+        <td>
+            <div style="cursor:pointer; width:100px;" class="actionDiv" onclick="Invoice.exportToCSV(); return false;">
+                <span class="imageWithText">
+                    <img alt="" height="18px" src="@Url.Content("~/Content/Img/add_plus_green.png")" />
+                </span>
+                Export Invoices
+            </div>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,296 @@
+﻿@model Enabill.Web.Models.ActivityReportDisplayModel
+@{
+    var clientList = new List<SelectListItem>();
+    var projectList = new List<SelectListItem>();
+    var divisionList = new List<SelectListItem>();
+    var employeeList = new List<SelectListItem>();
+    var employmentTypeList = new List<SelectListItem>();
+    var activityList = new List<SelectListItem>();
+
+    //Client
+    clientList.Add(new SelectListItem
+    {
+        Value = "0",
+        Text = "--all clients"
+    });
+
+    clientList.AddRange(Model.Clients.OrderBy(c => c.ClientName).Select(c => new SelectListItem { Text = c.ClientName, Value = c.ClientID.ToString(), Selected = c.ClientID == Model.ClientId }));
+
+    //Project
+    projectList.Add(new SelectListItem
+    {
+        Value = "",
+        Text = "--all projects"
+    });
+
+    projectList.AddRange(Model.Projects.GroupBy(p => p.ProjectName).OrderBy(g => g.Key).Select(pg => new SelectListItem { Text = pg.First().ProjectName, Value = pg.First().ProjectName, Selected = pg.First().ProjectName == Model.ProjectName }));
+
+    //Division
+    divisionList.Add(new SelectListItem
+    {
+        Value = "0",
+        Text = "--all divisions"
+    });
+
+    divisionList.AddRange(Model.Divisions.OrderBy(d => d.DivisionName).Select(d => new SelectListItem { Text = d.DivisionName, Value = d.DivisionID.ToString(), Selected = d.DivisionID == Model.DivisionId }).ToList());
+
+    //Employee
+    employeeList.Add(new SelectListItem
+    {
+        Value = "",
+        Text = "--all employees"
+    });
+
+    //employeeList.AddRange(Model.Users.OrderBy(u => u.UserName).Select(u => new SelectListItem { Text = u.UserName, Value = u.UserName, Selected = u.UserName == Model.UserName }));
+    employeeList.AddRange(Model.Users.OrderBy(u => u.UserName).Select(u => new SelectListItem { Text = u.UserName, Value = u.UserName, Selected = u.UserName == Model.UserName }));
+
+    //Employment Type
+    employmentTypeList.Add(new SelectListItem
+    {
+        Value = "0",
+        Text = "--all employment types"
+    });
+
+    employmentTypeList.AddRange(Model.EmploymentTypes.OrderBy(t => t.EmploymentTypeName).Select(et => new SelectListItem { Value = et.EmploymentTypeID.ToString(), Text = et.EmploymentTypeName, Selected = et.EmploymentTypeID == Model.EmploymentTypeId }));
+
+    //Activity
+    activityList.Add(new SelectListItem
+    {
+        Value = "",
+        Text = "--all activities"
+    });
+
+    activityList.AddRange(Model.Activities.GroupBy(ac => ac.ActivityName).OrderBy(a => a.Key).Select(a => new SelectListItem { Value = a.First().ActivityName, Text = a.First().ActivityName, Selected = a.First().ActivityName == Model.ActivityName }));
+
+}
+
+<table style="width:100%">
+    <tr>
+        <td style="width:15%">
+            <h1 style="margin:0px;padding-left:0px">Activity Report</h1>
+            <table style="width:100%;margin:8px 0 8px 0;background-image:none" class="headingTable">
+                <tbody>
+                    <tr>
+                        <td style="width:2%;padding-left:0;" class="headingTableCol3">
+                            <span class="imageWithText previousPage"><img alt="" src="@Url.Content("~/Content/Img/arrow_left_16x16.png")" /></span>
+                            <b>Page @Model.PageNumber of @Model.TotalPages</b>
+                            <span class="imageWithText nextPage"><img alt="" src="@Url.Content("~/Content/Img/arrow_right_16x16.png")" /></span>
+                            @*<span class="previousPage" style="display:inline-block;max-width: none;font-size:10px;color:black;cursor:pointer">&lt;</span>&nbsp;<span style="font-size: 10px; color: black;font-weight:normal; display:inline-block">Page @Model.PageNumber of @Model.TotalPages</span>&nbsp;<span class="nextPage" style="display:inline-block;max-width: none;font-size:10px;color:black;cursor:pointer">&gt;</span>*@
+                            <input type="hidden" value="@Model.TotalPages" id="totalPages" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table style="width:100%;margin:8px 0 8px 0">
+                <tr>
+                    <td style="width:90%;padding-left:0;text-align:left"><h2 style="margin:0px;padding:0px">@Model.TotalHoursWorked hours</h2></td>
+                </tr>
+                <tr>
+                    <td style="width:2%;padding-left:0;">&nbsp;<span style="font-size: 10px; color: black;font-weight:normal; display:inline-block">Total Hours Worked</span>&nbsp;</td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td colspan="2" style="font-size:12px;padding-left:0">Date From </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="padding-left:0">
+                        @Html.TextBox("DTFrom", Model.DateFrom.ToString("yyyy-MM-dd"))
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size:12px;padding-left:0">Date To </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="padding-left:0">@Html.TextBox("DTTo", Model.DateTo.ToString("yyyy-MM-dd"))</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-size:12px;padding-left:0">Division</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="padding-left:0">@Html.DropDownList("DivisionList", divisionList, new { id = "DivisionList", style = "font-size:12px" })</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-size:12px;padding-left:0">Client</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="padding-left:0">@Html.DropDownList("ClientList", clientList, new { id = "ClientList", style = "font-size:12px" })</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-size:12px;padding-left:0">Activity</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="padding-left:0">@Html.DropDownList("ActivityList", activityList, new { id = "ActivityList", style = "font-size:12px" })</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-size:12px;padding-left:0">Employee</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="padding-left: 0">@Html.DropDownList("UserList", employeeList, new { id = "UserList", style = "font-size:12px" })</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-size:12px;padding-left:0">Projects</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="padding-left:0">@Html.DropDownList("ProjectList", projectList, new { id = "ProjectList", style = "font-size:12px" })</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-size:12px;padding-left:0">Employment Type</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="padding-left:0">@Html.DropDownList("EmploymentTypeList", employmentTypeList, new { id = "EmploymentTypeList", style = "font-size:12px" })</td>
+                </tr>
+                <tr>
+                    <td style="padding-left:0">
+                        <input type="button" value="Print" onclick="printActivityReport();" />&nbsp;<input type="button" value="Filter" onclick="getFilterActivityReport();" />
+                    </td>
+                    <td style="padding-left:0"></td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table class="calendarTable fullWidth">
+                <tr>
+                    <th>Username</th>
+                    <th>Employment Type</th>
+                    <th>Division Name</th>
+                    <th>Region Name</th>
+                    <th>Department Name</th>
+                    <th>Client Name</th>
+                    <th>Project Name</th>
+                    <th>Activity Name</th>
+                    <th>Period</th>
+                    <th>Day Worked</th>
+                    <th>Hours Worked</th>
+                </tr>
+                @foreach (var u in Model.PagedUsersWorkAllocations)
+                {
+                    <tr>
+                        <td>
+                            @u.UserName
+                        </td>
+                        <td>
+                            @u.EmploymentType
+                        </td>
+                        <td>
+                            @u.DivisionName
+                        </td>
+                        <td>
+                            @u.RegionName
+                        </td>
+                        <td>
+                            @u.DepartmentName
+                        </td>
+                        <td>
+                            @u.ClientName
+                        </td>
+                        <td>
+                            @u.ProjectName
+                        </td>
+                        <td>
+                            @u.ActivityName
+                        </td>
+                        <td>
+                            @u.Period
+                        </td>
+                        <td>
+                            @u.DayWorked.ToShortDateString()
+                        </td>
+                        <td>
+                            @u.HoursWorked
+                        </td>
+                    </tr>
+                }
+            </table>
+        </td>
+    </tr>
+</table>
+
+@*<form id="frmActivityReport" method="post">
+        <table>
+            <tr>
+                <th>Date From </th>
+                <td>@Html.TextBox("DateFrom")</td>
+                <td>Division</td>
+                <td>@Html.DropDownList("DivisionList", Model.Divisions)</td>
+                <td>Client</td>
+                <td>@Html.DropDownList("ClientList", Model.Clients)</td>
+                <td>Activity</td>
+                <td>@Html.DropDownList("ActivityList", Model.Activities)</td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <th>Date To </th>
+                <td>@Html.TextBox("DateTo")</td>
+                <td>Employee</td>
+                <td>@Html.DropDownList("EmployeeList", Model.Employees)</td>
+                <td>Projects</td>
+                <td>@Html.DropDownList("ProjectList", Model.Projects)</td>
+                <td>Employment Type</td>
+                <td>@Html.DropDownList("EmploymentTypeList", Model.EmploymentType)</td>
+                <td>
+                    <input type="button" value="Show" onclick="Report.showActivityReportOnScreen();" />
+                </td>
+                <td>
+                    <input type="button" value="Print" onclick="Report.printActivityReport();" />
+                </td>
+            </tr>
+        </table>
+    </form>
+    <table class="calendarTable fullWidth">
+        <tr>
+            <th>Username</th>
+            <th>Employment Type</th>
+            <th>Division Name</th>
+            <th>Region Name</th>
+            <th>Department Name</th>
+            <th>Client Name</th>
+            <th>Project Name</th>
+            <th>Activity Name</th>
+            <th>Period</th>
+            <th>Day Worked</th>
+            <th>Hours Worked</th>
+        </tr>
+        <tbody>
+            @foreach (var u in Model.UserTimeSplitReportModels)
+            {
+                <tr>
+                    <td style="font-size:8pt">
+                        @u.UserName
+                    </td>
+                    <td style="font-size:8pt">
+                        @u.EmploymentType
+                    </td>
+                    <td style="font-size:8pt">
+                        @u.DivisionName
+                    </td>
+                    <td style="font-size:8pt">
+                        @u.RegionName
+                    </td>
+                    <td style="font-size:8pt">
+                        @u.DepartmentName
+                    </td>
+                    <td style="font-size:8pt">
+                        @u.ClientName
+                    </td>
+                    <td style="font-size:8pt">
+                        @u.ProjectName
+                    </td>
+                    <td style="font-size:8pt">
+                        @u.ActivityName
+                    </td>
+                    <td style="font-size:8pt">
+                        @u.Period
+                    </td>
+                    <td style="font-size:8pt">
+                        @u.DayWorked
+                    </td>
+                    <td style="font-size:8pt">
+                        @u.HoursWorked
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@

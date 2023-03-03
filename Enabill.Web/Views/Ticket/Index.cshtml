@@ -1,0 +1,19 @@
+﻿@model Enabill.Web.Models.TicketIndexModel
+
+@section beginHead
+{
+    @IncludeRichEditor()
+}
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    Html.EnableClientValidation(false);
+    ViewBag.Title = "Ticket Dashboard";
+}
+
+<div id="ucIndex" class="marginView">
+    @Html.Partial("ucIndex", Model)
+</div>

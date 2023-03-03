@@ -1,0 +1,43 @@
+﻿@model Enabill.Web.Models.TimeIndexModel
+
+<table class="calendarTable fullWidth">
+    <tr>
+        <th></th>
+        <th class="center">Day</th>
+        <th class="center">Date</th>
+        <th class="center">Hours Worked</th>
+        <th class="center">Allocated Hours</th>
+        <th class="center">Unallocated Hours</th>
+    </tr>
+    @foreach (var date in Model.Calendar)
+    {
+        <tr class="@date.WorkDayClass">
+            <td class="center">
+                @date.FlexiOrLeaveDayText
+            </td>
+            <td class="center">
+                @date.WorkDay.ToString("dddd")
+            </td>
+            <td class="center">
+                @Html.ActionLink(date.WorkDay.ToDisplayString(), "Day", "Time", new { id = Model.User.UserID, dateString = date.WorkDay.ToDisplayString() }, null)
+            </td>
+            <td class="center">
+                @date.DailyWorkSessions.Sum(ws => ws.TotalTime).ToDoubleString()
+            </td>
+            <td class="center">
+                @(date.AllocatedTime == 0 ? string.Empty : date.AllocatedTime.ToDoubleString())
+            </td>
+            <td class="@date.AllocationClass center">
+                @(date.UnallocatedTime == 0 ? string.Empty : date.UnallocatedTime.ToDoubleString())
+            </td>
+        </tr>
+    }
+    @if (CurrentUser.CanManage(ContextUser))
+    {
+        <tr>
+            <td class="center" colspan="6">
+                <input type="button" onclick="window.location='/Time/Index/@ContextUserID';" value="Go to Time page" />
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,42 @@
+﻿<form id="BookLeaveFrm">
+    <table class="underline fullWidth">
+        <tr>
+            <th colspan="2" class="center"><h2>Multiple Days</h2></th>
+        </tr>
+        <tr>
+            <th>
+                Multiple/Partial
+            </th>
+            <th>
+                <label>
+                    <input type="checkbox" class="labelcheckboxinput" onclick="Leave.changeLeaveBookingType(2)" checked="checked" /> Multiple&nbsp;
+                    <input type="checkbox" class="labelcheckboxinput" onclick="Leave.changeLeaveBookingType(1)" /> Partial
+                </label>
+            </th>
+        </tr>
+        <tr>
+            <th>Leave Type</th>
+            <td>
+                @Html.DropDownList("LeaveType", null, new { style = "font-size: 12px;" })
+            </td>
+        </tr>
+        <tr>
+            <th>Date From</th>
+            <td>
+                @Html.TextBox("LeaveDateFrom")
+            </td>
+        </tr>
+        <tr>
+            <th>Date To</th>
+            <td>
+                @Html.TextBox("LeaveDateTo")
+            </td>
+        </tr>
+        <tr>
+            <th>Remark</th>
+            <td>
+                @Html.TextBox("LeaveRemark")
+            </td>
+        </tr>
+    </table>
+</form>

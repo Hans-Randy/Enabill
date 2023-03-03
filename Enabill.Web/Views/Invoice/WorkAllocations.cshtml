@@ -1,0 +1,23 @@
+﻿@model Enabill.Web.Models.InvoiceWorkAllocationModel
+
+@section beginHead
+{
+    @IncludeRichEditor()
+}
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "Invoice Work Allocations";
+}
+
+<div class="marginView">
+    @Html.TitleTable("tblWorkAllocations", string.Empty, "<b>Work Allocations</b>", string.Empty, null, null, null, null, "ucInvoiceWorkAllocationsCol5", Model.Invoice.InvoiceID)
+    <div id="ucWorkAllocations" class="padView">
+        @Html.Partial("ucWorkAllocations", Model)
+    </div>
+</div>
+
+@Html.Hidden("InvoiceID", Model.Invoice.InvoiceID)

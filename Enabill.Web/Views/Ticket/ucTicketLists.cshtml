@@ -1,0 +1,58 @@
+﻿@model Enabill.Web.Models.TicketIndexModel
+
+<fieldset>
+    <legend><h3>Client Summary</h3></legend>
+    <table class="underline fullWidth">
+        <tr class="general">
+            @{
+                int ticketDetailColSpan = Model.TicketStatusList.Count() + 1;
+                var asterisks = "*";
+            }
+            <th>Client Name</th>
+            @foreach (var ticketStatus in Model.TicketStatusList.OrderBy(s => s.TicketStatusID))
+            {
+                <th class="center">@ticketStatus.TicketStatusName</th>
+            }
+        </tr>
+        @if (Model.TicketClientSummaryList.Count() == 0)
+        {
+            <tr>
+                <td colspan="7" class="center">No matching tickets found.</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var client in Model.TicketClientSummaryList.Select(c => c.ClientName).Distinct())
+            {
+                int clientStatusWrittenCount = 0;
+
+                <tr>
+                    <td>@client</td>
+                    @foreach (var ticket in Model.TicketClientSummaryList.OrderBy(c => c.ClientName).ThenBy(s => s.TicketStatusID))
+                    {
+                        if (ticket.ClientName == client)
+                        {
+                            int nrOfSpacesToWrite = ticket.TicketStatusID - clientStatusWrittenCount;
+
+                            for (int i = 1; i < nrOfSpacesToWrite; i++)
+                            {
+                                <td></td>
+                                clientStatusWrittenCount++;
+                            }
+
+                            <td class="center">
+                                <a href="#" onclick="Ticket.viewTickets(@ticket.ClientID,@ticket.TicketStatusID); return false;">@ticket.NumberOfTickets.ToString()</a>
+                            </td>
+
+                            clientStatusWrittenCount++;
+                        }
+                    }
+                </tr>
+            }
+
+            <tr><td colspan="@ticketDetailColSpan" class="borderRight" valign="top"></tr>
+            <tr><td colspan="@ticketDetailColSpan" class="borderRight" valign="top"></tr>
+
+        }
+    </table>
+</fieldset>

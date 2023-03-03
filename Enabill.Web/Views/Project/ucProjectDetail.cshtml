@@ -1,0 +1,191 @@
+﻿@model Enabill.Models.Project
+
+<table class="subTable general" style="width: 500px;">
+    <tr>
+        <td>
+            <form id="ProjectDetailFrm">
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <legend>Project Details</legend>
+                    @Html.HiddenFor(model => model.ProjectID, new { id = "hiddenProjectID" })
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.ProjectName)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.ProjectName, new { @class = "required" })
+                        @Html.ValidationMessageFor(model => model.ProjectName)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.ClientID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ClientID, "ClientList")
+                        @Html.ValidationMessageFor(model => model.ClientID)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.ProjectCode)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ProjectCode)
+                        @Html.ValidationMessageFor(model => model.ProjectCode)
+                    </div>
+                    <div class="editor-label">
+                        Project Group Code
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.GroupCode)
+                        @Html.ValidationMessageFor(model => model.GroupCode)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.ProjectDesc)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextAreaFor(model => model.ProjectDesc, new { style = "width:200px" })
+                        @Html.ValidationMessageFor(model => model.ProjectDesc)
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Other</legend>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.ProjectOwnerID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ProjectOwnerID, "ProjectOwnerUserList")
+                        @Html.ValidationMessageFor(model => model.ProjectOwnerID)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.InvoiceAdminID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.InvoiceAdminID, "InvoiceUserList")
+                        @Html.ValidationMessageFor(model => model.InvoiceAdminID)
+                    </div>
+
+                    <br />
+
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.BookInAdvance)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.BookInAdvance)
+                        @Html.ValidationMessageFor(model => model.BookInAdvance)
+                    </div>
+
+                    <br />
+
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.RegionID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.RegionID, "RegionList")
+                        @Html.ValidationMessageFor(model => model.RegionID)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.DepartmentID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.DepartmentID, "DepartmentList")
+                        @Html.ValidationMessageFor(model => model.DepartmentID)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.BillingMethodID)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.BillingMethodID, "BillingMethodList")
+                        @Html.ValidationMessageFor(model => model.BillingMethodID)
+                    </div>
+
+                    <br />
+
+                    <span id="billingMethodSpan" style="display: block;">
+                        <div class="editor-label">
+                            @Html.Label(Model.AmountTotal )
+                       </div>
+
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.ProjectValue)
+                            @Html.ValidationMessageFor(model => model.ProjectValue)
+                        </div>
+
+                        <br />
+                    </span>
+
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.MustHaveRemarks)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.MustHaveRemarks, new { htmlAttributes = new { Title = "Default for new Activities. Activities can be set independently." } })
+                        @Html.ValidationMessageFor(model => model.MustHaveRemarks)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.CanHaveNotes)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.CanHaveNotes)
+                        @Html.ValidationMessageFor(model => model.CanHaveNotes)
+                    </div>
+                    <div class="editor-label">
+                        @*@Html.CleanLabelFor(model => model.SupportEmailAddress)*@
+                        Enabill helpdesk email address
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.SupportEmailAddress, "SupportEmailAddress")
+                        @Html.ValidationMessageFor(model => model.SupportEmailAddress)
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Project Dates</legend>
+
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.StartDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBox("StartDate", Model.StartDate.ToDisplayString(), new { @class = "datePicker" })
+                        @Html.ValidationMessageFor(model => model.StartDate)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.ScheduledEndDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBox("ScheduledEndDate", Model.ScheduledEndDate.ToDisplayString(), new { @class = "datePicker" })
+                        @Html.ValidationMessageFor(model => model.ScheduledEndDate)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.CleanLabelFor(model => model.ProjectStatus)
+                    </div>
+                    @{
+                        string projectStatusClass = Model.ProjectStatus == "Active" ? "active" : "error";
+                    }
+                    <div class="editor-field @projectStatusClass">
+                        <b>@Html.Label("ProjectStatus", Model.ProjectStatus)</b>
+                        @Html.ValidationMessageFor(model => model.ProjectStatus)
+                    </div>
+                </fieldset>
+
+                <p>
+                    @if (Model.ProjectID == 0)
+                    {
+                        <fieldset>
+                            <legend>Extras</legend>
+
+                            <div class="editor-label">
+                                Create a default activity?
+                            </div>
+                            <div class="editor-field">
+                                <input type="checkbox" id="CreateDefaultActivity" name="CreateDefaultActivity" runat="server" title="Create an activity with the same name as the project" />
+                            </div>
+                        </fieldset>
+                    }
+
+                    <input type="button" id="Close" value="Close" onclick="Project.close(); return false;" />
+                    <input type="button" id="Cancel" value="Cancel" onclick="Project.cancel(@Model.ProjectID); return false;" />
+                    <input type="button" id="Save" value="Save" onclick="Project.save(@Model.ProjectID); return false;" />
+                </p>
+            </form>
+        </td>
+    </tr>
+</table>

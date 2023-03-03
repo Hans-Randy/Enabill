@@ -1,0 +1,20 @@
+﻿@model StoryWriter.Models.Story
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Story Details</h2>
+
+<div class="Story">
+    <fieldset>
+        <legend>Story | @Html.ActionLink("Edit", "Edit", "Story", new { id = Model.StoryID }, null) | @Html.ActionLink("List", "Index") </legend>
+        <h2>@Model.StoryName (@Model.StoryNumber)</h2>
+        <div>@Html.Raw(Model.StoryText)</div>
+        <div>
+            <span class="StoryLines">As a:</span> @Model.ActorName<br />
+            <span class="StoryLines">I want to:</span> @Model.IWantToAction<br />
+            <span class="StoryLines">So that:</span> @Model.SoThatOutcome<br />
+        </div>
+    </fieldset>
+</div>

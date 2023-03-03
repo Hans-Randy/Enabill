@@ -1,0 +1,27 @@
+﻿@model Enabill.Web.Models.UserRoleModel
+<table class="general ">
+    <tr>
+        <th>Current Roles</th>
+        <th></th>
+        <th>Other Roles</th>
+    </tr>
+    <tr>
+        <td valign="top">
+            @foreach (var act in Model.UserRoles)
+            {
+                <input type="checkbox" class="removeRole" value="@act.RoleID" />@act.RoleName<br />
+            }
+        </td>
+        <td>
+            <input type="button" style="width:90px" value="Remove &gt;&gt;" onclick="User.removeRole()" /><br />
+            <br />
+            <input type="button" style="width:90px" value="<< Assign" onclick="User.addRole()" /><br />
+        </td>
+        <td valign="top">
+            @foreach (var act in Model.UserRolesNotAssigned)
+            {
+                <input type="checkbox" class="addRole" value="@act.RoleID" />@act.RoleName<br />
+            }
+        </td>
+    </tr>
+</table>

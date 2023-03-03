@@ -1,0 +1,35 @@
+﻿@model Enabill.Web.Models.InvoiceRuleModel
+
+@section head{
+    <script type="text/javascript">
+        $(function () {
+            accrualSum = NumberFunctions.returnNumber($('#AccrualSum').html());
+            FixedCostLines.updateValues();
+        });
+    </script>
+}
+
+<form id="fcLines">
+    <table class="underline fullWidth">
+        <tr>
+            <th colspan="2">@Html.Label("Fixed Cost Amount (" + Model.Client.GetCurrency(Model.Client.CurrencyTypeID).CurrencyISO+ ")")</th>
+            <td>@Html.TextBox("InvoiceAmountExclVAT", Model.InvoiceRule.InvoiceAmountExclVAT.Value, new { @class = "right requiresNumberFormatting" })</td>
+        </tr>
+        <tr>
+            <th colspan="2">Accrual Periods (in Months)</th>
+            <td>@Html.TextBox("AccrualPeriods", Model.InvoiceRule.AccrualPeriods, new { @class = "right" })</td>
+        </tr>
+        <tr>
+            <td colspan="3" align="center">
+                <input type="button" value="Update" onclick="FixedCostLines.update(); return false;" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+        </tr>
+    </table>
+
+    <div id="FixedCostLines">
+        @Html.Partial("ucFixedCostLines", Model.FixedCostAccrualBreakdown)
+    </div>
+</form>

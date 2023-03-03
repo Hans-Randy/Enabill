@@ -1,0 +1,10 @@
+﻿@model List<Enabill.Models.UserActivity>
+
+    <h3>
+        Current Projects/Activities
+    </h3>
+    @foreach (var act in Model)
+    {
+        @act.ActivityName <br />
+    }
+    @Html.ActionLink("Request more Activities", "RequestAct")

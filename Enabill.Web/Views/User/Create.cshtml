@@ -1,0 +1,16 @@
+﻿@model Enabill.Models.User
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "Create User";
+}
+
+<div class="marginView">
+    @Html.TitleTable("tblUserDetail", "", "<b>Create A New User</b>")
+    <div class="padView">
+        @Html.Partial("ucUserDetail", Model)
+    </div>
+</div>

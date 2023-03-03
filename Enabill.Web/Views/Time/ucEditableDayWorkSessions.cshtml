@@ -1,0 +1,95 @@
+﻿@model Enabill.Web.Models.TimeDayModel
+
+<form id="frmAddWS" method="post" action="">
+    @Html.Hidden("WorkDay", Model.WorkDay.ToString("yyyy-MM-dd"))
+    @Html.Hidden("UserID", Model.User.UserID)
+
+    <table style="width: 96%; margin: auto;">
+        <tr>
+            <th>From</th>
+            <th>To</th>
+            <th>Lunch</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>@Html.DropDownList("StartTime", Helpers.WorkTimeList(Model.WorkDay, Model.DayWorkSessions, null), new { style = "width: 96%;" })</td>
+            <td>@Html.DropDownList("EndTime", Helpers.WorkTimeList(Model.WorkDay, Model.DayWorkSessions, null), new { style = "width: 96%;" })</td>
+            <td>@Html.TextBox("LunchTime", null, new { style = "width:30px" })</td>
+            <td><input type="button" value="Add" onclick="WorkSession.addWS()" /></td>
+        </tr>
+
+        @foreach (var ws in Model.DayWorkSessions)
+        {
+            <tr>
+                <td colspan="5">From <strong>@ws.StartTime.ToString("HH:mm")</strong> to <strong>@ws.EndTime.ToString("HH:mm")</strong> (<strong>@ws.TotalTime hrs</strong> with @(ws.LunchTime)hr lunch) <img src="/Content/Img/Delete.gif" style="cursor:pointer; height:10px" onclick="WorkSession.delWS(@Model.User.UserID, @ws.WorkSessionID)" /></td>
+            </tr>
+        }
+        <tr>
+            <td colspan="5">Total hours worked : <strong>@Model.DayWorkSessions.Sum(ws => ws.TotalTime).ToString() hrs</strong></td>
+        </tr>
+    </table>
+</form>
+
+@if (Model.DayWorkSessions.Count > 0)
+{
+    <div id="userWorkAllocations">
+        <h3>Allocated Time</h3>
+        <form id="frmUserAllocations" method="post" action="">
+            @Html.Hidden("UserID", Model.User.UserID)
+            @Html.Hidden("SelectedDay", Model.WorkDay)
+
+            <table style="width: 96%; margin: auto;">
+                <tr>
+                    <th>Project</th>
+                    <th>Activity</th>
+                    <th>Hours</th>
+                    <th>Remark</th>
+                    <th></th>
+                </tr>
+                @foreach (var all in Model.WorkAllocations)
+                {
+                    <tr>
+                        @Html.Hidden("WorkAllocationID", all.WorkAllocation.WorkAllocationID.ToString())
+                        <td>@all.Project.ProjectName</td>
+                        <td>@all.Activity.ActivityName</td>
+                        <td>
+                            @Html.TextBox("ActHours" + all.Activity.ActivityID, all.WorkAllocation.HoursWorked, new { style = "width: 30px" })
+                        </td>
+                        <td>
+                            @if (all.Activity.MustHaveRemarks)
+                            {
+                                @Html.TextBox("ActRemark" + all.Activity.ActivityID, all.WorkAllocation.Remark, new { style = "width: 98%", @class = "error" })
+                            }
+                            else
+                            {
+                                @Html.TextBox("ActRemark" + all.Activity.ActivityID, all.WorkAllocation.Remark, new { style = "width: 98%" })
+                            }
+                        </td>
+                        <td>
+                            @if (all.Activity.CanHaveNotes && all.WorkAllocation.WorkAllocationID > 0)
+                            {
+                                <a class="ui-icon ui-icon-note" href="/Note/Edit/@all.WorkAllocation.WorkAllocationID"></a>
+                            }
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <th colspan="2">Unallocated</th>
+                    @if (Model.User.GetUnallocatedTime(Model.WorkDay) == 0)
+                    {
+                        <th>@Model.User.GetUnallocatedTime(Model.WorkDay).ToString("0.00")</th>
+                    }
+                    else
+                    {
+                        <th class="timeError">@Model.User.GetUnallocatedTime(Model.WorkDay).ToString("0.00")</th>
+                    }
+                    <th colspan="2"></th>
+                </tr>
+            </table>
+            <br />
+            <span style="display: block; width: 96%; margin: auto;">
+                <input type="button" value="Save" onclick="WorkAllocation.saveWorkAllocation()" />
+            </span>
+        </form>
+    </div>
+}

@@ -1,0 +1,21 @@
+﻿@model Enabill.Web.Models.TimeWeekModel
+
+@section beginhead{
+    @IncludeRichEditor()
+    @IncludeControllerCSS(true)
+}
+
+@section head{
+    @IncludeControllerScript(true)
+    @IncludeWebix()
+    @IncludeFiles("js", true, false, false, "Component/DataTableWeek.js")
+}
+
+@{
+    Html.EnableClientValidation(false);
+    ViewBag.Title = Model.User.FullName + "'s Weekly Timesheet";
+}
+
+<div id="ucWeek" class="marginView">
+    @Html.Partial("ucWeek", Model)
+</div>

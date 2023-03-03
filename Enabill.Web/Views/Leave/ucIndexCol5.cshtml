@@ -1,0 +1,8 @@
+﻿@model Enabill.Models.User
+
+<div class="actionDiv" onclick="window.location='/User/Profile/@Model.UserID'">
+    <span class="imageWithText">
+        <img alt="" height="16px" src="@Url.Content("~/Content/Img/redo_16x16.png")" />
+    </span>
+    Go to @(Model.UserID == CurrentUserID ? "My" : Model.FullName + "'s") Profile
+</div>

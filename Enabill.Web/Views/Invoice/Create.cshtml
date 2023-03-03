@@ -1,0 +1,90 @@
+﻿@model Enabill.Models.Dto.InvoiceExtendedDetail
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    string action = "Create";
+    if (Model.Invoice.InvoiceID > 0)
+    {
+        action = "Edit";
+    }
+    ViewBag.Title = action;
+}
+
+<h2>@action</h2>
+
+<form method="post">
+    @Html.Hidden("InvoiceRuleID", @Model.Invoice.InvoiceRuleID)
+    <table class="general fullWidth">
+        <tr>
+            <td style="width: 50%;">
+                <form id="RuleSetup" method="post">
+                    <table style="">
+                        <tr>
+                            <th>
+                                Client
+                            </th>
+                            <td>
+                                @Model.Client.ClientName
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Billing Method
+                            </th>
+                            <td>
+                                @Model.BillingMethodName
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Invoice Category
+                            </th>
+                            <td>
+                                @Html.DropDownList("InvoiceCategoryID")
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Invoice Sub Category
+                            </th>
+                            <td>
+                                @Html.DropDownList("InvoiceSubCategoryID")
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Date Range For Work Allocations
+                            </th>
+                            <td>
+                                @Html.TextBox("DateFrom", Model.Invoice.DateFrom.ToDisplayString(), new { @class = "datePicker" })
+                                -
+                                @Html.TextBox("DateTo", Model.Invoice.DateTo.ToDisplayString(), new { @class = "datePicker" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Order Number
+                            </th>
+                            <td>
+                                @Html.TextBox("OrderNo", Model.Invoice.OrderNo)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Invoice Date to Display on Invoice
+                            </th>
+                            <td>
+                                @Html.TextBox("InvoiceDate", Model.Invoice.InvoiceDate.ToDisplayString(), new { @class = "datePicker" })
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+    <input type="submit" Value="Save" />
+</form>

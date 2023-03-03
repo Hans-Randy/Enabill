@@ -1,0 +1,14 @@
+﻿@model Enabill.Web.Models.InvoiceEditAdHoc
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    string title = Model.Invoice.InvoiceID == 0 ? "Create Ad Hoc Invoice" : "Edit Ad Hoc Invoice";
+    ViewBag.Title = title;
+}
+
+<div id="InvoiceDiv" class="marginView">
+    @Html.Partial("ucEditAdHoc", Model)
+</div>

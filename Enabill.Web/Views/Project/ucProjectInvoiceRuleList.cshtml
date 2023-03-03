@@ -1,0 +1,74 @@
+﻿@model Enabill.Web.Models.ProjectInvoiceRuleModel
+
+@Html.TitleTable("tblInvRules", "", "<b>Invoice Rules<b>", "", "ucIndexCol5", "", null, null, null, "")
+
+<div class="padView">
+    <table class="subTable fullWidth">
+        <tr>
+            <td>
+                <table class="general fullWidth">
+                    <tr class="left">
+                        <th></th>
+                        <th>Type</th>
+                        <th>Project</th>
+                        <th>Activities</th>
+                        <th>Default Contact</th>
+                        <th>Activation Date</th>
+                        <th>DeActivation Date</th>
+                    </tr>
+
+                    @foreach (var clientModel in Model.InvoiceRuleClients)
+                    {
+                        <tr>
+                            <th colspan="7">@clientModel.Client.ClientName</th>
+                        </tr>
+                        if (clientModel.InvoiceRules.Count() == 0)
+                        {
+                            <tr>
+                                <th colspan="7">No invoice rules found for this project.</th>
+                            </tr>
+                        }
+                        foreach (var iR in clientModel.InvoiceRules)
+                        {
+                            <tr>
+                                <td>
+                                    <img class="icon" alt="Edit" title="Edit invoice rule" src="@Url.Content("/Content/Img/edit_128.png")" onclick="window.open('/InvoiceRule/Edit/@(iR.InvoiceRuleID)', '_blank');" />
+                                </td>
+                                <td class="@((Enabill.BillingMethodType)iR.BillingMethodID)">@((Enabill.BillingMethodType)iR.BillingMethodID)</td>
+                                <td>
+                                    @if (iR.ProjectNames != null)
+                                    {
+                                        foreach (string name in iR.ProjectNames)
+                                        {
+                                            @name
+                                            <br />
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @foreach (var a in iR.GetActivities(CurrentUser))
+                                    {
+                                        @a.ActivityName
+                                        <br />
+                                    }
+                                </td>
+                                <td>
+                                    @Enabill.Helpers.DecryptString(iR.GetDefaultContact().ContactName, Enabill.Code.Constants.PASSPHRASE)
+                                </td>
+                                <td>
+                                    @iR.DateFrom.ToDisplayString()
+                                </td>
+                                <td>
+                                    @iR.DateTo.ToDisplayString()
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="5"></td>
+                        </tr>
+                    }
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

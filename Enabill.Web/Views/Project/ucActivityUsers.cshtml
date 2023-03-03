@@ -1,0 +1,195 @@
+﻿@model Enabill.Web.Models.ProjectActivityUsersModel
+
+@if (Model.Activities.Count == 0)
+{
+    <p>
+        This project: <b>@Model.Project.ProjectName</b> does not have any activities created:<br />
+        You must add activities before allocating users to the project.
+    </p>
+    return;
+}
+
+<h3>Users and Rates per Activity</h3>
+<form id="frmActivityUsers" action="">
+    <table class="general fullWidth">
+        <tr>
+            <th>
+                <input type="checkbox" title="Select/Deselect all Activities" id="chkAllActs" onchange="$('.activityIDs').each(function() {$(this).get(0).checked = $('#chkAllActs').get(0).checked} );" />
+            </th>
+            <th>Activity Name</th>
+            <th colspan="5">Current Users</th>
+            <th colspan="4">Past Users</th>
+            <th colspan="4">Future Users</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>User</th>
+              <!-- <th>
+            @*Html.Label("Hourly Rate (" + @Model.Project.Client.GetCurrency(Model.Project.Client.CurrencyTypeID).CurrencyISO + ")")*@
+             </th>-->
+            <th> @Html.Label("Hourly Rate (" + @Model.Project.Currency + ")") </th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th></th>
+            <th>User</th>
+            <th> @Html.Label("Hourly Rate (" + @Model.Project.Currency + ")") </th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th></th>
+            <th>User</th>
+            <th> @Html.Label("Hourly Rate (" + @Model.Project.Currency + ")") </th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+            @foreach (var activity in Model.Activities)
+            {
+                for (int k = 1; k <= activity.RequiredRows; k++)
+                {
+                    <tr>
+                        @*Write the activity for each new activityt*@
+                    @if (k == 1)
+                    {
+                            <td rowspan="@activity.RequiredRows">
+                                @if (activity.Activity.IsActive)
+                                {
+                                    <input type="checkbox" name="activityIDs" class="activityIDs" value="@activity.Activity.ActivityID" />
+                                }
+                            </td>
+                            <td rowspan="@activity.RequiredRows">
+                                @activity.Activity.ActivityName
+                            </td>
+                        }
+
+                        @*Write the a row from Assigned user list*@
+                        @if (activity.UsersAssignedToActivity.Count >= k)
+                        {
+                            var user = activity.UsersAssignedToActivity[k - 1];
+                            <td>
+                                @user.UserFullName
+                            </td>
+                            <td>
+                                @user.ChargeRate
+                            </td>
+                            <td>
+                                @user.StartDate.ToDisplayString()
+                            </td>
+                            <td>
+                                @(user.ConfirmedEndDate != null ? user.ConfirmedEndDate.ToDisplayString() + " - (confirmed)" : user.ScheduledEndDate.HasValue ? user.ScheduledEndDate.ToDisplayString() + " - (scheduled)" : "No end date specified")
+                            </td>
+                            <td>
+                                <img src="@Url.Content("~/Content/Img/edit_14.png")" alt="Edit" title="Edit" onclick="UserAllocation.addEditUserAllocation(@user.UserAllocationID); return false;" style="cursor:pointer; height:14px" />
+                                <img src="@Url.Content("~/Content/Img/Delete.gif")" alt="Delete" style="cursor:pointer; height:14px" onclick="UserAllocation.deleteUserAllocation(@user.UserAllocationID); return false;" />
+                            </td>
+                        }
+                        else
+                        {
+                            <td colspan="5"></td>
+                        }
+
+                        @*Write the a row from PastUser list*@
+                        @if (activity.PastUsersAssignedToActivity.Count >= k)
+                        {
+                            var user = activity.PastUsersAssignedToActivity[k - 1];
+                            <td>
+                                @user.UserFullName
+                            </td>
+                            <td>
+                                @user.ChargeRate
+                            </td>
+                            <td>
+                                @user.StartDate.ToDisplayString()
+                            </td>
+                            <td>
+                                @user.ConfirmedEndDate.ToDisplayString()
+                            </td>
+                        }
+                        else
+                        {
+                            <td colspan="4"></td>
+                        }
+
+                        @*Write the a row from FutureUser list*@
+                        @if (activity.FutureUsersAssignedToActivity.Count() >= k)
+                        {
+                            var user = activity.FutureUsersAssignedToActivity[k - 1];
+                            <td>
+                                @user.UserFullName
+                            </td>
+                            <td>
+                                @user.ChargeRate
+                            </td>
+                            <td>
+                                @user.StartDate.ToDisplayString()
+                            </td>
+                            <td>
+                                @(user.ConfirmedEndDate != null ? "to " + user.ConfirmedEndDate.ToDisplayString() + " - (confirmed)" : user.ScheduledEndDate.HasValue ? "to " + user.ScheduledEndDate.ToDisplayString() + " - (scheduled)" : "No end date specified")
+                            </td>
+                            <td>
+                                <img src="@Url.Content("~/Content/Img/edit_14.png")" alt="Edit" title="Edit" onclick="UserAllocation.addEditUserAllocation(@user.UserAllocationID); return false;" style="cursor:pointer; height:14px" />
+                                <img src="@Url.Content("~/Content/Img/Delete.gif")" alt="Delete" style="cursor:pointer; height:14px" onclick="UserAllocation.deleteUserAllocation(@user.UserAllocationID); return false;" />
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+            }
+            <tr>
+                <th colspan="200"></th>
+            </tr>
+        </table>
+        <br />
+        <table class="general center">
+            <tr>
+                <th colspan="5" class="center">Add a user to an activity</th>
+            </tr>
+            <tr>
+                <td>
+                    Add User:
+                    <p style="margin-top:16px">
+                        <input type="text" id="luUser" />
+                    </p>
+                </td>
+                <td>
+                    <!-- Rate: -->
+                    @Html.Label("Rate: (" + @Model.Project.Currency + ")")
+                    <p style="margin-top:16px">
+                        <input type="text" name="chargeRate" style="width: 40px" />
+                    </p>
+                </td>
+                <td>
+                    Date Range:
+                    <p>
+                        <input type="text" name="StartDate" class="datePicker" />
+                        <input type="text" name="EndDate" class="datePicker" />
+                    </p>
+                </td>
+                <td style="text-align:center;">
+                    Confirmed End Date:
+                    <p>
+                        <input type="checkbox" name="IsConfirmed" />
+                    </p>
+                </td>
+                <td>
+                    <p>
+                    </p>
+                    <p>
+                        <input type="button" value="Add User to selected Activities" onclick="Activity.addUser(@Model.Project.ProjectID)" />
+                    </p>
+                </td>
+            </tr>
+            @*<tr>
+                    <td colspan="5">
+                        <span class="help">The dates are informational only. A user can only be allocated once to an activity. (Regardless of the rates or dates).
+                        When changing a rate be sure to archive the old rates before adding a new rate.<br />
+                        You cannot change a rate once added. To correct, remove and add it back. <br />
+                        Dates are not checked for overlapping, because a user can only assigned to an activity once.
+                        </span>
+                    </td>
+                </tr>*@
+        </table>
+        <input type="hidden" id="userIDs" name="userIDs" /><br />
+    </form>

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Enabill.Models.Client>
+@{
+    ViewBag.Title = "Index";
+}
+
+@section head
+    {
+    @IncludeControllerScript(true)
+}
+
+<div id="Index" class="marginView">
+    @if (this.CurrentUser.HasRole(Enabill.UserRoleType.ContractManager))
+    {
+        @Html.TitleTable("tblClients", "", "<b>Clients</b>", Url.Content("/Content/Img/admin_20x20.png"), "ucIndexCol3", "", "ucIndexCol4", "", null, null)
+    }
+    else
+    {
+        @Html.TitleTable("tblClients", "", "<b>Clients</b>", Url.Content("/Content/Img/admin_20x20.png"), "ucIndexCol3", "", "", "", null, null)
+    }
+    <div class="padView">
+
+        <table class="subTable general">
+            <tr>
+                <th></th>
+                <th>Client Name </th>
+                <th>Phased Out</th>
+                <th>Status</th>
+                <th>Registered Name</th>
+                <th>Account Code</th>
+                <th>VAT No</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ClientID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ClientID })
+                    </td>
+                    <td>
+                        @item.ClientName
+                    </td>
+                    <td>
+                        @(item.IsDeactivated ? "Yes" : "No")
+                    </td>
+                    <td>
+                        @(item.IsActive ? "Active" : "InActive")
+                    </td>
+                    <td>
+                        @item.RegisteredName
+                    </td>
+                    <td>
+                        @item.AccountCode
+                    </td>
+                    <td>
+                        @item.VATNo
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+﻿@model Enabill.Web.Models.ManagerIndexModel
+@Html.TitleTable("tblMnger", "", "<b>Manager's Overview: </b> " + ContextUser.FullName)
+@{
+
+}
+
+<div class="padView">
+    @if (Model.StaffList.Count() == 0)
+    {
+        <table class="subTable">
+            <tr>
+                <td>
+                    <h3>You do not have any users to manage.</h3>
+                </td>
+            </tr>
+        </table>
+        return;
+    }
+</div>
+<div id="gridData">
+
+    <table class="subTable fullWidth general" id="">
+        <tr>
+            <th>
+            </th>
+            <th>
+                Full Name
+            </th>
+            <th>
+                Billable Indicator
+            </th>
+            <th>
+                Division
+            </th>
+            <th>
+                Employment Type
+            </th>
+            <th>
+                Employment Start Date
+            </th>
+            @*<th>
+                        Flexi Balance <br />
+                        <input type="button" value="Calculate All Flexi Balances" id="calculate" />
+                </th>*@
+            <th>
+                Leave Balance
+            </th>
+            <th>
+                Pending Leave
+            </th>
+        </tr>
+        @foreach (var user in Model.StaffList)
+        {
+            <tr>
+                <td>
+                    @Html.Partial("ucUserNavigationOptions", user.User)
+                </td>
+                <td>
+                    @user.User.FullName
+                </td>
+                <td>
+                    @user.BillableIndicatorName
+                </td>
+                <td>
+                    @user.DivisionName
+                </td>
+                <td>
+                    @user.EmploymentTypeName
+                </td>
+                <td>
+                    @user.User.EmployStartDate.ToExceptionDisplayString()
+                </td>
+                @*<td id="@user.User.UserID">
+                            <a href="#" id="text">Calculate Flexi Balance</a>
+                    </td>*@
+                <td>
+                    @user.LeaveBalance
+                </td>
+                <td>
+                    @if (user.HasPendingLeave)
+                    {
+                        <img src="../../Content/Img/tick_green_small.gif" />
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>

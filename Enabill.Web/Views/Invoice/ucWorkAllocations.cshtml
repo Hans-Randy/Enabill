@@ -1,0 +1,12 @@
+﻿@model Enabill.Web.Models.InvoiceWorkAllocationModel
+
+@Html.Partial("ucInvoiceWorkAllocationsDetail", Model)
+<br />
+@if ((Model.Invoice.IsOpen || Model.Invoice.IsInProgress)@* && (Model.Invoice.IsTM || Model.Invoice.IsSLA)*@)
+{
+    @Html.Partial("ucInvoiceWorkAllocationsEditable", Model)
+}
+else
+{
+    @Html.Partial("ucInvoiceWorkAllocationsLocked", Model)
+}

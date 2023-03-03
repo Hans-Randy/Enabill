@@ -1,0 +1,50 @@
+﻿@model List<Enabill.Models.InvoiceRuleLine>
+
+    <table class="underline fullWidth">
+        <tr class="general">
+            <th class="center" colspan="3" class="center">Accrual Period Breakdown</th>
+        </tr>
+        <tr>
+            <th>Period</th>
+            <th class="right">Customer Amount</th>
+            <th class="right">Accrual Amount</th>
+        </tr>
+
+        @foreach (var line in Model)
+        {
+            if (line.CanEdit)
+            {
+                <tr>
+                    <td>@line.Period</td>
+                    <td class="right">@Html.TextBox("CustAmt|" + line.InvoiceRuleLineID, line.CustomerAmount, new { @class = "right custAmt requiresNumberFormatting", onchange = "FixedCostLines.updateRuleLines(); return false;" })</td>
+                    <td class="right">@Html.TextBox("AccrualAmt|" + line.InvoiceRuleLineID, line.AccrualAmount, new { @class = "right accrualAmt requiresNumberFormatting", onchange = "FixedCostLines.updateRuleLines(); return false;" })</td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>@line.Period</td>
+                    <td class="right">
+                        @(line.CustomerAmount.ToDoubleString())
+                        @Html.Hidden("CustAmt|" + line.InvoiceRuleLineID, line.CustomerAmount, new { @class = "custAmt" })
+                    </td>
+                    <td class="right">
+                        @(line.AccrualAmount.ToDoubleString())
+                        @Html.Hidden("AccrualAmt|" + line.InvoiceRuleLineID, line.AccrualAmount, new { @class = "accrualAmt" })
+                    </td>
+                </tr>
+            }
+        }
+
+        <tr class="general">
+            <th></th>
+            <th class="right"><span id="CustomerSum">@Model.Sum(m => m.AccrualAmount).ToDoubleString()</span></th>
+            <th class="right"><span id="AccrualSum">@Model.Sum(m => m.AccrualAmount).ToDoubleString()</span></th>
+        </tr>
+        <tr>
+            <td colspan="3" align="center">
+                <input type="button" value="Save" onclick="FixedCostLines.saveFixedCostAccrualBreakdown()" id="SaveFCLines" />
+                <span id="ErrorMessage" class="error">The customer and/or accrual amounts do not total to the specified fixed cost amount</span>
+            </td>
+        </tr>
+    </table>

@@ -1,0 +1,22 @@
+﻿@model Enabill.Web.Models.UserEditModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "Edit User: " + Model.User.FullName;
+}
+
+<div class="marginView">
+    @Html.TitleTable("tblUserEdit", "", "<b>Edit User:<b> " + Model.User.FullName)
+    <div class="padView">
+        @Html.Tabs("tabs",
+            new TabPage("User Details", "ucUserDetail", Model.User),
+            new TabPage("Managers", "ucManagers", Model.Managers),
+            new TabPage("Roles", "ucRoles", Model.UserRoles, "divRoles"),
+            new TabPage("Activity Allocations", "ucActivities", Model.UserAllocations, "divActivities"),
+            new TabPage("Reports", "ucReports", Model.UserReportEmails, "divReports"),
+            new TabPage("Leave", "ucLeave", Model, "divLeave"))
+    </div>
+</div>

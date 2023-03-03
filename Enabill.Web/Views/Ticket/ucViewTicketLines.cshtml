@@ -1,0 +1,42 @@
+﻿@model Enabill.Web.Models.TicketLineModel
+<script language="javascript" type="text/javascript">
+</script>
+<fieldset>
+    <legend><h3>History</h3></legend>
+    <table style="font-size:12px">
+        <tr>
+            <td>
+                @*         <div id="divTree" style="width: 100%;">
+                    <ul id="treeView" class="filetree">  *@
+
+                @foreach (Enabill.Models.TicketLine line in Model.TicketLines.OrderByDescending(s => s.DateCreated))
+                {
+                    <h2 class="trigger" id="trigger1"><a href="#" style="border: 0px solid transparent;">@line.GetUserCreated().FullName <text>posted on</text> @line.DateCreated.ToLongDisplayString()</a></h2>
+
+                    <div class="toggle_container" id="general_Container">
+                        <div class="block">
+                            @Html.Raw(line.Body)
+                        </div>
+                    </div>
+                }
+                @*             </ul>
+                    </div>
+                *@
+            </td>
+        </tr>
+    </table>
+</fieldset>
+
+<fieldset>
+    <legend><h3>Attachments</h3></legend>
+    <table class="fullWidth">
+        @foreach (Enabill.Models.TicketLineAttachment attachment in Model.TicketLineAttachments)
+        {
+            <tr>
+                <td style="font-size: 7.5pt;">
+                    @Html.ActionLink(attachment.AttachmentName, "ViewAttachments", "Ticket", new { ticketLineAttachmentID = attachment.TicketLineAttachmentID }, null)
+                </td>
+            </tr>
+        }
+    </table>
+</fieldset>

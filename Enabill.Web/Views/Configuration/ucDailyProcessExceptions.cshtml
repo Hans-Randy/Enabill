@@ -1,0 +1,24 @@
+﻿@model Enabill.Web.Models.DailyProcessExceptionModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+@{
+    ViewBag.Title = "Daily Process Exceptions";
+}
+<h2>Daily Process Exceptions</h2>
+<table class="subTable calendarTable fullWidth" style="font-size: 9px;">
+    <tr>
+        <th class="center" width="20%">
+            Message
+        </th>
+    </tr>
+    @foreach (var ex in Model.ProcessExceptions)
+    {
+        <tr>
+            <td>
+                @ex
+            </td>
+        </tr>
+    }
+</table>

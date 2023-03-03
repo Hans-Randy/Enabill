@@ -1,0 +1,55 @@
+﻿@model Enabill.Web.Models.FlexiTimeIndexModel
+
+<table class="calendarTable" style="font-size: 9px;">
+    <tr>
+        <th style="padding: 5px;" class="center">Leave</th>
+        <th style="padding: 5px;" class="center">Date</th>
+        <th style="padding: 5px;" class="center">Hours Worked</th>
+        <th style="padding: 5px;" class="center">FlexiBalance Adjustment</th>
+        <th style="padding: 5px;" class="center">Leave Hours</th>
+        <th style="padding: 5px;" class="center">Gross</th>
+        <th style="padding: 5px;" class="center">Lunch</th>
+        <th style="padding: 5px;" class="center">Nett</th>
+        <th style="padding: 5px;" class="center">Hours Required</th>
+        <th style="padding: 5px;" class="center">Delta</th>
+        <th style="padding: 5px;" class="center">Balance</th>
+    </tr>
+    <tr>
+        <th colspan="10">
+            Opening Balance
+        </th>
+        <th class="center">
+            @Model.OpeningBalance.ToDoubleString()
+        </th>
+    </tr>
+    @foreach (var day in Model.Calendar)
+    {
+        <tr class="@day.WorkDayClass">
+            <td align="center">@day.FlexiOrLeaveDayText</td>
+            <td class="center">@Html.ActionLink(day.Date.ToDisplayString(), "Day", "Time", new { dateString = day.Date.ToDisplayString() }, null)</td>
+            <td class="center">@day.HoursWorked.ToDoubleString()</td>
+            <td class="center">@day.FlexiTimeAdjustment.ToDoubleString()</td>
+            <td class="center">@day.LeaveHoursTaken.ToDoubleString()</td>
+            <td align="center">@day.GrossHours.ToDoubleString()</td>
+            <td align="center">@day.LunchHours.ToDoubleString()</td>
+            <td align="center">@day.NettHours.ToDoubleString()</td>
+            <td align="center">@day.HoursRequired.ToDoubleString()</td>
+            <td align="center">@day.DeltaHours.ToString("0.00")</td>
+            <td align="center">@((day.OpeningBalance + day.DeltaHours).ToDoubleString())</td>
+        </tr>
+    }
+    <tr>
+        <th colspan="2">Closing Balance</th>
+        <th class="center">@Model.Calendar.Sum(ws => ws.HoursWorked).ToDoubleString()</th>
+        <th class="center">@Model.Calendar.Sum(ws => ws.FlexiTimeAdjustment).ToDoubleString()</th>
+        <th class="center">@Model.Calendar.Sum(ws => ws.LeaveHoursTaken).ToDoubleString()</th>
+        <th style="text-align: center !important;">@Model.Calendar.Sum(ws => ws.GrossHours).ToDoubleString()</th>
+        <th style="text-align: center !important;">@Model.Calendar.Sum(ws => ws.LunchHours).ToDoubleString()</th>
+        <th style="text-align: center !important;">@Model.Calendar.Sum(ws => ws.NettHours).ToDoubleString()</th>
+        <th style="text-align: center !important;">@Model.Calendar.Sum(ws => ws.HoursRequired).ToDoubleString()</th>
+        <th style="text-align: center !important;">@Model.Calendar.Sum(ws => ws.DeltaHours).ToDoubleString()</th>
+        <th style="text-align: center !important;">@Model.ClosingBalance.ToDoubleString()</th>
+    </tr>
+</table>
+
+@Html.Hidden("WorkDay", Model.FlexiDate.ToString("yyyy'/'MM'/'dd"))

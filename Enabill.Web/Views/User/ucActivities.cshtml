@@ -1,0 +1,25 @@
+﻿@model Enabill.Web.Models.UserAllocationModel
+
+<div id="dialog-modal" style="display: none" class="ui-dialog" title="Loading Activities">
+    <p>
+        Please wait... Your request is being processed...
+    </p>
+    <p>
+        <img src="@Url.Content("/Content/img/loading.gif")" alt="" />
+    </p>
+</div>
+<table class="subTable fullWidth">
+    <tr>
+        <td>
+            <fieldset>
+                <legend>Current Activity Allocations</legend>
+                @Html.Partial("ucExistingAllocations", Model.UserExistingAllocations)
+            </fieldset>
+        </td>
+    </tr>
+    @*<tr>
+            <td>
+                @Html.CollapsableTable("tblLinkNewActivities", "fullWidth", "Allocate New Activities", "ucLinkNewAllocations", Model)
+            </td>
+        </tr>*@
+</table>

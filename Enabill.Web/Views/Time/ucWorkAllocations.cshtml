@@ -1,0 +1,160 @@
+﻿@model Enabill.Web.Models.TimeDayModel
+<script language="javascript" type="text/javascript">
+    $(function () {
+        WorkAllocation.setAutoComplete();
+    });
+</script>
+@if (Model.DayWorkSessions.Count > 0)
+{
+    <div id="userWorkAllocations">
+        <h2>Allocated Time</h2>
+        <form id="frmUserAllocations" method="post" action="">
+            @Html.Hidden("SelectedDay", Model.WorkDay)
+            @Html.Hidden("ApprovalInd", Model.CallingPage)
+            <table class="underline fullWidth">
+                <tr class="general">
+                    <th>Client</th>
+                    <th>Project</th>
+                    <th>Activity</th>
+                    <th>Hours</th>
+                    <th></th>
+                    <th>Remark</th>
+                    @if (Model.HasAssociatedTickets)
+                    {
+                        <th>Ticket</th>
+                    }
+                    <th></th>
+                </tr>
+
+                @foreach (var all in Model.WorkAllocations)
+                {
+                    string ID = all.WorkAllocation.WorkAllocationID.ToString() + "__" + all.Activity.ActivityID;
+                    Func<string, string> getName = s => s + ID;
+
+                    if (all.WorkAllocation.CanEdit)
+                    {
+                        <tr>
+                            <td>@all.Client.ClientName</td>
+                            <td>@all.Project.ProjectName</td>
+                            <td>@all.Activity.ActivityName</td>
+                            <td>
+                                @Html.Hidden("WorkAllocationID" + ID, all.WorkAllocation.WorkAllocationID, new { @class = "WorkAllocationID" })
+                                @Html.Hidden("TrainingCategoryID" + ID, all.WorkAllocation.TrainingCategoryID, new { @class = "TrainingCategoryID" })
+                                @Html.Hidden("ActivityID" + ID, all.Activity.ActivityID, new { @class = "ActivityID" })
+                                @Html.Hidden("ClientActivity" + ID, all.Client.ClientName + "-" + all.Activity.ActivityName, new { @class = "Activity-Info" })
+                                @Html.TextBox("ActHours" + ID, all.WorkAllocation.HoursWorked, new { @class = "actHours right", style = "width: 40px", onchange = "View.CalculateTotalHours(); return false;" })
+                            </td>
+                            <td></td>
+                            <td>
+                                @if (all.Activity.MustHaveRemarks)
+                                {
+                                    @Html.TextBox("ActRemark" + ID, all.WorkAllocation.Remark, new { @class = "Remark", style = "background-color: #FDD;" })
+                                    @Html.Hidden("MustHaveRemarks" + ID, "true", new { @class = "MustHaveRemarks" })
+                                }
+                                else
+                                {
+                                    @Html.TextBox("ActRemark" + ID, all.WorkAllocation.Remark)
+                                    @Html.Hidden("MustHaveRemarks" + ID, "false", new { @class = "MustHaveRemarks" })
+                                }
+                            </td>
+                            @if (all.AssociatedProjectTickets.Count() > 0)
+                            {
+                                if (all.WorkAllocation.TicketReference != null)
+                                {
+                                    <td>@Html.TextBox("Ticket" + ID, all.WorkAllocation.TicketReference, new { @class = "AutoComplete", onchange = "WorkAllocation.setAutoComplete(); return false;", style = "width:60px" })</td>
+                                }
+                                else
+                                {
+                                    <td>@Html.TextBox("Ticket" + ID, null, new { @class = "AutoComplete", onchange = "WorkAllocation.setAutoComplete(); return false;", style = "width:60px" })  </td>
+                                }
+                                @Html.Hidden("TicketIDs")
+                                @Html.Hidden("ClientID" + ID, all.Client.ClientID)
+                                @Html.Hidden("ProjectID" + ID, all.Project.ProjectID)
+                            }
+                            else
+                            {
+                                if (Model.HasAssociatedTickets)
+                                {
+                                    <td></td>
+                                }
+                            }
+                            <td>
+                                @if (!Model.IsTimesheetLockedForDay && all.WorkAllocation.HoursWorked != 0)
+                                {
+                                    <img src="@Url.Content("~/Content/Img/add_14.png")" alt="Edit" title="Add additional allocation" onclick="WorkAllocation.addExtraAllocation(@all.Activity.ActivityID); return false;" style="cursor:pointer; height:14px" />
+                                }
+
+                                @if (!Model.IsTimesheetLockedForDay && all.WorkAllocation.HoursWorked != 0 && all.WorkAllocation.GetActivity().ActivityName == "Training")
+                                {
+                                    <img src="@Url.Content("~/Content/Img/edit_14.png")" alt="Edit" title="Edit Training Details" onclick="WorkAllocation.addTrainingDetails(@all.WorkAllocation.WorkAllocationID, @all.Activity.ActivityID, @all.WorkAllocation.HoursWorked, '@all.WorkAllocation.Remark'); return false;" style="cursor:pointer; height:14px" />
+                                }
+
+                                @if (!Model.IsTimesheetLockedForDay && all.Activity.CanHaveNotes && all.WorkAllocation.WorkAllocationID > 0)
+                                {
+                                    if (!all.NoteID.HasValue || all.NoteID.Value <= 0)
+                                    {
+                                        <img alt="Capture Note" title="Capture a note" style="cursor:pointer; height:14px" onclick="Note.viewNote(@all.WorkAllocation.WorkAllocationID); return false;" src="@Url.Content("~/Content/Img/notepad_icon.gif")" />
+                                    }
+                                    else
+                                    {
+                                        <img alt="View/Edit Note" title="View/Edit this note" style="cursor:pointer; height:14px" onclick="Note.viewNote(@all.WorkAllocation.WorkAllocationID); return false;" src="@Url.Content("~/Content/Img/notepad.png")" />
+                                    }
+                                }
+                                @if (!Model.IsTimesheetLockedForDay && all.WorkAllocation.WorkAllocationID > 0 && all.WorkAllocation.CanDelete)
+                                {
+                                    <img alt="Delete Note" src="/Content/Img/Delete.gif" title="Delete allocation" style="cursor:pointer; height:14px" onclick="WorkAllocation.deleteWA(@all.WorkAllocation.WorkAllocationID); return false;" />
+                                }
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>@all.Client.ClientName</td>
+                            <td>@all.Project.ProjectName</td>
+                            <td>@all.Activity.ActivityName</td>
+                            <td class="right">
+                                @Html.Hidden("WorkAllocationID" + ID, all.WorkAllocation.WorkAllocationID, new { @class = "WorkAllocationID" })
+                                @Html.Hidden("ActivityID" + ID, all.Activity.ActivityID, new { @class = "ActivityID" })
+                                @Html.Hidden("ClientActivity" + ID, all.Client.ClientName + "-" + all.Activity.ActivityName, new { @class = "Activity-Info" })
+                                @Html.Hidden("HoursHidden", all.WorkAllocation.HoursWorked, new { @class = "actHours" })
+                                @all.WorkAllocation.HoursWorked
+                            </td>
+                            <td></td>
+                            <td>
+                                @all.WorkAllocation.Remark
+                            </td>
+                            <td>
+                                @all.WorkAllocation.TicketReference
+                            </td>
+                            <td>
+                                @if (all.NoteID.HasValue && all.NoteID.Value > 0)
+                                {
+                                    <a class="ui-icon ui-icon-note" href="#" onclick="Note.viewNote(@all.WorkAllocation.WorkAllocationID); return false;" title="View note for work allocation"></a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                <tr>
+                    <td colspan="3"></td>
+                    <td id="hoursTotal" class="">
+                        @Model.WorkAllocations.Sum(m => m.WorkAllocation.HoursWorked) hours
+                    </td>
+                    <td colspan="3"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="7">
+                        @if (!Model.IsTimesheetLockedForDay)
+                        {
+                            <input type="button" value="Copy from previous workday" onclick="WorkAllocation.copyDay('@Model.WorkDay', 'true');" />
+                            <input type="button" value="Copy to next workday" onclick="WorkAllocation.copyDay('@Model.WorkDay', 'false');" />
+                            <input type="button" value="Save" onclick="WorkAllocation.save()" />
+                        }
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+}

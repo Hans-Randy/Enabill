@@ -1,0 +1,45 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@section head{
+    <style type="text/css">
+        #main-error {
+            width: 500px;
+            margin: auto;
+            margin-top: 70px;
+        }
+    </style>
+}
+
+@{
+    ViewBag.Title = "Error";
+    ViewBag.CanSearch = false;
+
+    if (CurrentUserID == 0)
+    {
+        Layout = "~/Views/Shared/_WelcomeLayout.cshtml";
+    }
+}
+
+<div id="main-error">
+    <table style="width: 100%;">
+        <tr>
+            <th colspan="2" class="center">
+                <h2 style="margin: 0px;">An Error Occurred</h2>
+            </th>
+        </tr>
+        <tr>
+            <td valign="top" style="padding-top: 15px; width: 100%;">
+                @Model.Exception.Message
+            </td>
+            <td valign="bottom" align="right" rowspan="2">
+                <img src="@Url.Content("~/Content/Img/broken_robot.png")" alt="" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                This is all we have for you now *<br />
+                @Html.ActionLink("Go Home", "Index", "Home")
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,66 @@
+﻿@model Enabill.Web.Models.DashboardViewModel
+
+@section beginhead{
+    @IncludeRichEditor()
+}
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<table class="fullWidth">
+    <tr>
+        <td class="halfWidth" style="padding: 20px 20px 10px 20px; min-height: 100%;">
+            @*///------------------My TimeSheet------------------///*@
+            @if (CurrentUser.HasRole(Enabill.UserRoleType.TimeCapturing))
+            {
+                @Html.CollapsableHomeTable("tblTimesheet", "focusTable fullWidth", Model.TimeTableHeading, "ucRecentWorkDays", Model.RecentWorkSessions, Url.Content("~/Content/Img/timesheet_20x20.png"), CurrentUserPreference.CollapseMyTimesheet, Enabill.Models.CollapseColumnType.CollapseMyTimesheet)
+            }
+        </td>
+        <td style="padding: 20px 20px 10px 20px; min-height: 100%;">
+            @*///------------------My FlexiBalance------------------///*@
+
+            @if (CurrentUser.HasRole(Enabill.UserRoleType.TimeCapturing))
+            {
+                @*if (CurrentUser.IsFlexiTimeUser)
+                    {
+                        @Html.CollapsableHomeTable("tblFB", "focusTable fullWidth", "My Monthly Balance", "ucCurrentFlexiTimeBalance", Model.CurrentFlexiBalance, Url.Content("~/Content/Img/flexi_20x20.png"), CurrentUserPreference.CollapseMyFlexTimeBalance, Enabill.Models.CollapseColumnType.CollapseMyFlexiTimeBalance)
+                    }
+                    else
+                    {
+                        @Html.CollapsableHomeTable("tblTB", "focusTable fullWidth", "My Time Balance", "ucCurrentTimeBalance", Model.CurrentTimeBalance, Url.Content("~/Content/Img/flexi_20x20.png"), CurrentUserPreference.CollapseMyFlexTimeBalance, Enabill.Models.CollapseColumnType.CollapseMyFlexiTimeBalance)
+                    }*@
+
+                @Html.CollapsableHomeTable("tblTB", "focusTable fullWidth", "My Time Balance", "ucCurrentTimeBalance", Model.CurrentTimeBalance, Url.Content("~/Content/Img/flexi_20x20.png"), CurrentUserPreference.CollapseMyFlexTimeBalance, Enabill.Models.CollapseColumnType.CollapseMyFlexiTimeBalance)
+
+                @*if (CurrentUser.IsFlexiTimeUser)
+                {
+                    @Html.CollapsableHomeTable("tblFB", "focusTable fullWidth", "My Flexitime Balance at March 1, 2018", "ucCurrentFlexiTimeBalance", Model.CurrentFlexiBalance, Url.Content("~/Content/Img/flexi_20x20.png"), CurrentUserPreference.CollapseMyFlexTimeBalance, Enabill.Models.CollapseColumnType.CollapseMyFlexiTimeBalance)
+                }*@
+            }
+
+            @*///------------------My Leave Balances------------------///*@
+
+            @*@if (CurrentUser.IsLeaveUser)
+                {
+                    @Html.CollapsableHomeTable("tblLeaveBalance", "focusTable fullWidth", "My Leave Balance", "ucCurrentLeaveBalance", Model.CurrentLeaveBalance, Url.Content("~/Content/Img/timesheet_20x20.png"), CurrentUserPreference.CollapseMyLeaveBalance, Enabill.Models.CollapseColumnType.CollapseMyLeaveBalance)
+                }*@
+
+            @*///------------------My Upcoming Leave------------------///*@
+
+            @*@Html.CollapsableHomeTable("tblLeaveDates", "focusTable fullWidth", "My Upcoming Leave", "ucUpcomingLeave", Model.UserLeave, Url.Content("~/Content/Img/timesheet_20x20.png"), CurrentUserPreference.CollapseMyUpcomingLeave, Enabill.Models.CollapseColumnType.CollapseMyUpcomingLeave)
+
+                @if (Model.ManagerDashboardModel.HasStaff)
+                {
+                    if (Model.ManagerDashboardModel.HasLeaveToApprove)
+                    {
+                        @Html.CollapsableTable("tblLeaveToApprove", "focusTable fullWidth", "Leave To Approve", "ucLeaveToApprove", Model.ManagerDashboardModel.PendingLeave, Url.Content("~/Content/Img/timesheet_20x20.png"))
+                    }
+                }*@
+        </td>
+    </tr>
+</table>

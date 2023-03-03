@@ -1,0 +1,13 @@
+﻿@model Enabill.Web.Models.InvoiceRuleIndexModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="marginView">
+    @Html.Partial("ucInvoiceRuleList", Model)
+</div>

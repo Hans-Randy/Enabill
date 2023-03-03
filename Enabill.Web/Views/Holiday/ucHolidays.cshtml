@@ -1,0 +1,35 @@
+﻿@model Enabill.Web.Models.Holiday.HolidayViewModel
+<table class="fullWidth font-size-up">
+    <tr>
+        <td>
+            <div class="holiday-entry-container">
+                @foreach (var t in Model.HolidayList)
+                {
+                    <div class="holiday-entry">
+                        <div>
+                            @t.Date.ToHolidayDateString()
+                        </div>
+
+                        <a href="#" class="holiday-entry"
+                           data-id="@t.Id"
+                           data-month="@t.Date.Month"
+                           data-day="@t.Date.Day"
+                           data-name="@t.HolidayName"
+                           data-options-fixed="@t.IsFixedDate"
+                           data-options-repeat="@t.IsRepeated">
+                            @t.HolidayName
+                        </a>
+                    </div>
+                    
+                }
+                <div class="clear"></div>
+            </div>
+</td>
+    </tr>
+
+    <tr>
+        <td>
+            <input type="button" value="Apply with these Holidays" id="holiday-apply"/>
+        </td>
+    </tr>
+</table>   

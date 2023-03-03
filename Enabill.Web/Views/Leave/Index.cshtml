@@ -1,0 +1,20 @@
+﻿@model Enabill.Web.Models.LeaveIndexModel
+
+@section head{
+    @IncludeControllerScript(true)
+
+    <script type="text/javascript" runat="server">
+
+        $(function(){
+            DatePicker.toDatePickerForDateRange($("#StartDate"), $("#EndDate"), {}, {});
+        });
+    </script>
+}
+
+@{
+    ViewBag.Title = Model.User.FullName + "'s Leave Overview";
+}
+
+<div id="ucIndex" class="marginView">
+    @Html.Partial("ucIndex", Model)
+</div>

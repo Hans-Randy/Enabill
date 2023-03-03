@@ -1,0 +1,62 @@
+﻿@model Enabill.Web.Models.FinPeriodEditModel
+<div id="ManagePeriods" width="100%">
+    <h2>
+        Financial Periods
+    </h2>
+    <table class="subTable calendarTable fullWidth" style="font-size: 9px;">
+        <tr>
+            <th class="center" width="20%">
+                Period ID
+            </th>
+            <th class="center" width="20%">
+                From
+            </th>
+            <th class="center" width="20%">
+                To
+            </th>
+            <th class="center" width="30%">
+            </th>
+        </tr>
+    </table>
+    <div width="100%" style="height: 200px; overflow: auto;">
+        <table class="subTable calendarTable fullWidth" style="font-size: 9px;">
+            @foreach (var period in Model.FinPeriods)
+            {
+                var activeClass = period.IsCurrent ? "active" : "";
+                var activePeriod = period.DateFrom.Month.ToMonthName() + " " + period.DateFrom.Year.ToString();
+                <tr>
+                    <td class="@activeClass" width="20%">@period.FinPeriodID.ToString()</td>
+                    <td class="@activeClass" width="20%">@period.DateFrom.ToDisplayString()</td>
+                    <td class="@activeClass" width="20%">@period.DateTo.ToDisplayString()</td>
+                    <td class="@activeClass" width="30%">
+                        @if (period.IsCurrent)
+                {
+                            <text>Active</text>
+                            @Html.Hidden("ActivePeriod", activePeriod);
+                        }
+                        else
+                        {
+                            <i>
+                                <a href="#" onclick="Configuration.updateFinPeriods(@period.FinPeriodID); return false;">
+                                    Activate Period
+                                </a>
+                            </i>
+                        }
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="2" class="left">
+                    <b>
+                        <a href="#" onclick="Configuration.addFinPeriodPopup(); return false;">Add Period</a>
+                    </b>
+                </td>
+                <td colspan="2" class="right">
+                    <b>
+                        <a href="#" onclick="Configuration.manageFinPeriods('Yes'); return false;">Show All Financial Periods</a>
+                    </b>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

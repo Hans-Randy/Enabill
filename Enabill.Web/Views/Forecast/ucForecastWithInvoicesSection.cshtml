@@ -1,0 +1,161 @@
+﻿@model Enabill.Web.Models.ForecastReportModel
+
+<div class="padView">
+    <table class="subTable fullWidth general fontIncrease">
+        @if (Model.ForecastWithInvoices.Count() == 0)
+        {
+            <tr><th colspan="11">No records found.</th></tr>
+        }
+        else
+        {
+            <tr>
+                <td class="ReportSectionColor" colspan="4"></td>
+                <td class="ReportSectionColor center">Forecast Figures</td>
+                <td colspan="3" class="ReportSectionColor center">Projected Figures</td>
+                <td colspan="3" class="ReportSectionColor center">Actual Figures</td>
+            </tr>
+            <tr>
+                <td class="ReportSectionColor" colspan="4"></td>
+                <td class="ReportSectionColor right">Amount</td>
+                <td class="ReportSectionColor right">Amount</td>
+                <td class="ReportSectionColor right">Variance</td>
+                <td class="ReportSectionColor right">%</td>
+                <td class="ReportSectionColor right">Amount</td>
+                <td class="ReportSectionColor right">Variance</td>
+                <td class="ReportSectionColor right">%</td>
+            </tr>
+
+            double forecastAmountGrandTotal = Model.ForecastAmounts.Where(f => f.HasInvoicesLink == "true").Sum(f => f.MostRecentForecastDetail.Amount);
+            double projectedAmountGrandTotal = Model.ForecastWithInvoices.Sum(r => r.ProjectedAmount);
+            double projectedVarianceGrandTotal = projectedAmountGrandTotal - forecastAmountGrandTotal;
+            double projectedVariancePercentGrandTotal = (projectedAmountGrandTotal - forecastAmountGrandTotal) / forecastAmountGrandTotal;
+            double actualAmountGrandTotal = Model.ForecastWithInvoices.Sum(r => r.ActualAmount);
+            double actualVarianceGrandTotal = actualAmountGrandTotal - forecastAmountGrandTotal;
+            double actualVariancePercentGrandTotal = (actualAmountGrandTotal - forecastAmountGrandTotal) / forecastAmountGrandTotal;
+
+            <tr>
+                <td class="GrandTotalColor" colspan="4">Grand Total</td>
+                <td class="GrandTotalColor" style="text-align: right !important;">@forecastAmountGrandTotal.ToDoubleString()</td>
+                <td class="GrandTotalColor" style="text-align: right !important;">@projectedAmountGrandTotal.ToDoubleString()</td>
+                <td class="GrandTotalColor" style="text-align: right !important;">@projectedVarianceGrandTotal.ToDoubleString()</td>
+                <td class="GrandTotalColor" style="text-align: right !important;">@projectedVariancePercentGrandTotal.ToDoubleString()</td>
+                <td class="GrandTotalColor" style="text-align: right !important;">@actualAmountGrandTotal.ToDoubleString()</td>
+                <td class="GrandTotalColor" style="text-align: right !important;">@actualVarianceGrandTotal.ToDoubleString()</td>
+                <td class="GrandTotalColor" style="text-align: right !important;">@actualVariancePercentGrandTotal.ToDoubleString()</td>
+            </tr>
+
+            foreach (var region in Model.ForecastWithInvoiceDistinctRegionList)
+            {
+                double forecastAmountRegionTotal = Model.ForecastAmounts.Where(f => f.HasInvoicesLink == "true" && f.ForecastHeader.RegionID == region.RegionID).Sum(f => f.MostRecentForecastDetail.Amount);
+                double projectedAmountRegionTotal = Model.ForecastWithInvoices.Where(r => r.RegionID == region.RegionID).Sum(r => r.ProjectedAmount);
+                double projectedVarianceRegionTotal = projectedAmountRegionTotal - forecastAmountRegionTotal;
+                double projectedVariancePercentRegionTotal = (projectedAmountRegionTotal - forecastAmountRegionTotal) / forecastAmountRegionTotal;
+                double actualAmountRegionTotal = Model.ForecastWithInvoices.Where(r => r.RegionID == region.RegionID).Sum(r => r.ActualAmount);
+                double actualVarianceRegionTotal = actualAmountRegionTotal - forecastAmountRegionTotal;
+                double actualVariancePercentRegionTotal = (actualAmountRegionTotal - forecastAmountRegionTotal) / forecastAmountRegionTotal;
+
+                <tr>
+                    <td class="RegionColor" colspan="4">Region: @region.RegionName</td>
+                    <td class="RegionColor" style="text-align: right !important;">@forecastAmountRegionTotal.ToDoubleString()</td>
+                    <td class="RegionColor" style="text-align: right !important;">@projectedAmountRegionTotal.ToDoubleString()</td>
+                    <td class="RegionColor" style="text-align: right !important;">@projectedVarianceRegionTotal.ToDoubleString()</td>
+                    <td class="RegionColor" style="text-align: right !important;">@projectedVariancePercentRegionTotal.ToDoubleString()</td>
+                    <td class="RegionColor" style="text-align: right !important;">@actualAmountRegionTotal.ToDoubleString()</td>
+                    <td class="RegionColor" style="text-align: right !important;">@actualVarianceRegionTotal.ToDoubleString()</td>
+                    <td class="RegionColor" style="text-align: right !important;">@actualVariancePercentRegionTotal.ToDoubleString()</td>
+                </tr>
+                foreach (var division in Model.ForecastWithInvoiceDistinctDivisionList)
+                {
+                    double forecastAmountDivisionTotal = Model.ForecastAmounts.Where(f => f.HasInvoicesLink == "true" && f.ForecastHeader.RegionID == region.RegionID && f.ForecastHeader.DivisionID == division.DivisionID).Sum(f => f.MostRecentForecastDetail.Amount);
+                    double projectedAmountDivisionTotal = Model.ForecastWithInvoices.Where(r => r.RegionID == region.RegionID && r.DivisionID == division.DivisionID).Sum(r => r.ProjectedAmount);
+                    double projectedVarianceDivisionTotal = projectedAmountDivisionTotal - forecastAmountDivisionTotal;
+                    double projectedVariancePercentDivisionTotal = (projectedAmountDivisionTotal - forecastAmountDivisionTotal) / forecastAmountDivisionTotal;
+                    double actualAmountDivisionTotal = Model.ForecastWithInvoices.Where(r => r.RegionID == region.RegionID && r.DivisionID == division.DivisionID).Sum(r => r.ActualAmount);
+                    double actualVarianceDivisionTotal = actualAmountRegionTotal - forecastAmountDivisionTotal;
+                    double actualVariancePercentDivisionTotal = (actualAmountDivisionTotal - forecastAmountDivisionTotal) / forecastAmountDivisionTotal;
+
+                    <tr>
+                        <td class="DivisionColor" colspan="4">Division: @division.DivisionName</td>
+                        <td class="DivisionColor" style="text-align: right !important;">@forecastAmountDivisionTotal.ToDoubleString()</td>
+                        <td class="DivisionColor" style="text-align: right !important;">@projectedAmountDivisionTotal.ToDoubleString()</td>
+                        <td class="DivisionColor" style="text-align: right !important;">@projectedVarianceDivisionTotal.ToDoubleString()</td>
+                        <td class="DivisionColor" style="text-align: right !important;">@projectedVariancePercentDivisionTotal.ToDoubleString()</td>
+                        <td class="DivisionColor" style="text-align: right !important;">@actualAmountDivisionTotal.ToDoubleString()</td>
+                        <td class="DivisionColor" style="text-align: right !important;">@actualVarianceDivisionTotal.ToDoubleString()</td>
+                        <td class="DivisionColor" style="text-align: right !important;">@actualVariancePercentDivisionTotal.ToDoubleString()</td>
+                    </tr>
+
+                    <tr>
+                        <th colspan="1">Billing Method</th>
+                        <th colspan="3">Client</th>
+                        <th class="right"></th>
+                        <th class="right"></th>
+                        <th class="right"></th>
+                        <th class="right"></th>
+                        <th class="right"></th>
+                        <th class="right"></th>
+                        <th class="right"></th>
+                    </tr>
+
+                    foreach (var forecastWithInvoice in Model.ForecastWithInvoices)
+                    {
+                        string forecastInvoiceHeaderID = forecastWithInvoice.Client.Replace(" ", "") + "_" + forecastWithInvoice.BillingMethod;
+                        string forecastInvoiceLineID = "ShowInvoiceDetailLines" + forecastInvoiceHeaderID;
+                        double forecastAmount = Model.ForecastAmounts.Where(f => f.ForecastHeader.RegionID == region.RegionID && f.ForecastHeader.DivisionID == division.DivisionID && f.ForecastHeader.BillingMethod == forecastWithInvoice.BillingMethod && f.ForecastHeader.Client == forecastWithInvoice.Client).Sum(f => f.MostRecentForecastDetail.Amount);
+
+                        if (forecastWithInvoice.RegionID == region.RegionID && forecastWithInvoice.DivisionID == division.DivisionID)
+                        {
+                            double projectedVariance = forecastWithInvoice.ProjectedAmount - forecastAmount;
+                            double projectedVariancePercentage = (projectedVariance / forecastAmount) * 100;
+                            double actualVariance = forecastWithInvoice.ActualAmount - forecastAmount;
+                            double actualVariancePercentage = (actualVariance / forecastAmount) * 100;
+                            <tr>
+                                <td colspan="1">@((Enabill.BillingMethodType)forecastWithInvoice.BillingMethod)</td>
+                                <td colspan="3">@forecastWithInvoice.Client</td>
+                                <td class="right">@forecastAmount.ToDoubleString()</td>
+                                <td class="right">@forecastWithInvoice.ProjectedAmount.ToDoubleString()</td>
+                                <td class="right">@projectedVariance.ToDoubleString()</td>
+                                <td class="right">@projectedVariancePercentage.ToDoubleString()</td>
+                                <td class="right">@forecastWithInvoice.ActualAmount.ToDoubleString()</td>
+                                <td class="right">@actualVariance.ToDoubleString()</td>
+                                <td class="right">@actualVariancePercentage.ToDoubleString()</td>
+                                <td><img src="@Url.Content("~/Content/Img/add_14.png")" alt="ShowLinkedInvoices" title="Show Linked Invoices" onclick="Forecast.showLinkedInvoices('@forecastInvoiceHeaderID'); return false;" style="cursor:pointer; height:14px" /> </td>
+                            </tr>
+                            <tr class="padview hide @forecastInvoiceLineID">
+                                <td class="DetailsColor" width="5%"></td>
+                                <td class="DetailsColor" width="5%">InvoiceID</td>
+                                <td class="DetailsColor" width="10%">Period</td>
+                                <td class="DetailsColor">OrderNo</td>
+                                <td colspan="7" class="DetailsColor"></td>
+                            </tr>
+
+                            foreach (var forecastWithInvoiceDetail in Model.ForecastWithInvoiceDetails)
+                            {
+                                if (forecastWithInvoice.RegionID == region.RegionID && forecastWithInvoice.DivisionID == division.DivisionID && forecastWithInvoice.Client == forecastWithInvoiceDetail.Client && forecastWithInvoice.BillingMethod == forecastWithInvoiceDetail.BillingMethod)
+                                {
+                                    double detailProjectedVariance = forecastWithInvoiceDetail.ProjectedAmount - forecastAmount;
+                                    double detailProjectedVariancePercentage = (detailProjectedVariance / forecastAmount) * 100;
+                                    double detailActualVariance = forecastWithInvoiceDetail.ActualAmount - forecastAmount;
+                                    double detailActualVariancePercentage = (detailActualVariance / forecastAmount) * 100;
+                                    <tr id="@forecastInvoiceLineID" class="padview hide @forecastInvoiceLineID">
+                                        <td class="DetailsColor" width="5%"></td>
+                                        <td class="DetailsColor" width="5%">@forecastWithInvoiceDetail.InvoiceID.ToString()</td>
+                                        <td class="DetailsColor" width="10%">@forecastWithInvoiceDetail.Period.ToString()</td>
+                                        <td class="DetailsColor">@forecastWithInvoiceDetail.OrderNo</td>
+                                        <td class="right DetailsColor">@forecastAmount.ToDoubleString()</td>
+                                        <td class="right DetailsColor">@forecastWithInvoiceDetail.ProjectedAmount.ToDoubleString()</td>
+                                        <td class="right DetailsColor">@detailProjectedVariance.ToDoubleString()</td>
+                                        <td class="right DetailsColor">@detailProjectedVariancePercentage.ToDoubleString()</td>
+                                        <td class="right DetailsColor">@forecastWithInvoiceDetail.ActualAmount.ToDoubleString()</td>
+                                        <td class="right DetailsColor">@detailActualVariance.ToDoubleString()</td>
+                                        <td class="right DetailsColor">@detailActualVariancePercentage.ToDoubleString()</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </table>
+</div>

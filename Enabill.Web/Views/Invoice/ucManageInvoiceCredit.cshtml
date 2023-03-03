@@ -1,0 +1,45 @@
+﻿<table class="underline fullWidth">
+    <tr>
+        <th>
+            Hourly Rate (@Model.Invoice.Client.GetCurrency(Model.Invoice.Client.CurrencyTypeID).CurrencyISO):
+        </th>
+        <td>
+             @ViewBag.HourlyRate
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Hours Worked:
+        </th>
+        <td>
+            @ViewBag.Hours
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Gross Amount (@Model.Invoice.Client.GetCurrency(Model.Invoice.Client.CurrencyTypeID).CurrencyISO):
+        </th>
+        <td>
+             @(((double)ViewBag.GrossAmount).ToDoubleString())
+        </td>
+    </tr>
+    <tr>
+        <td class="lightGrey" colspan="2"></td>
+    </tr>
+    <tr>
+        <th>
+            Credit By Hours:
+        </th>
+        <td>
+            @Html.TextBox("CreditByHours", 0, new { @class = "requiresNumberFormatting", onchange = "ManageInvoiceCredit.calculateForHoursCredited(); return false;" }) hrs
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Credit Amount(@Model.Invoice.Client.GetCurrency(Model.Invoice.Client.CurrencyTypeID).CurrencyISO):
+        </th>
+        <td>
+            @Html.TextBox("CreditedAmount", ViewData["CreditedAmount"], new { @class = "requiresNumberFormatting", onchange = "ManageInvoiceCredit.setUpForNonHourCalculation(); return false;" })
+        </td>
+    </tr>
+</table>

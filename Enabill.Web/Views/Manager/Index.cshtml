@@ -1,0 +1,12 @@
+﻿@model Enabill.Web.Models.ManagerIndexModel
+
+@section head{
+    @IncludeControllerScript(true)
+}
+
+@{
+    ViewBag.Title = "My Staff";
+}
+<div id="ucIndex" class="marginView">
+    @Html.Partial("ucIndex", Model)
+</div>

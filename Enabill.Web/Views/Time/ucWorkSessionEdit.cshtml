@@ -1,0 +1,13 @@
+﻿@model Enabill.Models.WorkSession
+
+@{ Func<string, string> getName = s => s + Model.WorkSessionID; }
+
+<tr id="WorkSessionEdit@(Model.WorkSessionID)">
+    <td>@Html.DropDownList(getName("StartTime"), Enabill.Web.Helpers.WorkTimeList(Model.WorkDate, null, Model.StartTime), new { style = "width: 96%;" })</td>
+    <td>@Html.DropDownList(getName("EndTime"), Enabill.Web.Helpers.WorkTimeList(Model.WorkDate, null, Model.EndTime), new { style = "width: 96%;" })</td>
+    <td>@Html.TextBox(getName("LunchTime"), Model.LunchTime, new { style = "width:30px" })</td>
+    <td>
+        <input type="button" value="Update" onclick="WorkSession.update(@Model.WorkSessionID); return false;" />
+        <input type="button" value="Cancel" onclick="WorkSession.cancelEdit(@Model.WorkSessionID); return false;" />
+    </td>
+</tr>

@@ -1,0 +1,118 @@
+﻿@model Enabill.Web.Models.LeaveWithLeaveCycleBalanceModel
+@{
+
+}
+@Html.TitleTable("tblLeaveBalanceOnScreenReport", "", "<b>Leave with Leave Balance Report</b>")
+<div class="padView">
+    <table class="subTable general fullWidth">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Leave Type</th>
+                <th>Date From</th>
+                <th>Date To</th>
+                <th>Opening Balance</th>
+                <th>Taken</th>
+                <th>Manual Adjustment</th>
+                <th>Closing Balance</th>
+                <th>Leave Days</th>
+                <th>Total from Leave Days</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{double totalTaken = 0; double totalFromLeaveDays = 0;}
+            @foreach (var l in Model.LeavesWithLeaveCycleBalances)
+            {
+                totalTaken += l.LeaveCycleBalance.Taken;
+
+                var totalDays = l.Leaves.Select(t => t.NumberOfDays).Sum();
+                totalFromLeaveDays += totalDays;
+                <tr>
+                    <td valign="top">
+                        @l.User.FullName
+                    </td>
+                    <td valign="top">
+                        @l.LeaveType
+                    </td>
+                    <td valign="top">
+                        @l.LeaveCycleBalance.StartDate.ToDisplayString()
+                    </td>
+                    <td valign="top">
+                        @l.LeaveCycleBalance.EndDate.ToDisplayString()
+                    </td>
+                    <td valign="top">
+                        @l.LeaveCycleBalance.OpeningBalance
+                    </td>
+                    <td valign="top">
+                        @if (totalDays != l.LeaveCycleBalance.Taken)
+                        {
+                            <span style="color:red;font-weight:bold">
+                                @l.LeaveCycleBalance.Taken
+                            </span>
+                        }
+                        else
+                        {
+                            @l.LeaveCycleBalance.Taken
+                        }
+                    </td>
+                    <td valign="top">
+                        @l.LeaveCycleBalance.ManualAdjustment
+                    </td>
+                    <td valign="top">
+                        @l.LeaveCycleBalance.ClosingBalance
+                    </td>
+                    <td valign="top">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Approval Status</th>
+                                    <th>Number of Days</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var leave in l.Leaves)
+                                {
+                                    var approvalStatus = (Enabill.ApprovalStatusType)leave.ApprovalStatus;
+                                    <tr>
+                                        <td>
+                                            @leave.DateFrom.ToDisplayString()
+                                        </td>
+                                        <td>
+                                            @leave.DateTo.ToDisplayString()
+                                        </td>
+                                        <td>
+                                            @approvalStatus
+                                        </td>
+                                        <td>
+                                            @leave.NumberOfDays
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </td>
+                    <td valign="top">
+                        @if (totalDays != l.LeaveCycleBalance.Taken)
+                        {
+                            <span style="color:red;font-weight:bold">
+                                @totalDays
+                            </span>
+                        }
+                        else
+                        {
+                            @totalDays
+                        }
+                    </td>
+                </tr>
+            }
+            @*<tr>
+                    <td>TOTAL taken: @totalTaken</td>
+                    <td>TOTAL from leave days: @totalFromLeaveDays</td>
+                    @{double difference = totalTaken - totalFromLeaveDays; }
+                    <td>Difference: @difference</td>
+                </tr>*@
+        </tbody>
+    </table>
+</div>

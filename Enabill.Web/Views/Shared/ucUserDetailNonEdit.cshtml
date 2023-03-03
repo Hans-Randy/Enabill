@@ -1,0 +1,169 @@
+﻿@model Enabill.Web.Models.UserDetailModel
+
+<table class="subTable underline fullWidth">
+    <tr>
+        <th>
+            User Name
+        </th>
+        <td>
+            @Model.User.UserName
+        </td>
+    </tr>
+    <tr>
+        <th>
+            First Name
+        </th>
+        <td>
+            @Model.User.FirstName
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Last Name
+        </th>
+        <td>
+            @Model.User.LastName
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Email
+        </th>
+        <td>
+            @Model.User.Email
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Phone Number
+        </th>
+        <td>
+            @Model.User.Phone
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Birth Date
+        </th>
+        @if (@Model.User.BirthDate.HasValue)
+        {
+            <td>
+                @Model.User.BirthDate.Value.ToString("dd MMM yyyy")
+            </td>
+        }
+        else
+        {
+            <td>
+                No Date
+            </td>
+        }
+    </tr>
+    <tr>
+        <td class="lightGrey" colspan="2"></td>
+    </tr>
+    <tr>
+        <th>
+            Managed By
+        </th>
+        <td>
+            @if (@Model.User.Manager != null)
+            {
+                @Model.Manager.FullName
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Hours Per Day
+        </th>
+        <td>
+            @Model.User.WorkHours hours
+        </td>
+    </tr>
+    <tr>
+        <td class="lightGrey" colspan="2"></td>
+    </tr>
+    <tr>
+        <th>
+            Region
+        </th>
+        <td>
+            @Model.RegionName
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Division
+        </th>
+        <td>
+            @Model.DivisionName
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Employment Type
+        </th>
+        <td>
+            @Model.EmploymentTypeName
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Billable Indicator
+        </th>
+        <td>
+            @Model.BillableIndicatorName
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Employment Date
+        </th>
+        <td>
+            @Model.User.EmployStartDate.ToLongDateString()
+        </td>
+    </tr>
+    <tr>
+        <td class="lightGrey" colspan="2"></td>
+    </tr>
+    <tr>
+        <th>
+            Can Log In ?
+        </th>
+        <td>
+            @(Model.User.CanLogin ? "Yes" : "No")
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Must Reset Password ?
+        </th>
+        <td>
+            @(Model.User.MustResetPwd ? "Yes" : "No")
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Payroll Reference No
+        </th>
+        <td>
+            @Model.User.PayrollRefNo
+        </td>
+    </tr>
+    <tr>
+        <th>
+            External Reference
+        </th>
+        <td>
+            @Model.User.ExternalRef
+        </td>
+    </tr>
+    @if (CurrentUser.HasRole(Enabill.UserRoleType.SystemAdministrator) || (CurrentUser.UserID == ContextUser.ManagerID && CurrentUser.HasRole(Enabill.UserRoleType.Manager)))
+    {
+        <tr>
+            <td class="center" colspan="2">
+                <input type="button" onclick="window.location='/User/Edit/@ContextUserID';" value="Edit" />
+            </td>
+        </tr>
+    }
+</table>

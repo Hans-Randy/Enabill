@@ -1,0 +1,27 @@
+﻿@model int
+<div>
+    <span class="actionSpan" onclick="window.location='/Invoice/PrintPdf/@Model'">
+        <span class="imageWithText">
+            <img alt="" height="16px" src="@Url.Content("~/Content/Img/PrintPdf.png")" />
+        </span>
+        Print Invoice
+    </span>
+    <span class="actionSpan" onclick="window.location='/Invoice/PrintTimeSheet/@Model'">
+        <span class="imageWithText">
+            <img alt="" height="16px" src="@Url.Content("~/Content/Img/PrintPdf.png")" />
+        </span>
+        Print TimeSheets
+    </span>
+    <span class="actionSpan" onclick="window.location='/InvoiceRule/EditFromInvoice/@Model'">
+        <span class="imageWithText">
+            <img alt="" height="16px" src="@Url.Content("~/Content/Img/redo_16x16.png")" />
+        </span>
+        Go to Invoice Rule
+    </span>
+    <span class="actionSpan" onclick="window.location='/Invoice/WorkAllocations/@Model'">
+        <span class="imageWithText">
+            <img alt="" height="16px" src="@Url.Content("~/Content/Img/redo_16x16.png")" />
+        </span>
+        Manage Work Allocations
+    </span>
+</div>

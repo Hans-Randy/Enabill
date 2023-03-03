@@ -1,0 +1,72 @@
+﻿@model Enabill.Web.Models.TicketLineModel
+
+<fieldset>
+    <legend><h3>Ticket</h3></legend>
+    <table class="general fullWidth">
+        @if (Model.Ticket != null)
+        {
+            <tr>
+                <td width="30%" style="font-size:7.5pt;">TicketID:</td>
+                <td> @Html.TextBox("TicketID", @Model.Ticket.TicketID, new { readOnly = "true", style = "font-size:7.5pt;color:gray;" })</td>
+                <td width="30%" style="font-size:7.5pt;">Reference:</td>
+                <td>@Html.TextBox("Reference", @Model.Ticket.TicketReference, new { readOnly = "true", style = "font-size:7.5pt;color:gray;" })</td>
+            </tr>
+            <tr>
+                <td width="30%" style="font-size:7.5pt;">Client:</td>
+                <td>@Html.TextBox("Client", @Model.ClientName, new { readOnly = "true", style = "font-size:7.5pt;color:gray;" })</td>
+                <td width="30%" style="font-size:7.5pt;">Project:</td>
+                <td>@Html.TextBox("ProjectName", @Model.ProjectName, new { readOnly = "true", style = "font-size:7.5pt;color:gray;" })</td>
+            </tr>
+            <tr>
+                <td width="30%" style="font-size:7.5pt;">Subject:</td>
+                <td colspan="3">@Html.TextBox("Subject", @Model.Ticket.TicketSubject, new { readOnly = "true", style = "font-size:7.5pt;width:480px; color:gray;" })</td>
+            </tr>
+            <tr>
+                <td width="30%" style="font-size:7.5pt;">Details:</td>
+                <td colspan="3">@Model.Ticket.TicketDetails</td>
+            </tr>
+
+            if (Model.Ticket.TicketStatus == (int)Enabill.TicketStatusEnum.Closed)
+            {
+                <tr>
+                    <td width="30%" style="font-size:7.5pt;">Type:</td>
+                    <td>@Html.TextBox("TicketType", (Enabill.TicketTypeEnum)Model.Ticket.TicketType, new { readOnly = "true", style = "font-size:7.5pt;color:gray;" })</td>
+                </tr>
+                <tr>
+                    <td width="30%" style="font-size:7.5pt;">Priority:</td>
+                    <td>@Html.TextBox("Priority", (Enabill.TicketPriorityEnum)Model.Ticket.Priority, new { readOnly = "true", style = "width:50px;font-size:7.5pt;color:gray;" })</td>
+                    <td width="30%" style="font-size:7.5pt;">Time Spent:</td>
+                    <td>@Html.TextBox("TimeSpent", Model.Ticket.TimeSpent.ToDoubleString(), new { readOnly = "true", style = "width:50px;font-size:7.5pt;color:gray;" })</td>
+                </tr>
+
+                int userAssigned = Model.Ticket.UserAssigned.HasValue ? Model.Ticket.UserAssigned.Value : 0;
+                string userAssignedFullName = userAssigned != 0 ? Enabill.Repos.UserRepo.GetByID(userAssigned).FullName : "Not Assigned";
+
+                <tr>
+                    <td width="30%" style="font-size:7.5pt;">Assigned To:</td>
+                    <td>@Html.TextBox("AssignedUser", userAssignedFullName, new { readOnly = "true", style = "font-size:7.5pt;color:gray;" })</td>
+                    <td width="30%" style="font-size:7.5pt;">Status:</td>
+                    <td>@Html.TextBox("Status", ((Enabill.TicketStatusEnum)Model.Ticket.TicketStatus), new { readOnly = "true", style = "font-size:7.5pt;color:gray;" })</td>
+                </tr>
+                <tr></tr>
+
+                <tr>
+                    @* <td colspan ="4" class="fullWidth">
+                             @Html.Partial("ucClosed", Model)
+                        </td>*@
+                </tr>
+            }
+            else
+            {
+                <tr></tr>
+                <td colspan="4" class="fullWidth">
+                    @Html.Partial("ucViewTicketLines", Model)
+                </td>
+            }
+        }
+        else
+        {
+            <tr><td colspan="8">No entries found</td></tr>
+        }
+    </table>
+</fieldset>

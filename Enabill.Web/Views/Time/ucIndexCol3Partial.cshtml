@@ -1,0 +1,10 @@
+﻿@model Enabill.Web.Models.TimeIndexModel
+
+<form method="post">
+    <span>
+        Date From: @Html.TextBox("StartDate", Model.sD.ToDisplayString(), new { style = "background-color: #FFF; font-size: 80%;" })
+        -
+        Date To: @Html.TextBox("EndDate", Model.eD.ToDisplayString(), new { style = "background-color: #FFF; font-size: 80%;" })
+        <input type="submit" value="Go" />
+    </span>
+</form>

@@ -1,0 +1,26 @@
+﻿@model Enabill.Web.Models.InvoiceEditAdHoc
+
+@{
+    string title = Model.Invoice.InvoiceID == 0 ? "Create Ad Hoc Invoice" : "Edit Ad Hoc Invoice";
+}
+
+@Html.TitleTable("tblEditAdHoc", string.Empty, string.Format($"<b>{title}:</b> {Model.ClientName} - {Model.Invoice.InvoiceID.ToString()}"))
+<div class="padView">
+
+    @if (Model.Invoice.IsOpen)
+    {
+        @Html.Partial("ucEditAdHocOpen", Model)
+    }
+    else if (Model.Invoice.IsInProgress)
+    {
+        @Html.Partial("ucEditAdHocInProgress", Model)
+    }
+    else if (Model.Invoice.IsReady)
+    {
+        @Html.Partial("ucEditAdHocReady", Model)
+    }
+    else if (Model.Invoice.IsComplete)
+    {
+        @Html.Partial("ucEditAdHocComplete", Model)
+    }
+</div>

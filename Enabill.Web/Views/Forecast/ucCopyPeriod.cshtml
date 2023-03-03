@@ -1,0 +1,39 @@
+﻿@model Enabill.Web.Models.ForecastCopyModel
+
+<form id="CopyPeriodFrm" action="" method="post">
+    <table class="fullWidth underline">
+        @Html.Hidden("ForecastDetailID", Model.ForecastDetail.ForecastDetailID)
+        <tr>
+            <td>
+                Client:
+            </td>
+            <td>
+                @Model.ForecastHeader.Client
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Project:
+            </td>
+            <td>
+                @Model.ForecastHeader.Project
+            </td>
+        </tr>
+        <tr>
+            <td>
+                From period:
+            </td>
+            <td>
+                @Html.TextBox("PeriodFrom", @Model.PeriodFrom, new { style = "width:40px;" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                To period:
+            </td>
+            <td>
+                @Html.TextBox("PeriodTo", @Model.PeriodTo, new { style = "width:40px;" })
+            </td>
+        </tr>
+    </table>
+</form>

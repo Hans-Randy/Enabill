@@ -1,0 +1,74 @@
+﻿@model Enabill.Models.Dto.LeaveRequestsPendingModel
+@{
+
+}
+<h1 style="margin:0">Leave Requests Pending On-screen Report</h1>
+<table>
+    <tr>
+        <th>Date From </th>
+        <td>@Html.TextBox("DateFrom")</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <input type="button" value="Show" onclick="Report.leaveRequestsPendingReport();" />
+        </td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+<table class="calendarTable fullWidth">
+    <tbody>
+        <tr class="today">
+            <th>Manager</th>
+            <th>User</th>
+            <th>Leave From</th>
+            <th>Leave To</th>
+        </tr>
+        @foreach (var m in Model.Leaves.GroupBy(m => m.Manager))
+        {
+            var rowSpan = m.GroupBy(u => u.User).Count();
+            <tr class="today">
+                <td style="width:20%;font-size:8pt">
+                    @m.Key.FirstName @m.Key.LastName
+                </td>
+                <td colspan="3"></td>
+            </tr>
+            foreach (var u in m.GroupBy(u => u.User))
+            {
+                var userRowSpan = u.GroupBy(ll => ll.Leave).Count() + 1;
+                <tr class="weekend">
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td colspan="3">
+                        @u.Key.FirstName @u.Key.LastName
+                    </td>
+                </tr>
+                foreach (var l in u.GroupBy(ll => ll.Leave))
+                {
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            @l.Key.DateFrom
+                        </td>
+                        <td>
+                            @l.Key.DateTo
+                        </td>
+                    </tr>
+                }
+            }
+            <tr>
+                <td style="width:20%">
+                    <input type="button" value="Notify" onclick="Report.leaveRequestPendingRunEmail(@m.Key.UserID);" />
+                </td>
+                <td colspan="3"></td>
+            </tr>
+        }
+    </tbody>
+</table>
